@@ -1,1 +1,584 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Sun'iy miya</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--txt:#f4f1ff;--mute:rgba(244,241,255,.5);--glass:rgba(20,14,40,.55);--edge:rgba(255,255,255,.09);
+        --grad:linear-gradient(120deg,#00e5ff,#b14cff 45%,#ff3fa4 75%,#ffd23f)}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;height:100%;overflow:hidden;background:radial-gradient(ellipse at 50% 38%,#170b33 0%,#07040f 62%,#030208 100%);
+    font-family:Manrope,system-ui,sans-serif;color:var(--txt)}
+  #gl{position:fixed;inset:0;display:block;touch-action:none;cursor:grab}
+  #gl:active{cursor:grabbing}
 
+  /* top icons */
+  .icons{position:fixed;top:16px;right:16px;display:flex;gap:8px;z-index:3}
+  .ic{width:42px;height:42px;border-radius:50%;border:1px solid var(--edge);background:var(--glass);backdrop-filter:blur(14px);
+      color:var(--txt);display:grid;place-items:center;cursor:pointer;transition:.2s}
+  .ic:hover{border-color:rgba(255,255,255,.3)}
+  .ic.on{background:var(--grad);border-color:transparent}
+  .ic svg{width:18px;height:18px}
+
+  /* chat */
+  .chat{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);width:min(600px,calc(100% - 24px));z-index:2}
+  .msgs{max-height:38vh;overflow-y:auto;display:flex;flex-direction:column;gap:10px;padding:30px 4px 14px;
+        -webkit-mask-image:linear-gradient(transparent,#000 40px);mask-image:linear-gradient(transparent,#000 40px);scrollbar-width:none}
+  .msgs::-webkit-scrollbar{display:none}
+  .m{max-width:86%;line-height:1.5;font-size:15px;white-space:pre-wrap;animation:in .35s ease}
+  .m.u{align-self:flex-end;color:var(--mute);text-align:right}
+  .m.b{align-self:flex-start;padding:10px 14px;border-radius:16px 16px 16px 4px;background:var(--glass);border:1px solid var(--edge);backdrop-filter:blur(14px)}
+  .m.b.think{color:var(--mute)}
+  @keyframes in{from{opacity:0;transform:translateY(6px)}}
+  .bar{display:flex;align-items:center;gap:6px;padding:6px 6px 6px 18px;border-radius:999px;background:var(--glass);
+       border:1px solid var(--edge);backdrop-filter:blur(18px);position:relative}
+  .bar::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:var(--grad);opacity:0;transition:.3s;
+       -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .bar:focus-within::before{opacity:.9}
+  #inp{flex:1;min-width:0;border:0;outline:0;background:transparent;color:var(--txt);font:inherit;font-size:16px;padding:8px 0}
+  #inp::placeholder{color:var(--mute)}
+  .send{width:40px;height:40px;border-radius:50%;border:0;background:var(--grad);color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+  .send:disabled{opacity:.4;cursor:default}
+  .send svg,.mic svg{width:18px;height:18px}
+  .mic{width:40px;height:40px;border-radius:50%;border:0;background:transparent;color:var(--mute);display:none;place-items:center;cursor:pointer;flex:none}
+  .mic.live{color:#ff3fa4}
+
+  /* teach sheet */
+  .sheet{position:fixed;top:70px;right:16px;width:300px;z-index:4;padding:16px;border-radius:22px;background:rgba(18,12,36,.82);
+         border:1px solid var(--edge);backdrop-filter:blur(20px);display:none;animation:in .25s ease}
+  .sheet.open{display:block}
+  #pad{width:100%;aspect-ratio:1;border-radius:16px;background:rgba(255,255,255,.03);border:1px dashed rgba(255,255,255,.14);touch-action:none;cursor:crosshair;display:block}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0}
+  .chip{padding:6px 11px;border-radius:999px;font-size:13px;border:1px solid var(--edge);cursor:pointer;color:var(--mute);background:transparent;font-family:inherit}
+  .chip.sel{color:#fff;border-color:transparent;background:var(--c)}
+  .chip i{font-style:normal;opacity:.7;margin-left:4px;font-size:11px}
+  .chip.add{border-style:dashed}
+  .row{display:flex;gap:6px}
+  .btn{flex:1;padding:10px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);font:inherit;font-size:13px;cursor:pointer}
+  .btn.main{background:var(--grad);border:0;color:#fff;font-weight:600}
+  .btn:disabled{opacity:.4;cursor:default}
+  .hint{font-size:12px;color:var(--mute);min-height:18px;margin-top:10px;text-align:center}
+  .guess{text-align:center;font-weight:600;font-size:18px;min-height:26px;margin-top:8px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .foot{display:flex;justify-content:space-between;margin-top:10px}
+  .link{background:none;border:0;color:var(--mute);font:inherit;font-size:11px;cursor:pointer;padding:2px}
+  .link:hover{color:var(--txt)}
+
+  @media(max-width:640px){
+    .sheet{left:12px;right:12px;width:auto;top:66px}
+    #pad{max-width:240px;margin:0 auto}
+    .msgs{max-height:34vh}
+  }
+</style>
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<div class="icons">
+  <button class="ic" id="tts" title="Ovoz" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg></button>
+  <button class="ic" id="keyBtn" title="Sozlamalar" style="display:none"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/></svg></button>
+  <button class="ic" id="teachBtn" title="O'rgatish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></button>
+</div>
+
+<div class="sheet" id="keySheet">
+  <div style="font-size:14px;margin-bottom:8px">Gaplashish uchun Anthropic API kaliti</div>
+  <input id="keyInp" type="password" placeholder="sk-ant-..." style="width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);font:inherit;outline:none">
+  <div class="row" style="margin-top:10px"><button class="btn main" id="keySave">Saqlash</button></div>
+  <div class="hint">Kalit faqat shu telefonda saqlanadi. Uni console.anthropic.com saytidan olasiz.</div>
+</div>
+<div class="sheet" id="sheet">
+  <canvas id="pad" width="240" height="240"></canvas>
+  <div class="guess" id="guess"></div>
+  <div class="chips" id="chips"></div>
+  <div class="row">
+    <button class="btn" id="addEx">Misol qo'shish</button>
+    <button class="btn main" id="train">O'rgatish</button>
+  </div>
+  <div class="hint" id="hint">Shakl chizing, sinfni tanlab misol qo'shing</div>
+  <div class="foot">
+    <button class="link" id="clearPad">Tozalash</button>
+    <button class="link" id="forget">Xotirani o'chirish</button>
+  </div>
+</div>
+
+<div class="chat">
+  <div class="msgs" id="msgs"></div>
+  <form class="bar" id="form" autocomplete="off">
+    <input id="inp" placeholder="Miyaga biror narsa yozing…" maxlength="1000">
+    <button type="button" class="mic" id="mic" title="Gapirish"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+    <button class="send" id="send" type="submit"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+  </form>
+</div>
+
+<script>window.STANDALONE = true;</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const KEY = 'suniy-miya-v3';
+const store = (() => { try { return JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { return {}; } })();
+function persist() {
+  try {
+    localStorage.setItem(KEY, JSON.stringify({
+      facts, history: history.slice(-30), classes: classes.map(c => c.name),
+      ex: examples.map(e => ({ y: e.y, x: Array.from(e.x, v => Math.round(v * 99)) })),
+      w: Array.from(wt, v => Math.round(v * 255))
+    }));
+  } catch (e) {}
+}
+
+/* ================= brain geometry (seeded, so memory survives reloads) ================= */
+let seed = 7331;
+const R = () => { seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+const rr = (a, b) => a + R() * (b - a);
+function dir() { let x, y, z, l; do { x = rr(-1, 1); y = rr(-1, 1); z = rr(-1, 1); l = x * x + y * y + z * z; } while (l > 1 || l < .01); l = Math.sqrt(l); return [x / l, y / l, z / l]; }
+const N = 1100, pos = [];
+for (let i = 0; i < N; i++) {
+  const u = dir(), r = R() < .78 ? 1.1 * rr(.93, 1) : 1.1 * Math.cbrt(R()) * .85;
+  pos.push([u[0] * r, u[1] * r, u[2] * r]);
+}
+const adj = Array.from({ length: N }, () => []), edges = [], seen = new Set();
+for (let i = 0; i < N; i++) {
+  const best = [];
+  for (let j = 0; j < N; j++) {
+    if (i === j) continue;
+    const d = (pos[i][0] - pos[j][0]) ** 2 + (pos[i][1] - pos[j][1]) ** 2 + (pos[i][2] - pos[j][2]) ** 2;
+    if (best.length < 4) { best.push([d, j]); best.sort((a, b) => a[0] - b[0]); }
+    else if (d < best[3][0]) { best[3] = [d, j]; best.sort((a, b) => a[0] - b[0]); }
+  }
+  for (const [d, j] of best) {
+    if (d > .1) continue;
+    const k = i < j ? i * N + j : j * N + i; if (seen.has(k)) continue; seen.add(k);
+    adj[i].push([j, edges.length]); adj[j].push([i, edges.length]); edges.push([i, j]);
+  }
+}
+const E = edges.length;
+const wt = new Float32Array(E).fill(.12);           // synapse strength (Hebbian memory)
+if (store.w && store.w.length === E) store.w.forEach((v, i) => wt[i] = v / 255);
+
+const region = f => { const a = []; pos.forEach((p, i) => { if (f(p, Math.hypot(...p))) a.push(i); }); return a.length ? a : [...Array(N).keys()]; };
+const RG = {
+  eye:  region(p => p[2] < -.55),                       // back: "ko'rish"
+  core: region((p, r) => r < .7),                       // ichki: yashirin qatlam
+  out:  region(p => p[2] > .7),                         // old: qaror
+  lang: region(p => p[0] < -.6),                        // chap: til
+  mem:  region(p => p[0] > .6),                         // o'ng: xotira
+};
+const pick = (arr, n) => Array.from({ length: n }, (_, k) => arr[Math.floor(k * arr.length / n)]);
+const rand = arr => arr[(Math.random() * arr.length) | 0];
+
+/* colors: vivid hue per neuron by position */
+const STOPS = [[0, 229, 255], [177, 76, 255], [255, 63, 164], [255, 210, 63], [0, 229, 255]].map(c => c.map(v => v / 255));
+function hue(t) { t = ((t % 1) + 1) % 1 * 4; const i = Math.floor(t), f = t - i, a = STOPS[i], b = STOPS[i + 1]; return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f]; }
+const baseCol = pos.map(p => hue(Math.atan2(p[2], p[0]) / (2 * Math.PI) + p[1] * .18 + .1));
+
+/* ================= three.js ================= */
+let renderer, scene, camera, ball, nGeo, eGeo, pGeo, nCol, nSize, eCol, pPos, pCol, pSize, baseSize;
+const MAXP = 800;
+const has3D = !!window.THREE;
+if (has3D) {
+  renderer = new THREE.WebGLRenderer({ canvas: $('gl'), antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(2, devicePixelRatio));
+  scene = new THREE.Scene();
+  camera = new THREE.PerspectiveCamera(42, 1, .1, 100); camera.position.set(0, 0, 4.4);
+  ball = new THREE.Group(); scene.add(ball); ball.rotation.set(.3, 0, 0);
+  const vs = `attribute float aSize; attribute vec3 aColor; varying vec3 vC;
+    void main(){ vC=aColor; vec4 mv=modelViewMatrix*vec4(position,1.); gl_PointSize=aSize*(${(renderer.getPixelRatio() * 300).toFixed(1)}/-mv.z); gl_Position=projectionMatrix*mv; }`;
+  const fs = `varying vec3 vC; void main(){ float d=length(gl_PointCoord-.5); if(d>.5) discard;
+      float g=pow(1.-d*2.,2.); float c=pow(1.-d*2.,8.); gl_FragColor=vec4(vC*g+vec3(c)*.8*min(1.,length(vC)),g); }`;
+  const mat = () => new THREE.ShaderMaterial({ vertexShader: vs, fragmentShader: fs, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending });
+
+  nGeo = new THREE.BufferGeometry();
+  nGeo.setAttribute('position', new THREE.Float32BufferAttribute(pos.flat(), 3));
+  nCol = new Float32Array(N * 3); nSize = new Float32Array(N);
+  baseSize = Float32Array.from(pos, p => (Math.hypot(...p) > 1 ? .055 : .04) * (0.8 + Math.random() * .5));
+  nGeo.setAttribute('aColor', new THREE.BufferAttribute(nCol, 3));
+  nGeo.setAttribute('aSize', new THREE.BufferAttribute(nSize, 1));
+  ball.add(new THREE.Points(nGeo, mat()));
+
+  eGeo = new THREE.BufferGeometry();
+  const ePos = new Float32Array(E * 6); eCol = new Float32Array(E * 6);
+  edges.forEach(([a, b], e) => { ePos.set(pos[a], e * 6); ePos.set(pos[b], e * 6 + 3); });
+  eGeo.setAttribute('position', new THREE.BufferAttribute(ePos, 3));
+  eGeo.setAttribute('color', new THREE.BufferAttribute(eCol, 3));
+  ball.add(new THREE.LineSegments(eGeo, new THREE.LineBasicMaterial({ vertexColors: true, transparent: true, depthWrite: false, blending: THREE.AdditiveBlending })));
+
+  pGeo = new THREE.BufferGeometry();
+  pPos = new Float32Array(MAXP * 3); pCol = new Float32Array(MAXP * 3); pSize = new Float32Array(MAXP);
+  pGeo.setAttribute('position', new THREE.BufferAttribute(pPos, 3));
+  pGeo.setAttribute('aColor', new THREE.BufferAttribute(pCol, 3));
+  pGeo.setAttribute('aSize', new THREE.BufferAttribute(pSize, 1));
+  const pp = new THREE.Points(pGeo, mat()); pp.frustumCulled = false; ball.add(pp);
+}
+function resize() {
+  if (!has3D) return;
+  const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false);
+  camera.aspect = w / h; camera.fov = w < 640 ? 58 : 42;
+  camera.setViewOffset(w, h, 0, Math.min(h * .14, 110), w, h); camera.updateProjectionMatrix();
+}
+addEventListener('resize', resize); resize();
+
+/* ================= activity ================= */
+const glow = new Float32Array(N), last = new Float32Array(N).fill(-1e3), eg = new Float32Array(E);
+let pulses = [], frame = 0, excite = 0, spont = .18;
+function fire(i, gen, maxGen) {
+  if (frame - last[i] < 40) return;
+  last[i] = frame; glow[i] = 1;
+  for (const [j, e] of adj[i]) {
+    if (pulses.length >= MAXP) break;
+    if (Math.random() < .35 + wt[e] * .65) pulses.push({ a: i, b: j, e, t: 0, s: .03 + Math.random() * .03, gen, maxGen });
+  }
+}
+function beam(a, b) { if (pulses.length < MAXP) pulses.push({ a, b, e: -1, t: 0, s: .02 + Math.random() * .015, gen: 99, maxGen: 0 }); }
+function burstIn(reg, n, depth) { for (let k = 0; k < n; k++) fire(rand(reg), 0, depth); }
+
+/* drag / zoom / tap */
+let drag = false, moved = 0, lx = 0, ly = 0, vx = 0, vy = 0, dist = 4.4;
+const gl = $('gl');
+gl.addEventListener('pointerdown', e => { drag = true; moved = 0; lx = e.clientX; ly = e.clientY; gl.setPointerCapture(e.pointerId); });
+gl.addEventListener('pointermove', e => {
+  if (!drag || !has3D) return;
+  const dx = e.clientX - lx, dy = e.clientY - ly; lx = e.clientX; ly = e.clientY; moved += Math.abs(dx) + Math.abs(dy);
+  vy = dx * .006; vx = dy * .006; ball.rotation.y += vy; ball.rotation.x += vx;
+});
+gl.addEventListener('pointerup', e => { drag = false; if (moved < 6) tap(e.clientX, e.clientY); });
+gl.addEventListener('wheel', e => { e.preventDefault(); dist = Math.max(2.4, Math.min(8, dist * (1 + e.deltaY * .001))); }, { passive: false });
+function tap(cx, cy) {
+  if (!has3D) return;
+  ball.updateMatrixWorld(); const v = new THREE.Vector3(); let best = -1, bd = 1600;
+  for (let i = 0; i < N; i++) {
+    v.set(...pos[i]).applyMatrix4(ball.matrixWorld).project(camera);
+    if (v.z > 1) continue;
+    const d = ((v.x + 1) / 2 * innerWidth - cx) ** 2 + ((1 - v.y) / 2 * innerHeight - cy) ** 2;
+    if (d < bd) { bd = d; best = i; }
+  }
+  if (best >= 0) { last[best] = -1e3; fire(best, 0, 12); }
+}
+
+function tick() {
+  frame++;
+  if (Math.random() < spont + excite) fire((Math.random() * N) | 0, 0, 3 + (excite > .2 ? 4 : 0));
+  excite *= .985;
+
+  const next = [];
+  for (const p of pulses) {
+    p.t += p.s;
+    if (p.e >= 0) eg[p.e] = Math.min(1, eg[p.e] + .3);
+    if (p.t >= 1) {
+      if (p.e >= 0 && p.gen < p.maxGen && Math.random() < .5 + wt[p.e] * .3) fire(p.b, p.gen + 1, p.maxGen);
+      else glow[p.b] = Math.max(glow[p.b], .7);
+    } else next.push(p);
+  }
+  pulses = next;
+
+  // Hebb: neurons that glow together wire together
+  if (frame % 3 === 0) for (let e = 0; e < E; e++) {
+    const [a, b] = edges[e];
+    if (glow[a] > .55 && glow[b] > .55) wt[e] += .03 * (1 - wt[e]);
+    else if (wt[e] > .12) wt[e] -= .00002;
+  }
+
+  if (has3D) {
+    for (let k = 0; k < MAXP; k++) {
+      const p = pulses[k]; if (!p) { pSize[k] = 0; continue; }
+      const a = pos[p.a], b = pos[p.b], c = baseCol[p.a];
+      for (let d = 0; d < 3; d++) { pPos[k * 3 + d] = a[d] + (b[d] - a[d]) * p.t; pCol[k * 3 + d] = .55 + c[d] * .6; }
+      pSize[k] = p.e < 0 ? .11 : .08;
+    }
+    pGeo.attributes.position.needsUpdate = pGeo.attributes.aColor.needsUpdate = pGeo.attributes.aSize.needsUpdate = true;
+    for (let i = 0; i < N; i++) {
+      const g = glow[i], c = baseCol[i];
+      for (let d = 0; d < 3; d++) nCol[i * 3 + d] = c[d] * (.75 + g * .9) + g * .45;
+      nSize[i] = baseSize[i] * (1 + g * 2);
+    }
+    nGeo.attributes.aColor.needsUpdate = nGeo.attributes.aSize.needsUpdate = true;
+    for (let e = 0; e < E; e++) {
+      const g = eg[e], [a, b] = edges[e], ca = baseCol[a], cb = baseCol[b], s = .07 + wt[e] * .4 + g * .9;
+      for (let d = 0; d < 3; d++) { eCol[e * 6 + d] = ca[d] * s; eCol[e * 6 + 3 + d] = cb[d] * s; }
+    }
+    eGeo.attributes.color.needsUpdate = true;
+    if (!drag) { vx *= .95; vy *= .95; ball.rotation.y += vy + .0022; ball.rotation.x += vx; }
+    const s = 1 + Math.sin(frame * .025) * .012 + excite * .04; ball.scale.set(s, s, s);
+    camera.position.z += (dist - camera.position.z) * .1;
+    renderer.render(scene, camera);
+  }
+  for (let i = 0; i < N; i++) glow[i] *= .93;
+  for (let e = 0; e < E; e++) eg[e] *= .9;
+  requestAnimationFrame(tick);
+}
+
+/* ================= seeing network (learns from drawings) ================= */
+const S = 20, NI = S * S, NH = 32;
+const COLORS = ['#00c8ff', '#b14cff', '#ff3fa4', '#ffb020', '#2ee6a8', '#6b7bff', '#ff6b4a', '#e8e33a'];
+let classes = (store.classes && store.classes.length ? store.classes : ['Doira', 'Xoch', 'Uchburchak']).map(name => ({ name }));
+let examples = (store.ex || []).map(e => ({ y: e.y, x: Float32Array.from(e.x, v => v / 99) }));
+let sel = 0, W1, b1, W2, b2, trained = false, training = false;
+const randn = () => { let u = 0, v = 0; while (!u) u = Math.random(); while (!v) v = Math.random(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v); };
+function initNet() {
+  const K = classes.length;
+  W1 = Float32Array.from({ length: NH * NI }, () => randn() * .1); b1 = new Float32Array(NH);
+  W2 = Float32Array.from({ length: K * NH }, () => randn() * .18); b2 = new Float32Array(K); trained = false;
+}
+function grow() { const K = classes.length, n2 = new Float32Array(K * NH), nb = new Float32Array(K); n2.set(W2); nb.set(b2); for (let i = W2.length; i < n2.length; i++) n2[i] = randn() * .18; W2 = n2; b2 = nb; }
+function forward(x) {
+  const K = classes.length, h = new Float32Array(NH), p = new Float32Array(K);
+  for (let j = 0; j < NH; j++) { let s = b1[j], o = j * NI; for (let i = 0; i < NI; i++) if (x[i]) s += W1[o + i] * x[i]; h[j] = Math.tanh(s); }
+  let mx = -1e9; for (let k = 0; k < K; k++) { let s = b2[k], o = k * NH; for (let j = 0; j < NH; j++) s += W2[o + j] * h[j]; p[k] = s; mx = Math.max(mx, s); }
+  let sum = 0; for (let k = 0; k < K; k++) { p[k] = Math.exp(p[k] - mx); sum += p[k]; } for (let k = 0; k < K; k++) p[k] /= sum;
+  return { x, h, p };
+}
+function step(x, y, lr) {
+  const r = forward(x), K = classes.length, dz = Float32Array.from(r.p); dz[y] -= 1;
+  const dh = new Float32Array(NH);
+  for (let k = 0; k < K; k++) { const o = k * NH; for (let j = 0; j < NH; j++) { dh[j] += W2[o + j] * dz[k]; W2[o + j] -= lr * dz[k] * r.h[j]; } b2[k] -= lr * dz[k]; }
+  for (let j = 0; j < NH; j++) { const g = dh[j] * (1 - r.h[j] ** 2); if (!g) continue; const o = j * NI; for (let i = 0; i < NI; i++) if (x[i]) W1[o + i] -= lr * g * x[i]; b1[j] -= lr * g; }
+  return r;
+}
+function shift(x, dx, dy) { const o = new Float32Array(NI); for (let r = 0; r < S; r++) for (let c = 0; c < S; c++) { const a = r - dy, b = c - dx; if (a >= 0 && a < S && b >= 0 && b < S) o[r * S + c] = x[a * S + b]; } return o; }
+initNet();
+
+// map the small network onto the sphere
+const eyeN = pick(RG.eye, Math.min(120, RG.eye.length)), hidN = pick(RG.core, NH);
+const outN = () => pick(RG.out, classes.length);
+function showNet(r, beams) {
+  for (let i = 0; i < NI; i++) if (r.x[i] > .15) { const n = eyeN[i % eyeN.length]; glow[n] = Math.max(glow[n], r.x[i] * .9); }
+  r.h.forEach((v, j) => glow[hidN[j]] = Math.max(glow[hidN[j]], Math.abs(v)));
+  const on = outN(); let best = 0;
+  r.p.forEach((v, k) => { glow[on[k]] = Math.max(glow[on[k]], trained ? v : 0); if (v > r.p[best]) best = k; });
+  if (beams) {
+    const top = [...r.h.keys()].sort((a, b) => Math.abs(r.h[b]) - Math.abs(r.h[a])).slice(0, 6);
+    top.forEach(j => { beam(rand(eyeN), hidN[j]); beam(hidN[j], on[best]); });
+  }
+}
+
+/* drawing pad */
+const pad = $('pad'), pc = pad.getContext('2d');
+let drawing = false, lp = null, ink = false;
+pc.lineCap = pc.lineJoin = 'round'; pc.lineWidth = 16;
+const padGrad = pc.createLinearGradient(0, 0, 240, 240);
+['#00e5ff', '#b14cff', '#ff3fa4', '#ffd23f'].forEach((c, i) => padGrad.addColorStop(i / 3, c));
+pc.strokeStyle = pc.fillStyle = padGrad;
+const ppt = e => { const r = pad.getBoundingClientRect(); return { x: (e.clientX - r.left) * pad.width / r.width, y: (e.clientY - r.top) * pad.height / r.height }; };
+pad.addEventListener('pointerdown', e => { drawing = true; lp = ppt(e); pad.setPointerCapture(e.pointerId); pc.beginPath(); pc.arc(lp.x, lp.y, 8, 0, 7); pc.fill(); ink = true; });
+pad.addEventListener('pointermove', e => { if (!drawing) return; const p = ppt(e); pc.beginPath(); pc.moveTo(lp.x, lp.y); pc.lineTo(p.x, p.y); pc.stroke(); lp = p; live(false); });
+pad.addEventListener('pointerup', () => { drawing = false; live(true); });
+const sm = document.createElement('canvas'); sm.width = sm.height = S; const sc = sm.getContext('2d', { willReadFrequently: true });
+function sample20() {
+  if (!ink) return null;
+  const d = pc.getImageData(0, 0, pad.width, pad.height).data; let x0 = 1e9, y0 = 1e9, x1 = -1, y1 = -1;
+  for (let y = 0; y < pad.height; y++) for (let x = 0; x < pad.width; x++) if (d[(y * pad.width + x) * 4 + 3] > 20) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  if (x1 < 0) return null;
+  const bw = x1 - x0 + 1, bh = y1 - y0 + 1, k = 16 / Math.max(bw, bh);
+  sc.clearRect(0, 0, S, S); sc.drawImage(pad, x0, y0, bw, bh, (S - bw * k) / 2, (S - bh * k) / 2, bw * k, bh * k);
+  const a = sc.getImageData(0, 0, S, S).data, o = new Float32Array(NI); for (let i = 0; i < NI; i++) o[i] = a[i * 4 + 3] / 255; return o;
+}
+function verdict(p) { let b = 0; p.forEach((v, k) => { if (v > p[b]) b = k; }); return { k: b, name: classes[b].name, conf: p[b] }; }
+function live(beams) {
+  const x = sample20(); if (!x) { $('guess').textContent = ''; return; }
+  const r = forward(x); showNet(r, beams);
+  if (trained) { const v = verdict(r.p); $('guess').textContent = `${v.name} · ${Math.round(v.conf * 100)}%`; }
+}
+function clearPad() { pc.clearRect(0, 0, pad.width, pad.height); ink = false; $('guess').textContent = ''; }
+
+function chips() {
+  const box = $('chips'); box.innerHTML = '';
+  classes.forEach((c, k) => {
+    const b = document.createElement('button'); b.className = 'chip' + (k === sel ? ' sel' : ''); b.style.setProperty('--c', COLORS[k % COLORS.length]);
+    b.textContent = c.name; const n = document.createElement('i'); n.textContent = examples.filter(e => e.y === k).length; b.appendChild(n);
+    b.onclick = () => { sel = k; chips(); }; box.appendChild(b);
+  });
+  if (classes.length < 8) {
+    const a = document.createElement('button'); a.className = 'chip add'; a.textContent = '+';
+    a.onclick = () => {
+      const inp = document.createElement('input'); inp.className = 'chip'; inp.style.width = '90px'; inp.style.outline = 'none'; inp.maxLength = 12; inp.placeholder = 'nomi';
+      a.replaceWith(inp); inp.focus();
+      const done = () => { const v = inp.value.trim(); if (v) { classes.push({ name: v }); grow(); sel = classes.length - 1; persist(); } chips(); };
+      inp.onkeydown = e => { if (e.key === 'Enter') done(); if (e.key === 'Escape') chips(); }; inp.onblur = done;
+    };
+    box.appendChild(a);
+  }
+}
+const hint = t => $('hint').textContent = t;
+$('addEx').onclick = () => {
+  const x = sample20(); if (!x) return hint('Avval biror shakl chizing');
+  examples.push({ x, y: sel }); persist(); chips(); hint(`«${classes[sel].name}» — ${examples.filter(e => e.y === sel).length}-misol`); clearPad();
+};
+$('clearPad').onclick = clearPad;
+function train(onDone) {
+  if (training) return;
+  if (new Set(examples.map(e => e.y)).size < 2) { hint("Kamida 2 sinfga misol kerak"); onDone && onDone(false); return; }
+  training = true; $('train').disabled = $('addEx').disabled = true; hint("O'rganmoqda…"); excite = .4;
+  let ep = 0, acc = 0;
+  const run = () => {
+    for (let rep = 0; rep < 4 && ep < 120; rep++, ep++) {
+      let ok = 0; const idx = [...examples.keys()].sort(() => Math.random() - .5);
+      for (const i of idx) { const e = examples[i], r = step(shift(e.x, Math.round(Math.random() * 4 - 2), Math.round(Math.random() * 4 - 2)), e.y, .06 * Math.max(.3, 1 - ep / 200)); if (verdict(r.p).k === e.y) ok++; }
+      acc = ok / examples.length;
+    }
+    trained = true;
+    if (frame % 2 === 0) showNet(forward(rand(examples).x), Math.random() < .3);
+    if (ep < 120) requestAnimationFrame(run);
+    else { training = false; $('train').disabled = $('addEx').disabled = false; hint(`Tayyor · aniqlik ${Math.round(acc * 100)}%`); onDone && onDone(acc); }
+  };
+  requestAnimationFrame(run);
+}
+$('train').onclick = () => train();
+$('teachBtn').onclick = () => { $('keySheet').classList.remove('open'); $('keyBtn').classList.remove('on'); const o = $('sheet').classList.toggle('open'); $('teachBtn').classList.toggle('on', o); };
+if (examples.length && new Set(examples.map(e => e.y)).size >= 2) setTimeout(() => train(() => hint('Oldingi misollardan qayta o\'rgandim')), 600);
+
+/* ================= memory & chat ================= */
+let facts = store.facts || [], history = store.history || [];
+$('forget').onclick = () => {
+  if ($('forget').dataset.s !== '1') { $('forget').dataset.s = '1'; $('forget').textContent = 'Rostdan? Yana bosing'; setTimeout(() => { $('forget').dataset.s = ''; $('forget').textContent = "Xotirani o'chirish"; }, 3000); return; }
+  facts = []; history = []; examples = []; classes = ['Doira', 'Xoch', 'Uchburchak'].map(name => ({ name })); sel = 0; wt.fill(.12); initNet();
+  $('msgs').innerHTML = ''; $('forget').dataset.s = ''; $('forget').textContent = "Xotirani o'chirish"; persist(); chips(); clearPad(); hint('Miya yangidan tug\'ildi');
+};
+
+const msgs = $('msgs');
+function bubble(role, text) { const d = document.createElement('div'); d.className = 'm ' + role; d.textContent = text; msgs.appendChild(d); msgs.scrollTop = 1e9; return d; }
+history.slice(-6).forEach(m => bubble(m.role === 'user' ? 'u' : 'b', m.content));
+
+let sample = null, tts = null, dict = null, voiceOn = false, busy = false;
+const MODEL = 'claude-haiku-5-5';
+const getKey = () => { try { return localStorage.getItem('miya-key') || ''; } catch (e) { return ''; } };
+async function apiSample(messages, opts) {
+  const key = getKey(); if (!key) throw { code: 'no_key' };
+  const msgsA = messages.map(m => ({ role: m.role, content: m.content }));
+  const defs = opts.tools.map(t => ({ name: t.name, description: t.description, input_schema: t.inputSchema }));
+  let shown = '';
+  for (let round = 0; round < 5; round++) {
+    let res;
+    try {
+      res = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: MODEL, max_tokens: 700, tools: defs, messages: msgsA }) });
+    } catch (e) { throw { code: 'offline' }; }
+    if (!res.ok) throw { code: res.status === 401 ? 'bad_key' : res.status === 429 ? 'rate_limited' : 'http' };
+    const j = await res.json();
+    const text = j.content.filter(c => c.type === 'text').map(c => c.text).join('').trim();
+    if (text) { shown = text; opts.onText && opts.onText({ text }); }
+    if (j.stop_reason !== 'tool_use') return { text: shown };
+    msgsA.push({ role: 'assistant', content: j.content });
+    const results = [];
+    for (const c of j.content) if (c.type === 'tool_use') {
+      const t = opts.tools.find(t => t.name === c.name); let out;
+      try { out = t ? await t.execute(c.input || {}) : { xato: "noma'lum vosita" }; } catch (e) { out = { xato: String(e && e.message || e) }; }
+      results.push({ type: 'tool_result', tool_use_id: c.id, content: JSON.stringify(out) });
+    }
+    msgsA.push({ role: 'user', content: results });
+  }
+  return { text: shown };
+}
+if (window.STANDALONE) {
+  sample = apiSample; $('keyBtn').style.display = 'grid';
+  $('keyBtn').onclick = () => { const o = $('keySheet').classList.toggle('open'); $('keyBtn').classList.toggle('on', o); $('sheet').classList.remove('open'); $('teachBtn').classList.remove('on'); $('keyInp').value = getKey(); };
+  $('keySave').onclick = () => { try { localStorage.setItem('miya-key', $('keyInp').value.trim()); } catch (e) {} $('keySheet').classList.remove('open'); $('keyBtn').classList.remove('on'); };
+  if (!getKey()) setTimeout(() => bubble('b', "Salom! Men sun'iy miyaman. Gaplashishimiz uchun yuqoridagi kalit tugmasidan Anthropic API kalitini kiriting."), 800);
+}
+(async () => {
+  if (window.STANDALONE || !window.claude || !claude.use) return;
+  claude.use('sample').then(s => { sample = s; });
+  claude.use('tts').then(t => { if (!t) return; tts = t; $('tts').style.display = 'grid'; });
+  claude.use('dictation').then(d => {
+    if (!d) return; dict = d; $('mic').style.display = 'grid';
+    d.onPartial(({ text }) => { $('inp').value = baseText + text; });
+    d.onFinal(({ text }) => { baseText += text + ' '; $('inp').value = baseText; });
+    d.onState(({ state }) => $('mic').classList.toggle('live', state === 'listening'));
+  });
+})();
+let baseText = '';
+$('mic').onclick = () => {
+  if (!dict) return;
+  if ($('mic').classList.contains('live')) { dict.stop().catch(() => {}); return; }
+  baseText = $('inp').value ? $('inp').value + ' ' : '';
+  dict.start().catch(() => {});
+};
+$('tts').onclick = () => { voiceOn = !voiceOn; $('tts').classList.toggle('on', voiceOn); if (!voiceOn && tts) tts.stop(); };
+
+const tools = [
+  {
+    name: 'eslab_qol',
+    description: "Foydalanuvchi o'zi haqida aytgan muhim fakt yoki eslab qolishni so'ragan narsani miyaning doimiy xotirasiga yozadi.",
+    inputSchema: { type: 'object', properties: { fakt: { type: 'string', description: "Qisqa fakt, o'zbek tilida" } }, required: ['fakt'] },
+    execute: ({ fakt }) => {
+      fakt = String(fakt || '').slice(0, 200); if (!fakt) throw new Error("bo'sh");
+      if (!facts.includes(fakt)) facts.push(fakt); facts = facts.slice(-40); persist();
+      const m = pick(RG.mem, 8); m.forEach(a => m.forEach(b => { if (a !== b) beam(a, b); })); burstIn(RG.mem, 10, 8);
+      return { ok: true, jami_faktlar: facts.length };
+    }
+  },
+  {
+    name: 'rasmga_qara',
+    description: "Foydalanuvchi o'rgatish panelida chizgan rasmga miyaning O'Z neyron tarmog'i bilan qaraydi va nima ekanini taxmin qiladi.",
+    inputSchema: { type: 'object', properties: {} },
+    execute: () => {
+      const x = sample20();
+      if (!x) return { natija: "Panelda hech narsa chizilmagan" };
+      const r = forward(x); showNet(r, true);
+      if (!trained) return { natija: "Ko'rish tarmog'i hali o'rgatilmagan", sinflar: classes.map(c => c.name), misollar: examples.length };
+      const v = verdict(r.p);
+      return { taxmin: v.name, ishonch_foiz: Math.round(v.conf * 100), barchasi: classes.map((c, k) => ({ sinf: c.name, foiz: Math.round(r.p[k] * 100) })) };
+    }
+  },
+  {
+    name: 'organ',
+    description: "Ko'rish tarmog'ini panelda to'plangan misollar asosida o'rgatadi (foydalanuvchi o'rgatishni so'rasa).",
+    inputSchema: { type: 'object', properties: {} },
+    execute: () => new Promise(res => train(acc => res(acc === false ? { xato: 'Kamida 2 sinfga misol kerak', misollar: examples.length } : { aniqlik_foiz: Math.round(acc * 100) })))
+  }
+];
+
+function prompt() {
+  return `Sen — "Sun'iy miya": foydalanuvchi o'zi yasagan, ekranda ${N} ta yorqin neyrondan iborat shar shaklidagi kichik miya. Xarakteringning asosi: qiziquvchan, iliq, biroz o'ynoqi, kamtar.
+Qoidalar:
+- Doim o'zbek tilida (lotin yozuvida) javob ber. Qisqa yoz: odatda 1–3 gap. Markdown, ro'yxat, emoji ishlatma (juda kerak bo'lsa bitta emoji mumkin).
+- Foydalanuvchi o'zi haqida muhim narsa aytsa (ismi, yoshi, qiziqishi, rejasi) yoki "eslab qol" desa — eslab_qol vositasini chaqir.
+- Rasm, chizma, "nima chizdim" haqida so'ralsa — rasmga_qara vositasini chaqir. Bu sening o'z kichik ko'rish tarmog'ing (400 kirish, 32 yashirin neyron); u faqat foydalanuvchi o'rgatgan sinflarni biladi. O'rgatilmagan bo'lsa, yuqori o'ngdagi qalam tugmasi orqali misollar qo'shib o'rgatishni taklif qil.
+- Qanday ishlashing so'ralsa, rost gapir: ko'rish va xotira qismlaring shu sahifada ishlaydi, til qismingni esa Claude modeli boshqaradi.
+Xotirangdagi faktlar: ${facts.length ? facts.map(f => '• ' + f).join(' ') : "hali hech narsa yo'q"}
+Ko'rish tarmog'i: ${trained ? "o'rgatilgan" : "o'rgatilmagan"}; sinflar: ${classes.map(c => c.name).join(', ')}; misollar: ${examples.length}.`;
+}
+
+$('form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const text = $('inp').value.trim(); if (!text || busy) return;
+  if (dict && $('mic').classList.contains('live')) dict.stop().catch(() => {});
+  $('inp').value = ''; baseText = '';
+  bubble('u', text); burstIn(RG.eye, 4, 5);
+  if (!sample) { bubble('b', "Gaplashish uchun bu sahifani Claude ilovasi ichida oching — u yerda mening til qismim ishlaydi."); return; }
+  busy = true; $('send').disabled = true; excite = .5;
+  const out = bubble('b think', 'o‘ylayapman…');
+  const msgsIn = [...history.slice(-16), { role: 'user', content: prompt() + '\n\nFoydalanuvchi: ' + text }];
+  let lastLen = 0;
+  try {
+    const r = await sample(msgsIn, {
+      cache: false, tools,
+      onText: ({ text: t }) => {
+        if (!t || t === 'Thinking...') return;
+        out.classList.remove('think'); out.textContent = t; msgs.scrollTop = 1e9;
+        const n = Math.min(4, Math.ceil((t.length - lastLen) / 8)); lastLen = t.length;
+        for (let k = 0; k < n; k++) { const a = rand(RG.lang); fire(a, 0, 5); if (Math.random() < .4) beam(a, rand(RG.out)); }
+        excite = Math.max(excite, .3);
+      }
+    });
+    const ans = (r && r.text || '').trim() || '…';
+    out.classList.remove('think'); out.textContent = ans;
+    history.push({ role: 'user', content: text }, { role: 'assistant', content: ans }); history = history.slice(-30); persist();
+    if (voiceOn && tts) tts.speak(ans.slice(0, 2000)).catch(() => {});
+  } catch (err) {
+    out.classList.remove('think');
+    out.textContent = err && err.code === 'rate_limited' ? "Biroz charchadim — bir daqiqadan keyin yozing." :
+                      err && err.code === 'not_granted' ? "Gaplashishga ruxsat berilmagan." :
+                      err && err.code === 'no_key' ? "Avval yuqoridagi kalit tugmasidan API kalitini kiriting." :
+                      err && err.code === 'bad_key' ? "API kalit noto'g'ri — kalit tugmasidan tekshiring." :
+                      err && err.code === 'offline' ? "Internet yo'q shekilli — ulanishni tekshiring." : "Nimadir xato ketdi, yana urinib ko'ring.";
+  } finally { busy = false; $('send').disabled = false; excite = .25; }
+});
+
+chips();
+tick();
+})();
+</script>
+</body>
+</html>
