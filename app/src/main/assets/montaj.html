@@ -4,125 +4,278 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>Montaj Studiya</title>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{--bg:#07040f;--card:rgba(24,16,46,.7);--edge:rgba(255,255,255,.09);--txt:#f4f1ff;--mute:rgba(244,241,255,.55);
-        --acc:#b14cff;--acc2:#00e5ff;--ok:#3ddc97;--bad:#ff5c7a;
-        --grad:linear-gradient(120deg,#00e5ff,#b14cff 45%,#ff3fa4 75%,#ffd23f)}
+  :root{--bg:#07040f;--card:rgba(22,14,44,.62);--card2:rgba(255,255,255,.04);--edge:rgba(255,255,255,.09);--edge2:rgba(255,255,255,.18);
+        --txt:#f4f1ff;--mute:rgba(244,241,255,.58);--faint:rgba(244,241,255,.32);
+        --acc:#b14cff;--acc2:#00e5ff;--pink:#ff3fa4;--yel:#ffd23f;--ok:#3ddc97;--bad:#ff5c7a;
+        --grad:linear-gradient(120deg,#00e5ff,#b14cff 45%,#ff3fa4 75%,#ffd23f);--navw:220px;color-scheme:dark}
   *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-  html,body{margin:0;background:radial-gradient(ellipse at 50% 0%,#1a0d3a 0%,#07040f 60%);background-color:var(--bg);color:var(--txt);
-    font-family:Manrope,system-ui,sans-serif;min-height:100%}
-  body{padding:0 0 84px}
-  header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(7,4,15,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--edge)}
-  header h1{font-size:18px;margin:0;flex:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-  .ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--edge);background:var(--card);color:var(--txt);display:grid;place-items:center;cursor:pointer;text-decoration:none;font-size:16px}
-  main{max-width:720px;margin:0 auto;padding:14px 16px}
-  .tab{display:none}.tab.on{display:block}
-  nav{position:fixed;bottom:0;left:0;right:0;z-index:5;display:flex;background:rgba(7,4,15,.92);backdrop-filter:blur(14px);border-top:1px solid var(--edge);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
-  nav button{flex:1;background:none;border:0;color:var(--mute);font:inherit;font-size:11px;padding:6px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
-  nav button .e{font-size:20px}
+  [hidden]{display:none!important}
+  html,body{margin:0;background-color:var(--bg);color:var(--txt);font-family:Manrope,system-ui,sans-serif;min-height:100%}
+  body{padding:0 0 84px;overflow-x:hidden}
+  .bg{position:fixed;inset:0;z-index:-1;overflow:hidden;background:radial-gradient(ellipse at 50% -10%,#1d0f40 0%,#07040f 60%)}
+  .bg i{position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;animation:float 22s ease-in-out infinite alternate}
+  .bg i:nth-child(1){width:46vw;height:46vw;background:#5b1fff;left:-10vw;top:-12vw}
+  .bg i:nth-child(2){width:38vw;height:38vw;background:#ff3fa4;right:-12vw;top:30vh;animation-duration:28s;opacity:.18}
+  .bg i:nth-child(3){width:30vw;height:30vw;background:#00c2ff;left:30vw;bottom:-14vw;animation-duration:34s;opacity:.16}
+  @keyframes float{to{transform:translate(6vw,4vh) scale(1.15)}}
+  header{position:sticky;top:env(safe-area-inset-top,0px);z-index:8;display:flex;align-items:center;gap:10px;padding:12px 16px;background:rgba(7,4,15,.72);backdrop-filter:blur(16px);border-bottom:1px solid var(--edge)}
+  .logo{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;font-weight:800;font-size:15px;color:#fff;box-shadow:0 0 24px rgba(177,76,255,.5)}
+  header h1{font-size:18px;margin:0;flex:1;font-weight:800;letter-spacing:-.01em}
+  header h1 small{font-weight:500;color:var(--mute);font-size:12px;margin-left:8px}
+  .ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--edge);background:var(--card);color:var(--txt);display:grid;place-items:center;cursor:pointer;text-decoration:none;font-size:16px;flex:none}
+  .ib:hover{border-color:var(--edge2)}
+  main{max-width:760px;margin:0 auto;padding:16px}
+  .tab{display:none}.tab.on{display:block;animation:tabin .35s ease}
+  @keyframes tabin{from{opacity:0;transform:translateY(8px)}}
+  nav{position:fixed;bottom:0;left:0;right:0;z-index:7;display:flex;overflow-x:auto;scrollbar-width:none;background:rgba(7,4,15,.9);backdrop-filter:blur(16px);border-top:1px solid var(--edge);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  nav::-webkit-scrollbar{display:none}
+  nav button{flex:1;min-width:62px;background:none;border:0;color:var(--mute);font:inherit;font-size:11px;padding:6px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;position:relative;border-radius:12px;transition:.2s}
+  nav button .e{font-size:20px;transition:.2s}
   nav button.on{color:var(--txt)}
-  nav button.on .e{filter:drop-shadow(0 0 8px var(--acc))}
-  .card{background:var(--card);border:1px solid var(--edge);border-radius:18px;padding:14px;margin-bottom:12px}
-  .card h3{margin:0 0 10px;font-size:15px}
+  nav button.on .e{filter:drop-shadow(0 0 8px var(--acc));transform:scale(1.1)}
+  nav button .dot{position:absolute;top:4px;right:calc(50% - 18px);width:8px;height:8px;border-radius:50%;background:var(--pink);box-shadow:0 0 8px var(--pink);display:none}
+  nav button.new .dot{display:block}
+  .card{background:var(--card);border:1px solid var(--edge);border-radius:20px;padding:16px;margin-bottom:12px;backdrop-filter:blur(12px);transition:border-color .2s}
+  .card:hover{border-color:rgba(255,255,255,.14)}
+  .card h3{margin:0 0 12px;font-size:15px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .card h3 .r{margin-left:auto;font-weight:500;font-size:12px;color:var(--mute)}
+  .hero{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .hero .hi{flex:1;min-width:200px}
+  .hero .hi h2{margin:0;font-size:24px;font-weight:800;letter-spacing:-.02em}
+  .hero .hi p{margin:4px 0 0;color:var(--mute);font-size:13px}
+  .ring{position:relative;width:86px;height:86px;flex:none;cursor:pointer}
+  .ring svg{transform:rotate(-90deg)}
+  .ring div{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:11px;color:var(--mute);line-height:1.2}
+  .ring b{display:block;font-size:20px;color:var(--txt)}
+  .streak{display:flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,63,164,.12);border:1px solid rgba(255,63,164,.3);font-weight:700;font-size:14px}
   .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
-  .stat{background:var(--card);border:1px solid var(--edge);border-radius:16px;padding:12px}
-  .stat b{display:block;font-size:24px}
+  .stat{background:var(--card);border:1px solid var(--edge);border-radius:18px;padding:14px;position:relative;overflow:hidden}
+  .stat::after{content:"";position:absolute;right:-20px;top:-20px;width:70px;height:70px;border-radius:50%;background:var(--grad);opacity:.12;filter:blur(6px)}
+  .stat b{display:block;font-size:26px;font-weight:800;letter-spacing:-.02em}
   .stat span{font-size:12px;color:var(--mute)}
+  .continue{display:flex;align-items:center;gap:12px;background:linear-gradient(120deg,rgba(0,229,255,.12),rgba(177,76,255,.18));border-color:rgba(177,76,255,.35)}
+  .continue .t{flex:1;min-width:0}.continue b{display:block}.continue small{color:var(--mute)}
   label{display:block;font-size:12px;color:var(--mute);margin:10px 0 4px}
-  input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);font:inherit;font-size:15px;outline:none}
+  input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);font:inherit;font-size:14px;outline:none;transition:border-color .2s}
   input:focus,select:focus,textarea:focus{border-color:var(--acc)}
-  select option{background:#140c2a}
+  input[type=range]{padding:0;accent-color:var(--acc);border:0;background:none}
+  input[type=color]{padding:2px;height:38px}
+  input[type=checkbox]{width:auto;accent-color:var(--acc)}
+  select option,select optgroup{background:#140c2a}
   textarea{resize:vertical;min-height:70px}
   .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
   .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 8px}
-  .btn{padding:11px 16px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.05);color:var(--txt);font:inherit;font-weight:600;cursor:pointer}
-  .btn.main{background:var(--grad);border:0;color:#fff}
+  .btn{padding:10px 16px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.05);color:var(--txt);font:inherit;font-weight:700;font-size:14px;cursor:pointer;transition:.2s;white-space:nowrap}
+  .btn:hover{border-color:var(--edge2);background:rgba(255,255,255,.08)}
+  .btn.main{background:var(--grad);border:0;color:#fff;box-shadow:0 4px 20px rgba(177,76,255,.35)}
+  .btn.main:hover{filter:brightness(1.1)}
+  .btn.sm{padding:6px 12px;font-size:12px}
   .btn:disabled{opacity:.45;cursor:default}
-  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
   .item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--edge)}
   .item:first-child{border-top:0}
   .item .t{flex:1;min-width:0}
   .item .t b{display:block;font-size:14px}
   .item .t small{color:var(--mute);font-size:12px}
   .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--edge);margin:4px 4px 0 0;color:var(--mute)}
+  .pill.new{border-color:var(--pink);color:var(--pink);font-weight:700}
   .x{background:none;border:0;color:var(--mute);cursor:pointer;font-size:18px;padding:0 4px}
-  .bars{display:flex;align-items:flex-end;gap:6px;height:110px;padding-top:8px}
+  .x:hover{color:var(--txt)}
+  .bars{display:flex;align-items:flex-end;gap:6px;height:120px;padding-top:8px}
   .bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
-  .bars i{display:block;width:100%;border-radius:6px 6px 2px 2px;background:var(--grad);min-height:2px}
+  .bars i{display:block;width:100%;max-width:34px;border-radius:6px 6px 2px 2px;background:var(--grad);min-height:2px;transition:height .6s cubic-bezier(.2,.8,.2,1)}
+  .bars div:hover i{filter:brightness(1.3)}
   .bars small{font-size:10px;color:var(--mute)}
-  .rank div{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}
-  .rank span{color:var(--mute)}
-  .ai{white-space:pre-wrap;line-height:1.55;font-size:14px}
-  .ai h4{margin:12px 0 4px}
+  .hbar{margin:8px 0}
+  .hbar .l{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
+  .hbar .l span{color:var(--mute)}
+  .hbar .b{height:8px;border-radius:4px;background:rgba(255,255,255,.06);overflow:hidden}
+  .hbar .b i{display:block;height:100%;border-radius:4px;background:var(--acc)}
+  .ai{white-space:pre-wrap;line-height:1.6;font-size:14px}
   .muted{color:var(--mute);font-size:13px}
   .frames{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
   .frames img{width:100%;border-radius:8px;aspect-ratio:9/16;object-fit:cover;background:#000}
-  video{width:100%;max-height:320px;border-radius:12px;background:#000;margin-top:10px}
-  .font-card{border:1px solid var(--edge);border-radius:14px;padding:12px;margin-top:8px}
-  .font-card .s{font-size:30px;line-height:1.1;margin:6px 0;word-break:break-word}
+  video.prev{width:100%;max-height:320px;border-radius:12px;background:#000;margin-top:10px}
+  .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:10px}
+  .metric{background:var(--card2);border:1px solid var(--edge);border-radius:12px;padding:10px}
+  .metric b{display:block;font-size:18px}.metric span{font-size:11px;color:var(--mute)}
+  .swatches{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  .swatches div{flex:1;min-width:52px;height:46px;border-radius:10px;display:flex;align-items:flex-end;justify-content:center;font-size:10px;padding-bottom:3px;font-family:monospace;text-shadow:0 1px 2px #000;cursor:pointer}
+  .rhythm{width:100%;height:90px;display:block;margin-top:8px}
+  /* fonts */
+  .fgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+  .fcard{border:1px solid var(--edge);border-radius:16px;padding:12px;background:var(--card);transition:.2s;min-height:130px;display:flex;flex-direction:column}
+  .fcard:hover{border-color:var(--edge2);transform:translateY(-2px)}
+  .fcard .top{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mute)}
+  .fcard .top b{color:var(--txt);font-size:13px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .fcard .s{font-size:34px;line-height:1.15;margin:10px 0;word-break:break-word;flex:1}
+  .fcard.light{background:#f4f1ff;color:#111}.fcard.light .top b{color:#111}
+  .fcard .acts{display:flex;gap:6px}
+  .star{background:none;border:0;cursor:pointer;font-size:16px;padding:0;filter:grayscale(1);opacity:.5}
+  .star.on{filter:none;opacity:1}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .chip{font-size:12px;padding:6px 12px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;font-family:inherit;transition:.2s}
+  .chip:hover{border-color:var(--edge2)}
+  .chip.on{background:var(--acc);border-color:var(--acc)}
+  .pair{border-top:1px solid var(--edge);padding:12px 0}
+  .pair:first-of-type{border-top:0}
+  .pair .h{font-size:30px;line-height:1.1}.pair .p{font-size:15px;color:var(--mute);margin-top:4px}
+  .pair small{font-size:11px;color:var(--faint)}
   .trend{border-top:1px solid var(--edge);padding:10px 0}
-  .trend:first-child{border-top:0}
+  .trend:first-of-type{border-top:0}
   .trend b{font-size:14px}
   .trend p{margin:4px 0 0;font-size:13px;color:var(--mute);line-height:1.5}
   .src a{color:var(--acc2);font-size:12px;word-break:break-all}
+  .font-card{border:1px solid var(--edge);border-radius:14px;padding:12px;margin-top:8px}
+  .font-card .s{font-size:30px;line-height:1.1;margin:6px 0;word-break:break-word}
+  /* chat */
   .msgs{display:flex;flex-direction:column;gap:10px;min-height:40vh}
-  .m{max-width:88%;line-height:1.5;font-size:14px;white-space:pre-wrap;padding:10px 13px;border-radius:16px}
-  .m.u{align-self:flex-end;background:rgba(177,76,255,.25);border-radius:16px 16px 4px 16px}
+  .m{max-width:88%;line-height:1.55;font-size:14px;white-space:pre-wrap;padding:10px 14px;border-radius:16px;animation:tabin .3s ease}
+  .m.u{align-self:flex-end;background:rgba(177,76,255,.28);border-radius:16px 16px 4px 16px}
   .m.b{align-self:flex-start;background:var(--card);border:1px solid var(--edge);border-radius:16px 16px 16px 4px}
   .chatbar{position:fixed;left:0;right:0;bottom:62px;z-index:4;padding:8px 16px;background:linear-gradient(transparent,rgba(7,4,15,.95) 30%)}
-  .chatbar form{max-width:720px;margin:0 auto;display:flex;gap:8px}
-  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-  .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;font-family:inherit}
-  .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--mute);border-top-color:var(--acc2);border-radius:50%;animation:r 0.8s linear infinite;vertical-align:-2px;margin-right:6px}
-  @keyframes r{to{transform:rotate(360deg)}}
-  .sheet{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:16px}
-  .sheet.open{display:flex}
-  .sheet .card{width:min(440px,100%)}
+  .chatbar form{max-width:760px;margin:0 auto;display:flex;gap:8px}
   #tab-chat{padding-bottom:70px}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--mute);border-top-color:var(--acc2);border-radius:50%;animation:r .8s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes r{to{transform:rotate(360deg)}}
+  .sheet{position:fixed;inset:0;z-index:20;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)}
+  .sheet.open{display:flex}
+  .sheet>.card{width:min(520px,100%);max-height:90vh;overflow:auto;background:#140c2a}
+  .prog{height:10px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:12px}
+  .prog i{display:block;height:100%;width:0;background:var(--grad);transition:width .2s}
+  .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%) translateY(20px);opacity:0;z-index:30;background:#1e1338;border:1px solid var(--edge2);padding:10px 18px;border-radius:999px;font-size:13px;transition:.3s;pointer-events:none;max-width:90vw}
+  .toast.show{opacity:1;transform:translateX(-50%)}
+
+  /* ===== Timeline muharriri ===== */
+  .ed-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
+  .ed-top select{width:auto;min-width:160px;max-width:240px}
+  .ed-top .sp{flex:1}
+  .ed-grid{display:grid;grid-template-columns:1fr;gap:12px}
+  .ed-media,.ed-insp{margin:0;max-height:none}
+  .mlist{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:360px;overflow:auto}
+  .mi{display:flex;gap:8px;align-items:center;padding:6px;border-radius:12px;border:1px solid transparent;cursor:pointer}
+  .mi:hover{background:var(--card2);border-color:var(--edge)}
+  .mi img,.mi .ph{width:40px;height:56px;border-radius:6px;object-fit:cover;background:#000;flex:none;display:grid;place-items:center;font-size:20px}
+  .mi .t{flex:1;min-width:0;font-size:12px}.mi .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mi .t span{color:var(--mute)}
+  .drop{border:1.5px dashed var(--edge2);border-radius:14px;padding:14px;text-align:center;color:var(--mute);font-size:13px;cursor:pointer;transition:.2s}
+  .drop:hover,.drop.over{border-color:var(--acc);color:var(--txt);background:rgba(177,76,255,.08)}
+  .ed-preview{display:flex;flex-direction:column;align-items:center;gap:10px}
+  .stage{position:relative;height:min(62vh,640px);aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px var(--edge)}
+  .stage canvas{width:100%;height:100%;display:block;touch-action:none}
+  .stage .empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--mute);font-size:13px;pointer-events:none}
+  .ctrl{display:flex;align-items:center;gap:10px}
+  .play{width:48px;height:48px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 4px 20px rgba(177,76,255,.45)}
+  .tc{font-family:ui-monospace,monospace;font-size:13px;color:var(--mute);min-width:130px;text-align:center}
+  .insp h4{margin:14px 0 4px;font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
+  .insp .rv{display:flex;justify-content:space-between;font-size:12px;color:var(--mute)}
+  .ed-ai{display:flex;gap:8px;align-items:center}
+  .ed-ai input{flex:1}
+  .timeline{padding:10px 0 12px;user-select:none}
+  .tl-tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 12px 10px}
+  .tl-tools label{margin:0 0 0 auto;display:flex;align-items:center;gap:6px}
+  .tl-tools input[type=range]{width:120px}
+  .tl-body{display:flex}
+  .tl-heads{flex:none;width:44px;padding-top:24px}
+  .tl-heads div{height:64px;display:grid;place-items:center;font-size:16px;border-bottom:1px solid transparent}
+  .tl-heads div.t,.tl-heads div.a{height:40px}
+  .tl-scroll{flex:1;overflow-x:auto;overflow-y:hidden;position:relative;padding-right:12px}
+  .tl-inner{position:relative;min-width:100%}
+  .ruler{height:24px;position:relative;cursor:pointer;border-bottom:1px solid var(--edge)}
+  .ruler span{position:absolute;top:4px;font-size:10px;color:var(--faint);transform:translateX(-50%);font-family:ui-monospace,monospace}
+  .ruler i{position:absolute;bottom:0;width:1px;height:6px;background:var(--faint)}
+  .ruler i.beat{height:9px;background:var(--pink);opacity:.8}
+  .track{position:relative;height:64px;border-bottom:1px solid var(--edge);background:rgba(255,255,255,.015)}
+  .track.t,.track.a{height:40px}
+  .clip{position:absolute;top:5px;bottom:5px;border-radius:10px;overflow:hidden;cursor:grab;border:2px solid rgba(255,255,255,.12);background-color:#2a1d4d;background-size:auto 100%;background-repeat:repeat-x;transition:box-shadow .15s}
+  .clip:active{cursor:grabbing}
+  .clip.sel{border-color:#fff;box-shadow:0 0 0 2px var(--acc),0 0 18px rgba(177,76,255,.6);z-index:2}
+  .clip .lb{position:absolute;left:6px;right:6px;bottom:3px;font-size:10px;font-weight:700;text-shadow:0 1px 3px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+  .clip .bd{position:absolute;left:4px;top:3px;display:flex;gap:3px;pointer-events:none}
+  .clip .bd span{font-size:9px;background:rgba(0,0,0,.65);padding:1px 5px;border-radius:6px;font-weight:700}
+  .clip .h{position:absolute;top:0;bottom:0;width:10px;cursor:ew-resize;z-index:3}
+  .clip .h.l{left:0}.clip .h.r{right:0}
+  .clip .h::after{content:"";position:absolute;top:30%;bottom:30%;left:3px;width:3px;border-radius:2px;background:rgba(255,255,255,.7)}
+  .clip.txt{background:linear-gradient(90deg,#6b2bd9,#b14cff);top:4px;bottom:4px}
+  .clip.txt .lb{bottom:auto;top:50%;transform:translateY(-50%);font-size:11px}
+  .clip.mus{background:#123a4a;top:4px;bottom:4px;cursor:ew-resize}
+  .clip.mus canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.8;pointer-events:none}
+  .clip.ghost{opacity:.6;z-index:5;pointer-events:none}
+  .playhead{position:absolute;top:0;bottom:0;width:2px;background:#fff;pointer-events:none;z-index:6;box-shadow:0 0 8px rgba(255,255,255,.8)}
+  .playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:9px solid #fff}
+  .tl-hint{padding:8px 12px 0;font-size:11px;color:var(--faint)}
+
   /* Kompyuter (katta ekran) */
   @media(min-width:900px){
-    body{padding:0 0 0 210px}
-    nav{top:0;bottom:0;right:auto;width:210px;flex-direction:column;justify-content:flex-start;gap:4px;padding:76px 12px 12px;border-top:0;border-right:1px solid var(--edge)}
-    nav button{flex:none;flex-direction:row;gap:12px;font-size:15px;padding:12px 14px;border-radius:12px;justify-content:flex-start}
-    nav button.on{background:rgba(177,76,255,.18)}
-    header{z-index:6}
-    main{max-width:960px;padding:20px 28px}
+    body{padding:0 0 0 var(--navw)}
+    nav{top:0;bottom:0;right:auto;width:var(--navw);flex-direction:column;justify-content:flex-start;gap:4px;padding:74px 12px 12px;border-top:0;border-right:1px solid var(--edge);overflow:visible}
+    nav button{flex:none;flex-direction:row;gap:12px;font-size:14px;font-weight:600;padding:11px 14px;justify-content:flex-start}
+    nav button:hover{background:rgba(255,255,255,.04)}
+    nav button.on{background:rgba(177,76,255,.18);box-shadow:inset 0 0 0 1px rgba(177,76,255,.35)}
+    nav button .dot{top:50%;right:14px;transform:translateY(-50%)}
+    header{margin-left:calc(-1 * var(--navw));padding-left:20px}
+    main{max-width:1000px;padding:22px 28px}
     .stats{grid-template-columns:repeat(4,1fr)}
-    #tab-stats{display:none}#tab-stats.on{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:start}
-    #tab-stats .stats,#tab-stats > div:nth-of-type(4),#tab-stats > div:nth-of-type(5){grid-column:1/-1}
-    #tab-stats > div:nth-of-type(2),#tab-stats > div:nth-of-type(3){align-self:stretch}
+    .dash2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:start}
     .frames{grid-template-columns:repeat(8,1fr)}
-    .chatbar{left:210px;bottom:0;padding-bottom:16px}
+    .metrics{grid-template-columns:repeat(4,1fr)}
+    .chatbar{left:var(--navw);bottom:0;padding-bottom:16px}
     #tab-chat{padding-bottom:90px}
     .m{max-width:75%}
+    body.wide main{max-width:none}
+    .ed-grid{grid-template-columns:250px 1fr 300px;align-items:start}
+    .ed-insp{max-height:calc(62vh + 70px);overflow:auto}
+    .toast{bottom:30px}
   }
+  @media(max-width:899px){ .stage{height:min(56vh,560px)} }
 </style>
 </head>
 <body>
+<div class="bg"><i></i><i></i><i></i></div>
 <header>
   <a class="ib" href="index.html" title="Orqaga" id="backBtn">←</a>
-  <h1>Montaj Studiya</h1>
+  <div class="logo">M</div>
+  <h1>Montaj Studiya<small id="hdrSub"></small></h1>
   <button class="ib" id="keyBtn" title="API kalit">🔑</button>
 </header>
 
 <main>
   <!-- 1. HISOB -->
-  <section class="tab on" id="tab-stats">
-    <div class="stats">
-      <div class="stat"><b id="sCount">0</b><span>Jami montaj</span></div>
-      <div class="stat"><b id="sHours">0</b><span>Sarflangan soat</span></div>
-      <div class="stat"><b id="sViews">0</b><span>O'rtacha ko'rish</span></div>
-      <div class="stat"><b id="sMonth">0</b><span>Shu oy</span></div>
+  <section class="tab on" id="tab-dash">
+    <div class="card hero">
+      <div class="hi"><h2 id="greet">Salom! 👋</h2><p id="greetSub"></p></div>
+      <div class="streak" id="streak" title="Ketma-ket montaj qilingan kunlar">🔥 <span>0 kun</span></div>
+      <div class="ring" id="goalRing" title="Haftalik maqsad (bosib o'zgartiring)">
+        <svg width="86" height="86"><circle cx="43" cy="43" r="36" stroke="rgba(255,255,255,.08)" stroke-width="8" fill="none"/>
+          <circle id="goalArc" cx="43" cy="43" r="36" stroke="url(#gg)" stroke-width="8" fill="none" stroke-linecap="round" stroke-dasharray="226" stroke-dashoffset="226" style="transition:stroke-dashoffset 1s"/>
+          <defs><linearGradient id="gg"><stop offset="0" stop-color="#00e5ff"/><stop offset="1" stop-color="#ff3fa4"/></linearGradient></defs></svg>
+        <div><span><b id="goalTxt">0/5</b>hafta</span></div>
+      </div>
     </div>
-    <div class="card"><h3>Haftalik montajlar (8 hafta)</h3><div class="bars" id="weekBars"></div></div>
-    <div class="card"><h3>Qaysi stil ko'proq ko'rilgan</h3><div class="rank" id="styleRank"><span class="muted">Ma'lumot yo'q</span></div></div>
+    <div class="card continue" id="continueCard" hidden>
+      <div style="font-size:26px">🎞</div>
+      <div class="t"><b id="contName"></b><small id="contSub"></small></div>
+      <button class="btn main" id="contBtn">Davom ettirish</button>
+    </div>
+    <div class="stats">
+      <div class="stat"><b data-count id="sCount">0</b><span>Jami montaj</span></div>
+      <div class="stat"><b data-count id="sHours">0</b><span>Sarflangan soat</span></div>
+      <div class="stat"><b data-count id="sViews">0</b><span>O'rtacha ko'rish</span></div>
+      <div class="stat"><b data-count id="sMonth">0</b><span>Shu oy</span></div>
+    </div>
+    <div class="dash2">
+      <div class="card"><h3>📅 Haftalik montajlar<span class="r">8 hafta</span></h3><div class="bars" id="weekBars"></div></div>
+      <div class="card"><h3>👁 Ko'rishlar dinamikasi<span class="r">oxirgi 15 ta</span></h3><svg id="viewsChart" viewBox="0 0 320 120" style="width:100%;height:120px;display:block"></svg></div>
+    </div>
+    <div class="card"><h3>🎨 Qaysi stil ko'proq ko'rilgan<span class="r">o'rtacha ko'rish</span></h3><div id="styleRank"><span class="muted">Ma'lumot yo'q</span></div></div>
     <div class="card">
-      <h3>Montajlarim</h3>
+      <h3>📁 Montajlarim</h3>
       <div id="list"><span class="muted">Hali montaj qo'shilmagan. «➕ Qo'shish» bo'limidan boshlang.</span></div>
       <div class="row">
-        <button class="btn" id="exportBtn">Zaxira (JSON)</button>
-        <button class="btn" id="importBtn">Tiklash</button>
+        <button class="btn sm" id="exportBtn">Zaxira (JSON)</button>
+        <button class="btn sm" id="importBtn">Tiklash</button>
         <input type="file" id="importFile" accept="application/json" hidden>
       </div>
     </div>
@@ -154,7 +307,7 @@
           <div><label>Musiqa</label><input name="music" placeholder="Trek nomi"></div>
           <div><label>Dastur</label><input name="app" list="apps" placeholder="CapCut, AE…"></div>
         </div>
-        <datalist id="apps"><option>CapCut</option><option>After Effects</option><option>Premiere Pro</option><option>DaVinci Resolve</option><option>VN</option><option>Alight Motion</option></datalist>
+        <datalist id="apps"><option>Montaj Studiya</option><option>CapCut</option><option>After Effects</option><option>Premiere Pro</option><option>DaVinci Resolve</option><option>VN</option><option>Alight Motion</option></datalist>
         <div class="g3">
           <div><label>Davomiylik (s)</label><input name="duration" type="number" min="0" step="1"></div>
           <div><label>Vaqt (soat)</label><input name="hours" type="number" min="0" step="0.25"></div>
@@ -171,41 +324,138 @@
     </div>
   </section>
 
-  <!-- 3. VIDEO TAHLIL -->
-  <section class="tab" id="tab-video">
-    <div class="card">
-      <h3>🎬 Videoni tahlil qilish</h3>
-      <div class="muted">Montajingizni yoki ilhom olgan reelsni tanlang. Dastur kesimlar sonini, tempni o'lchaydi, keyin AI kadrlarni ko'rib stil, shrift, rang va yaxshilash g'oyalarini beradi.</div>
-      <label>Video</label><input type="file" id="vidFile" accept="video/*">
-      <label>Qo'shimcha savol (ixtiyoriy)</label><input id="vidQ" placeholder="Masalan: bu to'y reels uchun qaysi shrift mos?">
-      <video id="vid" controls playsinline muted hidden></video>
-      <div class="muted" id="vidInfo" style="margin-top:8px"></div>
-      <div class="frames" id="frames"></div>
-      <div class="row"><button class="btn main" id="analyzeBtn" disabled>AI bilan tahlil</button><button class="btn" id="saveVidBtn" disabled>Montajlarimga qo'shish</button></div>
-      <div class="ai" id="vidOut"></div>
+  <!-- 3. TIMELINE MUHARRIRI -->
+  <section class="tab" id="tab-editor">
+    <div class="ed-top">
+      <select id="projSel" title="Loyihalar"></select>
+      <button class="btn sm" id="projNew">+ Yangi</button>
+      <button class="btn sm" id="projRename" title="Nomini o'zgartirish">✎</button>
+      <button class="btn sm" id="projDel" title="Loyihani o'chirish">🗑</button>
+      <span class="sp"></span>
+      <button class="btn sm" id="undoBtn" title="Orqaga (Ctrl+Z)">↶</button>
+      <button class="btn sm" id="redoBtn" title="Oldinga (Ctrl+Shift+Z)">↷</button>
+      <button class="btn main" id="aiMontajBtn">🤖 AI montaj</button>
+      <button class="btn" id="mp4Btn">⬇ MP4</button>
+      <button class="btn sm" id="aeBtn" title="After Effects uchun skript">AE .jsx</button>
+    </div>
+    <div class="ed-grid">
+      <aside class="card ed-media">
+        <h3>🗂 Media</h3>
+        <div class="drop" id="drop">+ Video, rasm yoki musiqa qo'shing<br><small>yoki shu yerga sudrab tashlang</small></div>
+        <input type="file" id="mediaFile" multiple accept="video/*,image/*,audio/*" hidden>
+        <div class="mlist" id="mediaList"></div>
+      </aside>
+      <div class="ed-preview">
+        <div class="stage"><canvas id="cv" width="720" height="1280"></canvas><div class="empty" id="stageEmpty">Media qo'shing va uni timelinega sudrang<br>yoki «🤖 AI montaj» ni bosing</div></div>
+        <div class="ctrl">
+          <button class="btn sm" id="toStart" title="Boshiga">⏮</button>
+          <button class="play" id="playBtn" title="Ijro (Probel)">▶</button>
+          <button class="btn sm" id="toEnd" title="Oxiriga">⏭</button>
+          <span class="tc" id="timeLbl">0:00.0 / 0:00.0</span>
+        </div>
+      </div>
+      <aside class="card ed-insp insp" id="insp"></aside>
+    </div>
+    <div class="card ed-ai" style="margin-top:12px">
+      <span style="font-size:20px">✨</span>
+      <input id="aiCmd" placeholder="AI'ga buyruq: «hookni kuchliroq qil», «matnlarni inglizchaga o'gir», «to'y uslubiga o'tkaz»…">
+      <button class="btn main" id="aiCmdBtn">Bajar</button>
+    </div>
+    <div class="card timeline">
+      <div class="tl-tools">
+        <button class="btn sm" id="splitBtn" title="Playhead joyida bo'lish (S)">✂ Bo'lish</button>
+        <button class="btn sm" id="addTextBtn">T Matn</button>
+        <button class="btn sm" id="dupBtn" title="Nusxa (Ctrl+D)">⧉ Nusxa</button>
+        <button class="btn sm" id="delBtn" title="O'chirish (Delete)">🗑</button>
+        <button class="btn sm" id="beatBtn" title="Kesimlarni musiqa beatiga moslash">⚡ Beatga moslash</button>
+        <label>🔍 <input type="range" id="zoom" min="20" max="320" value="90"></label>
+      </div>
+      <div class="tl-body">
+        <div class="tl-heads"><div title="Video">🎬</div><div class="t" title="Matn">🔤</div><div class="a" title="Musiqa">🎵</div></div>
+        <div class="tl-scroll" id="tlScroll">
+          <div class="tl-inner" id="tlInner">
+            <div class="ruler" id="ruler"></div>
+            <div class="track" id="trV"></div>
+            <div class="track t" id="trT"></div>
+            <div class="track a" id="trA"></div>
+            <div class="playhead" id="playhead"></div>
+          </div>
+        </div>
+      </div>
+      <div class="tl-hint">Klipni sudrab joyini almashtiring · chetlarini tortib qirqing · Probel — ijro · S — bo'lish · Delete — o'chirish · Ctrl+Z — orqaga · matnni ekranda sudrab joylang</div>
     </div>
   </section>
 
-  <!-- 4. TRENDLAR -->
+  <!-- 4. VIDEO TAHLIL -->
+  <section class="tab" id="tab-video">
+    <div class="card">
+      <h3>🎬 Videoni chuqur tahlil qilish</h3>
+      <div class="muted">Montajingiz yoki ilhom olgan reelsni tanlang: kesimlar ritmi, harakat grafigi, musiqa BPM va beatga moslik, rang palitrasi, hook kuchi — keyin AI xulosa beradi.</div>
+      <label>Video</label><input type="file" id="vidFile" accept="video/*">
+      <label>Qo'shimcha savol (ixtiyoriy)</label><input id="vidQ" placeholder="Masalan: bu to'y reels uchun qaysi shrift mos?">
+      <video class="prev" id="vid" controls playsinline muted hidden></video>
+      <div class="muted" id="vidInfo" style="margin-top:8px"></div>
+    </div>
+    <div id="vidResult" hidden>
+      <div class="metrics" id="vidMetrics"></div>
+      <div class="card" style="margin-top:12px"><h3>📈 Ritm: harakat, kesimlar va beatlar</h3><svg class="rhythm" id="rhythm" preserveAspectRatio="none"></svg>
+        <div class="muted" style="margin-top:6px"><span style="color:var(--acc2)">━</span> harakat &nbsp; <span style="color:#fff">┃</span> kesim &nbsp; <span style="color:var(--pink)">╷</span> beat</div></div>
+      <div class="card"><h3>🎨 Rang palitrasi<span class="r">bosib nusxalang</span></h3><div class="swatches" id="palette"></div></div>
+      <div class="card"><h3>🖼 Kadrlar</h3><div class="frames" id="frames"></div></div>
+      <div class="card">
+        <div class="row" style="margin-top:0">
+          <button class="btn main" id="analyzeBtn">🤖 AI xulosa</button>
+          <button class="btn" id="toTimelineBtn">🎞 Kesimlar bo'yicha timelinega</button>
+          <button class="btn" id="likeThisBtn">✨ Shu uslubda AI montaj</button>
+          <button class="btn sm" id="saveVidBtn">Montajlarimga qo'shish</button>
+        </div>
+        <div class="ai" id="vidOut" style="margin-top:12px"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. SHRIFTLAR -->
+  <section class="tab" id="tab-fonts">
+    <div class="card">
+      <h3>🔤 Shriftlar kutubxonasi<span class="r" id="fontCount"></span></h3>
+      <div class="g2">
+        <div><label>Namuna matn</label><input id="fontSample" value="Reels montaj 2026"></div>
+        <div><label>Qidirish</label><input id="fontSearch" placeholder="Shrift nomi…"></div>
+      </div>
+      <div class="row">
+        <label style="margin:0;display:flex;gap:8px;align-items:center;flex:1;min-width:180px">Hajm <input type="range" id="fontSize" min="18" max="72" value="34"></label>
+        <button class="btn sm" id="fontBg">☀ Oq fon</button>
+      </div>
+      <div class="chips" id="fontCats" style="margin-top:12px"></div>
+    </div>
+    <div class="fgrid" id="fontGrid"></div>
+    <div class="card" style="margin-top:12px"><h3>💞 Tayyor juftliklar<span class="r">sarlavha + matn</span></h3><div id="pairs"></div></div>
+  </section>
+
+  <!-- 6. TRENDLAR -->
   <section class="tab" id="tab-trends">
     <div class="card">
       <h3>🔥 Yangiliklar va trendlar</h3>
-      <div class="muted">AI internetdan eng so'nggi reels montaj stillari, shriftlar, o'tishlar va audio trendlarni qidiradi.</div>
-      <label>Yo'nalish</label>
-      <select id="trendNiche"><option>Umumiy Reels / TikTok</option><option>To'y va marosim videolari</option><option>Avto / moto edit</option><option>Sport / futbol edit</option><option>Biznes reklama</option><option>Vlog / lifestyle</option><option>Musiqiy klip</option><option>Anime / gaming edit</option></select>
-      <div class="row"><button class="btn main" id="trendBtn">Trendlarni yangilash</button></div>
+      <div class="muted">AI internetdan eng so'nggi reels montaj stillari, shriftlar, o'tishlar va audio trendlarni qidiradi. Yangi chiqqanlari «YANGI» belgisi bilan ko'rsatiladi.</div>
+      <div class="g2">
+        <div><label>Yo'nalish</label>
+          <select id="trendNiche"><option>Umumiy Reels / TikTok</option><option>To'y va marosim videolari</option><option>Avto / moto edit</option><option>Sport / futbol edit</option><option>Biznes reklama</option><option>Vlog / lifestyle</option><option>Musiqiy klip</option><option>Anime / gaming edit</option></select></div>
+        <div><label>Avtomatik tekshirish</label>
+          <select id="trendAuto"><option value="0">O'chiq</option><option value="1">Har kuni</option><option value="3" selected>Har 3 kunda</option><option value="7">Har hafta</option></select></div>
+      </div>
+      <div class="row"><button class="btn main" id="trendBtn">Hozir yangilash</button></div>
       <div class="muted" id="trendDate" style="margin-top:8px"></div>
     </div>
     <div id="trendOut"></div>
   </section>
 
-  <!-- 5. AI HAMKOR -->
+  <!-- 7. AI HAMKOR -->
   <section class="tab" id="tab-chat">
     <div class="chips" id="chips">
       <button class="chip">Bugun qanday montaj qilay?</button>
       <button class="chip">Hook uchun 5 ta g'oya ber</button>
       <button class="chip">To'y reels uchun shrift juftligi</button>
-      <button class="chip">CapCut'da velocity qanday qilinadi?</button>
+      <button class="chip">Hozirgi timeline'imga baho ber</button>
     </div>
     <div class="msgs" id="msgs"></div>
   </section>
@@ -216,319 +466,1490 @@
 </div>
 
 <nav id="nav">
-  <button data-t="stats" class="on"><span class="e">📊</span>Hisob</button>
-  <button data-t="add"><span class="e">➕</span>Qo'shish</button>
+  <button data-t="dash" class="on"><span class="e">📊</span>Hisob</button>
+  <button data-t="editor"><span class="e">🎞</span>Timeline</button>
   <button data-t="video"><span class="e">🎬</span>Tahlil</button>
-  <button data-t="trends"><span class="e">🔥</span>Trendlar</button>
+  <button data-t="fonts"><span class="e">🔤</span>Shriftlar</button>
+  <button data-t="trends"><span class="e">🔥</span>Trendlar<i class="dot"></i></button>
   <button data-t="chat"><span class="e">🤖</span>Hamkor</button>
+  <button data-t="add"><span class="e">➕</span>Qo'shish</button>
 </nav>
 
 <div class="sheet" id="keySheet">
   <div class="card">
-    <h3>Anthropic API kaliti</h3>
+    <h3>🔑 Anthropic API kaliti</h3>
     <input id="keyInp" type="password" placeholder="sk-ant-...">
     <div class="row"><button class="btn main" id="keySave">Saqlash</button><button class="btn" id="keyClose">Yopish</button></div>
-    <div class="muted" style="margin-top:10px">Kalit faqat shu telefonda saqlanadi (bosh sahifa bilan umumiy). Uni console.anthropic.com saytidan olasiz.</div>
+    <div class="muted" style="margin-top:10px">Kalit faqat shu qurilmada saqlanadi. Uni console.anthropic.com saytidan olasiz. Kalitsiz ham timeline, eksport, shriftlar va tahlil ishlaydi — faqat AI qismlari ishlamaydi.</div>
   </div>
 </div>
 
+<div class="sheet" id="aiSheet">
+  <div class="card">
+    <h3>🤖 AI montaj</h3>
+    <div class="muted">AI kadrlaringizni ko'radi, musiqa beatlarini hisobga oladi va tayyor montajni timelinega joylaydi. Keyin xohlagancha tahrirlaysiz.</div>
+    <label>Qaysi media ishlatilsin</label>
+    <div id="aiMediaPick" class="mlist" style="max-height:180px;margin-top:4px"></div>
+    <div class="g2">
+      <div><label>Musiqa</label><select id="aiMusic"></select></div>
+      <div><label>Davomiylik</label><select id="aiDur"><option value="10">10 s</option><option value="15" selected>15 s</option><option value="30">30 s</option><option value="45">45 s</option><option value="60">60 s</option></select></div>
+    </div>
+    <label>Uslub</label>
+    <select id="aiStyle"><option>Velocity / beat-sync edit</option><option>Kinematografik (cinematic)</option><option>To'y / nikoh — nafis, romantik</option><option>Avto / sport — agressiv</option><option>Vlog — tabiiy, matnli</option><option>Biznes reklama — sotuvchi</option><option>Minimal / estetik</option><option>Glitch / yoshlar</option></select>
+    <label>Matn / g'oya (ixtiyoriy)</label><input id="aiIdea" placeholder="Masalan: Aziz & Madina • 12.10.2026">
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="aiTrends" checked> Saqlangan trendlardan foydalansin</label>
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="aiRef"> Tahlil qilingan videoga o'xshatsin <span class="muted" id="aiRefName"></span></label>
+    <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="aiSnap" checked> Kesimlarni musiqa beatiga moslash</label>
+    <div class="row">
+      <button class="btn main" id="aiGo">✨ Montaj qil</button>
+      <button class="btn" id="aiLocal" title="API kalitsiz, tezkor algoritm">⚡ Tezkor avto (AI'siz)</button>
+      <button class="btn" id="aiClose">Yopish</button>
+    </div>
+    <div class="muted" id="aiStatus" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<div class="sheet" id="expSheet">
+  <div class="card">
+    <h3>⬇ MP4 eksport</h3>
+    <div class="g2">
+      <div><label>Sifat</label><select id="expRes"><option value="720">720×1280 (tez)</option><option value="1080">1080×1920 (Full HD)</option></select></div>
+      <div><label>Kadr tezligi</label><select id="expFps"><option>30</option><option>25</option><option>60</option></select></div>
+    </div>
+    <div class="prog"><i id="expBar"></i></div>
+    <div class="muted" id="expStatus" style="margin-top:8px">Tayyor.</div>
+    <div class="row"><button class="btn main" id="expGo">Boshlash</button><button class="btn" id="expClose">Yopish</button></div>
+  </div>
+</div>
+
+<div class="sheet" id="dlgSheet">
+  <div class="card">
+    <h3 id="dlgMsg"></h3>
+    <input id="dlgInp" hidden>
+    <div class="row"><button class="btn main" id="dlgOk">Ha</button><button class="btn" id="dlgCancel">Bekor qilish</button></div>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+<script src="https://cdn.jsdelivr.net/npm/mp4-muxer@5.2.1/build/mp4-muxer.js"></script>
 <script>
-(() => {
+"use strict";
 const $ = id => document.getElementById(id);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const fmt = n => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(Math.round(n));
-const load = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
-const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+const today = () => new Date().toISOString().slice(0, 10);
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+function toast(msg, ms = 2600) { const t = $('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(toast._t); toast._t = setTimeout(() => t.classList.remove('show'), ms); }
+function dlg(msg, { input = null, ok = 'Ha' } = {}) {
+  return new Promise(res => {
+    const s = $('dlgSheet'), inp = $('dlgInp'); $('dlgMsg').textContent = msg; inp.hidden = input === null; inp.value = input ?? ''; $('dlgOk').textContent = ok;
+    s.classList.add('open'); if (input !== null) setTimeout(() => { inp.focus(); inp.select(); }, 50);
+    const done = v => { s.classList.remove('open'); $('dlgOk').onclick = $('dlgCancel').onclick = inp.onkeydown = null; res(v); };
+    $('dlgOk').onclick = () => done(input === null ? true : inp.value); $('dlgCancel').onclick = () => done(input === null ? false : null);
+    inp.onkeydown = e => { if (e.key === 'Enter') $('dlgOk').click(); };
+  });
+}
+const IN_ANDROID = location.host === 'appassets.androidplatform.net';
+if (!IN_ANDROID) $('backBtn').remove();
 
-/* ---------- Claude API ---------- */
-const MODEL = 'claude-opus-5-5';
+/* ================= Platforma: Claude.ai (sample/db/downloads) yoki mahalliy ================= */
+const P = { sample: null, db: null, dl: null, userId: null, ready: null };
+P.ready = (async () => {
+  if (!window.claude || !claude.use) return;
+  try {
+    const [s, d, dl, u] = await Promise.all(['sample', 'db', 'downloads', 'user'].map(n => claude.use(n).catch(() => null)));
+    P.sample = s; P.dl = dl;
+    if (d && u) { const id = await u.id().catch(() => null); if (id) { P.db = d; P.userId = id; } }
+  } catch (e) {}
+})();
+
+/* Kalit-qiymat ombori: Claude.ai'da shaxsiy db, aks holda localStorage */
+const KV = {
+  mem: {},
+  async get(k, d) {
+    await P.ready;
+    if (P.db) {
+      try { const s = await P.db.doc(`data/users/${P.userId}/kv/${k}`).get(); if (s.exists) { const v = JSON.parse(s.data().v); this.mem[k] = v; return v; } } catch (e) {}
+    }
+    try { const v = localStorage.getItem('ms-' + k); if (v) return JSON.parse(v); } catch (e) {}
+    return k in this.mem ? this.mem[k] : d;
+  },
+  _t: {},
+  set(k, v) {
+    this.mem[k] = v;
+    try { localStorage.setItem('ms-' + k, JSON.stringify(v)); } catch (e) {}
+    clearTimeout(this._t[k]);
+    this._t[k] = setTimeout(async () => {
+      await P.ready;
+      if (P.db) { try { await P.db.doc(`data/users/${P.userId}/kv/${k}`).set({ v: JSON.stringify(v) }); } catch (e) { console.warn('db', e); } }
+    }, 600);
+  }
+};
+
+/* Faylni yuklab berish */
+async function saveFile(name, data) {
+  await P.ready;
+  if (P.dl) {
+    try { await P.dl.save({ filename: name, data }); return true; }
+    catch (e) { if (e.code === 'declined') return false; if (e.code !== 'unavailable' && e.code !== 'not_granted') { toast('Saqlab bo\'lmadi: ' + e.code); return false; } }
+  }
+  const blob = data instanceof Blob ? data : new Blob([data]);
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 60000); return true;
+}
+
+/* ================= AI ================= */
 const getKey = () => { try { return localStorage.getItem('miya-key') || ''; } catch (e) { return ''; } };
-const ERR = { no_key: "Avval 🔑 tugmasi orqali API kalitni kiriting.", bad_key: "API kalit noto'g'ri.", rate_limited: "Juda ko'p so'rov — biroz kutib qayta urinib ko'ring.", offline: "Internet yo'q.", http: "Server xatosi, qayta urinib ko'ring.", refusal: "AI bu so'rovga javob bermadi." };
-const errText = e => ERR[e && e.code] || ('Xato: ' + (e && (e.msg || e.message) || e));
+const ERR = { no_ai: "AI ulanmagan. Dasturni Claude.ai ichida oching (bepul, obunangiz orqali) yoki 🔑 orqali API kalit kiriting.",
+  bad_key: "API kalit noto'g'ri.", rate_limited: "Limit tugadi yoki juda ko'p so'rov — biroz kutib qayta urinib ko'ring.", offline: "Internet yo'q.",
+  http: "Server xatosi, qayta urinib ko'ring.", refusal: "AI bu so'rovga javob bermadi.", not_granted: "AI'ga ruxsat berilmadi (sahifani yangilab, ruxsat bering).",
+  cancelled: "To'xtatildi.", invalid_json: "AI javobini o'qib bo'lmadi, qayta urinib ko'ring.", sampling_disabled: "Claude akkauntingizda AI hozir o'chiq." };
+const errText = e => ERR[e && e.code] || ('Xato: ' + (e && (e.msg || e.message || e.code) || e));
+const SYS = `Sen tajribali video montajchi va kreativ direktorsan. Foydalanuvchi Instagram Reels, TikTok va Shorts uchun montaj qiladi (CapCut, After Effects, Premiere va shu dastur — Montaj Studiya).
+Har doim o'zbek tilida (lotin yozuvida) javob ber. Aniq, amaliy bo'l: qaysi effekt, nechanchi soniyada, qanday shrift — konkret yoz. Javobni qisqa sarlavhalar va ro'yxatlar bilan tuz. Markdown jadval ishlatma.`;
+const aiMode = async () => { await P.ready; return P.sample ? 'claude' : getKey() ? 'key' : null; };
+function hdrUpdate() { aiMode().then(m => { $('hdrSub').textContent = m === 'claude' ? '· AI: Claude obunangiz orqali' : m === 'key' ? '· AI: API kalit' : '· AI ulanmagan'; $('keyBtn').hidden = m === 'claude'; }); }
 
-async function claude({ system, messages, web = false, effort = 'medium', maxTokens = 16000 }) {
-  const key = getKey(); if (!key) throw { code: 'no_key' };
-  const msgs = messages.slice();
-  const tools = web ? [{ type: 'web_search_20260209', name: 'web_search', max_uses: 6 }] : undefined;
+const dataURLtoBlob = d => { const [h, b] = d.split(','); const bin = atob(b); const u = new Uint8Array(bin.length); for (let i = 0; i < bin.length; i++) u[i] = bin.charCodeAt(i); return new Blob([u], { type: h.match(/:(.*?);/)[1] }); };
+
+/**
+ * ai({system, messages:[{role,content}], images:[dataURL], web, effort, json, tier, onText})
+ * images faqat oxirgi user xabariga qo'shiladi.
+ */
+async function ai(o) {
+  const mode = await aiMode();
+  if (!mode) throw { code: 'no_ai' };
+  const msgs = o.messages || [{ role: 'user', content: o.prompt }];
+  if (mode === 'claude') {
+    const turns = [{ role: 'user', content: (o.system || SYS) + (o.json ? '\nJavobni faqat JSON qilib ber.' : '') }, ...msgs.map(m => ({ role: m.role, content: String(m.content) }))];
+    // ketma-ket user turnlari birlashadi — platforma shunday o'qiydi
+    const opts = { modelTier: o.tier || 'default', cache: o.cache ?? false };
+    if (o.onText) opts.onText = o.onText;
+    if (o.images && o.images.length) {
+      const lim = await P.sample.limits().catch(() => null);
+      if (lim && lim.images) opts.images = o.images.slice(0, lim.images.maxCount).map(d => typeof d === 'string' ? dataURLtoBlob(d) : d);
+    }
+    if (o.json) return { data: await P.sample.json(turns, opts), sources: [] };
+    const r = await P.sample(turns, opts);
+    return { text: r.text, sources: [] };
+  }
+  // API kalit bilan to'g'ridan-to'g'ri
+  const apiMsgs = msgs.map(m => ({ role: m.role, content: m.content }));
+  if (o.images && o.images.length) {
+    const last = apiMsgs[apiMsgs.length - 1];
+    last.content = [...o.images.map(d => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: d.split(',')[1] } })), { type: 'text', text: String(last.content) }];
+  }
+  const tools = o.web ? [{ type: 'web_search_20260209', name: 'web_search', max_uses: 6 }] : undefined;
   const sources = new Map();
   for (let round = 0; round < 6; round++) {
     let res;
     try {
       res = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST',
-        headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01',
+        headers: { 'content-type': 'application/json', 'x-api-key': getKey(), 'anthropic-version': '2023-06-01',
                    'anthropic-beta': 'server-side-fallback-2026-07-01', 'anthropic-dangerous-direct-browser-access': 'true' },
-        body: JSON.stringify({ model: MODEL, max_tokens: maxTokens, system, messages: msgs, tools,
-                               output_config: { effort }, fallbacks: 'default' }) });
+        body: JSON.stringify({ model: 'claude-opus-5-5', max_tokens: 16000, system: (o.system || SYS) + (o.json ? '\nJavobni faqat ```json blokida ber.' : ''),
+          messages: apiMsgs, tools, output_config: { effort: o.effort || 'medium' }, fallbacks: 'default' }) });
     } catch (e) { throw { code: 'offline' }; }
-    if (!res.ok) {
-      let msg = ''; try { msg = (await res.json()).error.message; } catch (e) {}
-      throw { code: res.status === 401 ? 'bad_key' : res.status === 429 ? 'rate_limited' : 'http', msg };
-    }
+    if (!res.ok) { let msg = ''; try { msg = (await res.json()).error.message; } catch (e) {} throw { code: res.status === 401 ? 'bad_key' : res.status === 429 ? 'rate_limited' : 'http', msg }; }
     const j = await res.json();
     if (j.stop_reason === 'refusal') throw { code: 'refusal' };
-    for (const c of j.content) {
-      if (c.type === 'web_search_tool_result' && Array.isArray(c.content))
-        c.content.forEach(r => r.url && sources.set(r.url, r.title || r.url));
-    }
-    if (j.stop_reason === 'pause_turn') { msgs.push({ role: 'assistant', content: j.content }); continue; }
+    for (const c of j.content) if (c.type === 'web_search_tool_result' && Array.isArray(c.content)) c.content.forEach(r => r.url && sources.set(r.url, r.title || r.url));
+    if (j.stop_reason === 'pause_turn') { apiMsgs.push({ role: 'assistant', content: j.content }); continue; }
     const text = j.content.filter(c => c.type === 'text').map(c => c.text).join('').trim();
-    return { text, sources: [...sources].map(([url, title]) => ({ url, title })) };
+    o.onText && o.onText({ text });
+    const src = [...sources].map(([url, title]) => ({ url, title }));
+    if (o.json) { try { return { data: parseJSON(text), sources: src }; } catch (e) { throw { code: 'invalid_json' }; } }
+    return { text, sources: src };
   }
   throw { code: 'http', msg: 'juda uzoq davom etdi' };
 }
+function parseJSON(text) {
+  try { return JSON.parse(text); } catch (e) {}
+  const m = text.match(/```(?:json)?\s*([\s\S]*?)```/);
+  if (m) return JSON.parse(m[1]);
+  const a = Math.min(...['{', '['].map(c => { const i = text.indexOf(c); return i < 0 ? 1e9 : i; }));
+  const b = Math.max(text.lastIndexOf('}'), text.lastIndexOf(']'));
+  return JSON.parse(text.slice(a, b + 1));
+}
 
-const SYS_BASE = `Sen tajribali video montajchi va kreativ direktorsan. Foydalanuvchi Instagram Reels, TikTok va Shorts uchun montaj qiladi (CapCut, After Effects, Premiere va h.k.).
-Har doim o'zbek tilida (lotin yozuvida) javob ber. Aniq, amaliy bo'l: qaysi dasturda, qaysi effekt, nechanchi soniyada, qanday shrift — konkret yoz.
-Javobni qisqa sarlavhalar va ro'yxatlar bilan tuz. Markdown jadval ishlatma.`;
+/* ================= Shriftlar kutubxonasi ================= */
+// [nom, kategoriya, qalin (700) bormi]
+const FONT_CATS = { d: 'Display', s: 'Sans', r: 'Serif', y: 'Yozma', h: "Qo'lyozma", p: 'Retro / piksel', f: 'Futuristik' };
+const FONTS = [
+ ['Bebas Neue','d'],['Anton','d'],['Archivo Black','d'],['Bangers','d'],['Bungee','d'],['Bungee Shade','d'],['Bungee Inline','d'],['Righteous','d'],['Russo One','d'],
+ ['Black Ops One','d'],['Alfa Slab One','d'],['Ultra','d'],['Bowlby One','d'],['Titan One','d'],['Luckiest Guy','d'],['Staatliches','d'],['Squada One','d'],['Passion One','d'],
+ ['Paytone One','d'],['Racing Sans One','d'],['Teko','d',1],['Fjalla One','d'],['Abril Fatface','d'],['Shrikhand','d'],['Rubik Mono One','d'],['Dela Gothic One','d'],
+ ['Bagel Fat One','d'],['Climate Crisis','d'],['Monoton','d'],['Faster One','d'],['Oswald','d',1],['Big Shoulders Display','d',1],['Barlow Condensed','d',1],
+ ['Saira Condensed','d',1],['League Spartan','d',1],['Londrina Solid','d'],['Reggae One','d'],['Mochiy Pop One','d'],
+ ['Montserrat','s',1],['Poppins','s',1],['Inter','s',1],['DM Sans','s',1],['Space Grotesk','s',1],['Outfit','s',1],['Sora','s',1],['Plus Jakarta Sans','s',1],['Urbanist','s',1],
+ ['Kanit','s',1],['Lexend','s',1],['Manrope','s',1],['Rubik','s',1],['Work Sans','s',1],['Nunito','s',1],['Roboto Condensed','s',1],['Josefin Sans','s',1],['Archivo','s',1],
+ ['Unbounded','s',1],['Syne','s',1],['Bricolage Grotesque','s',1],['Raleway','s',1],['Quicksand','s',1],['Comfortaa','s',1],['Fredoka','s',1],['Baloo 2','s',1],
+ ['Playfair Display','r',1],['DM Serif Display','r'],['Cormorant Garamond','r',1],['Cinzel','r',1],['Cinzel Decorative','r',1],['Bodoni Moda','r',1],['Libre Baskerville','r',1],
+ ['Lora','r',1],['Merriweather','r',1],['Prata','r'],['Marcellus','r'],['Yeseva One','r'],['Italiana','r'],['Poiret One','r'],['Roboto Slab','r',1],['Zilla Slab','r',1],
+ ['Great Vibes','y'],['Pacifico','y'],['Dancing Script','y',1],['Satisfy','y'],['Sacramento','y'],['Allura','y'],['Parisienne','y'],['Alex Brush','y'],['Tangerine','y',1],
+ ['Kaushan Script','y'],['Lobster','y'],['Yellowtail','y'],['Pinyon Script','y'],['Mrs Saint Delafield','y'],['Monsieur La Doulaise','y'],
+ ['Caveat','h',1],['Permanent Marker','h'],['Shadows Into Light','h'],['Rock Salt','h'],['Gloria Hallelujah','h'],['Amatic SC','h',1],['Indie Flower','h'],['Kalam','h',1],
+ ['Gochi Hand','h'],['Sedgwick Ave Display','h'],['Chewy','h'],['Rubik Wet Paint','h'],['Rubik Beastly','h'],
+ ['Press Start 2P','p'],['VT323','p'],['Silkscreen','p',1],['Space Mono','p',1],['JetBrains Mono','p',1],['Special Elite','p'],['Major Mono Display','p'],['Rampart One','p'],
+ ['Train One','p'],['Creepster','p'],['Nosifer','p'],['Eater','p'],['Frijole','p'],['Rubik Glitch','p'],
+ ['Orbitron','f',1],['Audiowide','f'],['Exo 2','f',1],['Rajdhani','f',1],['Chakra Petch','f',1],['Michroma','f'],['Syncopate','f',1],['Wallpoet','f'],['Zen Dots','f'],['Tilt Warp','f']
+];
+const FONT_BY = Object.fromEntries(FONTS.map(f => [f[0], f]));
+const PAIRS = [['Bebas Neue','Montserrat','Klassik reels'],['Anton','Inter','Sport / energiya'],['Great Vibes','Cormorant Garamond',"To'y / nikoh"],
+  ['Playfair Display','DM Sans','Premium brend'],['Unbounded','Space Grotesk','Zamonaviy texno'],['Archivo Black','Caveat','Vlog / shaxsiy'],
+  ['Orbitron','Rajdhani','Avto / gaming'],['Cinzel','Lora','Kinematografik'],['Permanent Marker','Poppins',"Ko'cha / yoshlar"],['Shrikhand','Outfit','Retro 70-lar']];
+const fontLoaded = {};
+function loadFont(name) {
+  if (fontLoaded[name]) return fontLoaded[name];
+  const f = FONT_BY[name]; const fam = encodeURIComponent(name).replace(/%20/g, '+') + (f && f[2] ? ':wght@400;700' : '');
+  const l = document.createElement('link'); l.rel = 'stylesheet'; l.href = `https://fonts.googleapis.com/css2?family=${fam}&display=swap`;
+  document.head.appendChild(l);
+  fontLoaded[name] = new Promise(res => { l.onload = () => document.fonts.load(`400 40px "${name}"`).then(res, res); l.onerror = res; setTimeout(res, 6000); });
+  return fontLoaded[name];
+}
 
-/* ---------- Montajlar ma'lumoti ---------- */
-let edits = load('montaj-edits', []);
-let editingId = null;
-const persist = () => save('montaj-edits', edits);
+let favFonts = [], fontCat = 'all', fontLight = false;
+function renderFonts() {
+  const q = $('fontSearch').value.trim().toLowerCase(), sample = $('fontSample').value || 'Reels montaj', size = $('fontSize').value;
+  const trendNames = new Set(((trends && trends.data && trends.data.fonts) || []).map(f => String(f.name).toLowerCase()));
+  const list = FONTS.filter(f => (fontCat === 'all' || (fontCat === 'fav' ? favFonts.includes(f[0]) : fontCat === 'trend' ? trendNames.has(f[0].toLowerCase()) : f[1] === fontCat)) && (!q || f[0].toLowerCase().includes(q)));
+  $('fontCount').textContent = list.length + ' ta';
+  $('fontGrid').innerHTML = list.map(f => `<div class="fcard${fontLight ? ' light' : ''}" data-font="${esc(f[0])}">
+     <div class="top"><b>${esc(f[0])}</b>${trendNames.has(f[0].toLowerCase()) ? '<span class="pill new">🔥 trend</span>' : ''}<span>${FONT_CATS[f[1]]}</span>
+       <button class="star${favFonts.includes(f[0]) ? ' on' : ''}" data-fav="${esc(f[0])}" title="Sevimli">⭐</button></div>
+     <div class="s" style="font-family:'${esc(f[0])}',sans-serif;font-size:${size}px">${esc(sample)}</div>
+     <div class="acts"><button class="btn sm" data-use="${esc(f[0])}">🎞 Timelinega</button><button class="btn sm" data-copy="${esc(f[0])}">Nomini nusxalash</button></div></div>`).join('') || '<div class="muted">Hech narsa topilmadi.</div>';
+  fontObserver.disconnect();
+  document.querySelectorAll('.fcard').forEach(c => fontObserver.observe(c));
+}
+const fontObserver = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { loadFont(e.target.dataset.font); fontObserver.unobserve(e.target); } }), { rootMargin: '200px' });
+function renderFontCats() {
+  const cats = [['all', 'Hammasi'], ['fav', '⭐ Sevimlilar'], ['trend', '🔥 Trend'], ...Object.entries(FONT_CATS)];
+  $('fontCats').innerHTML = cats.map(([k, v]) => `<button class="chip${fontCat === k ? ' on' : ''}" data-cat="${k}">${v}</button>`).join('');
+}
+function renderPairs() {
+  PAIRS.forEach(p => { loadFont(p[0]); loadFont(p[1]); });
+  $('pairs').innerHTML = PAIRS.map(p => `<div class="pair"><small>${esc(p[2])} · ${esc(p[0])} + ${esc(p[1])}</small>
+    <div class="h" style="font-family:'${esc(p[0])}'">${esc($('fontSample').value || 'Reels montaj')}</div>
+    <div class="p" style="font-family:'${esc(p[1])}'">Ikkinchi qator matni shu shriftda bo'ladi — subtitr va izohlar uchun.</div>
+    <div class="row" style="margin-top:8px"><button class="btn sm" data-pair="${esc(p[0])}|${esc(p[1])}">🎞 Ikkalasini timelinega</button></div></div>`).join('');
+}
+$('fontCats').onclick = e => { const b = e.target.closest('[data-cat]'); if (b) { fontCat = b.dataset.cat; renderFontCats(); renderFonts(); } };
+['fontSample', 'fontSearch', 'fontSize'].forEach(id => $(id).addEventListener('input', () => { clearTimeout(renderFonts._t); renderFonts._t = setTimeout(() => { renderFonts(); if (id === 'fontSample') renderPairs(); }, 150); }));
+$('fontBg').onclick = () => { fontLight = !fontLight; $('fontBg').textContent = fontLight ? '🌙 Qora fon' : '☀ Oq fon'; renderFonts(); };
+$('tab-fonts').addEventListener('click', e => {
+  const fav = e.target.closest('[data-fav]'), use = e.target.closest('[data-use]'), cp = e.target.closest('[data-copy]'), pr = e.target.closest('[data-pair]');
+  if (fav) { const n = fav.dataset.fav; favFonts = favFonts.includes(n) ? favFonts.filter(x => x !== n) : [...favFonts, n]; KV.set('favFonts', favFonts); fav.classList.toggle('on'); }
+  if (use) Editor.useFont(use.dataset.use);
+  if (pr) { const [a, b] = pr.dataset.pair.split('|'); Editor.usePair(a, b); }
+  if (cp) { navigator.clipboard && navigator.clipboard.writeText(cp.dataset.copy).then(() => toast('Nusxalandi: ' + cp.dataset.copy), () => toast(cp.dataset.copy)); }
+});
+
+/* ================= Montajlar hisobi ================= */
+let edits = [], editingId = null, weekGoal = 5;
+const persistEdits = () => KV.set('edits', edits);
 
 function summary() {
   const n = edits.length;
   const hours = edits.reduce((s, e) => s + num(e.hours), 0);
   const withViews = edits.filter(e => num(e.views) > 0);
   const avgViews = withViews.length ? withViews.reduce((s, e) => s + num(e.views), 0) / withViews.length : 0;
-  const now = new Date(), ym = now.toISOString().slice(0, 7);
-  const month = edits.filter(e => (e.date || '').startsWith(ym)).length;
+  const month = edits.filter(e => (e.date || '').startsWith(today().slice(0, 7))).length;
   const byStyle = {};
-  edits.forEach(e => { const k = (e.style || 'Belgilanmagan').trim(); (byStyle[k] ||= { n: 0, views: 0, saves: 0 }); byStyle[k].n++; byStyle[k].views += num(e.views); byStyle[k].saves += num(e.saves); });
-  const income = edits.reduce((s, e) => s + num(e.price), 0);
-  return { n, hours, avgViews, month, byStyle, income };
+  edits.forEach(e => { const k = (e.style || 'Belgilanmagan').trim(); (byStyle[k] ||= { n: 0, views: 0 }); byStyle[k].n++; byStyle[k].views += num(e.views); });
+  return { n, hours, avgViews, month, byStyle, income: edits.reduce((s, e) => s + num(e.price), 0) };
 }
-
-function renderStats() {
+function countUp(el, to, dec = 0) {
+  const from = num(el.dataset.v), t0 = performance.now(); el.dataset.v = to;
+  const f = now => { const p = Math.min(1, (now - t0) / 700), e = 1 - Math.pow(1 - p, 3), v = from + (to - from) * e;
+    el.textContent = to >= 1000 ? fmt(v) : v.toFixed(dec); if (p < 1) requestAnimationFrame(f); };
+  requestAnimationFrame(f);
+}
+function streakDays() {
+  const days = new Set(edits.map(e => e.date)); let n = 0; const d = new Date();
+  if (!days.has(d.toISOString().slice(0, 10))) d.setDate(d.getDate() - 1);
+  while (days.has(d.toISOString().slice(0, 10))) { n++; d.setDate(d.getDate() - 1); }
+  return n;
+}
+function renderDash() {
   const s = summary();
-  $('sCount').textContent = s.n; $('sHours').textContent = +s.hours.toFixed(1);
-  $('sViews').textContent = fmt(s.avgViews); $('sMonth').textContent = s.month;
+  const h = new Date().getHours();
+  $('greet').textContent = (h < 5 ? 'Xayrli tun' : h < 12 ? 'Xayrli tong' : h < 18 ? 'Xayrli kun' : 'Xayrli kech') + '! 👋';
+  $('greetSub').textContent = new Date().toLocaleDateString('uz-UZ', { weekday: 'long', day: 'numeric', month: 'long' }) + (s.income ? ` · Jami daromad: ${s.income.toLocaleString()} so'm` : '');
+  $('streak').querySelector('span').textContent = streakDays() + ' kun';
+  countUp($('sCount'), s.n); countUp($('sHours'), s.hours, s.hours % 1 ? 1 : 0); countUp($('sViews'), s.avgViews); countUp($('sMonth'), s.month);
   // haftalik
-  const weeks = []; const start = new Date(); start.setHours(0,0,0,0); start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+  const weeks = []; const start = new Date(); start.setHours(0, 0, 0, 0); start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
   for (let i = 7; i >= 0; i--) { const a = new Date(start); a.setDate(a.getDate() - i * 7); const b = new Date(a); b.setDate(b.getDate() + 7); weeks.push({ a, b, n: 0 }); }
   edits.forEach(e => { const d = new Date(e.date); weeks.forEach(w => { if (d >= w.a && d < w.b) w.n++; }); });
   const max = Math.max(1, ...weeks.map(w => w.n));
-  $('weekBars').innerHTML = weeks.map(w => `<div><small>${w.n || ''}</small><i style="height:${w.n / max * 80}%"></i><small>${w.a.getDate()}.${w.a.getMonth() + 1}</small></div>`).join('');
+  $('weekBars').innerHTML = weeks.map(w => `<div title="${w.a.toLocaleDateString()} haftasi: ${w.n} ta montaj"><small>${w.n || ''}</small><i style="height:0%" data-h="${w.n / max * 82}"></i><small>${w.a.getDate()}.${w.a.getMonth() + 1}</small></div>`).join('');
+  requestAnimationFrame(() => document.querySelectorAll('#weekBars i').forEach(i => i.style.height = i.dataset.h + '%'));
+  const thisWeek = weeks[weeks.length - 1].n, pct = Math.min(1, thisWeek / weekGoal);
+  $('goalTxt').textContent = `${thisWeek}/${weekGoal}`; $('goalArc').style.strokeDashoffset = 226 * (1 - pct);
+  // ko'rishlar grafigi
+  const vs = edits.filter(e => num(e.views) > 0).sort((a, b) => (a.date || '').localeCompare(b.date || '')).slice(-15);
+  const svg = $('viewsChart');
+  if (vs.length < 2) svg.innerHTML = `<text x="160" y="64" text-anchor="middle" fill="rgba(244,241,255,.5)" font-size="12">Kamida 2 ta montajga ko'rishlar sonini kiriting</text>`;
+  else {
+    const mv = Math.max(...vs.map(e => num(e.views))), W = 320, H = 120, pad = 10;
+    const pts = vs.map((e, i) => [pad + i * (W - 2 * pad) / (vs.length - 1), H - 18 - (num(e.views) / mv) * (H - 34)]);
+    const line = pts.map((p, i) => (i ? 'L' : 'M') + p[0].toFixed(1) + ' ' + p[1].toFixed(1)).join(' ');
+    svg.innerHTML = `<defs><linearGradient id="vg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b14cff" stop-opacity=".45"/><stop offset="1" stop-color="#b14cff" stop-opacity="0"/></linearGradient></defs>
+      <line x1="${pad}" x2="${W - pad}" y1="${H - 18}" y2="${H - 18}" stroke="rgba(255,255,255,.1)"/>
+      <path d="${line} L${pts[pts.length - 1][0]} ${H - 18} L${pts[0][0]} ${H - 18} Z" fill="url(#vg)"/>
+      <path d="${line}" fill="none" stroke="#b14cff" stroke-width="2" stroke-linejoin="round"/>
+      ${pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="9" fill="transparent"><title>${esc(vs[i].name)} — ${fmt(num(vs[i].views))} ko'rish</title></circle><circle cx="${p[0]}" cy="${p[1]}" r="3" fill="#fff" stroke="#b14cff" stroke-width="2" pointer-events="none"/>`).join('')}
+      <text x="${pad}" y="12" fill="rgba(244,241,255,.5)" font-size="10">${fmt(mv)}</text>`;
+  }
   // stillar
-  const st = Object.entries(s.byStyle).sort((a, b) => (b[1].views / b[1].n) - (a[1].views / a[1].n));
-  $('styleRank').innerHTML = st.length ? st.slice(0, 6).map(([k, v]) => `<div><b>${esc(k)}</b><span>${v.n} ta · o'rtacha ${fmt(v.views / v.n)} ko'rish</span></div>`).join('') : '<span class="muted">Ma\'lumot yo\'q</span>';
+  const st = Object.entries(s.byStyle).map(([k, v]) => [k, v.n, v.views / v.n]).sort((a, b) => b[2] - a[2]);
+  const ms = Math.max(1, ...st.map(x => x[2]));
+  $('styleRank').innerHTML = st.length ? st.slice(0, 6).map(([k, n, avg]) => `<div class="hbar" title="${esc(k)}: ${n} ta montaj, o'rtacha ${fmt(avg)} ko'rish"><div class="l"><b>${esc(k)}</b><span>${n} ta · ${fmt(avg)}</span></div><div class="b"><i style="width:${avg / ms * 100}%"></i></div></div>`).join('') : '<span class="muted">Ma\'lumot yo\'q</span>';
   // ro'yxat
   const sorted = edits.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-  $('list').innerHTML = sorted.length ? sorted.map(e => `<div class="item"><div class="t"><b>${esc(e.name)}</b>
+  $('list').innerHTML = sorted.length ? sorted.slice(0, 50).map(e => `<div class="item"><div class="t"><b>${esc(e.name)}</b>
       <small>${esc(e.date)} · ${esc(e.type)}${e.app ? ' · ' + esc(e.app) : ''}${num(e.views) ? ' · 👁 ' + fmt(num(e.views)) : ''}${num(e.likes) ? ' · ❤ ' + fmt(num(e.likes)) : ''}${num(e.saves) ? ' · 🔖 ' + fmt(num(e.saves)) : ''}</small><br>
       ${[e.style, e.fonts, e.effects].filter(Boolean).map(p => `<span class="pill">${esc(p)}</span>`).join('')}</div>
       <button class="x" data-edit="${e.id}" title="Tahrirlash">✎</button><button class="x" data-del="${e.id}" title="O'chirish">×</button></div>`).join('')
-    : '<span class="muted">Hali montaj qo\'shilmagan. «➕ Qo\'shish» bo\'limidan boshlang.</span>';
+    : '<span class="muted">Hali montaj qo\'shilmagan. Timeline\'da montaj qilib eksport qiling yoki «➕ Qo\'shish» bo\'limidan yozing.</span>';
 }
-
-$('list').onclick = ev => {
+$('goalRing').onclick = async () => { const v = parseInt(await dlg('Haftalik maqsad: nechta montaj?', { input: String(weekGoal), ok: 'Saqlash' })); if (v > 0) { weekGoal = v; KV.set('weekGoal', v); renderDash(); } };
+$('list').onclick = async ev => {
   const del = ev.target.dataset.del, ed = ev.target.dataset.edit;
-  if (del && confirm("Bu montajni o'chirasizmi?")) { edits = edits.filter(e => e.id !== del); persist(); renderStats(); }
+  if (del && await dlg("Bu montajni o'chirasizmi?", { ok: "O'chirish" })) { edits = edits.filter(e => e.id !== del); persistEdits(); renderDash(); }
   if (ed) startEdit(ed);
 };
-
 const form = $('addForm');
-function resetForm() { form.reset(); form.date.value = new Date().toISOString().slice(0, 10); editingId = null; $('formTitle').textContent = 'Yangi montaj'; $('cancelEdit').hidden = true; }
+function resetForm() { form.reset(); form.date.value = today(); editingId = null; $('formTitle').textContent = 'Yangi montaj'; $('cancelEdit').hidden = true; }
 function startEdit(id) {
   const e = edits.find(x => x.id === id); if (!e) return;
-  resetForm(); editingId = id; $('formTitle').textContent = 'Tahrirlash';  $('cancelEdit').hidden = false;
+  resetForm(); editingId = id; $('formTitle').textContent = 'Tahrirlash'; $('cancelEdit').hidden = false;
   for (const [k, v] of Object.entries(e)) if (form.elements[k]) form.elements[k].value = v;
   show('add');
 }
-$('cancelEdit').onclick = () => { resetForm(); show('stats'); };
+function addEdit(data) { edits.push({ id: uid(), ...data }); persistEdits(); renderDash(); }
+$('cancelEdit').onclick = () => { resetForm(); show('dash'); };
 form.onsubmit = ev => {
   ev.preventDefault();
   const data = Object.fromEntries(new FormData(form));
-  if (editingId) { const i = edits.findIndex(e => e.id === editingId); edits[i] = { ...edits[i], ...data }; }
-  else edits.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), ...data });
-  persist(); resetForm(); renderStats(); show('stats');
+  if (editingId) { const i = edits.findIndex(e => e.id === editingId); edits[i] = { ...edits[i], ...data }; persistEdits(); renderDash(); }
+  else addEdit(data);
+  resetForm(); show('dash'); toast('Saqlandi ✓');
 };
-
-$('exportBtn').onclick = () => {
-  const blob = new Blob([JSON.stringify(edits, null, 2)], { type: 'application/json' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'montajlar-' + new Date().toISOString().slice(0, 10) + '.json'; a.click();
-};
+$('exportBtn').onclick = () => saveFile('montajlar-' + today() + '.json', JSON.stringify(edits, null, 2));
 $('importBtn').onclick = () => $('importFile').click();
 $('importFile').onchange = async ev => {
   const f = ev.target.files[0]; if (!f) return;
   try { const arr = JSON.parse(await f.text()); if (!Array.isArray(arr)) throw 0;
-    const ids = new Set(edits.map(e => e.id)); arr.forEach(e => { if (e && e.id && !ids.has(e.id)) edits.push(e); });
-    persist(); renderStats(); alert(arr.length + ' ta yozuv tiklandi');
-  } catch (e) { alert("Fayl noto'g'ri"); }
+    const ids = new Set(edits.map(e => e.id)); let n = 0; arr.forEach(e => { if (e && e.id && !ids.has(e.id)) { edits.push(e); n++; } });
+    persistEdits(); renderDash(); toast(n + ' ta yozuv tiklandi');
+  } catch (e) { toast("Fayl noto'g'ri"); }
   ev.target.value = '';
 };
-
 function editsForAI(limit = 40) {
   return edits.slice().sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, limit)
-    .map(e => `- ${e.date} | ${e.name} | ${e.type} | stil: ${e.style || '-'} | shrift: ${e.fonts || '-'} | effekt: ${e.effects || '-'} | dastur: ${e.app || '-'} | ${e.duration || '?'}s | ${e.hours || '?'} soat | 👁${e.views || 0} ❤${e.likes || 0} 🔖${e.saves || 0}${e.notes ? ' | izoh: ' + e.notes : ''}`).join('\n');
+    .map(e => `- ${e.date} | ${e.name} | ${e.type} | stil: ${e.style || '-'} | shrift: ${e.fonts || '-'} | effekt: ${e.effects || '-'} | ${e.duration || '?'}s | ${e.hours || '?'} soat | 👁${e.views || 0} ❤${e.likes || 0} 🔖${e.saves || 0}${e.notes ? ' | izoh: ' + e.notes : ''}`).join('\n');
 }
-
 $('reportBtn').onclick = async () => {
   if (!edits.length) { $('reportOut').textContent = 'Avval bir nechta montaj qo\'shing.'; return; }
   const btn = $('reportBtn'); btn.disabled = true; $('reportOut').innerHTML = '<span class="spin"></span>Tahlil qilinyapti…';
   const s = summary();
   try {
-    const r = await claude({ system: SYS_BASE, effort: 'medium', messages: [{ role: 'user', content:
-      `Mening montajlarim statistikasi: jami ${s.n} ta, ${s.hours.toFixed(1)} soat, o'rtacha ${Math.round(s.avgViews)} ko'rish, daromad ${s.income} so'm.\n\nMontajlar:\n${editsForAI()}\n\n` +
-      `Tahlil qil: 1) qaysi stil/shrift/effekt eng yaxshi natija bergan (ko'rish va saqlash bo'yicha), 2) zaif tomonlarim, 3) tezlik/samaradorlik (soat sarfi), 4) keyingi hafta uchun aniq 5 ta vazifa.` }] });
+    const r = await ai({ prompt: `Mening montajlarim statistikasi: jami ${s.n} ta, ${s.hours.toFixed(1)} soat, o'rtacha ${Math.round(s.avgViews)} ko'rish, daromad ${s.income} so'm, haftalik maqsad ${weekGoal}.\n\nMontajlar:\n${editsForAI()}\n\n` +
+      `Tahlil qil: 1) qaysi stil/shrift/effekt eng yaxshi natija bergan (ko'rish va saqlash bo'yicha), 2) zaif tomonlarim, 3) tezlik/samaradorlik (soat sarfi), 4) keyingi hafta uchun aniq 5 ta vazifa.`,
+      onText: ({ text }) => { $('reportOut').textContent = text; } });
     $('reportOut').textContent = r.text;
   } catch (e) { $('reportOut').textContent = errText(e); }
   btn.disabled = false;
 };
 
-/* ---------- Video tahlil ---------- */
-let vidMeta = null, vidFrames = [];
-const vid = $('vid');
-$('vidFile').onchange = async ev => {
-  const f = ev.target.files[0]; if (!f) return;
-  $('vidOut').textContent = ''; $('frames').innerHTML = ''; $('analyzeBtn').disabled = true; $('saveVidBtn').disabled = true;
-  vid.src = URL.createObjectURL(f); vid.hidden = false;
-  await new Promise((ok, no) => { vid.onloadedmetadata = ok; vid.onerror = no; }).catch(() => null);
-  if (!vid.duration || !isFinite(vid.duration)) { $('vidInfo').textContent = "Videoni o'qib bo'lmadi."; return; }
-  $('vidInfo').innerHTML = '<span class="spin"></span>Kesimlar sanalyapti…';
-  try {
-    vidMeta = await scanVideo(f.name);
-    vidFrames = vidMeta.frames;
-    $('frames').innerHTML = vidFrames.map(fr => `<img src="data:image/jpeg;base64,${fr.data}" alt="${fr.t.toFixed(1)}s">`).join('');
-    $('vidInfo').innerHTML = `⏱ ${vidMeta.duration.toFixed(1)} s · 📐 ${vidMeta.w}×${vidMeta.h} (${vidMeta.ratio}) · ✂️ ~${vidMeta.cuts.length} ta kesim · ⚡ har ${vidMeta.avgShot.toFixed(2)} s da kesim · 🌗 o'rtacha yorug'lik ${vidMeta.brightness}%`;
-    $('analyzeBtn').disabled = false; $('saveVidBtn').disabled = false;
-  } catch (e) { $('vidInfo').textContent = 'Xato: ' + (e.message || e); }
-};
-
-const seek = t => new Promise(ok => { const h = () => { vid.removeEventListener('seeked', h); ok(); }; vid.addEventListener('seeked', h); vid.currentTime = t; });
-
-async function scanVideo(name) {
-  const dur = vid.duration, w = vid.videoWidth, h = vid.videoHeight;
-  const small = document.createElement('canvas'); small.width = 48; small.height = Math.round(48 * h / w) || 85;
-  const sctx = small.getContext('2d', { willReadFrequently: true });
-  const step = Math.max(0.1, Math.min(0.25, dur / 400));
-  let prev = null; const diffs = []; let brightSum = 0, bn = 0;
-  for (let t = 0; t < dur; t += step) {
-    await seek(t); sctx.drawImage(vid, 0, 0, small.width, small.height);
-    const px = sctx.getImageData(0, 0, small.width, small.height).data;
-    const g = new Float32Array(px.length / 4);
-    for (let i = 0; i < g.length; i++) { g[i] = (px[i*4] * .3 + px[i*4+1] * .59 + px[i*4+2] * .11); brightSum += g[i]; bn++; }
-    if (prev) { let d = 0; for (let i = 0; i < g.length; i++) d += Math.abs(g[i] - prev[i]); diffs.push({ t, d: d / g.length }); }
-    prev = g;
-  }
-  // moslashuvchan chegara: median * 3, kamida 18
-  const sorted = diffs.map(x => x.d).sort((a, b) => a - b); const med = sorted[Math.floor(sorted.length / 2)] || 0;
-  const thr = Math.max(18, med * 3);
-  const cuts = []; diffs.forEach(x => { if (x.d > thr && (!cuts.length || x.t - cuts[cuts.length - 1] > 0.3)) cuts.push(x.t); });
-  // AI uchun 8 ta kadr
-  const big = document.createElement('canvas'); const bw = 360; big.width = bw; big.height = Math.round(bw * h / w);
-  const bctx = big.getContext('2d'); const frames = []; const N = 8;
-  for (let i = 0; i < N; i++) { const t = dur * (i + 0.5) / N; await seek(t); bctx.drawImage(vid, 0, 0, big.width, big.height);
-    frames.push({ t, data: big.toDataURL('image/jpeg', 0.7).split(',')[1] }); }
-  await seek(0);
-  const g = (a, b) => b ? g(b, a % b) : a; const k = g(w, h);
-  return { name, duration: dur, w, h, ratio: `${w / k}:${h / k}`, cuts, avgShot: dur / (cuts.length + 1), brightness: Math.round(brightSum / bn / 2.55), frames };
-}
-
-$('analyzeBtn').onclick = async () => {
-  if (!vidMeta) return;
-  const btn = $('analyzeBtn'); btn.disabled = true; $('vidOut').innerHTML = '<span class="spin"></span>AI kadrlarni ko\'ryapti…';
-  const trends = load('montaj-trends', null);
-  const content = [];
-  vidFrames.forEach(fr => { content.push({ type: 'text', text: `Kadr ${fr.t.toFixed(1)} s:` }); content.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: fr.data } }); });
-  content.push({ type: 'text', text:
-    `Video: ${vidMeta.duration.toFixed(1)} s, ${vidMeta.w}x${vidMeta.h}, ~${vidMeta.cuts.length} kesim (o'rtacha kadr ${vidMeta.avgShot.toFixed(2)} s), kesim vaqtlari: ${vidMeta.cuts.slice(0, 40).map(c => c.toFixed(1)).join(', ')}.\n` +
-    (trends ? `Oxirgi topilgan trendlar (${trends.date}): ${trends.data.styles?.map(s => s.name).join(', ')}; shriftlar: ${trends.data.fonts?.map(f => f.name).join(', ')}.\n` : '') +
-    ($('vidQ').value.trim() ? `Savolim: ${$('vidQ').value.trim()}\n` : '') +
-    `Shu montajni tahlil qil:\n1) Stil va janr\n2) Hook (birinchi 1-3 soniya) — kuchli/zaifmi\n3) Temp va kesimlar ritmi\n4) Matn va shriftlar (kadrlarda ko'ringan bo'lsa nomini taxmin qil) va o'rniga nimani tavsiya qilasan\n5) Rang / grading\n6) Shu videoga qo'shsa bo'ladigan 5 ta zamonaviy yangilik (effekt, o'tish, shrift, sound design) — aniq qaysi soniyaga\n7) 10 balldan baho` });
-  try {
-    const r = await claude({ system: SYS_BASE, effort: 'high', messages: [{ role: 'user', content }] });
-    $('vidOut').textContent = r.text;
-  } catch (e) { $('vidOut').textContent = errText(e); }
-  btn.disabled = false;
-};
-
-$('saveVidBtn').onclick = () => {
-  if (!vidMeta) return; resetForm();
-  form.name.value = vidMeta.name.replace(/\.[^.]+$/, ''); form.duration.value = Math.round(vidMeta.duration);
-  form.notes.value = `${vidMeta.cuts.length} kesim, har ${vidMeta.avgShot.toFixed(2)} s`;
-  show('add');
-};
-
-/* ---------- Trendlar ---------- */
-function loadFont(name) {
-  const id = 'gf-' + name.replace(/\W/g, '');
-  if (document.getElementById(id)) return;
-  const l = document.createElement('link'); l.id = id; l.rel = 'stylesheet';
-  l.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(name).replace(/%20/g, '+') + '&display=swap';
-  document.head.appendChild(l);
-}
-function parseJSON(text) {
-  const m = text.match(/```(?:json)?\s*([\s\S]*?)```/); const raw = m ? m[1] : text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1);
-  return JSON.parse(raw);
-}
+/* ================= Trendlar ================= */
+let trends = null, trendSeen = [];
 function renderTrends() {
-  const t = load('montaj-trends', null);
-  if (!t) { $('trendOut').innerHTML = '<div class="card muted">Hali trendlar yuklanmagan. «Trendlarni yangilash» ni bosing.</div>'; return; }
-  $('trendDate').textContent = `Oxirgi yangilanish: ${new Date(t.at).toLocaleString()} · ${t.niche}`;
-  const d = t.data, sec = (title, arr, f) => arr && arr.length ? `<div class="card"><h3>${title}</h3>${arr.map(f).join('')}</div>` : '';
-  const item = x => `<div class="trend"><b>${esc(x.name)}</b>${x.how ? `<p>${esc(x.how)}</p>` : ''}${x.why ? `<p>💡 ${esc(x.why)}</p>` : ''}</div>`;
-  (d.fonts || []).forEach(f => f.google && loadFont(f.name));
+  if (!trends) { $('trendOut').innerHTML = '<div class="card muted">Hali trendlar yuklanmagan. «Hozir yangilash» ni bosing.</div>'; return; }
+  $('trendDate').textContent = `Oxirgi yangilanish: ${new Date(trends.at).toLocaleString()} · ${trends.niche}${trends.web ? ' · internetdan' : ' · Claude bilimidan'}`;
+  const d = trends.data || {}, prev = new Set(trends.prevNames || []);
+  const isNew = n => trends.prevNames && trends.prevNames.length && !prev.has(String(n).toLowerCase());
+  const badge = n => isNew(n) ? ' <span class="pill new">YANGI</span>' : '';
+  const sec = (title, arr, f) => Array.isArray(arr) && arr.length ? `<div class="card"><h3>${title}</h3>${arr.map(f).join('')}</div>` : '';
+  const item = x => `<div class="trend"><b>${esc(x.name)}</b>${badge(x.name)}${x.how ? `<p>${esc(x.how)}</p>` : ''}${x.why ? `<p>💡 ${esc(x.why)}</p>` : ''}</div>`;
+  (d.fonts || []).forEach(f => FONT_BY[f.name] ? loadFont(f.name) : null);
   $('trendOut').innerHTML =
-    sec('🎨 Montaj stillari', d.styles, item) +
-    sec('🔤 Shriftlar', d.fonts, f => `<div class="font-card"><small class="muted">${esc(f.name)}${f.google ? ' · Google Fonts' : ''}${f.use ? ' · ' + esc(f.use) : ''}</small>
-        <div class="s" style="font-family:'${esc(f.name)}',sans-serif">${esc(f.sample || 'Reels 2026')}</div>${f.why ? `<p class="muted" style="margin:0">${esc(f.why)}</p>` : ''}</div>`) +
-    sec('🔀 O\'tishlar va effektlar', d.effects, item) +
+    sec('🎨 Montaj stillari', d.styles, x => item(x).replace('</div>', `<div class="row" style="margin-top:6px"><button class="btn sm" data-style="${esc(x.name)}">✨ Shu stilda AI montaj</button></div></div>`)) +
+    sec('🔤 Shriftlar', d.fonts, f => `<div class="font-card"><small class="muted">${esc(f.name)}${FONT_BY[f.name] ? ' · kutubxonada bor' : ''}${f.use ? ' · ' + esc(f.use) : ''}</small>${badge(f.name)}
+        <div class="s" style="font-family:'${esc(f.name)}',sans-serif">${esc(f.sample || 'Reels 2026')}</div>${f.why ? `<p class="muted" style="margin:0">${esc(f.why)}</p>` : ''}
+        ${FONT_BY[f.name] ? `<div class="row" style="margin-top:6px"><button class="btn sm" data-tfont="${esc(f.name)}">🎞 Timelinega</button></div>` : ''}</div>`) +
+    sec("🔀 O'tishlar va effektlar", d.effects, item) +
     sec('🎵 Audio va format', d.audio, item) +
-    sec('✅ Shu hafta sinab ko\'ring', d.ideas, item) +
-    (t.sources && t.sources.length ? `<div class="card src"><h3>Manbalar</h3>${t.sources.slice(0, 12).map(s => `<div><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></div>`).join('')}</div>` : '');
+    sec("✅ Shu hafta sinab ko'ring", d.ideas, item) +
+    (trends.sources && trends.sources.length ? `<div class="card src"><h3>Manbalar</h3>${trends.sources.slice(0, 12).filter(s => /^https:\/\//.test(s.url)).map(s => `<div><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></div>`).join('')}</div>` : '');
 }
-$('trendBtn').onclick = async () => {
+$('trendOut').addEventListener('click', e => {
+  const s = e.target.closest('[data-style]'), f = e.target.closest('[data-tfont]');
+  if (s) { show('editor'); Editor.openAI({ style: s.dataset.style }); }
+  if (f) Editor.useFont(f.dataset.tfont);
+});
+async function fetchTrends(silent) {
   const btn = $('trendBtn'); btn.disabled = true;
-  const niche = $('trendNiche').value; const today = new Date().toISOString().slice(0, 10);
-  $('trendDate').innerHTML = '<span class="spin"></span>Internetdan qidirilyapti (1–2 daqiqa)…';
+  const niche = $('trendNiche').value; const mode = await aiMode();
+  if (!silent) $('trendDate').innerHTML = `<span class="spin"></span>${mode === 'key' ? 'Internetdan qidirilyapti (1–2 daqiqa)…' : 'Claude trendlarni yig\'yapti…'}`;
   try {
-    const r = await claude({ system: SYS_BASE, web: true, effort: 'medium', messages: [{ role: 'user', content:
-      `Bugun ${today}. Web search orqali "${niche}" yo'nalishida OXIRGI 1-2 OYDAGI Instagram Reels / TikTok video montaj trendlarini top: yangi montaj stillari, mashhur shriftlar (iloji bo'lsa Google Fonts'dagilar), o'tishlar/effektlar, audio va format trendlari. Eski (bir yildan oldingi) narsalarni yozma.\n` +
-      `Javobni FAQAT shu JSON ko'rinishda, \`\`\`json blokida, matnlar o'zbek tilida ber:\n` +
-      `{"styles":[{"name":"","how":"qanday qilinadi (CapCut/AE)","why":"nega ishlaydi"}],"fonts":[{"name":"aniq shrift nomi","google":true,"use":"sarlavha/subtitr","sample":"namuna matn","why":""}],"effects":[{"name":"","how":"","why":""}],"audio":[{"name":"","how":"","why":""}],"ideas":[{"name":"","how":""}]}\n` +
-      `Har bo'limda 4-6 ta element.` }] });
-    const data = parseJSON(r.text);
-    save('montaj-trends', { at: Date.now(), date: today, niche, data, sources: r.sources });
-    renderTrends();
-  } catch (e) { $('trendDate').textContent = e instanceof SyntaxError ? "AI javobini o'qib bo'lmadi, qayta urinib ko'ring." : errText(e); }
+    const r = await ai({ web: true, json: true, effort: 'medium', prompt:
+      `Bugun ${today()}. ${mode === 'key' ? 'Web search orqali' : 'Bilimingga tayanib'} "${niche}" yo'nalishida ENG SO'NGGI Instagram Reels / TikTok video montaj trendlarini top: yangi montaj stillari, mashhur shriftlar (Google Fonts'dagilar — aniq nomi bilan), o'tishlar/effektlar, audio va format trendlari. Eskirgan narsalarni yozma.\n` +
+      `Faqat shu JSON ko'rinishda, matnlar o'zbek tilida:\n` +
+      `{"styles":[{"name":"","how":"qanday qilinadi","why":"nega ishlaydi"}],"fonts":[{"name":"aniq Google Fonts nomi","use":"sarlavha/subtitr","sample":"namuna matn","why":""}],"effects":[{"name":"","how":"","why":""}],"audio":[{"name":"","how":"","why":""}],"ideas":[{"name":"","how":""}]}\n` +
+      `Har bo'limda 4-6 ta element.` });
+    const prevNames = trends ? Object.values(trends.data || {}).flat().map(x => String(x && x.name).toLowerCase()) : [];
+    trends = { at: Date.now(), date: today(), niche, data: r.data || {}, sources: r.sources, web: mode === 'key', prevNames };
+    KV.set('trends', trends); renderTrends(); renderFonts();
+    if (silent) { document.querySelector('nav [data-t=trends]').classList.add('new'); toast('🔥 Yangi trendlar keldi'); }
+  } catch (e) { if (!silent) $('trendDate').textContent = errText(e); else renderTrends(); }
   btn.disabled = false;
-};
+}
+$('trendBtn').onclick = () => fetchTrends(false);
+$('trendAuto').onchange = () => KV.set('trendAuto', $('trendAuto').value);
+$('trendNiche').onchange = () => KV.set('trendNiche', $('trendNiche').value);
+async function autoTrends() {
+  const days = num($('trendAuto').value); if (!days || !(await aiMode())) return;
+  if (!trends || Date.now() - trends.at > days * 864e5) fetchTrends(true);
+}
 
-/* ---------- AI hamkor chat ---------- */
-let chat = load('montaj-chat', []);
+/* ================= AI hamkor ================= */
+let chat = [];
 function bubble(role, text) { const d = document.createElement('div'); d.className = 'm ' + role; d.textContent = text; $('msgs').appendChild(d); window.scrollTo(0, document.body.scrollHeight); return d; }
-chat.slice(-20).forEach(m => bubble(m.role === 'user' ? 'u' : 'b', m.content));
 async function ask(q) {
   q = q.trim(); if (!q) return;
   bubble('u', q); chat.push({ role: 'user', content: q });
   const b = bubble('b', ''); b.innerHTML = '<span class="spin"></span>O\'ylayapman…'; $('chatSend').disabled = true;
-  const t = load('montaj-trends', null), s = summary();
-  const ctx = `${SYS_BASE}\nSen foydalanuvchining doimiy montaj hamkorisan. Kerak bo'lsa web_search bilan eng yangi ma'lumotni top.\n\nFoydalanuvchi montajlari (jami ${s.n}):\n${editsForAI(25) || 'hali yo\'q'}\n` +
-    (t ? `\nOxirgi saqlangan trendlar (${t.date}, ${t.niche}): ${JSON.stringify(t.data).slice(0, 3000)}` : '');
+  const s = summary();
+  const ctx = `${SYS}\nSen foydalanuvchining doimiy montaj hamkorisan.\n\nFoydalanuvchi montajlari (jami ${s.n}):\n${editsForAI(20) || "hali yo'q"}\n` +
+    (trends ? `\nSaqlangan trendlar (${trends.date}, ${trends.niche}): ${JSON.stringify(trends.data).slice(0, 2500)}\n` : '') +
+    `\nHozirgi timeline loyihasi: ${Editor.describe()}`;
   try {
-    const r = await claude({ system: ctx, web: true, effort: 'low', maxTokens: 8000, messages: chat.slice(-16).map(m => ({ role: m.role, content: m.content })) });
+    const r = await ai({ system: ctx, web: true, effort: 'low', messages: chat.slice(-14), onText: ({ text }) => { b.textContent = text; window.scrollTo(0, document.body.scrollHeight); } });
     b.textContent = r.text || '…'; chat.push({ role: 'assistant', content: r.text || '…' });
   } catch (e) { b.textContent = errText(e); chat.pop(); }
-  chat = chat.slice(-40); save('montaj-chat', chat); $('chatSend').disabled = false;
+  chat = chat.slice(-40); KV.set('chat', chat); $('chatSend').disabled = false;
 }
 $('chatForm').onsubmit = ev => { ev.preventDefault(); const v = $('chatInp').value; $('chatInp').value = ''; ask(v); };
 $('chips').onclick = ev => { if (ev.target.classList.contains('chip')) ask(ev.target.textContent); };
 
-/* ---------- Navigatsiya va kalit ---------- */
+/* ================= Navigatsiya va kalit ================= */
+let curTab = 'dash';
 function show(t) {
+  curTab = t;
   document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + t));
   document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+  if (t === 'trends') document.querySelector('nav [data-t=trends]').classList.remove('new');
+  document.body.classList.toggle('wide', t === 'editor');
   $('chatbar').hidden = t !== 'chat'; window.scrollTo(0, t === 'chat' ? document.body.scrollHeight : 0);
+  if (t === 'editor') Editor.onShow();
+  if (t === 'fonts' && !renderFonts._done) { renderFonts._done = 1; renderFontCats(); renderFonts(); renderPairs(); }
 }
 $('nav').onclick = ev => { const b = ev.target.closest('button'); if (b) show(b.dataset.t); };
 $('keyBtn').onclick = () => { $('keyInp').value = getKey(); $('keySheet').classList.add('open'); };
 $('keyClose').onclick = () => $('keySheet').classList.remove('open');
-$('keySave').onclick = () => { try { localStorage.setItem('miya-key', $('keyInp').value.trim()); } catch (e) {} $('keySheet').classList.remove('open'); };
+$('keySave').onclick = () => { try { localStorage.setItem('miya-key', $('keyInp').value.trim()); } catch (e) {} $('keySheet').classList.remove('open'); hdrUpdate(); };
+document.querySelectorAll('.sheet').forEach(s => s.addEventListener('click', e => { if (e.target === s && s.id !== 'expSheet' && s.id !== 'dlgSheet') s.classList.remove('open'); }));
+</script>
+<script>
+"use strict";
+/* ================= Video / audio tahlil yordamchilari ================= */
+const seekEl = (el, t) => new Promise(ok => {
+  if (Math.abs(el.currentTime - t) < 0.0005 && el.readyState >= 2) return ok();
+  let done = false; const h = () => { if (done) return; done = true; el.removeEventListener('seeked', h); ok(); };
+  el.addEventListener('seeked', h); el.currentTime = t; setTimeout(h, 3000);
+});
+function makeVideo(src) { const v = document.createElement('video'); v.src = src; v.preload = 'auto'; v.playsInline = true; v.muted = true; return v; }
+const waitMeta = el => new Promise(ok => { if (el.readyState >= 1) return ok(true); el.onloadedmetadata = () => ok(true); el.onerror = () => ok(false); setTimeout(() => ok(el.readyState >= 1), 15000); });
 
-if (location.host !== 'appassets.androidplatform.net') $('backBtn').remove();
-resetForm(); renderStats(); renderTrends();
+async function scanVideoEl(el, { frames = 8, thumbW = 360, maxSteps = 400, onProgress } = {}) {
+  const dur = el.duration, w = el.videoWidth, h = el.videoHeight;
+  const small = document.createElement('canvas'); small.width = 48; small.height = Math.max(8, Math.round(48 * h / w) || 85);
+  const sctx = small.getContext('2d', { willReadFrequently: true });
+  const step = clamp(dur / maxSteps, 0.08, 2);
+  let prev = null; const diffs = []; let brightSum = 0, bn = 0; const hist = new Map(); let k = 0;
+  for (let t = 0; t < dur; t += step, k++) {
+    await seekEl(el, t); sctx.drawImage(el, 0, 0, small.width, small.height);
+    const px = sctx.getImageData(0, 0, small.width, small.height).data;
+    const g = new Float32Array(px.length / 4);
+    for (let i = 0; i < g.length; i++) {
+      const r = px[i * 4], gg = px[i * 4 + 1], b = px[i * 4 + 2];
+      g[i] = r * .3 + gg * .59 + b * .11; brightSum += g[i]; bn++;
+      if (k % 3 === 0 && i % 2 === 0) { const key = (r >> 5) << 6 | (gg >> 5) << 3 | (b >> 5); const e = hist.get(key) || [0, 0, 0, 0]; e[0]++; e[1] += r; e[2] += gg; e[3] += b; hist.set(key, e); }
+    }
+    if (prev) { let d = 0; for (let i = 0; i < g.length; i++) d += Math.abs(g[i] - prev[i]); diffs.push({ t, d: d / g.length }); }
+    prev = g; if (onProgress && k % 10 === 0) onProgress(t / dur);
+  }
+  const sorted = diffs.map(x => x.d).sort((a, b) => a - b); const med = sorted[Math.floor(sorted.length / 2)] || 0;
+  const thr = Math.max(18, med * 3);
+  const cuts = []; diffs.forEach(x => { if (x.d > thr && x.t > 0.2 && x.t < dur - 0.1 && (!cuts.length || x.t - cuts[cuts.length - 1] > 0.3)) cuts.push(+x.t.toFixed(2)); });
+  // palitra
+  const pal = []; [...hist.values()].sort((a, b) => b[0] - a[0]).forEach(e => {
+    const c = [e[1] / e[0], e[2] / e[0], e[3] / e[0]].map(Math.round);
+    if (pal.length < 6 && pal.every(p => Math.hypot(p[0] - c[0], p[1] - c[1], p[2] - c[2]) > 48)) pal.push(c);
+  });
+  const palette = pal.map(c => '#' + c.map(v => v.toString(16).padStart(2, '0')).join(''));
+  // kadrlar
+  const out = [];
+  if (frames) {
+    const big = document.createElement('canvas'); big.width = thumbW; big.height = Math.round(thumbW * h / w);
+    const bctx = big.getContext('2d');
+    for (let i = 0; i < frames; i++) { const t = dur * (i + 0.5) / frames; await seekEl(el, t); bctx.drawImage(el, 0, 0, big.width, big.height); out.push({ t, data: big.toDataURL('image/jpeg', 0.72) }); }
+  }
+  // har soniya harakati (0-9)
+  const mx = Math.max(1, ...diffs.map(x => x.d)); const motion = [];
+  for (let s = 0; s < Math.ceil(dur); s++) { const xs = diffs.filter(x => x.t >= s && x.t < s + 1 && !cuts.includes(+x.t.toFixed(2))); motion.push(xs.length ? Math.round(9 * xs.reduce((a, x) => a + x.d, 0) / xs.length / mx) : 0); }
+  const g2 = (a, b) => b ? g2(b, a % b) : a; const gk = g2(w, h) || 1;
+  return { duration: dur, w, h, ratio: `${w / gk}:${h / gk}`, diffs, cuts, avgShot: dur / (cuts.length + 1), brightness: Math.round(brightSum / bn / 2.55), frames: out, palette, motion };
+}
+async function decodeAudio(blob) {
+  try { const AC = window.AudioContext || window.webkitAudioContext; const ac = new AC(); const buf = await ac.decodeAudioData(await blob.arrayBuffer()); ac.close && ac.close(); return buf; }
+  catch (e) { return null; }
+}
+function detectBeats(buf) {
+  const sr = buf.sampleRate, hop = Math.round(sr * 0.01), d0 = buf.getChannelData(0), d1 = buf.numberOfChannels > 1 ? buf.getChannelData(1) : null;
+  const n = Math.floor(d0.length / hop), env = new Float32Array(n);
+  for (let i = 0; i < n; i++) { let s = 0; for (let j = i * hop, e = j + hop; j < e; j += 2) { const v = d1 ? (d0[j] + d1[j]) / 2 : d0[j]; s += v * v; } env[i] = Math.sqrt(s); }
+  const on = new Float32Array(n); let mx = 0;
+  for (let i = 8; i < n; i++) { let a = 0; for (let j = i - 8; j < i; j++) a += env[j]; on[i] = Math.max(0, env[i] - a / 8 * 1.05); mx = Math.max(mx, on[i]); }
+  if (!mx) return { bpm: 0, beats: [] };
+  for (let i = 0; i < n; i++) on[i] /= mx;
+  let best = 0, bestL = 50;
+  for (let L = 33; L <= 86; L++) { let s = 0; for (let i = 0; i + L < n; i++) s += on[i] * on[i + L]; const bpm = 6000 / L; s *= Math.exp(-0.5 * Math.pow((bpm - 120) / 70, 2)); if (s > best) { best = s; bestL = L; } }
+  let bo = 0, bs = -1;
+  for (let o = 0; o < bestL; o++) { let s = 0; for (let i = o; i < n; i += bestL) s += on[i]; if (s > bs) { bs = s; bo = o; } }
+  const beats = []; for (let i = bo; i < n; i += bestL) beats.push(+(i * 0.01).toFixed(3));
+  return { bpm: Math.round(6000 / bestL), beats };
+}
+function peaksOf(buf, N = 1200) { const d = buf.getChannelData(0), b = Math.floor(d.length / N) || 1, p = []; for (let i = 0; i < N; i++) { let m = 0; for (let j = i * b, e = Math.min(d.length, j + b); j < e; j += 4) m = Math.max(m, Math.abs(d[j])); p.push(+m.toFixed(3)); } return p; }
+
+/* ================= 🎬 Tahlil bo'limi ================= */
+let vidMeta = null, vidFile = null, lastAnalysis = null;
+const vid = $('vid');
+$('vidFile').onchange = async ev => {
+  const f = ev.target.files[0]; if (!f) return; vidFile = f;
+  $('vidOut').textContent = ''; $('vidResult').hidden = true;
+  vid.src = URL.createObjectURL(f); vid.hidden = false;
+  if (!(await waitMeta(vid)) || !isFinite(vid.duration)) { $('vidInfo').textContent = "Videoni o'qib bo'lmadi."; return; }
+  $('vidInfo').innerHTML = '<span class="spin"></span>Kesimlar va harakat o\'lchanmoqda…';
+  try {
+    vidMeta = await scanVideoEl(vid, { onProgress: p => { $('vidInfo').innerHTML = `<span class="spin"></span>Tahlil… ${Math.round(p * 100)}%`; } });
+    await seekEl(vid, 0);
+    $('vidInfo').innerHTML = '<span class="spin"></span>Musiqa beatlari aniqlanmoqda…';
+    const buf = await decodeAudio(f); const bt = buf ? detectBeats(buf) : { bpm: 0, beats: [] };
+    vidMeta.bpm = bt.bpm; vidMeta.beats = bt.beats;
+    const near = c => bt.beats.some(b => Math.abs(b - c) < 0.09);
+    vidMeta.sync = vidMeta.cuts.length && bt.beats.length ? Math.round(100 * vidMeta.cuts.filter(near).length / vidMeta.cuts.length) : null;
+    vidMeta.first3 = vidMeta.cuts.filter(c => c < 3).length;
+    vidMeta.motionAvg = vidMeta.motion.length ? +(vidMeta.motion.reduce((a, b) => a + b, 0) / vidMeta.motion.length).toFixed(1) : 0;
+    vidMeta.hookMotion = vidMeta.motion.slice(0, 3).length ? +(vidMeta.motion.slice(0, 3).reduce((a, b) => a + b, 0) / vidMeta.motion.slice(0, 3).length).toFixed(1) : 0;
+    renderVidResult();
+    $('vidInfo').textContent = `${f.name} · ${(f.size / 1048576).toFixed(1)} MB`;
+  } catch (e) { $('vidInfo').textContent = 'Xato: ' + (e.message || e); }
+};
+function renderVidResult() {
+  const m = vidMeta; $('vidResult').hidden = false;
+  const hook = Math.min(10, Math.round(m.first3 * 2 + m.hookMotion * 0.6 + (m.sync || 0) / 40));
+  const cards = [['⏱', m.duration.toFixed(1) + ' s', 'Davomiylik'], ['📐', `${m.w}×${m.h}`, m.ratio + (m.ratio === '9:16' ? ' ✓ reels' : ' — reels uchun 9:16 kerak')],
+    ['✂️', m.cuts.length, 'Kesimlar soni'], ['⚡', m.avgShot.toFixed(2) + ' s', "O'rtacha kadr uzunligi"],
+    ['🎵', m.bpm ? m.bpm + ' BPM' : '—', m.bpm ? 'Musiqa tempi' : 'Ovoz topilmadi'], ['🎯', m.sync != null ? m.sync + '%' : '—', 'Kesimlar beatga mosligi'],
+    ['🪝', hook + '/10', `Hook kuchi (3 s ichida ${m.first3} kesim)`], ['🌗', m.brightness + '%', "O'rtacha yorug'lik"]];
+  $('vidMetrics').innerHTML = cards.map(c => `<div class="metric"><span>${c[0]} ${esc(c[2])}</span><b>${esc(c[1])}</b></div>`).join('');
+  // ritm grafigi
+  const W = 1000, H = 100, mx = Math.max(1, ...m.diffs.map(x => x.d)), X = t => t / m.duration * W;
+  const path = m.diffs.map((x, i) => (i ? 'L' : 'M') + X(x.t).toFixed(1) + ' ' + (H - 14 - Math.min(1, x.d / mx) * (H - 22)).toFixed(1)).join(' ');
+  $('rhythm').setAttribute('viewBox', `0 0 ${W} ${H}`);
+  $('rhythm').innerHTML = `<rect width="${W}" height="${H}" fill="rgba(255,255,255,.02)"/>` +
+    m.beats.filter(b => b < m.duration).map(b => `<line x1="${X(b)}" x2="${X(b)}" y1="${H - 10}" y2="${H}" stroke="#ff3fa4" stroke-width="1.5"/>`).join('') +
+    `<path d="${path}" fill="none" stroke="#00e5ff" stroke-width="1.5" vector-effect="non-scaling-stroke"/>` +
+    m.cuts.map(c => `<line x1="${X(c)}" x2="${X(c)}" y1="0" y2="${H - 12}" stroke="#fff" stroke-width="2" vector-effect="non-scaling-stroke"><title>Kesim: ${c.toFixed(2)} s</title></line>`).join('');
+  $('palette').innerHTML = m.palette.map(c => { const n = parseInt(c.slice(1), 16), l = ((n >> 16) * .3 + (n >> 8 & 255) * .59 + (n & 255) * .11) / 255; return `<div style="background:${c};color:${l > .6 ? '#111' : '#fff'};text-shadow:none" data-hex="${c}" title="${c}">${c}</div>`; }).join('');
+  $('frames').innerHTML = m.frames.map(fr => `<img src="${fr.data}" alt="${fr.t.toFixed(1)}s" title="${fr.t.toFixed(1)} s">`).join('');
+  lastAnalysis = { name: vidFile.name, dur: +m.duration.toFixed(1), cuts: m.cuts.length, avgShot: +m.avgShot.toFixed(2), first3: m.first3, bpm: m.bpm, sync: m.sync, palette: m.palette, brightness: m.brightness, motionAvg: m.motionAvg, aiText: '' };
+}
+$('palette').onclick = e => { const h = e.target.dataset.hex; if (h) { navigator.clipboard && navigator.clipboard.writeText(h).catch(() => {}); toast('Rang: ' + h); } };
+$('analyzeBtn').onclick = async () => {
+  if (!vidMeta) return;
+  const btn = $('analyzeBtn'); btn.disabled = true; $('vidOut').innerHTML = '<span class="spin"></span>AI kadrlarni ko\'ryapti…';
+  const m = vidMeta;
+  const prompt = `Senga montaj qilingan videodan ${m.frames.length} ta kadr berildi (vaqt bo'yicha: ${m.frames.map(f => f.t.toFixed(1) + 's').join(', ')}).\n` +
+    `O'lchovlar: ${m.duration.toFixed(1)} s, ${m.w}x${m.h} (${m.ratio}), ${m.cuts.length} kesim (o'rtacha kadr ${m.avgShot.toFixed(2)} s), birinchi 3 soniyada ${m.first3} kesim, kesim vaqtlari: ${m.cuts.slice(0, 40).join(', ')}.\n` +
+    `Musiqa: ${m.bpm ? m.bpm + ' BPM, kesimlarning ' + m.sync + '% i beatga tushadi' : "ovoz topilmadi"}. Harakat har soniya (0-9): ${m.motion.slice(0, 60).join(',')}. Asosiy ranglar: ${m.palette.join(', ')}.\n` +
+    (trends ? `Saqlangan trendlar: stillar — ${(trends.data.styles || []).map(s => s.name).join(', ')}; shriftlar — ${(trends.data.fonts || []).map(f => f.name).join(', ')}.\n` : '') +
+    ($('vidQ').value.trim() ? `Savolim: ${$('vidQ').value.trim()}\n` : '') +
+    `Shu montajni tahlil qil:\n1) Stil va janr\n2) Hook (birinchi 1-3 soniya) — kuchli/zaifmi, qanday kuchaytirish\n3) Temp, kesimlar ritmi va beatga moslik\n4) Matn va shriftlar (kadrlarda ko'ringan bo'lsa nomini taxmin qil) va o'rniga nimani tavsiya qilasan\n5) Rang / grading (palitraga qarab)\n6) Shu videoga qo'shsa bo'ladigan 5 ta zamonaviy yangilik — aniq qaysi soniyaga\n7) 10 balldan baho`;
+  try {
+    const r = await ai({ prompt, images: m.frames.map(f => f.data), effort: 'high', onText: ({ text }) => { $('vidOut').textContent = text; } });
+    $('vidOut').textContent = r.text; if (lastAnalysis) lastAnalysis.aiText = r.text.slice(0, 1500);
+  } catch (e) { $('vidOut').textContent = errText(e); }
+  btn.disabled = false;
+};
+$('saveVidBtn').onclick = () => {
+  if (!vidMeta) return; resetForm();
+  form.name.value = vidFile.name.replace(/\.[^.]+$/, ''); form.duration.value = Math.round(vidMeta.duration);
+  form.notes.value = `${vidMeta.cuts.length} kesim, har ${vidMeta.avgShot.toFixed(2)} s${vidMeta.bpm ? ', ' + vidMeta.bpm + ' BPM' : ''}`;
+  show('add');
+};
+$('toTimelineBtn').onclick = () => vidFile && Editor.importWithCuts(vidFile, vidMeta.cuts);
+$('likeThisBtn').onclick = () => { show('editor'); Editor.openAI({ ref: true }); };
+
+/* ================= 🎞 TIMELINE MUHARRIRI ================= */
+const IDB = (() => {
+  let dbp;
+  const open = () => dbp || (dbp = new Promise((res, rej) => {
+    const r = indexedDB.open('montaj-studiya', 1);
+    r.onupgradeneeded = () => r.result.createObjectStore('media', { keyPath: 'id' });
+    r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+  }).catch(() => null));
+  const run = async (mode, fn) => { const db = await open(); if (!db) return null; return new Promise((res, rej) => { const t = db.transaction('media', mode); const r = fn(t.objectStore('media')); t.oncomplete = () => res(r.result); t.onerror = () => rej(t.error); }); };
+  return { put: rec => run('readwrite', s => s.put(rec)).catch(() => null), del: id => run('readwrite', s => s.delete(id)).catch(() => null), all: () => run('readonly', s => s.getAll()).then(r => r || []).catch(() => []) };
+})();
+
+const Editor = (() => {
+  const cv = $('cv'), ctx = cv.getContext('2d');
+  const FILTERS = { none: 'none', vivid: 'saturate(1.35) contrast(1.12)', cinematic: 'contrast(1.25) saturate(1.15) brightness(.92)', bw: 'grayscale(1) contrast(1.25)',
+    vintage: 'sepia(.4) contrast(1.05) saturate(.85) brightness(1.03)', warm: 'sepia(.22) saturate(1.25) hue-rotate(-8deg)', cool: 'saturate(1.1) hue-rotate(12deg) brightness(1.02)', soft: 'brightness(1.06) saturate(.85) contrast(.92)' };
+  const FILTER_N = { none: "Yo'q", vivid: 'Yorqin', cinematic: 'Kinematografik', bw: 'Oq-qora', vintage: 'Vintage', warm: 'Iliq', cool: 'Sovuq', soft: "Yumshoq (to'y)" };
+  const TRS = { cut: 'Kesim', flash: 'Flash ⚡', zoom: 'Zoom punch', whip: 'Whip pan', fade: 'Fade', glitch: 'Glitch', slide: 'Slide' };
+  const TR_IC = { flash: '⚡', zoom: '🔍', whip: '💨', fade: '◐', glitch: '▦', slide: '⇡' };
+  const ZOOMS = { none: "Yo'q", zoomIn: 'Sekin yaqinlashish', zoomOut: 'Sekin uzoqlashish', shake: 'Silkinish (boshida)', pulse: 'Beat pulsi' };
+  const CURVES = { none: 'Tekis', velocity: 'Velocity (tez→sekin→tez)', slowfast: 'Ramp (sekin→tez→sekin)' };
+  const CURVE_AVG = { none: 1, velocity: 1.6, slowfast: 1.6 };
+  const TSTYLES = { bold: 'Qalin + kontur', neon: 'Neon', box: 'Fonli quti', outline: 'Faqat kontur', gradient: 'Gradient', plain: 'Oddiy (soya)' };
+  const ANIMS = { pop: 'Pop', fade: 'Fade', slide: 'Pastdan', type: 'Yozuv mashinkasi', words: "So'zma-so'z", glitch: 'Glitch', none: "Yo'q" };
+
+  let media = [], rt = {}, proj = null, index = [], hist = [], fut = [], editSnap = null, sel = null;
+  let T = 0, playing = false, lastTs = 0, dirty = true, exporting = false, pps = 90, hitBoxes = {}, aiRef = null;
+
+  /* ---------- yordamchilar ---------- */
+  const mediaById = id => media.find(m => m.id === id);
+  const rtOf = m => {
+    if (!rt[m.id]) {
+      const url = URL.createObjectURL(m.blob); let el;
+      if (m.kind === 'video') { el = makeVideo(url); el.muted = false; el.addEventListener('seeked', () => dirty = true); el.addEventListener('loadeddata', () => dirty = true); }
+      else if (m.kind === 'image') { el = new Image(); el.onload = () => dirty = true; el.src = url; }
+      else { el = new Audio(url); el.preload = 'auto'; }
+      rt[m.id] = { url, el };
+    }
+    return rt[m.id];
+  };
+  const maxDur = m => !m ? 1e9 : m.kind === 'image' ? 60 : m.dur;
+  const cdur = c => Math.max(0.05, (c.out - c.in) / (c.speed * (CURVE_AVG[c.curve] || 1)));
+  const layout = () => { let t = 0; return proj.clips.map(c => { const s = t; t += cdur(c); return s; }); };
+  function total() {
+    if (!proj) return 0; const L = layout(); const n = proj.clips.length;
+    const v = n ? L[n - 1] + cdur(proj.clips[n - 1]) : 0;
+    return Math.max(v, ...proj.texts.map(x => x.start + x.dur), 0);
+  }
+  function srcAt(c, lt) {
+    const D = cdur(c), u = clamp(lt / D, 0, 1), k = c.speed;
+    if (!c.curve || c.curve === 'none') return c.in + clamp(lt, 0, D) * k;
+    const s2 = Math.sin(2 * Math.PI * u) / (4 * Math.PI);
+    const f = c.curve === 'velocity' ? 0.4 * u + 2.4 * (u / 2 + s2) : 0.4 * u + 2.4 * (u / 2 - s2);
+    return c.in + k * D * f;
+  }
+  function rateAt(c, lt) {
+    if (!c.curve || c.curve === 'none') return c.speed;
+    const u = clamp(lt / cdur(c), 0, 1), cs = Math.cos(Math.PI * u) ** 2;
+    return c.speed * (0.4 + 2.4 * (c.curve === 'velocity' ? cs : 1 - cs));
+  }
+  function clipAt(t) {
+    if (!proj || !proj.clips.length) return null;
+    const L = layout();
+    for (let i = 0; i < L.length; i++) { const D = cdur(proj.clips[i]); if (t >= L[i] && t < L[i] + D) return { c: proj.clips[i], i, start: L[i] }; }
+    const i = L.length - 1; if (t >= L[i]) return t <= L[i] + cdur(proj.clips[i]) + 0.001 ? { c: proj.clips[i], i, start: L[i] } : null;
+    return null;
+  }
+  function projBeats() {
+    if (!proj || !proj.music) return [];
+    const m = mediaById(proj.music.m); if (!m || !m.beats) return [];
+    return m.beats.map(b => b - proj.music.offset).filter(b => b >= 0);
+  }
+  const fmtT = t => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, '0')}`;
+
+  /* ---------- tarix (undo/redo) va saqlash ---------- */
+  function beginEdit() { if (!editSnap) editSnap = JSON.stringify(proj); }
+  function endEdit() {
+    if (!editSnap) return; const now = JSON.stringify(proj);
+    if (now !== editSnap) { hist.push(editSnap); if (hist.length > 120) hist.shift(); fut = []; saveProj(); }
+    editSnap = null; updUndo();
+  }
+  function mutate(fn) { beginEdit(); fn(); endEdit(); renderAll(); }
+  function undo() { if (!hist.length) return; fut.push(JSON.stringify(proj)); proj = JSON.parse(hist.pop()); saveProj(); sel = null; renderAll(); updUndo(); }
+  function redo() { if (!fut.length) return; hist.push(JSON.stringify(proj)); proj = JSON.parse(fut.pop()); saveProj(); sel = null; renderAll(); updUndo(); }
+  function updUndo() { $('undoBtn').disabled = !hist.length; $('redoBtn').disabled = !fut.length; }
+  function saveProj() {
+    if (!proj) return; proj.updated = Date.now(); KV.set('proj-' + proj.id, proj);
+    const e = index.find(x => x.id === proj.id); const meta = { id: proj.id, name: proj.name, updated: proj.updated, dur: +total().toFixed(1), clips: proj.clips.length };
+    if (e) Object.assign(e, meta); else index.push(meta);
+    KV.set('projIndex', index); KV.set('lastProj', proj.id); renderProjSel(); renderContinue();
+  }
+  const newProject = name => ({ id: uid(), name: name || ('Loyiha ' + (index.length + 1)), created: Date.now(), updated: Date.now(), workSec: 0, filter: 'none', letterbox: false, clips: [], texts: [], music: null, notes: '' });
+  async function loadProj(id) {
+    pause(); const p = await KV.get('proj-' + id, null);
+    if (!p) { toast('Loyiha topilmadi'); return; }
+    proj = Object.assign(newProject(), p); hist = []; fut = []; sel = null; T = 0; KV.set('lastProj', id);
+    proj.texts.forEach(x => loadFont(x.font)); renderAll(); updUndo(); renderProjSel();
+  }
+  function renderProjSel() {
+    const s = $('projSel'); const list = index.slice().sort((a, b) => b.updated - a.updated);
+    s.innerHTML = list.map(p => `<option value="${p.id}"${proj && p.id === proj.id ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
+  }
+  function renderContinue() {
+    const last = index.slice().sort((a, b) => b.updated - a.updated)[0];
+    $('continueCard').hidden = !last || !last.clips;
+    if (last) { $('contName').textContent = last.name; $('contSub').textContent = `${last.clips} klip · ${last.dur || 0} s · ${new Date(last.updated).toLocaleString()}`; }
+  }
+  $('contBtn').onclick = async () => { const last = index.slice().sort((a, b) => b.updated - a.updated)[0]; if (last && (!proj || proj.id !== last.id)) await loadProj(last.id); show('editor'); };
+  $('projSel').onchange = e => loadProj(e.target.value);
+  $('projNew').onclick = () => { pause(); proj = newProject(); hist = []; fut = []; sel = null; T = 0; saveProj(); renderAll(); updUndo(); toast('Yangi loyiha'); };
+  $('projRename').onclick = async () => { const n = await dlg('Loyiha nomi:', { input: proj.name, ok: 'Saqlash' }); if (n && n.trim()) { proj.name = n.trim(); saveProj(); } };
+  $('projDel').onclick = async () => {
+    if (!(await dlg(`«${proj.name}» loyihasini o'chirasizmi?`, { ok: "O'chirish" }))) return;
+    index = index.filter(x => x.id !== proj.id); KV.set('projIndex', index); KV.set('proj-' + proj.id, null);
+    if (index.length) loadProj(index.slice().sort((a, b) => b.updated - a.updated)[0].id); else { proj = newProject(); saveProj(); renderAll(); }
+  };
+  $('undoBtn').onclick = undo; $('redoBtn').onclick = redo;
+
+  /* ---------- media ---------- */
+  function kindOf(f) {
+    if (f.type.startsWith('video')) return 'video'; if (f.type.startsWith('image')) return 'image'; if (f.type.startsWith('audio')) return 'audio';
+    const e = (f.name.split('.').pop() || '').toLowerCase();
+    return ['mp4', 'mov', 'webm', 'mkv', 'm4v'].includes(e) ? 'video' : ['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(e) ? 'image' : ['mp3', 'wav', 'm4a', 'aac', 'ogg', 'flac'].includes(e) ? 'audio' : null;
+  }
+  function thumbOf(el, w, h) {
+    const c = document.createElement('canvas'); c.width = 90; c.height = 160; const x = c.getContext('2d');
+    const k = Math.max(90 / w, 160 / h); x.drawImage(el, (90 - w * k) / 2, (160 - h * k) / 2, w * k, h * k); return c.toDataURL('image/jpeg', 0.7);
+  }
+  async function addFiles(files, { toTimeline = false, idOverride = null } = {}) {
+    const added = [];
+    for (const f of files) {
+      const kind = kindOf(f); if (!kind) { toast('Qo\'llab-quvvatlanmaydi: ' + f.name); continue; }
+      toast('Yuklanmoqda: ' + f.name, 8000);
+      const rec = { id: idOverride || uid(), name: f.name, kind, blob: f, added: Date.now() };
+      const url = URL.createObjectURL(f);
+      try {
+        if (kind === 'video') {
+          const v = makeVideo(url); if (!(await waitMeta(v))) throw new Error("videoni o'qib bo'lmadi");
+          rec.dur = v.duration; rec.w = v.videoWidth; rec.h = v.videoHeight;
+          await seekEl(v, Math.min(1, rec.dur * 0.1)); rec.thumb = thumbOf(v, rec.w, rec.h);
+          const sc = await scanVideoEl(v, { frames: 0, maxSteps: 120 }); rec.motion = sc.motion; rec.cuts = sc.cuts;
+        } else if (kind === 'image') {
+          const img = new Image(); img.src = url; await img.decode(); rec.w = img.naturalWidth; rec.h = img.naturalHeight; rec.dur = 0; rec.thumb = thumbOf(img, rec.w, rec.h);
+        } else {
+          const buf = await decodeAudio(f); if (!buf) throw new Error("audioni o'qib bo'lmadi");
+          rec.dur = buf.duration; rec.peaks = peaksOf(buf); const b = detectBeats(buf); rec.bpm = b.bpm; rec.beats = b.beats;
+        }
+      } catch (e) { toast('Xato: ' + f.name + ' — ' + (e.message || e)); URL.revokeObjectURL(url); continue; }
+      URL.revokeObjectURL(url);
+      if (rt[rec.id]) { URL.revokeObjectURL(rt[rec.id].url); delete rt[rec.id]; }
+      media = media.filter(m => m.id !== rec.id); media.push(rec); IDB.put(rec); added.push(rec);
+      if (toTimeline) addToTimeline(rec, false);
+    }
+    renderMedia(); renderAll(); if (added.length) toast(`✓ ${added.length} ta fayl qo'shildi`);
+    return added;
+  }
+  function renderMedia() {
+    $('mediaList').innerHTML = media.length ? media.slice().sort((a, b) => a.added - b.added).map(m => `<div class="mi" draggable="true" data-mid="${m.id}" title="Bosing — timelinega qo'shish">
+      ${m.thumb ? `<img src="${m.thumb}" alt="">` : `<div class="ph">${m.kind === 'audio' ? '🎵' : '📄'}</div>`}
+      <div class="t"><b>${esc(m.name)}</b><span>${m.kind === 'video' ? '🎬 ' + m.dur.toFixed(1) + ' s' : m.kind === 'image' ? '🖼 rasm' : '🎵 ' + m.dur.toFixed(0) + ' s' + (m.bpm ? ' · ' + m.bpm + ' BPM' : '')}</span></div>
+      <button class="x" data-mdel="${m.id}" title="O'chirish">×</button></div>`).join('') : '<div class="muted" style="padding:6px">Hali media yo\'q.</div>';
+    $('stageEmpty').hidden = !!(proj && (proj.clips.length || proj.texts.length));
+  }
+  function addToTimeline(m, withMutate = true, at = null) {
+    const fn = () => {
+      if (m.kind === 'audio') { proj.music = { m: m.id, offset: 0, vol: 0.9 }; return; }
+      const c = { id: uid(), m: m.id, in: 0, out: m.kind === 'video' ? Math.min(m.dur, 6) : 2.5, speed: 1, curve: 'none', tr: 'cut', zoom: m.kind === 'image' ? 'zoomIn' : 'none', vol: 1, panX: 0.5, panY: 0.5 };
+      if (at == null) proj.clips.push(c); else proj.clips.splice(at, 0, c);
+      sel = { k: 'v', id: c.id };
+    };
+    if (withMutate) mutate(fn); else { beginEdit(); fn(); endEdit(); }
+  }
+  $('drop').onclick = () => $('mediaFile').click();
+  $('mediaFile').onchange = e => { addFiles([...e.target.files]); e.target.value = ''; };
+  const ed = $('tab-editor');
+  ed.addEventListener('dragover', e => { if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); $('drop').classList.add('over'); } });
+  ed.addEventListener('dragleave', e => { if (e.target === $('drop')) $('drop').classList.remove('over'); });
+  ed.addEventListener('drop', e => {
+    $('drop').classList.remove('over');
+    if (e.dataTransfer.files.length) { e.preventDefault(); addFiles([...e.dataTransfer.files], { toTimeline: !!e.target.closest('.timeline') }); }
+  });
+  $('mediaList').addEventListener('click', async e => {
+    const d = e.target.closest('[data-mdel]');
+    if (d) {
+      e.stopPropagation(); const id = d.dataset.mdel;
+      const used = proj && (proj.clips.some(c => c.m === id) || (proj.music && proj.music.m === id));
+      if (!(await dlg(used ? "Bu fayl timelineda ishlatilgan. Baribir o'chirasizmi?" : "Faylni o'chirasizmi?", { ok: "O'chirish" }))) return;
+      media = media.filter(m => m.id !== id); IDB.del(id); if (rt[id]) { URL.revokeObjectURL(rt[id].url); delete rt[id]; } renderMedia(); renderAll(); return;
+    }
+    const it = e.target.closest('[data-mid]'); if (it) { addToTimeline(mediaById(it.dataset.mid)); toast("Timelinega qo'shildi"); }
+  });
+  $('mediaList').addEventListener('dragstart', e => { const it = e.target.closest('[data-mid]'); if (it) e.dataTransfer.setData('text/mid', it.dataset.mid); });
+  $('tlScroll').addEventListener('dragover', e => { if (e.dataTransfer.types.includes('text/mid')) e.preventDefault(); });
+  $('tlScroll').addEventListener('drop', e => {
+    const id = e.dataTransfer.getData('text/mid'); if (!id) return; e.preventDefault();
+    const x = e.clientX - $('tlInner').getBoundingClientRect().left, t = x / pps, L = layout();
+    let at = proj.clips.length; for (let i = 0; i < L.length; i++) if (t < L[i] + cdur(proj.clips[i]) / 2) { at = i; break; }
+    addToTimeline(mediaById(id), true, at);
+  });
+
+  async function importWithCuts(file, cuts) {
+    show('editor');
+    pause(); proj = newProject(file.name.replace(/\.[^.]+$/, '') + ' (qayta montaj)'); hist = []; fut = []; T = 0; saveProj();
+    const [m] = await addFiles([file]); if (!m) return;
+    mutate(() => {
+      const pts = [0, ...cuts.filter(c => c > 0.2 && c < m.dur - 0.2), m.dur];
+      for (let i = 0; i < pts.length - 1; i++) proj.clips.push({ id: uid(), m: m.id, in: pts[i], out: pts[i + 1], speed: 1, curve: 'none', tr: 'cut', zoom: 'none', vol: 1, panX: .5, panY: .5 });
+    });
+    toast(`${proj.clips.length} ta kadrga bo'lindi — endi tahrirlang`);
+  }
+
+  /* ---------- chizish ---------- */
+  const easeOut = p => 1 - Math.pow(1 - p, 3);
+  const easeBack = p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
+  const lum = hex => { const n = parseInt((hex || '#fff').slice(1), 16); return ((n >> 16) * .3 + (n >> 8 & 255) * .59 + (n & 255) * .11) / 255; };
+  function draw(t) {
+    const W = cv.width, H = cv.height;
+    ctx.save(); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    const a = clipAt(t);
+    if (a) {
+      const { c, start } = a, lt = t - start, D = cdur(c), m = mediaById(c.m);
+      let s = 1, tx = 0, ty = 0, blur = 0, alpha = 1, flash = 0, glitch = 0;
+      if (c.zoom === 'zoomIn') s *= 1 + 0.15 * (lt / D);
+      if (c.zoom === 'zoomOut') s *= 1.15 - 0.15 * (lt / D);
+      if (c.zoom === 'shake' && lt < 0.45) { const k = 1 - lt / 0.45; tx += Math.sin(lt * 90) * W * 0.025 * k; ty += Math.cos(lt * 70) * W * 0.02 * k; s *= 1 + 0.05 * k; }
+      if (c.zoom === 'pulse') { const bs = projBeats(); let b = -1; for (const x of bs) { if (x <= t) b = x; else break; } const dt = t - b; if (b >= 0 && dt < 0.18) s *= 1 + 0.07 * (1 - dt / 0.18); }
+      const p = lt / 0.35;
+      if (p < 1 && (a.i > 0 || c.tr === 'fade')) {
+        const e = easeOut(p);
+        if (c.tr === 'flash') flash = 1 - p;
+        if (c.tr === 'zoom') { s *= 1 + 0.5 * (1 - e); blur = 8 * (1 - e); }
+        if (c.tr === 'whip') { tx += (1 - e) * W * 0.9; blur = 18 * (1 - e); }
+        if (c.tr === 'fade') alpha = e;
+        if (c.tr === 'glitch') glitch = 1 - p;
+        if (c.tr === 'slide') ty += (1 - e) * H;
+      }
+      let f = FILTERS[proj.filter] || 'none'; if (blur > 0.5) f = (f === 'none' ? '' : f + ' ') + `blur(${blur.toFixed(1)}px)`;
+      ctx.globalAlpha = alpha; ctx.filter = f;
+      if (m) {
+        const el = rtOf(m).el, sw = m.kind === 'video' ? el.videoWidth : el.naturalWidth, sh = m.kind === 'video' ? el.videoHeight : el.naturalHeight;
+        if (sw && (m.kind !== 'video' || el.readyState >= 2)) {
+          const k = Math.max(W / sw, H / sh) * s, dw = sw * k, dh = sh * k;
+          ctx.drawImage(el, (W - dw) * (c.panX ?? .5) + tx, (H - dh) * (c.panY ?? .5) + ty, dw, dh);
+        }
+      } else { ctx.filter = 'none'; ctx.fillStyle = '#1a1030'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#fff'; ctx.font = `600 ${W * 0.04}px Manrope`; ctx.textAlign = 'center'; ctx.fillText('⚠ Media topilmadi — qayta ulang', W / 2, H / 2); }
+      ctx.filter = 'none'; ctx.globalAlpha = 1;
+      if (glitch > 0) {
+        for (let i = 0; i < 7; i++) { const y = Math.random() * H, h = 10 + Math.random() * H * 0.06, off = (Math.random() - .5) * W * 0.25 * glitch; ctx.drawImage(cv, 0, y, W, h, off, y, W, h); }
+        ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = `rgba(255,0,160,${0.18 * glitch})`; ctx.fillRect(0, 0, W, H); ctx.globalCompositeOperation = 'source-over';
+      }
+      if (flash > 0) { ctx.fillStyle = `rgba(255,255,255,${flash})`; ctx.fillRect(0, 0, W, H); }
+    }
+    if (proj && proj.letterbox) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H * 0.1); ctx.fillRect(0, H * 0.9, W, H * 0.1); }
+    hitBoxes = {};
+    if (proj) for (const x of proj.texts) if (t >= x.start && t <= x.start + x.dur) drawText(x, t - x.start);
+    ctx.restore();
+  }
+  function wrapLines(str, maxW) {
+    const out = [];
+    for (const para of String(str).split('\n')) {
+      const words = para.split(' '); let line = '';
+      for (const w of words) { const test = line ? line + ' ' + w : w; if (ctx.measureText(test).width > maxW && line) { out.push(line); line = w; } else line = test; }
+      out.push(line);
+    }
+    return out;
+  }
+  function drawText(x, lt) {
+    const W = cv.width, H = cv.height, size = x.size * W, D = x.dur;
+    let alpha = 1, sc = 1, dy = 0, str = x.text, jit = 0;
+    const ein = Math.min(1, lt / 0.3), eout = clamp((D - lt) / 0.25, 0, 1);
+    switch (x.anim) {
+      case 'pop': sc = lt < 0.35 ? Math.max(0.01, easeBack(lt / 0.35)) : 1; alpha = eout; break;
+      case 'fade': alpha = Math.min(ein, eout); break;
+      case 'slide': dy = (1 - easeOut(Math.min(1, lt / 0.4))) * H * 0.05; alpha = Math.min(ein, eout); break;
+      case 'type': str = x.text.slice(0, Math.ceil(x.text.length * Math.min(1, lt / Math.max(0.3, D * 0.5)))); alpha = eout; break;
+      case 'words': { const tok = x.text.split(/(\s+)/), nw = tok.filter(s => s.trim()).length || 1, per = Math.min(0.35, D * 0.6 / nw); let n = Math.floor(lt / per) + 1, o = ''; for (const s of tok) { if (s.trim()) { if (n-- <= 0) break; } o += s; } str = o; alpha = eout; break; }
+      case 'glitch': jit = (lt < 0.5 || Math.random() < 0.04) ? 1 : 0; alpha = Math.min(ein, eout); break;
+    }
+    if (!str) return;
+    ctx.save(); ctx.globalAlpha = alpha;
+    ctx.font = `${x.bold ? 700 : 400} ${size}px "${x.font}", sans-serif`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.lineJoin = 'round';
+    const lines = wrapLines(str, W * 0.88), lh = size * 1.18, y0 = -(lines.length - 1) * lh / 2;
+    const fullW = Math.max(...wrapLines(x.text, W * 0.88).map(l => ctx.measureText(l).width));
+    const cx = x.x * W, cy = x.y * H + dy;
+    hitBoxes[x.id] = { x: cx - fullW / 2 - size * 0.3, y: cy + y0 - lh / 2 - size * 0.2, w: fullW + size * 0.6, h: lines.length * lh + size * 0.4 };
+    ctx.translate(cx, cy); ctx.scale(sc, sc);
+    lines.forEach((l, i) => {
+      const y = y0 + i * lh, w = ctx.measureText(l).width;
+      if (x.style === 'box') { ctx.fillStyle = x.color; const p = size * 0.22; ctx.beginPath(); ctx.roundRect(-w / 2 - p, y - lh / 2 + size * 0.04, w + 2 * p, lh - size * 0.02, size * 0.18); ctx.fill(); }
+      if (jit) { ctx.fillStyle = 'rgba(255,0,80,.8)'; ctx.fillText(l, -size * 0.06, y); ctx.fillStyle = 'rgba(0,229,255,.8)'; ctx.fillText(l, size * 0.06, y); }
+      if (x.style === 'bold') { ctx.lineWidth = size * 0.14; ctx.strokeStyle = '#000'; ctx.strokeText(l, 0, y); ctx.fillStyle = x.color; ctx.fillText(l, 0, y); }
+      else if (x.style === 'neon') { ctx.shadowColor = x.color; ctx.shadowBlur = size * 0.6; ctx.fillStyle = x.color; ctx.fillText(l, 0, y); ctx.shadowBlur = size * 0.2; ctx.fillStyle = '#fff'; ctx.globalAlpha = alpha * 0.85; ctx.fillText(l, 0, y); ctx.globalAlpha = alpha; ctx.shadowBlur = 0; }
+      else if (x.style === 'outline') { ctx.lineWidth = size * 0.05; ctx.strokeStyle = x.color; ctx.strokeText(l, 0, y); }
+      else if (x.style === 'gradient') { const g = ctx.createLinearGradient(-w / 2, 0, w / 2, 0); ['#00e5ff', '#b14cff', '#ff3fa4', '#ffd23f'].forEach((c, k) => g.addColorStop(k / 3, c)); ctx.shadowColor = 'rgba(0,0,0,.5)'; ctx.shadowBlur = size * 0.15; ctx.fillStyle = g; ctx.fillText(l, 0, y); ctx.shadowBlur = 0; }
+      else if (x.style === 'box') { ctx.fillStyle = lum(x.color) > 0.6 ? '#111' : '#fff'; ctx.fillText(l, 0, y); }
+      else { ctx.shadowColor = 'rgba(0,0,0,.65)'; ctx.shadowBlur = size * 0.15; ctx.shadowOffsetY = size * 0.04; ctx.fillStyle = x.color; ctx.fillText(l, 0, y); ctx.shadowBlur = 0; ctx.shadowOffsetY = 0; }
+    });
+    ctx.restore();
+  }
+  document.fonts && document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', () => { dirty = true; });
+
+  /* ---------- ijro ---------- */
+  function pauseAll() { Object.values(rt).forEach(r => { if (r.el.pause && !r.el.paused) r.el.pause(); }); }
+  function play() {
+    if (!proj || (!proj.clips.length && !proj.texts.length)) return;
+    if (T >= total() - 0.02) T = 0;
+    playing = true; lastTs = performance.now(); $('playBtn').textContent = '❚❚'; syncMedia();
+  }
+  function pause() { playing = false; $('playBtn').textContent = '▶'; pauseAll(); dirty = true; }
+  function syncMedia() {
+    const a = clipAt(T), m = a && mediaById(a.c.m);
+    const activeEl = m && m.kind === 'video' ? rtOf(m).el : null;
+    Object.values(rt).forEach(r => { if (r.el !== activeEl && r.el.tagName === 'VIDEO' && !r.el.paused) r.el.pause(); });
+    if (proj.music) {
+      const mm = mediaById(proj.music.m);
+      if (mm) {
+        const el = rtOf(mm).el, want = T + proj.music.offset;
+        if (playing && want < mm.dur) { el.volume = clamp(proj.music.vol, 0, 1); if (el.paused) { el.currentTime = want; el.play().catch(() => {}); } else if (Math.abs(el.currentTime - want) > 0.25) el.currentTime = want; }
+        else if (!el.paused) el.pause();
+      }
+    }
+    if (activeEl) {
+      const want = srcAt(a.c, T - a.start), rate = clamp(rateAt(a.c, T - a.start), 0.07, 16);
+      if (playing) {
+        activeEl.muted = !(a.c.vol > 0); activeEl.volume = clamp(a.c.vol ?? 1, 0, 1);
+        if (Math.abs(activeEl.playbackRate - rate) > 0.02) activeEl.playbackRate = rate;
+        if (activeEl.paused) { activeEl.currentTime = want; activeEl.play().catch(() => {}); }
+        else if (Math.abs(activeEl.currentTime - want) > 0.3) activeEl.currentTime = want;
+      } else if (!activeEl.seeking && Math.abs(activeEl.currentTime - want) > 0.03) activeEl.currentTime = want;
+    }
+  }
+  function setT(t) { T = clamp(t, 0, total()); if (playing) { lastTs = performance.now(); } syncMedia(); dirty = true; updatePlayhead(); }
+  function updatePlayhead() { $('playhead').style.left = (T * pps) + 'px'; $('timeLbl').textContent = `${fmtT(T)} / ${fmtT(total())}`; }
+  function loop(ts) {
+    if (!exporting && proj) {
+      if (playing) { T += (ts - lastTs) / 1000; lastTs = ts; const tot = total(); if (T >= tot) { T = tot; pause(); } syncMedia(); draw(T); updatePlayhead(); followPlayhead(); }
+      else if (dirty) { dirty = false; draw(T); updatePlayhead(); }
+    }
+    requestAnimationFrame(loop);
+  }
+  function followPlayhead() { const s = $('tlScroll'), x = T * pps; if (x > s.scrollLeft + s.clientWidth - 60 || x < s.scrollLeft) s.scrollLeft = x - 60; }
+  $('playBtn').onclick = () => playing ? pause() : play();
+  $('toStart').onclick = () => setT(0); $('toEnd').onclick = () => setT(total());
+
+  /* ---------- timeline ---------- */
+  function renderTL() {
+    if (!proj) return;
+    const tot = total(), inner = $('tlInner'), width = Math.max($('tlScroll').clientWidth - 12, (tot + 4) * pps);
+    inner.style.width = width + 'px';
+    const step = [0.5, 1, 2, 5, 10, 15, 30, 60].find(s => s * pps >= 64) || 60, endT = width / pps;
+    let r = '';
+    for (let t = 0; t <= endT; t += step / 2) { const major = Math.abs(t / step - Math.round(t / step)) < 1e-6; r += `<i style="left:${t * pps}px;height:${major ? 8 : 4}px"></i>` + (major ? `<span style="left:${t * pps}px">${t < 60 ? t + 's' : fmtT(t).replace('.0', '')}</span>` : ''); }
+    const bs = projBeats(); if (bs.length > 1 && (bs[1] - bs[0]) * pps > 5) r += bs.filter(b => b <= endT).map(b => `<i class="beat" style="left:${b * pps}px"></i>`).join('');
+    $('ruler').innerHTML = r;
+    const L = layout();
+    $('trV').innerHTML = proj.clips.map((c, i) => {
+      const m = mediaById(c.m), bd = [];
+      if (c.speed !== 1) bd.push('×' + c.speed); if (c.curve !== 'none') bd.push('〰'); if (TR_IC[c.tr] && i > 0) bd.push(TR_IC[c.tr]); if (c.zoom !== 'none') bd.push('✦');
+      return `<div class="clip${sel && sel.id === c.id ? ' sel' : ''}" data-k="v" data-id="${c.id}" style="left:${L[i] * pps}px;width:${Math.max(6, cdur(c) * pps - 2)}px;${m && m.thumb ? `background-image:url(${m.thumb})` : ''}">
+        <div class="h l"></div><div class="h r"></div><div class="bd">${bd.map(b => `<span>${b}</span>`).join('')}</div><div class="lb">${m ? esc(m.name) : "⚠ media yo'q"} · ${cdur(c).toFixed(1)}s</div></div>`;
+    }).join('');
+    $('trT').innerHTML = proj.texts.map(x => `<div class="clip txt${sel && sel.id === x.id ? ' sel' : ''}" data-k="t" data-id="${x.id}" style="left:${x.start * pps}px;width:${Math.max(6, x.dur * pps - 2)}px">
+        <div class="h l"></div><div class="h r"></div><div class="lb" style="font-family:'${esc(x.font)}'">${esc(x.text)}</div></div>`).join('');
+    const mm = proj.music && mediaById(proj.music.m);
+    $('trA').innerHTML = proj.music ? `<div class="clip mus${sel && sel.k === 'a' ? ' sel' : ''}" data-k="a" data-id="music" style="left:0;width:${Math.max(40, (tot || 10) * pps)}px" title="Sudrab musiqaning qaysi qismi ijro etilishini tanlang"><canvas></canvas><div class="lb">🎵 ${mm ? esc(mm.name) + (mm.bpm ? ' · ' + mm.bpm + ' BPM' : '') + ' · ' + proj.music.offset.toFixed(1) + 's dan' : "⚠ musiqa yo'q"}</div></div>` : '';
+    const wc = $('trA').querySelector('canvas');
+    if (wc && mm && mm.peaks) {
+      const r2 = wc.getBoundingClientRect(); wc.width = Math.min(4000, r2.width); wc.height = 30; const x = wc.getContext('2d'); x.fillStyle = '#00e5ff';
+      for (let i = 0; i < wc.width; i++) { const t = proj.music.offset + (i / wc.width) * (tot || 10); const pk = mm.peaks[Math.floor(t / mm.dur * mm.peaks.length)] || 0; const h = pk * 28; x.fillRect(i, 15 - h / 2, 1, h || 1); }
+    }
+    updatePlayhead();
+  }
+  $('zoom').oninput = e => { pps = +e.target.value; renderTL(); };
+  let drag = null;
+  $('tlInner').addEventListener('pointerdown', e => {
+    if (!proj || e.button > 0) return;
+    const inner = $('tlInner'), x0 = e.clientX - inner.getBoundingClientRect().left;
+    const ce = e.target.closest('.clip');
+    inner.setPointerCapture(e.pointerId);
+    if (!ce) { drag = { mode: 'seek' }; setT(x0 / pps); if (!e.target.closest('.ruler')) { sel = null; renderTL(); renderInsp(); } return; }
+    const k = ce.dataset.k, id = ce.dataset.id, h = e.target.classList.contains('h') ? (e.target.classList.contains('l') ? 'l' : 'r') : null;
+    sel = { k, id }; beginEdit();
+    const obj = k === 'v' ? proj.clips.find(c => c.id === id) : k === 't' ? proj.texts.find(c => c.id === id) : proj.music;
+    drag = { mode: 'obj', k, h, obj, orig: JSON.parse(JSON.stringify(obj)), x0, moved: false };
+    renderTL(); renderInsp();
+  });
+  $('tlInner').addEventListener('pointermove', e => {
+    if (!drag) return;
+    const x = e.clientX - $('tlInner').getBoundingClientRect().left;
+    if (drag.mode === 'seek') { setT(x / pps); return; }
+    const dt = (x - drag.x0) / pps, o = drag.orig, c = drag.obj; if (Math.abs(x - drag.x0) > 3) drag.moved = true; if (!drag.moved) return;
+    if (drag.k === 'v') {
+      const m = mediaById(c.m), r = c.speed * (CURVE_AVG[c.curve] || 1);
+      if (drag.h === 'l') c.in = clamp(o.in + dt * r, 0, c.out - 0.1);
+      else if (drag.h === 'r') c.out = clamp(o.out + dt * r, c.in + 0.1, maxDur(m));
+      else { const el = $('trV').querySelector(`[data-id="${c.id}"]`); if (el) { el.style.transform = `translateX(${x - drag.x0}px)`; el.classList.add('ghost'); } drag.tp = x / pps; return; }
+    } else if (drag.k === 't') {
+      if (drag.h === 'r') c.dur = Math.max(0.2, o.dur + dt);
+      else if (drag.h === 'l') { const ns = clamp(o.start + dt, 0, o.start + o.dur - 0.2); c.dur = o.dur - (ns - o.start); c.start = ns; }
+      else c.start = Math.max(0, o.start + dt);
+    } else if (drag.k === 'a') { const mm = mediaById(c.m); c.offset = clamp(o.offset - dt, 0, mm ? Math.max(0, mm.dur - 1) : 0); }
+    dirty = true; renderTL();
+  });
+  const endDrag = () => {
+    if (!drag) return;
+    if (drag.mode === 'obj') {
+      if (drag.k === 'v' && !drag.h && drag.moved && drag.tp != null) {
+        const i = proj.clips.indexOf(drag.obj); proj.clips.splice(i, 1); const L = layout();
+        let at = proj.clips.length; for (let j = 0; j < L.length; j++) if (drag.tp < L[j] + cdur(proj.clips[j]) / 2) { at = j; break; }
+        proj.clips.splice(at, 0, drag.obj);
+      }
+      endEdit(); renderAll();
+    }
+    drag = null;
+  };
+  $('tlInner').addEventListener('pointerup', endDrag); $('tlInner').addEventListener('pointercancel', endDrag);
+
+  /* ---------- matnni ekranda sudrash ---------- */
+  let tdrag = null;
+  const cvPt = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * cv.width, (e.clientY - r.top) / r.height * cv.height]; };
+  cv.addEventListener('pointerdown', e => {
+    if (!proj) return; const [px, py] = cvPt(e);
+    const hit = Object.entries(hitBoxes).reverse().find(([, b]) => px >= b.x && px <= b.x + b.w && py >= b.y && py <= b.y + b.h);
+    if (!hit) { if (!playing) play(); else pause(); return; }
+    const x = proj.texts.find(t => t.id === hit[0]); if (!x) return;
+    sel = { k: 't', id: x.id }; beginEdit(); tdrag = { x, px, py, ox: x.x, oy: x.y }; cv.setPointerCapture(e.pointerId); renderTL(); renderInsp();
+  });
+  cv.addEventListener('pointermove', e => { if (!tdrag) return; const [px, py] = cvPt(e); tdrag.x.x = clamp(tdrag.ox + (px - tdrag.px) / cv.width, 0.05, 0.95); tdrag.x.y = clamp(tdrag.oy + (py - tdrag.py) / cv.height, 0.04, 0.96); dirty = true; });
+  cv.addEventListener('pointerup', () => { if (tdrag) { tdrag = null; endEdit(); renderInsp(); } });
+
+  /* ---------- amallar ---------- */
+  function split() {
+    const a = clipAt(T); if (!a) return toast("Playhead ostida klip yo'q");
+    const lt = T - a.start, D = cdur(a.c); if (lt < 0.05 || lt > D - 0.05) return toast("Klip chetiga juda yaqin");
+    mutate(() => { const mid = srcAt(a.c, lt); const c2 = { ...a.c, id: uid(), in: mid, tr: 'cut' }; a.c.out = mid; proj.clips.splice(a.i + 1, 0, c2); sel = { k: 'v', id: c2.id }; });
+  }
+  function delSel() {
+    if (!sel) return;
+    mutate(() => { if (sel.k === 'v') proj.clips = proj.clips.filter(c => c.id !== sel.id); else if (sel.k === 't') proj.texts = proj.texts.filter(c => c.id !== sel.id); else proj.music = null; sel = null; });
+  }
+  function dupSel() {
+    if (!sel || sel.k === 'a') return;
+    mutate(() => {
+      if (sel.k === 'v') { const i = proj.clips.findIndex(c => c.id === sel.id); const c = { ...proj.clips[i], id: uid() }; proj.clips.splice(i + 1, 0, c); sel.id = c.id; }
+      else { const x = proj.texts.find(c => c.id === sel.id); const n = { ...x, id: uid(), start: x.start + x.dur }; proj.texts.push(n); sel.id = n.id; }
+    });
+  }
+  let lastFont = 'Bebas Neue';
+  function addText(o = {}) {
+    const x = { id: uid(), text: 'Matningiz', start: +T.toFixed(2), dur: 2.5, font: lastFont, size: 0.11, color: '#ffffff', style: 'bold', anim: 'pop', x: 0.5, y: 0.35, bold: true, ...o };
+    loadFont(x.font); mutate(() => { proj.texts.push(x); sel = { k: 't', id: x.id }; });
+    setTimeout(() => { const ta = $('insp').querySelector('textarea'); if (ta) { ta.focus(); ta.select(); } }, 50);
+  }
+  function useFont(name) {
+    show('editor'); lastFont = name; loadFont(name);
+    const x = sel && sel.k === 't' && proj.texts.find(t => t.id === sel.id);
+    if (x) { mutate(() => { x.font = name; }); toast('Shrift qo\'yildi: ' + name); }
+    else { addText({ font: name, text: $('fontSample').value || 'Matningiz' }); toast('Matn qo\'shildi: ' + name); }
+  }
+  function usePair(a, b) {
+    show('editor'); loadFont(a); loadFont(b);
+    mutate(() => {
+      const t0 = +T.toFixed(2);
+      proj.texts.push({ id: uid(), text: $('fontSample').value || 'Sarlavha', start: t0, dur: 3, font: a, size: 0.12, color: '#ffffff', style: 'bold', anim: 'pop', x: .5, y: .42, bold: true });
+      proj.texts.push({ id: uid(), text: 'Ikkinchi qator', start: t0 + 0.3, dur: 2.7, font: b, size: 0.05, color: '#ffffff', style: 'plain', anim: 'fade', x: .5, y: .5, bold: false });
+    });
+    toast('Juftlik qo\'shildi');
+  }
+  function snapToBeats() {
+    const bs = projBeats(); if (bs.length < 2) return false;
+    let acc = 0;
+    proj.clips.forEach(c => {
+      const D = cdur(c), end = acc + D;
+      let best = null; for (const b of bs) if (b > acc + 0.25 && (best == null || Math.abs(b - end) < Math.abs(best - end))) best = b;
+      if (best != null && Math.abs(best - end) < Math.max(0.3, D * 0.5)) {
+        const nd = best - acc, r = c.speed * (CURVE_AVG[c.curve] || 1), m = mediaById(c.m);
+        c.out = clamp(c.in + nd * r, c.in + 0.1, maxDur(m));
+      }
+      acc += cdur(c);
+    });
+    return true;
+  }
+  $('splitBtn').onclick = split; $('delBtn').onclick = delSel; $('dupBtn').onclick = dupSel; $('addTextBtn').onclick = () => addText();
+  $('beatBtn').onclick = () => { if (!projBeats().length) return toast("Avval musiqa qo'shing (Media → 🎵 fayl)"); mutate(snapToBeats); toast('⚡ Kesimlar beatga moslandi'); };
+  document.addEventListener('keydown', e => {
+    if (curTab !== 'editor' || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+    const k = e.key.toLowerCase(), mod = e.ctrlKey || e.metaKey;
+    if (k === ' ') { e.preventDefault(); playing ? pause() : play(); }
+    else if (k === 's' && !mod) split();
+    else if (k === 'delete' || k === 'backspace') { e.preventDefault(); delSel(); }
+    else if (mod && k === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); }
+    else if (mod && k === 'y') { e.preventDefault(); redo(); }
+    else if (mod && k === 'd') { e.preventDefault(); dupSel(); }
+    else if (k === 'arrowleft') setT(T - (e.shiftKey ? 1 : 1 / 30));
+    else if (k === 'arrowright') setT(T + (e.shiftKey ? 1 : 1 / 30));
+    else if (k === 't') addText();
+  });
+
+  /* ---------- inspektor ---------- */
+  const opts = (o, v) => Object.entries(o).map(([k, n]) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(n)}</option>`).join('');
+  const fontOpts = v => Object.entries(FONT_CATS).map(([c, n]) => `<optgroup label="${n}">${FONTS.filter(f => f[1] === c).map(f => `<option${f[0] === v ? ' selected' : ''}>${esc(f[0])}</option>`).join('')}</optgroup>`).join('');
+  function renderInsp() {
+    const el = $('insp'); if (!proj) { el.innerHTML = ''; return; }
+    if (sel && sel.k === 'v') {
+      const c = proj.clips.find(x => x.id === sel.id); if (!c) { sel = null; return renderInsp(); }
+      const m = mediaById(c.m), i = proj.clips.indexOf(c);
+      el.innerHTML = `<h3>🎬 Klip ${i + 1}<span class="r">${cdur(c).toFixed(2)} s</span></h3>
+        <div class="muted" style="word-break:break-all">${m ? esc(m.name) : "⚠ Media topilmadi"}</div>
+        ${m ? '' : `<button class="btn sm" data-act="relink" style="margin-top:8px">Faylni qayta ulash</button>`}
+        <div class="g2"><div><label>Boshi (s)</label><input type="number" step="0.05" min="0" data-f="in" value="${c.in.toFixed(2)}"></div><div><label>Oxiri (s)</label><input type="number" step="0.05" data-f="out" value="${c.out.toFixed(2)}"></div></div>
+        <div class="g2"><div><label>Tezlik</label><select data-f="speed" data-n>${[0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4].map(s => `<option value="${s}"${s === c.speed ? ' selected' : ''}>×${s}</option>`).join('')}</select></div>
+          <div><label>Tezlik egri chizig'i</label><select data-f="curve">${opts(CURVES, c.curve)}</select></div></div>
+        <label>O'tish (kirishda)</label><select data-f="tr">${opts(TRS, c.tr)}</select>
+        <label>Kamera effekti</label><select data-f="zoom">${opts(ZOOMS, c.zoom)}</select>
+        <label class="rv">Ovoz <span>${Math.round((c.vol ?? 1) * 100)}%</span></label><input type="range" min="0" max="1" step="0.05" data-f="vol" data-n value="${c.vol ?? 1}">
+        <label class="rv">Kadr joyi (gorizontal) <span>${Math.round((c.panX ?? .5) * 100)}%</span></label><input type="range" min="0" max="1" step="0.01" data-f="panX" data-n value="${c.panX ?? .5}">
+        <label class="rv">Kadr joyi (vertikal) <span>${Math.round((c.panY ?? .5) * 100)}%</span></label><input type="range" min="0" max="1" step="0.01" data-f="panY" data-n value="${c.panY ?? .5}">
+        <div class="row"><button class="btn sm" data-act="split">✂ Bo'lish</button><button class="btn sm" data-act="dup">⧉ Nusxa</button><button class="btn sm" data-act="del">🗑 O'chirish</button></div>`;
+    } else if (sel && sel.k === 't') {
+      const x = proj.texts.find(t => t.id === sel.id); if (!x) { sel = null; return renderInsp(); }
+      el.innerHTML = `<h3>🔤 Matn</h3>
+        <textarea data-f="text" rows="2">${esc(x.text)}</textarea>
+        <label>Shrift</label><select data-f="font">${fontOpts(x.font)}</select>
+        <div class="g2"><div><label>Uslub</label><select data-f="style">${opts(TSTYLES, x.style)}</select></div><div><label>Animatsiya</label><select data-f="anim">${opts(ANIMS, x.anim)}</select></div></div>
+        <div class="g2"><div><label>Rang</label><input type="color" data-f="color" value="${x.color}"></div><div><label>&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0 0"><input type="checkbox" data-f="bold"${x.bold ? ' checked' : ''}> Qalin</label></div></div>
+        <label class="rv">Hajm <span>${Math.round(x.size * 100)}</span></label><input type="range" min="0.03" max="0.22" step="0.005" data-f="size" data-n value="${x.size}">
+        <label class="rv">Balandlik <span>${Math.round(x.y * 100)}%</span></label><input type="range" min="0.04" max="0.96" step="0.01" data-f="y" data-n value="${x.y}">
+        <div class="g2"><div><label>Boshlanish (s)</label><input type="number" step="0.1" min="0" data-f="start" data-n value="${x.start.toFixed(2)}"></div><div><label>Davomiylik (s)</label><input type="number" step="0.1" min="0.2" data-f="dur" data-n value="${x.dur.toFixed(2)}"></div></div>
+        <div class="muted" style="margin-top:8px">💡 Matnni ko'rish oynasida sichqoncha bilan sudrab joylashtiring.</div>
+        <div class="row"><button class="btn sm" data-act="dup">⧉ Nusxa</button><button class="btn sm" data-act="del">🗑 O'chirish</button></div>`;
+    } else {
+      const auds = media.filter(m => m.kind === 'audio'), mu = proj.music, mm = mu && mediaById(mu.m);
+      const tot = total();
+      el.innerHTML = `<h3>⚙ Loyiha<span class="r">${fmtT(tot)}</span></h3>
+        <div class="muted">${proj.clips.length} klip · ${proj.texts.length} matn · ish vaqti ${Math.round((proj.workSec || 0) / 60)} daq</div>
+        <label>Rang filtri (butun video)</label><select data-pf="filter">${opts(FILTER_N, proj.filter)}</select>
+        <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-pf="letterbox"${proj.letterbox ? ' checked' : ''}> Kino chiziqlari (letterbox)</label>
+        <h4>Musiqa</h4>
+        <select data-pf="music"><option value="">— Musiqasiz —</option>${auds.map(a => `<option value="${a.id}"${mu && mu.m === a.id ? ' selected' : ''}>${esc(a.name)}</option>`).join('')}</select>
+        ${mu ? `<label class="rv">Musiqa ovozi <span>${Math.round(mu.vol * 100)}%</span></label><input type="range" min="0" max="1" step="0.05" data-pf="mvol" value="${mu.vol}">
+        <label class="rv">Boshlanish nuqtasi <span>${mu.offset.toFixed(1)} s</span></label><input type="range" min="0" max="${mm ? Math.max(0, mm.dur - 1).toFixed(1) : 0}" step="0.1" data-pf="moff" value="${mu.offset}">
+        <div class="muted" style="margin-top:6px">${mm && mm.bpm ? `🎵 ${mm.bpm} BPM · ${projBeats().length} ta beat (timeline ustida pushti chiziqlar)` : ''}</div>` : `<div class="muted" style="margin-top:6px">Media ro'yxatiga mp3/wav qo'shing — beatlar avtomatik aniqlanadi.</div>`}
+        ${proj.notes ? `<h4>🤖 AI izohi</h4><div class="ai muted">${esc(proj.notes)}</div>` : ''}
+        <h4>Maslahat</h4><div class="muted">Klip yoki matnni tanlasangiz, shu yerda uning sozlamalari chiqadi.</div>`;
+    }
+  }
+  const insp = $('insp');
+  insp.addEventListener('focusin', beginEdit); insp.addEventListener('pointerdown', beginEdit);
+  insp.addEventListener('input', e => applyInsp(e.target, false));
+  insp.addEventListener('change', e => { applyInsp(e.target, true); endEdit(); renderAll(); });
+  insp.addEventListener('focusout', () => setTimeout(() => { if (!insp.contains(document.activeElement)) endEdit(); }, 0));
+  function applyInsp(t, final) {
+    const f = t.dataset.f, pf = t.dataset.pf; if (!f && !pf) return; beginEdit();
+    const val = t.type === 'checkbox' ? t.checked : (t.dataset.n !== undefined || t.type === 'number' || t.type === 'range') ? num(t.value) : t.value;
+    if (f) {
+      const o = sel.k === 'v' ? proj.clips.find(c => c.id === sel.id) : proj.texts.find(c => c.id === sel.id); if (!o) return;
+      if (f === 'in') o.in = clamp(val, 0, o.out - 0.1);
+      else if (f === 'out') o.out = clamp(val, o.in + 0.1, maxDur(mediaById(o.m)));
+      else o[f] = val;
+      if (f === 'font') { loadFont(val); lastFont = val; }
+      const lbl = t.previousElementSibling && t.previousElementSibling.querySelector && t.previousElementSibling.querySelector('span');
+      if (lbl && t.type === 'range') lbl.textContent = f === 'size' ? Math.round(val * 100) : Math.round(val * 100) + '%';
+    } else {
+      if (pf === 'filter') proj.filter = val; if (pf === 'letterbox') proj.letterbox = val;
+      if (pf === 'music') proj.music = val ? { m: val, offset: 0, vol: 0.9 } : null;
+      if (pf === 'mvol' && proj.music) proj.music.vol = val;
+      if (pf === 'moff' && proj.music) proj.music.offset = val;
+      const lbl = t.previousElementSibling && t.previousElementSibling.querySelector && t.previousElementSibling.querySelector('span');
+      if (lbl && pf === 'mvol') lbl.textContent = Math.round(val * 100) + '%'; if (lbl && pf === 'moff') lbl.textContent = val.toFixed(1) + ' s';
+      if (final && pf === 'music') renderInsp();
+    }
+    dirty = true; if (!final) renderTL();
+  }
+  insp.addEventListener('click', e => {
+    const a = e.target.closest('[data-act]'); if (!a) return;
+    if (a.dataset.act === 'split') { const c = proj.clips.find(x => x.id === sel.id); const L = layout(), i = proj.clips.indexOf(c); if (T < L[i] || T > L[i] + cdur(c)) setT(L[i] + cdur(c) / 2); split(); }
+    if (a.dataset.act === 'dup') dupSel(); if (a.dataset.act === 'del') delSel();
+    if (a.dataset.act === 'relink') { const c = proj.clips.find(x => x.id === sel.id); const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'video/*,image/*'; inp.onchange = () => inp.files[0] && addFiles([inp.files[0]], { idOverride: c.m }); inp.click(); }
+  });
+  function renderAll() { renderTL(); renderInsp(); renderMedia(); dirty = true; }
+
+  /* ---------- ish vaqtini hisoblash ---------- */
+  let lastAct = Date.now();
+  ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, () => lastAct = Date.now()));
+  setInterval(() => { if (curTab === 'editor' && proj && Date.now() - lastAct < 60000 && document.visibilityState === 'visible') { proj.workSec = (proj.workSec || 0) + 10; KV.set('proj-' + proj.id, proj); } }, 10000);
+
+  /* ---------- AI montaj ---------- */
+  const labelsOf = list => Object.fromEntries(list.map((m, i) => ['M' + (i + 1), m]));
+  const planSchema = `{"title":"qisqa nom","filter":"${Object.keys(FILTERS).join('|')}","letterbox":false,
+ "clips":[{"m":"M1","in":0.0,"out":2.0,"speed":1,"curve":"${Object.keys(CURVES).join('|')}","tr":"${Object.keys(TRS).join('|')}","zoom":"${Object.keys(ZOOMS).join('|')}"}],
+ "texts":[{"text":"","start":0,"dur":2,"font":"Bebas Neue","size":0.1,"color":"#ffffff","style":"${Object.keys(TSTYLES).join('|')}","anim":"${Object.keys(ANIMS).join('|')}","x":0.5,"y":0.3,"bold":true}],
+ "musicOffset":0,"notes":"o'zbekcha qisqa izoh: nima qilding va nega"}`;
+  const planRules = `Qoidalar: klip timeline davomiyligi = (out-in)/speed (curve velocity/slowfast bo'lsa yana 1.6 ga bo'linadi). in/out media davomiyligidan oshmasin. Birinchi 1-2 soniya kuchli hook bo'lsin. Eng qiziqarli (harakati yuqori) joylarni tanla, bir joyni takrorlama. Matnlar qisqa (1-5 so'z), yuz va asosiy obyektni to'smasin (y 0.15-0.3 yoki 0.7-0.85 yaxshi). size 0.04-0.16 oralig'ida. Shrift faqat ro'yxatdagilardan. Rang hex formatda.`;
+  function openAI(o = {}) {
+    if (!proj) return;
+    const vis = media.filter(m => m.kind !== 'audio');
+    $('aiMediaPick').innerHTML = vis.length ? vis.map(m => `<label class="mi" style="margin:0"><input type="checkbox" value="${m.id}" checked>${m.thumb ? `<img src="${m.thumb}" alt="">` : ''}<div class="t"><b>${esc(m.name)}</b><span>${m.kind === 'video' ? m.dur.toFixed(1) + ' s' : 'rasm'}</span></div></label>`).join('')
+      : '<div class="muted">Avval Media bo\'limiga video yoki rasmlar qo\'shing.</div>';
+    const auds = media.filter(m => m.kind === 'audio');
+    $('aiMusic').innerHTML = `<option value="">— Musiqasiz —</option>` + auds.map(a => `<option value="${a.id}"${proj.music && proj.music.m === a.id ? ' selected' : ''}>${esc(a.name)}${a.bpm ? ' · ' + a.bpm + ' BPM' : ''}</option>`).join('');
+    if (o.style) { const s = $('aiStyle'); if (![...s.options].some(x => x.text === o.style)) s.add(new Option(o.style)); s.value = o.style; }
+    $('aiRef').checked = !!(o.ref && lastAnalysis); $('aiRef').disabled = !lastAnalysis; $('aiRefName').textContent = lastAnalysis ? '(' + lastAnalysis.name + ')' : "(avval 🎬 Tahlil'da video tahlil qiling)";
+    $('aiStatus').textContent = ''; $('aiSheet').classList.add('open');
+  }
+  $('aiMontajBtn').onclick = () => openAI(); $('aiClose').onclick = () => $('aiSheet').classList.remove('open');
+  function aiInputs() {
+    const ids = [...$('aiMediaPick').querySelectorAll('input:checked')].map(i => i.value);
+    return { sel: media.filter(m => ids.includes(m.id)), mus: mediaById($('aiMusic').value) || null, dur: num($('aiDur').value), style: $('aiStyle').value, idea: $('aiIdea').value.trim(), snap: $('aiSnap').checked };
+  }
+  function applyPlan(plan, labels, mus, opts) {
+    const p = opts.into || newProject(String(plan.title || 'AI montaj').slice(0, 60));
+    const pick = (v, o, d) => (v in o ? v : d);
+    p.filter = pick(plan.filter, FILTERS, 'none'); p.letterbox = !!plan.letterbox; p.notes = String(plan.notes || '').slice(0, 1500);
+    p.clips = (Array.isArray(plan.clips) ? plan.clips : []).map(c => {
+      const m = labels[c.m]; if (!m) return null; const md = maxDur(m);
+      const i0 = clamp(num(c.in), 0, Math.max(0, md - 0.15)), o0 = clamp(num(c.out) || i0 + 1.5, i0 + 0.15, md);
+      return { id: uid(), m: m.id, in: +i0.toFixed(3), out: +o0.toFixed(3), speed: clamp(num(c.speed) || 1, 0.25, 4), curve: pick(c.curve, CURVES, 'none'), tr: pick(c.tr, TRS, 'cut'), zoom: pick(c.zoom, ZOOMS, 'none'), vol: mus ? 0 : 1, panX: .5, panY: .5 };
+    }).filter(Boolean);
+    p.texts = (Array.isArray(plan.texts) ? plan.texts : []).filter(x => x && x.text).map(x => ({ id: uid(), text: String(x.text).slice(0, 120), start: Math.max(0, num(x.start)), dur: clamp(num(x.dur) || 2, 0.3, 30),
+      font: FONT_BY[x.font] ? x.font : 'Montserrat', size: clamp(num(x.size) || 0.08, 0.03, 0.2), color: /^#[0-9a-f]{6}$/i.test(x.color) ? x.color : '#ffffff',
+      style: pick(x.style, TSTYLES, 'bold'), anim: pick(x.anim, ANIMS, 'pop'), x: clamp(num(x.x) || 0.5, 0.05, 0.95), y: clamp(num(x.y) || 0.3, 0.04, 0.96), bold: x.bold !== false }));
+    p.music = mus ? { m: mus.id, offset: clamp(num(plan.musicOffset), 0, Math.max(0, mus.dur - 1)), vol: 0.9 } : (opts.into ? p.music : null);
+    return p;
+  }
+  function loadPlanProject(p, snap) {
+    pause(); proj = p; hist = []; fut = []; sel = null; T = 0;
+    if (snap) snapToBeats();
+    proj.texts.forEach(x => loadFont(x.font)); saveProj(); renderAll(); updUndo();
+  }
+  $('aiGo').onclick = async () => {
+    const { sel: list, mus, dur, style, idea, snap } = aiInputs();
+    if (!list.length) return toast('Kamida bitta video yoki rasm tanlang');
+    const btn = $('aiGo'); btn.disabled = true; const st = $('aiStatus');
+    try {
+      const labels = labelsOf(list), images = [], desc = [];
+      const per = clamp(Math.floor(20 / list.length), 1, 4);
+      for (const [lab, m] of Object.entries(labels)) {
+        st.innerHTML = `<span class="spin"></span>${esc(m.name)} ko'rib chiqilmoqda…`;
+        if (m.kind === 'video') {
+          const v = makeVideo(rtOf(m).url); await waitMeta(v);
+          const sc = await scanVideoEl(v, { frames: per, thumbW: 240, maxSteps: 150 });
+          sc.frames.forEach(f => { images.push(f.data); desc.push(`Rasm #${images.length} = ${lab} kadri ${f.t.toFixed(1)} s`); });
+          desc.push(`${lab}: video "${m.name}", ${m.dur.toFixed(2)} s; harakat har soniya (0-9): ${sc.motion.join(',')}; ichki kesimlar: ${sc.cuts.join(', ') || "yo'q"}`);
+        } else { images.push(m.thumb); desc.push(`Rasm #${images.length} = ${lab} (foto "${m.name}")`); desc.push(`${lab}: rasm, xohlagan davomiylik (in=0, out=1..4)`); }
+      }
+      st.innerHTML = '<span class="spin"></span>AI montaj qilyapti (30-90 soniya)…';
+      const bt = mus && mus.beats ? mus.beats.filter(b => b < dur + 30).slice(0, 160) : [];
+      const prompt = `Sen professional reels montajchisisan. Berilgan materiallardan ${dur} soniyalik vertikal (9:16) montaj rejasini tuz.\n` +
+        `Uslub: ${style}.\n${idea ? 'Matn/g\'oya: ' + idea + '\n' : ''}` +
+        `Materiallar:\n${desc.join('\n')}\n` +
+        (mus ? `Musiqa: "${mus.name}", ${mus.dur.toFixed(1)} s, ${mus.bpm} BPM, beatlar (s): ${bt.join(', ')}. musicOffset bilan musiqaning eng kuchli qismidan boshla; kesimlarni beatlarga to'g'rila (timeline vaqti = beat - musicOffset).\n` : "Musiqa yo'q — klip ovozlari qoladi.\n") +
+        ($('aiTrends').checked && trends ? `Hozirgi trendlar: stillar — ${(trends.data.styles || []).map(s => s.name).join(', ')}; effektlar — ${(trends.data.effects || []).map(s => s.name).join(', ')}; shriftlar — ${(trends.data.fonts || []).map(s => s.name).join(', ')}.\n` : '') +
+        ($('aiRef').checked && lastAnalysis ? `Namuna video uslubiga o'xshat: o'rtacha kadr ${lastAnalysis.avgShot} s, ${lastAnalysis.cuts} kesim / ${lastAnalysis.dur} s, ${lastAnalysis.bpm || '?'} BPM, ranglar ${lastAnalysis.palette.join(', ')}. ${lastAnalysis.aiText ? 'Namuna tahlili: ' + lastAnalysis.aiText.slice(0, 700) : ''}\n` : '') +
+        `Ruxsat etilgan shriftlar: ${FONTS.map(f => f[0]).join(', ')}.\n${planRules}\nFaqat shu JSON:\n${planSchema}`;
+      const r = await ai({ json: true, images, prompt, effort: 'high' });
+      const p = applyPlan(r.data || {}, labels, mus, {});
+      if (!p.clips.length) throw { code: 'invalid_json' };
+      loadPlanProject(p, snap && !!mus);
+      $('aiSheet').classList.remove('open'); toast('✨ AI montaj tayyor — endi xohlagancha tahrirlang');
+    } catch (e) { st.textContent = errText(e); }
+    btn.disabled = false;
+  };
+  $('aiLocal').onclick = () => {
+    const { sel: list, mus, dur, style, idea } = aiInputs();
+    if (!list.length) return toast('Kamida bitta video yoki rasm tanlang');
+    const period = mus && mus.bpm ? 60 / mus.bpm : 0.5, calm = /kinemat|to'y|minimal|vlog/i.test(style);
+    const segLen = period * (calm ? 4 : 2);
+    const cands = [];
+    list.forEach(m => {
+      if (m.kind === 'image') { cands.push({ m, in: 0, score: 4 }); return; }
+      for (let s = 0; s + segLen <= m.dur; s += segLen / 2) { const mo = (m.motion || []).slice(Math.floor(s), Math.ceil(s + segLen)); const sc = mo.length ? mo.reduce((a, b) => a + b, 0) / mo.length : 3; cands.push({ m, in: s, score: sc + Math.random() * 0.5 }); }
+    });
+    cands.sort((a, b) => b.score - a.score);
+    const used = [], picked = []; let acc = 0;
+    for (const c of cands) { if (acc >= dur) break; if (used.some(u => u.m === c.m && Math.abs(u.in - c.in) < segLen)) continue; used.push(c); picked.push(c); acc += segLen; }
+    picked.sort((a, b) => list.indexOf(a.m) - list.indexOf(b.m) || a.in - b.in);
+    const trs = calm ? ['fade', 'cut', 'zoom'] : ['flash', 'zoom', 'whip', 'glitch', 'cut'];
+    const font = /to'y/i.test(style) ? 'Great Vibes' : calm ? 'Playfair Display' : (trends && trends.data.fonts && FONT_BY[trends.data.fonts[0]?.name] ? trends.data.fonts[0].name : 'Bebas Neue');
+    const plan = { title: idea || 'Avto montaj', filter: calm ? (/to'y/i.test(style) ? 'soft' : 'cinematic') : 'vivid', letterbox: /kinemat/i.test(style),
+      clips: picked.map((c, i) => ({ m: 'X' + list.indexOf(c.m), in: c.in, out: c.in + segLen, speed: 1, curve: !calm && i % 4 === 2 ? 'velocity' : 'none', tr: i ? trs[i % trs.length] : 'fade', zoom: mus && !calm ? 'pulse' : 'zoomIn' })),
+      texts: idea ? [{ text: idea, start: 0.2, dur: Math.min(3, dur * 0.3), font, size: /to'y/i.test(style) ? 0.1 : 0.12, color: '#ffffff', style: calm ? 'plain' : 'bold', anim: calm ? 'fade' : 'pop', x: .5, y: .3, bold: !calm }] : [],
+      musicOffset: 0, notes: 'Tezkor algoritm: eng harakatli joylar tanlandi va beatga moslandi. AI montaj uchun «✨ Montaj qil» ni bosing.' };
+    // velocity klipda kadr uzunligi saqlanishi uchun out ni kengaytiramiz
+    plan.clips.forEach(c => { if (c.curve === 'velocity') { const m = list[+c.m.slice(1)]; c.out = Math.min(maxDur(m), c.in + segLen * 1.6); } });
+    const p = applyPlan(plan, Object.fromEntries(list.map((m, i) => ['X' + i, m])), mus, {});
+    loadPlanProject(p, !!mus); $('aiSheet').classList.remove('open'); toast('⚡ Avto montaj tayyor');
+  };
+  function projAsPlan() {
+    const labs = media.filter(m => m.kind !== 'audio'), lab = id => 'M' + (labs.findIndex(m => m.id === id) + 1);
+    return { labels: labelsOf(labs), plan: { title: proj.name, filter: proj.filter, letterbox: proj.letterbox,
+      clips: proj.clips.map(c => ({ m: lab(c.m), in: +c.in.toFixed(2), out: +c.out.toFixed(2), speed: c.speed, curve: c.curve, tr: c.tr, zoom: c.zoom })),
+      texts: proj.texts.map(x => ({ text: x.text, start: +x.start.toFixed(2), dur: +x.dur.toFixed(2), font: x.font, size: x.size, color: x.color, style: x.style, anim: x.anim, x: x.x, y: x.y, bold: x.bold })),
+      musicOffset: proj.music ? proj.music.offset : 0 } };
+  }
+  $('aiCmd').addEventListener('keydown', e => { if (e.key === 'Enter') $('aiCmdBtn').click(); });
+  $('aiCmdBtn').onclick = async () => {
+    const q = $('aiCmd').value.trim(); if (!q) return; if (!proj.clips.length && !proj.texts.length) return toast("Timeline bo'sh — avval «🤖 AI montaj» qiling");
+    const btn = $('aiCmdBtn'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
+    try {
+      const { labels, plan } = projAsPlan(), mus = proj.music && mediaById(proj.music.m);
+      const prompt = `Hozirgi montaj rejasi (JSON):\n${JSON.stringify(plan)}\n\nMateriallar:\n${Object.entries(labels).map(([l, m]) => `${l}: ${m.kind} "${m.name}"${m.kind === 'video' ? ', ' + m.dur.toFixed(2) + ' s, harakat: ' + (m.motion || []).join(',') : ''}`).join('\n')}\n` +
+        (mus ? `Musiqa: ${mus.bpm} BPM, beatlar: ${(mus.beats || []).slice(0, 120).join(', ')}\n` : '') +
+        `Foydalanuvchi buyrug'i: «${q}»\nBuyruqni bajarib, YANGILANGAN TO'LIQ rejani qaytar (o'zgarmagan qismlarni saqla). notes ga nima o'zgartirganingni yoz.\nRuxsat etilgan shriftlar: ${FONTS.map(f => f[0]).join(', ')}.\n${planRules}\nFaqat shu JSON:\n${planSchema}`;
+      const r = await ai({ json: true, prompt, effort: 'medium' });
+      beginEdit(); const keep = { id: proj.id, name: proj.name, created: proj.created, workSec: proj.workSec };
+      const p = applyPlan(r.data || {}, labels, mus, { into: JSON.parse(JSON.stringify(proj)) });
+      if (!p.clips.length && proj.clips.length) throw { code: 'invalid_json' };
+      proj = Object.assign(p, keep); if (mus) proj.music.m = mus.id;
+      proj.texts.forEach(x => loadFont(x.font)); endEdit(); sel = null; renderAll();
+      $('aiCmd').value = ''; toast('✓ Bajarildi (orqaga qaytarish: Ctrl+Z)');
+    } catch (e) { toast(errText(e), 5000); }
+    btn.disabled = false; btn.textContent = 'Bajar';
+  };
+
+  /* ---------- MP4 eksport ---------- */
+  $('mp4Btn').onclick = () => { if (!proj.clips.length) return toast("Timeline bo'sh"); pause(); $('expBar').style.width = '0'; $('expStatus').textContent = `Davomiyligi ${fmtT(total())}. Eksport kadrma-kadr bo'ladi — sahifani yopmang.`; $('expGo').disabled = false; $('expSheet').classList.add('open'); };
+  let cancelExp = false;
+  $('expClose').onclick = () => { if (exporting) { cancelExp = true; return; } $('expSheet').classList.remove('open'); };
+  async function renderAudio(tot) {
+    const sr = 48000, AC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!AC) return null;
+    const oc = new AC(2, Math.max(1, Math.ceil(tot * sr)), sr); let any = false; const bufs = {};
+    const getBuf = async m => (m.id in bufs ? bufs[m.id] : (bufs[m.id] = await decodeAudio(m.blob)));
+    const L = layout();
+    for (let i = 0; i < proj.clips.length; i++) {
+      const c = proj.clips[i], m = mediaById(c.m); if (!m || m.kind !== 'video' || !(c.vol > 0)) continue;
+      const buf = await getBuf(m); if (!buf) continue;
+      const src = oc.createBufferSource(); src.buffer = buf; const g = oc.createGain(); g.gain.value = c.vol; src.connect(g).connect(oc.destination);
+      const D = cdur(c);
+      if (c.curve && c.curve !== 'none') { const arr = new Float32Array(32).map((_, k) => rateAt(c, D * k / 31)); src.playbackRate.setValueCurveAtTime(arr, L[i], D); }
+      else src.playbackRate.value = c.speed;
+      src.start(L[i], c.in, c.out - c.in); any = true;
+    }
+    if (proj.music) {
+      const m = mediaById(proj.music.m), buf = m && await getBuf(m);
+      if (buf) { const src = oc.createBufferSource(); src.buffer = buf; const g = oc.createGain(); g.gain.setValueAtTime(proj.music.vol, 0); g.gain.setValueAtTime(proj.music.vol, Math.max(0, tot - 1)); g.gain.linearRampToValueAtTime(0, tot); src.connect(g).connect(oc.destination); src.start(0, proj.music.offset); any = true; }
+    }
+    return any ? await oc.startRendering() : null;
+  }
+  $('expGo').onclick = async () => {
+    if (!('VideoEncoder' in window) || !window.Mp4Muxer) { $('expStatus').textContent = "Bu brauzer video eksportni qo'llamaydi. Kompyuterda Chrome yoki Edge'ning yangi versiyasidan foydalaning."; return; }
+    const res = num($('expRes').value), fps = num($('expFps').value), W = res, H = Math.round(res * 16 / 9), tot = total(), N = Math.ceil(tot * fps);
+    const st = $('expStatus'), bar = $('expBar'); $('expGo').disabled = true; exporting = true; cancelExp = false; $('expClose').textContent = "To'xtatish";
+    let err = null;
+    try {
+      st.innerHTML = '<span class="spin"></span>Shriftlar va ovoz tayyorlanmoqda…';
+      await Promise.all(proj.texts.map(x => loadFont(x.font)));
+      const audio = await renderAudio(tot);
+      let vcodec = null, mux = 'avc';
+      for (const c of ['avc1.640033', 'avc1.64002a', 'avc1.640028', 'avc1.4d0028', 'avc1.42002a']) { try { const s = await VideoEncoder.isConfigSupported({ codec: c, width: W, height: H, bitrate: W > 800 ? 10e6 : 5e6, framerate: fps }); if (s.supported) { vcodec = c; break; } } catch (e) {} }
+      if (!vcodec) { for (const c of ['vp09.00.40.08', 'vp09.00.31.08']) { try { const s = await VideoEncoder.isConfigSupported({ codec: c, width: W, height: H, bitrate: 8e6, framerate: fps }); if (s.supported) { vcodec = c; mux = 'vp9'; break; } } catch (e) {} } }
+      if (!vcodec) throw new Error("video kodek topilmadi");
+      let acodec = null;
+      if (audio && 'AudioEncoder' in window) for (const [c, n] of [['mp4a.40.2', 'aac'], ['opus', 'opus']]) { try { const s = await AudioEncoder.isConfigSupported({ codec: c, sampleRate: 48000, numberOfChannels: 2, bitrate: 160000 }); if (s.supported) { acodec = [c, n]; break; } } catch (e) {} }
+      const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: mux, width: W, height: H, frameRate: fps },
+        audio: acodec ? { codec: acodec[1], numberOfChannels: 2, sampleRate: 48000 } : undefined, fastStart: 'in-memory', firstTimestampBehavior: 'offset' });
+      const venc = new VideoEncoder({ output: (ch, meta) => muxer.addVideoChunk(ch, meta), error: e => { err = e; } });
+      venc.configure({ codec: vcodec, width: W, height: H, bitrate: W > 800 ? 10e6 : 5e6, framerate: fps });
+      cv.width = W; cv.height = H; pauseAll();
+      for (let f = 0; f < N; f++) {
+        if (cancelExp) throw new Error("to'xtatildi"); if (err) throw err;
+        const t = f / fps, a = clipAt(t), m = a && mediaById(a.c.m);
+        if (m && m.kind === 'video') { const el = rtOf(m).el; if (el.readyState < 2) await new Promise(r => { el.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 3000); }); await seekEl(el, Math.min(m.dur - 0.01, srcAt(a.c, t - a.start))); }
+        draw(t);
+        const vf = new VideoFrame(cv, { timestamp: Math.round(f * 1e6 / fps), duration: Math.round(1e6 / fps) });
+        venc.encode(vf, { keyFrame: f % (fps * 2) === 0 }); vf.close();
+        while (venc.encodeQueueSize > 6) await sleep(4);
+        if (f % 5 === 0) { bar.style.width = (f / N * (acodec ? 92 : 100)) + '%'; st.textContent = `Kadr ${f} / ${N}`; await sleep(0); }
+      }
+      await venc.flush();
+      if (acodec) {
+        st.textContent = 'Ovoz kodlanmoqda…';
+        const aenc = new AudioEncoder({ output: (ch, meta) => muxer.addAudioChunk(ch, meta), error: e => { err = e; } });
+        aenc.configure({ codec: acodec[0], sampleRate: 48000, numberOfChannels: 2, bitrate: 160000 });
+        const c0 = audio.getChannelData(0), c1 = audio.getChannelData(1), CH = 4800;
+        for (let o = 0; o < audio.length; o += CH) {
+          const n = Math.min(CH, audio.length - o), d = new Float32Array(n * 2); d.set(c0.subarray(o, o + n), 0); d.set(c1.subarray(o, o + n), n);
+          const ad = new AudioData({ format: 'f32-planar', sampleRate: 48000, numberOfFrames: n, numberOfChannels: 2, timestamp: Math.round(o / 48000 * 1e6), data: d });
+          aenc.encode(ad); ad.close(); if (aenc.encodeQueueSize > 20) await sleep(2);
+        }
+        await aenc.flush(); if (err) throw err;
+      }
+      muxer.finalize(); bar.style.width = '100%';
+      const blob = new Blob([muxer.target.buffer], { type: 'video/mp4' });
+      st.textContent = `✓ Tayyor: ${(blob.size / 1048576).toFixed(1)} MB${acodec ? '' : ' (ovozsiz)'}`;
+      cv.width = 720; cv.height = 1280; exporting = false; dirty = true;
+      await saveFile((proj.name || 'montaj').replace(/[\\/:*?"<>|]/g, '_') + '.mp4', blob);
+      if (await dlg('Montaj tayyor! «Montajlarim» ro\'yxatiga qo\'shaymi?', { ok: "Qo'shish" })) {
+        addEdit({ name: proj.name, date: today(), type: 'Reels', style: $('aiStyle').value.split(' —')[0].split(' (')[0], fonts: [...new Set(proj.texts.map(x => x.font))].join(', '),
+          effects: [...new Set(proj.clips.map(c => TRS[c.tr]).concat(proj.clips.filter(c => c.zoom !== 'none').map(c => ZOOMS[c.zoom])))].join(', '),
+          music: proj.music && mediaById(proj.music.m) ? mediaById(proj.music.m).name : '', app: 'Montaj Studiya', duration: Math.round(tot), hours: Math.max(0.25, Math.round((proj.workSec || 0) / 900) / 4) });
+        toast('Montajlarim ro\'yxatiga qo\'shildi');
+      }
+    } catch (e) { st.textContent = 'Xato: ' + (e.message || e); }
+    cv.width = 720; cv.height = 1280; exporting = false; dirty = true; $('expGo').disabled = false; $('expClose').textContent = 'Yopish';
+  };
+
+  /* ---------- After Effects skripti ---------- */
+  $('aeBtn').onclick = async () => {
+    if (!proj.clips.length) return toast("Timeline bo'sh");
+    const L = layout(), tot = total(), J = JSON.stringify, n = v => (+v).toFixed(3);
+    let s = `// Montaj Studiya → After Effects\n// Ishlatish: After Effects → File → Scripts → Run Script File… → shu faylni tanlang.\n// So'ng manba fayllar (video, rasm, musiqa) turgan papkani tanlang.\n// Eslatma: rang filtri va o'tishlar ko'chirilmaydi — ularni AE'da qo'shing.\n(function(){\napp.beginUndoGroup("Montaj Studiya");\nvar folder = Folder.selectDialog("Manba fayllar turgan papkani tanlang");\nif(!folder){return;}\nvar comp = app.project.items.addComp(${J(proj.name)}, 1080, 1920, 1, ${n(Math.max(1, tot))}, 30);\nvar cache = {};\nfunction imp(nm){ if(cache[nm]) return cache[nm]; var f = new File(folder.fsName + "/" + nm); if(!f.exists){ alert("Topilmadi: " + nm); return null; } cache[nm] = app.project.importFile(new ImportOptions(f)); return cache[nm]; }\nfunction fit(Ly, it){ var k = Math.max(1080/it.width, 1920/it.height)*100; Ly.property("Scale").setValue([k,k]); }\nvar it, Ly, T, sp, td;\n`;
+    if (proj.music && mediaById(proj.music.m)) s += `it = imp(${J(mediaById(proj.music.m).name)}); if(it){ Ly = comp.layers.add(it); Ly.startTime = ${n(-proj.music.offset)}; Ly.inPoint = 0; Ly.outPoint = ${n(tot)}; }\n`;
+    proj.clips.forEach((c, i) => {
+      const m = mediaById(c.m); if (!m) return;
+      s += m.kind === 'video' ? `it = imp(${J(m.name)}); if(it){ Ly = comp.layers.add(it); Ly.stretch = ${n(100 / c.speed)}; Ly.startTime = ${n(L[i] - c.in / c.speed)}; Ly.inPoint = ${n(L[i])}; Ly.outPoint = ${n(L[i] + cdur(c))}; fit(Ly, it); }\n`
+        : `it = imp(${J(m.name)}); if(it){ Ly = comp.layers.add(it); Ly.startTime = ${n(L[i])}; Ly.outPoint = ${n(L[i] + cdur(c))}; fit(Ly, it); }\n`;
+    });
+    proj.texts.forEach(x => {
+      const rgb = [1, 3, 5].map(k => (parseInt(x.color.slice(k, k + 2), 16) / 255).toFixed(3));
+      s += `T = comp.layers.addText(${J(x.text)}); sp = T.property("Source Text"); td = sp.value; try{ td.font = ${J(x.font.replace(/\s+/g, '') + (x.bold && FONT_BY[x.font] && FONT_BY[x.font][2] ? '-Bold' : '-Regular'))}; }catch(e){} td.fontSize = ${Math.round(x.size * 1080)}; td.fillColor = [${rgb}]; td.justification = ParagraphJustification.CENTER_JUSTIFY; sp.setValue(td); T.property("Position").setValue([${Math.round(x.x * 1080)}, ${Math.round(x.y * 1920)}]); T.inPoint = ${n(x.start)}; T.outPoint = ${n(x.start + x.dur)};\n`;
+    });
+    s += `comp.openInViewer();\napp.endUndoGroup();\nalert("Tayyor! Shriftlar kompyuterda o'rnatilgan bo'lishi kerak.");\n})();\n`;
+    const name = (proj.name || 'montaj').replace(/[\\/:*?"<>|]/g, '_');
+    await P.ready;
+    if (P.dl) { await saveFile(name + '.jsx.txt', s); toast("Saqlandi: oxiridagi .txt ni o'chirib .jsx qiling", 6000); }
+    else saveFile(name + '.jsx', s);
+  };
+
+  /* ---------- tashqi API ---------- */
+  function describe() {
+    if (!proj) return "yo'q";
+    const L = layout();
+    return `«${proj.name}», ${total().toFixed(1)} s, filtr ${proj.filter}${proj.music && mediaById(proj.music.m) ? ', musiqa ' + mediaById(proj.music.m).name + ' (' + mediaById(proj.music.m).bpm + ' BPM)' : ''}.\nKliplar: ` +
+      proj.clips.map((c, i) => `${i + 1}) ${(mediaById(c.m) || {}).name || '?'} ${c.in.toFixed(1)}-${c.out.toFixed(1)}s, ${L[i].toFixed(1)}s da, ×${c.speed}${c.curve !== 'none' ? ' ' + c.curve : ''}, o'tish ${c.tr}, effekt ${c.zoom}`).join('; ') +
+      `\nMatnlar: ` + (proj.texts.map(x => `«${x.text}» ${x.font} ${x.start.toFixed(1)}s ${x.style}/${x.anim}`).join('; ') || "yo'q");
+  }
+  function onShow() { requestAnimationFrame(() => { renderTL(); dirty = true; }); }
+  async function init() {
+    media = (await IDB.all()) || []; index = await KV.get('projIndex', []) || [];
+    index = index.filter(Boolean);
+    const last = await KV.get('lastProj', null);
+    if (last && index.some(p => p.id === last)) await loadProj(last);
+    else if (index.length) await loadProj(index[0].id);
+    else { proj = newProject('Birinchi loyiham'); saveProj(); }
+    renderMedia(); renderAll(); renderContinue(); updUndo(); requestAnimationFrame(loop);
+  }
+  window.addEventListener('resize', () => { if (curTab === 'editor') renderTL(); });
+  return { init, onShow, useFont, usePair, openAI, describe, importWithCuts };
+})();
+
+/* ================= Ishga tushirish ================= */
+(async () => {
+  resetForm(); renderTrends(); renderFontCats();
+  hdrUpdate();
+  [edits, weekGoal, favFonts, trends, chat] = await Promise.all([KV.get('edits', []), KV.get('weekGoal', 5), KV.get('favFonts', []), KV.get('trends', null), KV.get('chat', [])]);
+  // eski versiyadan ko'chirish
+  if (!edits.length) { try { const old = JSON.parse(localStorage.getItem('montaj-edits') || '[]'); if (old.length) { edits = old; persistEdits(); } } catch (e) {} }
+  edits = edits || []; chat = chat || [];
+  $('trendNiche').value = await KV.get('trendNiche', $('trendNiche').value); $('trendAuto').value = await KV.get('trendAuto', '3');
+  renderDash(); renderTrends();
+  chat.slice(-20).forEach(m => bubble(m.role === 'user' ? 'u' : 'b', m.content));
+  await Editor.init();
+  setTimeout(autoTrends, 4000);
 })();
 </script>
 </body>

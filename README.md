@@ -20,22 +20,21 @@ Kalitsiz ham 3D miya, chizib o'rgatish va rasm tanish ishlaydi. 3D shar uchun in
 
 ## 🎬 Montaj Studiya
 
-Bosh sahifada yuqoridagi 🎥 tugmasini bosing. Ichida 5 bo'lim bor:
+Reels montajchi uchun studiya: `app/src/main/assets/montaj.html` (bitta fayl). Bosh sahifadagi 🎥 tugmasi orqali ochiladi.
 
-- **📊 Hisob** — montajlaringiz soni, sarflangan soat, o'rtacha ko'rishlar, haftalik grafik, qaysi stil ko'proq ko'rilgani. «Tahlil qilish» tugmasi AI'dan hisobot va keyingi haftaga vazifalar oladi. Zaxira (JSON) bilan ma'lumotni saqlab qo'yish mumkin.
-- **➕ Qo'shish** — har bir montajni yozib boring: stil, shrift, effektlar, musiqa, dastur, vaqt, narx, ko'rish/layk/saqlash.
-- **🎬 Tahlil** — videoni tanlang: dastur kesimlar sonini, tempni, o'lchamni o'zi hisoblaydi, keyin AI 8 ta kadrni ko'rib hook, shrift, rang, temp bo'yicha baho va shu videoga qo'shsa bo'ladigan yangiliklarni aytadi.
-- **🔥 Trendlar** — AI internetdan eng so'nggi reels stillari, shriftlar (namunasi bilan), o'tishlar va audio trendlarni qidirib beradi. Yo'nalishni tanlash mumkin (to'y, avto, sport…).
-- **🤖 Hamkor** — montajlaringiz va trendlarni biladigan AI bilan suhbat; kerak bo'lsa internetdan qidiradi.
+- **📊 Hisob** — montajlar soni, soatlar, ko'rishlar grafigi, haftalik maqsad, ketma-ket kunlar, «Davom ettirish» va AI hisobot.
+- **🎞 Timeline** — video, rasm va musiqani qo'shing; kliplarni sudrab joyini almashtiring, chetini tortib qirqing, bo'ling (S), nusxalang, tezlik (velocity egri chizig'i bilan), o'tishlar (flash, zoom, whip, glitch…), kamera effektlari (beat pulsi, silkinish), rang filtrlari, matnlar (130+ shrift, 6 uslub, 7 animatsiya). Musiqa BPM va beatlari avtomatik aniqlanadi, «⚡ Beatga moslash» kesimlarni beatga tushiradi. Ctrl+Z / Ctrl+Shift+Z. Hammasi avtomatik saqlanadi — keyin o'sha joyidan davom ettirasiz.
+- **🤖 AI montaj** — AI kadrlaringizni ko'rib, musiqa beatlariga mos montaj qiladi va timelinega joylaydi. «✨ AI'ga buyruq» bilan tayyor montajni o'zgartirtirasiz. API'siz «⚡ Tezkor avto» ham bor.
+- **⬇ MP4** — kadrma-kadr H.264 + ovoz, 720p yoki 1080p. **AE .jsx** — timeline'ni After Effects'ga ko'chiruvchi skript.
+- **🎬 Tahlil** — kesimlar, harakat grafigi, BPM, beatga moslik %, hook bahosi, rang palitrasi; «Kesimlar bo'yicha timelinega» va «Shu uslubda AI montaj».
+- **🔤 Shriftlar** — 130+ Google shrift, kategoriyalar, sevimlilar, trend shriftlar, tayyor juftliklar.
+- **🔥 Trendlar** — avtomatik yangilanadi, yangilari «YANGI» belgisi bilan.
 
-AI qismlari uchun 🔑 API kalit kerak (bosh sahifadagi kalit bilan bir xil). Video kadrlari va trend qidiruvi ko'proq token ishlatadi.
+### AI qanday ishlaydi
 
-### 💻 Kompyuterda ishlatish
+- **Claude.ai ichida** (tavsiya etiladi): sahifa claude.ai'da ochilsa, AI sizning Claude obunangiz orqali ishlaydi — kalit va qo'shimcha to'lov kerak emas.
+- **Fayl yoki Android ilova sifatida**: 🔑 orqali Anthropic API kaliti kiritiladi (alohida pullik). Kalitsiz ham timeline, eksport, tahlil va shriftlar ishlaydi.
 
-Montaj Studiya bitta fayl: `app/src/main/assets/montaj.html`. O'rnatish shart emas.
+### 💻 Kompyuterda
 
-1. Shu faylni kompyuterga yuklab oling (GitHub'da faylni ochib, **Download raw file** tugmasi).
-2. Faylni **Chrome** yoki **Edge** brauzerida oching (ikki marta bosish yetadi).
-3. 🔑 tugmasi orqali API kalitni kiriting.
-
-Katta ekranda menyu chap tomonda chiqadi. Ma'lumotlar shu brauzerda saqlanadi — vaqti-vaqti bilan «Zaxira (JSON)» qilib qo'ying.
+`montaj.html` faylini Chrome yoki Edge'da oching (o'ng tugma → «Open with»). MP4 eksport uchun Chrome/Edge'ning yangi versiyasi kerak.
