@@ -29,3 +29,13 @@ Bosh sahifada yuqoridagi 🎥 tugmasini bosing. Ichida 5 bo'lim bor:
 - **🤖 Hamkor** — montajlaringiz va trendlarni biladigan AI bilan suhbat; kerak bo'lsa internetdan qidiradi.
 
 AI qismlari uchun 🔑 API kalit kerak (bosh sahifadagi kalit bilan bir xil). Video kadrlari va trend qidiruvi ko'proq token ishlatadi.
+
+### 💻 Kompyuterda ishlatish
+
+Montaj Studiya bitta fayl: `app/src/main/assets/montaj.html`. O'rnatish shart emas.
+
+1. Shu faylni kompyuterga yuklab oling (GitHub'da faylni ochib, **Download raw file** tugmasi).
+2. Faylni **Chrome** yoki **Edge** brauzerida oching (ikki marta bosish yetadi).
+3. 🔑 tugmasi orqali API kalitni kiriting.
+
+Katta ekranda menyu chap tomonda chiqadi. Ma'lumotlar shu brauzerda saqlanadi — vaqti-vaqti bilan «Zaxira (JSON)» qilib qo'ying.
