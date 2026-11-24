@@ -152,61 +152,92 @@
   .ed-top{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
   .ed-top select{width:auto;min-width:160px;max-width:240px}
   .ed-top .sp{flex:1}
-  .ed-grid{display:grid;grid-template-columns:1fr;gap:12px}
-  .ed-media,.ed-insp{margin:0;max-height:none}
-  .mlist{display:flex;flex-direction:column;gap:6px;margin-top:10px;max-height:360px;overflow:auto}
-  .mi{display:flex;gap:8px;align-items:center;padding:6px;border-radius:12px;border:1px solid transparent;cursor:pointer}
+  .ed-grid{display:grid;grid-template-columns:1fr;gap:10px}
+  .panel{margin:0;padding:0;overflow:hidden;border-radius:14px}
+  .phd{display:flex;align-items:center;gap:8px;padding:8px 12px;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute);border-bottom:1px solid var(--edge);background:rgba(255,255,255,.025)}
+  .phd b{color:var(--txt)}.phd .r{margin-left:auto;text-transform:none;letter-spacing:0;font-weight:500}
+  .pbd{padding:10px 12px}
+  .mlist{display:flex;flex-direction:column;gap:4px;margin-top:8px;max-height:420px;overflow:auto}
+  .mi{display:flex;gap:8px;align-items:center;padding:5px;border-radius:10px;border:1px solid transparent;cursor:grab}
   .mi:hover{background:var(--card2);border-color:var(--edge)}
-  .mi img,.mi .ph{width:40px;height:56px;border-radius:6px;object-fit:cover;background:#000;flex:none;display:grid;place-items:center;font-size:20px}
-  .mi .t{flex:1;min-width:0;font-size:12px}.mi .t b{display:block;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .mi img,.mi .ph{width:36px;height:50px;border-radius:5px;object-fit:cover;background:#000;flex:none;display:grid;place-items:center;font-size:18px}
+  .mi .t{flex:1;min-width:0;font-size:11px}.mi .t b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .mi .t span{color:var(--mute)}
-  .drop{border:1.5px dashed var(--edge2);border-radius:14px;padding:14px;text-align:center;color:var(--mute);font-size:13px;cursor:pointer;transition:.2s}
+  .drop{border:1.5px dashed var(--edge2);border-radius:12px;padding:12px;text-align:center;color:var(--mute);font-size:12px;cursor:pointer;transition:.2s}
   .drop:hover,.drop.over{border-color:var(--acc);color:var(--txt);background:rgba(177,76,255,.08)}
-  .ed-preview{display:flex;flex-direction:column;align-items:center;gap:10px}
-  .stage{position:relative;height:min(62vh,640px);aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 20px 60px rgba(0,0,0,.6),0 0 0 1px var(--edge)}
+  .monitor .pbd{display:flex;flex-direction:column;align-items:center;gap:8px;background:#05030a}
+  .stage{position:relative;height:min(56vh,600px);aspect-ratio:9/16;max-width:100%;overflow:hidden;background:#000;box-shadow:0 0 0 1px var(--edge)}
   .stage canvas{width:100%;height:100%;display:block;touch-action:none}
   .stage .empty{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:20px;color:var(--mute);font-size:13px;pointer-events:none}
-  .ctrl{display:flex;align-items:center;gap:10px}
-  .play{width:48px;height:48px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:18px;cursor:pointer;box-shadow:0 4px 20px rgba(177,76,255,.45)}
-  .tc{font-family:ui-monospace,monospace;font-size:13px;color:var(--mute);min-width:130px;text-align:center}
-  .insp h4{margin:14px 0 4px;font-size:12px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em}
-  .insp .rv{display:flex;justify-content:space-between;font-size:12px;color:var(--mute)}
-  .ed-ai{display:flex;gap:8px;align-items:center}
+  .stage .safe{position:absolute;inset:5%;border:1px dashed rgba(255,255,255,.35);pointer-events:none}
+  .stage .safe::after{content:"";position:absolute;inset:5.5%;border:1px dashed rgba(255,255,255,.25)}
+  .mon-tc{display:flex;justify-content:space-between;align-items:center;width:100%;max-width:420px;font-family:ui-monospace,monospace;font-size:13px}
+  .tc-now{color:#ffcf4a;font-weight:700}
+  .ctrl{display:flex;align-items:center;gap:6px;flex-wrap:wrap;justify-content:center}
+  .ib2{width:34px;height:34px;border-radius:8px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;font-size:14px;display:grid;place-items:center}
+  .ib2:hover{border-color:var(--edge2)}.ib2.on{background:var(--acc);border-color:var(--acc)}
+  .play{width:44px;height:44px;border-radius:50%;border:0;background:var(--grad);color:#fff;font-size:16px;cursor:pointer}
+  .insp h4{margin:14px 0 6px;font-size:11px;color:var(--faint);text-transform:uppercase;letter-spacing:.06em;display:flex;align-items:center;gap:6px}
+  .insp label{margin:8px 0 3px}
+  .prop{display:grid;grid-template-columns:78px 1fr 58px 22px 22px 22px;gap:5px;align-items:center;font-size:12px;margin:5px 0}
+  .prop span{color:var(--mute)}
+  .prop input[type=number]{padding:4px 6px;font-size:12px;border-radius:6px}
+  .kf{width:22px;height:22px;border:0;background:none;color:var(--faint);cursor:pointer;font-size:12px;padding:0}
+  .kf.on{color:#ffcf4a}.kf:hover{color:var(--txt)}
+  .ed-ai{display:flex;gap:8px;align-items:center;margin:10px 0 !important;padding:10px 12px}
   .ed-ai input{flex:1}
-  .timeline{padding:10px 0 12px;user-select:none}
-  .tl-tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap;padding:0 12px 10px}
-  .tl-tools label{margin:0 0 0 auto;display:flex;align-items:center;gap:6px}
-  .tl-tools input[type=range]{width:120px}
-  .tl-body{display:flex}
-  .tl-heads{flex:none;width:44px;padding-top:24px}
-  .tl-heads div{height:64px;display:grid;place-items:center;font-size:16px;border-bottom:1px solid transparent}
-  .tl-heads div.t,.tl-heads div.a{height:40px}
-  .tl-scroll{flex:1;overflow-x:auto;overflow-y:hidden;position:relative;padding-right:12px}
+  .nle{padding:0;user-select:none;overflow:hidden}
+  .nle-bar{display:flex;align-items:center;gap:6px;flex-wrap:wrap;padding:8px 10px;border-bottom:1px solid var(--edge);background:rgba(255,255,255,.025)}
+  .tc-big{font-family:ui-monospace,monospace;font-size:20px;font-weight:700;color:#ffcf4a;min-width:150px}
+  .nle-bar .sp{flex:1}
+  .nle-bar input[type=range]{width:120px}
+  .nle-body{display:flex;align-items:stretch}
+  .tools{flex:none;width:40px;display:flex;flex-direction:column;gap:4px;padding:6px 3px;border-right:1px solid var(--edge)}
+  .heads{flex:none;width:128px;border-right:1px solid var(--edge)}
+  .heads .rsp{height:28px;border-bottom:1px solid var(--edge);display:flex;align-items:center;justify-content:center;gap:4px}
+  .hd{height:58px;border-bottom:1px solid var(--edge);display:flex;align-items:center;gap:3px;padding:0 6px;font-size:11px}
+  .hd b{width:26px;font-size:12px}
+  .hd.v{background:rgba(91,108,255,.06)}.hd.a{background:rgba(54,194,122,.06)}
+  .hd button{width:22px;height:22px;border-radius:5px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--mute);font-size:10px;font-weight:800;cursor:pointer;padding:0}
+  .hd button.on{color:#111;background:#ffcf4a;border-color:#ffcf4a}
+  .hd button.off{opacity:.35}
+  .tl-scroll{flex:1;overflow-x:auto;overflow-y:hidden;position:relative;min-width:0}
   .tl-inner{position:relative;min-width:100%}
-  .ruler{height:24px;position:relative;cursor:pointer;border-bottom:1px solid var(--edge)}
-  .ruler span{position:absolute;top:4px;font-size:10px;color:var(--faint);transform:translateX(-50%);font-family:ui-monospace,monospace}
+  .ruler{height:28px;position:relative;cursor:text;border-bottom:1px solid var(--edge);background:rgba(255,255,255,.02)}
+  .ruler span{position:absolute;top:3px;font-size:10px;color:var(--faint);transform:translateX(3px);font-family:ui-monospace,monospace;white-space:nowrap}
   .ruler i{position:absolute;bottom:0;width:1px;height:6px;background:var(--faint)}
-  .ruler i.beat{height:9px;background:var(--pink);opacity:.8}
-  .track{position:relative;height:64px;border-bottom:1px solid var(--edge);background:rgba(255,255,255,.015)}
-  .track.t,.track.a{height:40px}
-  .clip{position:absolute;top:5px;bottom:5px;border-radius:10px;overflow:hidden;cursor:grab;border:2px solid rgba(255,255,255,.12);background-color:#2a1d4d;background-size:auto 100%;background-repeat:repeat-x;transition:box-shadow .15s}
-  .clip:active{cursor:grabbing}
-  .clip.sel{border-color:#fff;box-shadow:0 0 0 2px var(--acc),0 0 18px rgba(177,76,255,.6);z-index:2}
-  .clip .lb{position:absolute;left:6px;right:6px;bottom:3px;font-size:10px;font-weight:700;text-shadow:0 1px 3px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
-  .clip .bd{position:absolute;left:4px;top:3px;display:flex;gap:3px;pointer-events:none}
-  .clip .bd span{font-size:9px;background:rgba(0,0,0,.65);padding:1px 5px;border-radius:6px;font-weight:700}
-  .clip .h{position:absolute;top:0;bottom:0;width:10px;cursor:ew-resize;z-index:3}
+  .ruler i.beat{height:7px;background:var(--pink);opacity:.7}
+  .ruler .mk{position:absolute;bottom:0;width:0;height:0;border:6px solid transparent;border-bottom:9px solid #3ddc97;transform:translateX(-6px);cursor:pointer}
+  .trk{position:relative;height:58px;border-bottom:1px solid var(--edge)}
+  .trk.v{background:rgba(91,108,255,.03)}.trk.a{background:rgba(54,194,122,.03)}
+  .trk.locked{background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.03) 0 6px,transparent 6px 12px)}
+  .clip{position:absolute;top:3px;bottom:3px;border-radius:5px;overflow:hidden;cursor:default;border:1px solid rgba(255,255,255,.25)}
+  .clip.v{background:#2f3a8f;border-color:#6f7cff}.clip.a{background:#1d5a3c;border-color:#36c27a}.clip.t{background:#6a2a7d;border-color:#d36bff}
+  .clip.sel{outline:2px solid #fff;outline-offset:-1px;z-index:2;box-shadow:0 0 12px rgba(255,255,255,.35)}
+  .clip .film{position:absolute;left:0;right:0;top:16px;bottom:0;display:flex;overflow:hidden;opacity:.85;pointer-events:none}
+  .clip .film img{height:100%;flex:none;object-fit:cover}
+  .clip canvas{position:absolute;left:0;top:16px;width:100%;height:calc(100% - 16px);pointer-events:none}
+  .clip .lb{position:absolute;left:0;right:0;top:0;height:16px;padding:1px 5px;font-size:10px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:rgba(0,0,0,.35);pointer-events:none}
+  .clip .lb em{font-style:normal;color:#ffcf4a;margin-left:4px}
+  .clip.t .tx{position:absolute;left:5px;right:5px;top:20px;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;pointer-events:none}
+  .clip .h{position:absolute;top:0;bottom:0;width:8px;cursor:ew-resize;z-index:3}
   .clip .h.l{left:0}.clip .h.r{right:0}
-  .clip .h::after{content:"";position:absolute;top:30%;bottom:30%;left:3px;width:3px;border-radius:2px;background:rgba(255,255,255,.7)}
-  .clip.txt{background:linear-gradient(90deg,#6b2bd9,#b14cff);top:4px;bottom:4px}
-  .clip.txt .lb{bottom:auto;top:50%;transform:translateY(-50%);font-size:11px}
-  .clip.mus{background:#123a4a;top:4px;bottom:4px;cursor:ew-resize}
-  .clip.mus canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.8;pointer-events:none}
-  .clip.ghost{opacity:.6;z-index:5;pointer-events:none}
-  .playhead{position:absolute;top:0;bottom:0;width:2px;background:#fff;pointer-events:none;z-index:6;box-shadow:0 0 8px rgba(255,255,255,.8)}
-  .playhead::before{content:"";position:absolute;top:0;left:-6px;border:7px solid transparent;border-top:9px solid #fff}
-  .tl-hint{padding:8px 12px 0;font-size:11px;color:var(--faint)}
-
+  .clip .h:hover{background:rgba(255,207,74,.5)}
+  .clip .trn{position:absolute;left:0;top:16px;bottom:0;background:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 4px,rgba(255,255,255,.1) 4px 8px);pointer-events:none;border-right:1px solid #fff}
+  .clip .kfd{position:absolute;bottom:3px;width:7px;height:7px;background:#ffcf4a;transform:translateX(-3.5px) rotate(45deg);pointer-events:none}
+  .clip.razor{cursor:crosshair}
+  .nle.razor .clip{cursor:crosshair}
+  .playhead{position:absolute;top:0;bottom:0;width:1px;background:#ffcf4a;pointer-events:none;z-index:6}
+  .playhead::before{content:"";position:absolute;top:0;left:-6px;width:13px;height:12px;background:#ffcf4a;clip-path:polygon(0 0,100% 0,100% 60%,50% 100%,0 60%)}
+  .snapline{position:absolute;top:0;bottom:0;width:1px;background:#00e5ff;z-index:7;pointer-events:none;box-shadow:0 0 6px #00e5ff}
+  .razorline{position:absolute;top:28px;bottom:0;width:1px;background:#ff5c7a;z-index:7;pointer-events:none}
+  .meters{flex:none;width:30px;border-left:1px solid var(--edge);display:flex;justify-content:center;padding:6px 0}
+  .meters canvas{width:20px;height:100%}
+  .tl-hint{padding:6px 12px;font-size:11px;color:var(--faint);border-top:1px solid var(--edge)}
+  .ctxmenu{position:fixed;z-index:40;background:#1b1233;border:1px solid var(--edge2);border-radius:10px;padding:4px;min-width:200px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+  .ctxmenu button{display:flex;justify-content:space-between;width:100%;background:none;border:0;color:var(--txt);font:inherit;font-size:13px;padding:7px 10px;border-radius:6px;cursor:pointer;text-align:left}
+  .ctxmenu button:hover{background:rgba(177,76,255,.25)}
+  .ctxmenu button small{color:var(--faint)}
   /* Kompyuter (katta ekran) */
   @media(min-width:900px){
     body{padding:0 0 0 var(--navw)}
@@ -225,11 +256,11 @@
     #tab-chat{padding-bottom:90px}
     .m{max-width:75%}
     body.wide main{max-width:none}
-    .ed-grid{grid-template-columns:250px 1fr 300px;align-items:start}
-    .ed-insp{max-height:calc(62vh + 70px);overflow:auto}
+    .ed-grid{grid-template-columns:240px 1fr 330px;align-items:stretch}
+    .ed-insp{max-height:calc(56vh + 130px);overflow:auto}
     .toast{bottom:30px}
   }
-  @media(max-width:899px){ .stage{height:min(56vh,560px)} }
+  @media(max-width:899px){ .stage{height:min(52vh,520px)} .heads{width:96px} .hd button.opt{display:none} }
 </style>
 </head>
 <body>
@@ -339,51 +370,69 @@
       <button class="btn sm" id="aeBtn" title="After Effects uchun skript">AE .jsx</button>
     </div>
     <div class="ed-grid">
-      <aside class="card ed-media">
-        <h3>🗂 Media</h3>
-        <div class="drop" id="drop">+ Video, rasm yoki musiqa qo'shing<br><small>yoki shu yerga sudrab tashlang</small></div>
-        <input type="file" id="mediaFile" multiple accept="video/*,image/*,audio/*" hidden>
-        <div class="mlist" id="mediaList"></div>
-      </aside>
-      <div class="ed-preview">
-        <div class="stage"><canvas id="cv" width="720" height="1280"></canvas><div class="empty" id="stageEmpty">Media qo'shing va uni timelinega sudrang<br>yoki «🤖 AI montaj» ni bosing</div></div>
-        <div class="ctrl">
-          <button class="btn sm" id="toStart" title="Boshiga">⏮</button>
-          <button class="play" id="playBtn" title="Ijro (Probel)">▶</button>
-          <button class="btn sm" id="toEnd" title="Oxiriga">⏭</button>
-          <span class="tc" id="timeLbl">0:00.0 / 0:00.0</span>
+      <aside class="card panel ed-media">
+        <div class="phd"><b>Loyiha</b> · Media<span class="r" id="mediaCount"></span></div>
+        <div class="pbd">
+          <div class="drop" id="drop">+ Video, rasm, musiqa<br><small>bosing yoki sudrab tashlang</small></div>
+          <input type="file" id="mediaFile" multiple accept="video/*,image/*,audio/*" hidden>
+          <div class="mlist" id="mediaList"></div>
         </div>
-      </div>
-      <aside class="card ed-insp insp" id="insp"></aside>
-    </div>
-    <div class="card ed-ai" style="margin-top:12px">
-      <span style="font-size:20px">✨</span>
-      <input id="aiCmd" placeholder="AI'ga buyruq: «hookni kuchliroq qil», «matnlarni inglizchaga o'gir», «to'y uslubiga o'tkaz»…">
-      <button class="btn main" id="aiCmdBtn">Bajar</button>
-    </div>
-    <div class="card timeline">
-      <div class="tl-tools">
-        <button class="btn sm" id="splitBtn" title="Playhead joyida bo'lish (S)">✂ Bo'lish</button>
-        <button class="btn sm" id="addTextBtn">T Matn</button>
-        <button class="btn sm" id="dupBtn" title="Nusxa (Ctrl+D)">⧉ Nusxa</button>
-        <button class="btn sm" id="delBtn" title="O'chirish (Delete)">🗑</button>
-        <button class="btn sm" id="beatBtn" title="Kesimlarni musiqa beatiga moslash">⚡ Beatga moslash</button>
-        <label>🔍 <input type="range" id="zoom" min="20" max="320" value="90"></label>
-      </div>
-      <div class="tl-body">
-        <div class="tl-heads"><div title="Video">🎬</div><div class="t" title="Matn">🔤</div><div class="a" title="Musiqa">🎵</div></div>
-        <div class="tl-scroll" id="tlScroll">
-          <div class="tl-inner" id="tlInner">
-            <div class="ruler" id="ruler"></div>
-            <div class="track" id="trV"></div>
-            <div class="track t" id="trT"></div>
-            <div class="track a" id="trA"></div>
-            <div class="playhead" id="playhead"></div>
+      </aside>
+      <div class="card panel monitor">
+        <div class="phd"><b>Dastur monitori</b><span class="r" id="monName"></span></div>
+        <div class="pbd">
+          <div class="stage"><canvas id="cv" width="720" height="1280"></canvas><div class="safe" id="safeBox" hidden></div><div class="empty" id="stageEmpty">Media qo'shing va timelinega sudrang<br>yoki «🤖 AI montaj» ni bosing</div></div>
+          <div class="mon-tc"><span class="tc-now" id="tcNow">00:00:00:00</span><select id="monQ" style="width:auto;padding:3px 6px;font-size:12px" title="Ko'rish sifati"><option value="1">To'liq</option><option value="0.5">1/2</option></select><span id="tcDur">00:00:00:00</span></div>
+          <div class="ctrl">
+            <button class="ib2" id="mkBtn" title="Marker qo'shish (M)">⬥</button>
+            <button class="ib2" id="prevEdit" title="Oldingi kesim (↑)">⇤</button>
+            <button class="ib2" id="frBack" title="1 kadr orqaga (←)">◀︎</button>
+            <button class="play" id="playBtn" title="Ijro (Probel / L)">▶</button>
+            <button class="ib2" id="frFwd" title="1 kadr oldinga (→)">▶︎</button>
+            <button class="ib2" id="nextEdit" title="Keyingi kesim (↓)">⇥</button>
+            <button class="ib2" id="safeBtn" title="Xavfsiz chegaralar">▢</button>
           </div>
         </div>
       </div>
-      <div class="tl-hint">Klipni sudrab joyini almashtiring · chetlarini tortib qirqing · Probel — ijro · S — bo'lish · Delete — o'chirish · Ctrl+Z — orqaga · matnni ekranda sudrab joylang</div>
+      <aside class="card panel ed-insp insp"><div class="phd"><b>Effekt sozlamalari</b><span class="r" id="inspName"></span></div><div class="pbd" id="insp"></div></aside>
     </div>
+    <div class="card ed-ai">
+      <span style="font-size:18px">✨</span>
+      <input id="aiCmd" placeholder="AI'ga buyruq: «hookni kuchliroq qil», «matnlarni inglizchaga o'gir», «to'y uslubiga o'tkaz»…">
+      <button class="btn main sm" id="aiCmdBtn">Bajar</button>
+    </div>
+    <div class="card nle" id="nle">
+      <div class="nle-bar">
+        <span class="tc-big" id="tcBig">00:00:00:00</span>
+        <button class="ib2 on" id="snapBtn" title="Yopishish / snapping (S)">🧲</button>
+        <button class="ib2 on" id="linkBtn" title="Bog'langan tanlash (video+audio)">🔗</button>
+        <button class="btn sm" id="splitBtn" title="Playhead joyida kesish (Ctrl+K)">✂ Kesish</button>
+        <button class="btn sm" id="addTextBtn" title="Matn (T)">T Matn</button>
+        <button class="btn sm" id="beatBtn" title="V1 kesimlarini musiqa beatiga moslash">⚡ Beatga</button>
+        <span class="sp"></span>
+        <button class="ib2" id="fitBtn" title="Hammasini ko'rsatish (\\)">⤢</button>
+        <label style="margin:0;display:flex;align-items:center;gap:6px">🔍 <input type="range" id="zoom" min="10" max="400" value="90"></label>
+      </div>
+      <div class="nle-body">
+        <div class="tools">
+          <button class="ib2 on" data-tool="select" title="Tanlash (V)">➤</button>
+          <button class="ib2" data-tool="razor" title="Ustara — bosgan joyda kesadi (C)">✂</button>
+        </div>
+        <div class="heads" id="heads"></div>
+        <div class="tl-scroll" id="tlScroll">
+          <div class="tl-inner" id="tlInner">
+            <div class="ruler" id="ruler"></div>
+            <div id="tracks"></div>
+            <div class="playhead" id="playhead"></div>
+            <div class="snapline" id="snapline" hidden></div>
+            <div class="razorline" id="razorline" hidden></div>
+          </div>
+        </div>
+        <div class="meters" title="Ovoz darajasi"><canvas id="meter" width="20" height="200"></canvas></div>
+      </div>
+      <div class="tl-hint">V tanlash · C ustara · Ctrl+K kesish · Delete / Shift+Delete (ripple) · Q/W chetni playheadgacha qirqish · J/K/L ijro · ←/→ kadr · ↑/↓ kesimlar · M marker · S yopishish · Alt+sudrash — faqat bitta klip · o'ng tugma — menyu</div>
+    </div>
+    <div class="ctxmenu" id="ctx" hidden></div>
   </section>
 
   <!-- 4. VIDEO TAHLIL -->
@@ -858,7 +907,7 @@ $('reportBtn').onclick = async () => {
   const btn = $('reportBtn'); btn.disabled = true; $('reportOut').innerHTML = '<span class="spin"></span>Tahlil qilinyapti…';
   const s = summary();
   try {
-    const r = await ai({ prompt: `Mening montajlarim statistikasi: jami ${s.n} ta, ${s.hours.toFixed(1)} soat, o'rtacha ${Math.round(s.avgViews)} ko'rish, daromad ${s.income} so'm, haftalik maqsad ${weekGoal}.\n\nMontajlar:\n${editsForAI()}\n\n` +
+    const r = await ai({ tier: 'quick', prompt: `Mening montajlarim statistikasi: jami ${s.n} ta, ${s.hours.toFixed(1)} soat, o'rtacha ${Math.round(s.avgViews)} ko'rish, daromad ${s.income} so'm, haftalik maqsad ${weekGoal}.\n\nMontajlar:\n${editsForAI()}\n\n` +
       `Tahlil qil: 1) qaysi stil/shrift/effekt eng yaxshi natija bergan (ko'rish va saqlash bo'yicha), 2) zaif tomonlarim, 3) tezlik/samaradorlik (soat sarfi), 4) keyingi hafta uchun aniq 5 ta vazifa.`,
       onText: ({ text }) => { $('reportOut').textContent = text; } });
     $('reportOut').textContent = r.text;
@@ -897,7 +946,7 @@ async function fetchTrends(silent) {
   const niche = $('trendNiche').value; const mode = await aiMode();
   if (!silent) $('trendDate').innerHTML = `<span class="spin"></span>${mode === 'key' ? 'Internetdan qidirilyapti (1–2 daqiqa)…' : 'Claude trendlarni yig\'yapti…'}`;
   try {
-    const r = await ai({ web: true, json: true, effort: 'medium', prompt:
+    const r = await ai({ web: true, json: true, effort: 'medium', tier: 'quick', prompt:
       `Bugun ${today()}. ${mode === 'key' ? 'Web search orqali' : 'Bilimingga tayanib'} "${niche}" yo'nalishida ENG SO'NGGI Instagram Reels / TikTok video montaj trendlarini top: yangi montaj stillari, mashhur shriftlar (Google Fonts'dagilar — aniq nomi bilan), o'tishlar/effektlar, audio va format trendlari. Eskirgan narsalarni yozma.\n` +
       `Faqat shu JSON ko'rinishda, matnlar o'zbek tilida:\n` +
       `{"styles":[{"name":"","how":"qanday qilinadi","why":"nega ishlaydi"}],"fonts":[{"name":"aniq Google Fonts nomi","use":"sarlavha/subtitr","sample":"namuna matn","why":""}],"effects":[{"name":"","how":"","why":""}],"audio":[{"name":"","how":"","why":""}],"ideas":[{"name":"","how":""}]}\n` +
@@ -929,7 +978,7 @@ async function ask(q) {
     (trends ? `\nSaqlangan trendlar (${trends.date}, ${trends.niche}): ${JSON.stringify(trends.data).slice(0, 2500)}\n` : '') +
     `\nHozirgi timeline loyihasi: ${Editor.describe()}`;
   try {
-    const r = await ai({ system: ctx, web: true, effort: 'low', messages: chat.slice(-14), onText: ({ text }) => { b.textContent = text; window.scrollTo(0, document.body.scrollHeight); } });
+    const r = await ai({ system: ctx, web: true, effort: 'low', tier: 'quick', messages: chat.slice(-14), onText: ({ text }) => { b.textContent = text; window.scrollTo(0, document.body.scrollHeight); } });
     b.textContent = r.text || '…'; chat.push({ role: 'assistant', content: r.text || '…' });
   } catch (e) { b.textContent = errText(e); chat.pop(); }
   chat = chat.slice(-40); KV.set('chat', chat); $('chatSend').disabled = false;
@@ -1110,94 +1159,118 @@ const IDB = (() => {
 })();
 
 const Editor = (() => {
-  const cv = $('cv'), ctx = cv.getContext('2d');
+  const cv = $('cv'), ctx = cv.getContext('2d'), FPS = 30, F1 = 1 / FPS;
   const FILTERS = { none: 'none', vivid: 'saturate(1.35) contrast(1.12)', cinematic: 'contrast(1.25) saturate(1.15) brightness(.92)', bw: 'grayscale(1) contrast(1.25)',
     vintage: 'sepia(.4) contrast(1.05) saturate(.85) brightness(1.03)', warm: 'sepia(.22) saturate(1.25) hue-rotate(-8deg)', cool: 'saturate(1.1) hue-rotate(12deg) brightness(1.02)', soft: 'brightness(1.06) saturate(.85) contrast(.92)' };
   const FILTER_N = { none: "Yo'q", vivid: 'Yorqin', cinematic: 'Kinematografik', bw: 'Oq-qora', vintage: 'Vintage', warm: 'Iliq', cool: 'Sovuq', soft: "Yumshoq (to'y)" };
-  const TRS = { cut: 'Kesim', flash: 'Flash ⚡', zoom: 'Zoom punch', whip: 'Whip pan', fade: 'Fade', glitch: 'Glitch', slide: 'Slide' };
-  const TR_IC = { flash: '⚡', zoom: '🔍', whip: '💨', fade: '◐', glitch: '▦', slide: '⇡' };
+  const TRS = { cut: "Yo'q (kesim)", flash: 'Flash ⚡', zoom: 'Zoom punch', whip: 'Whip pan', fade: 'Fade (qoraning ichidan)', glitch: 'Glitch', slide: 'Slide' };
   const ZOOMS = { none: "Yo'q", zoomIn: 'Sekin yaqinlashish', zoomOut: 'Sekin uzoqlashish', shake: 'Silkinish (boshida)', pulse: 'Beat pulsi' };
   const CURVES = { none: 'Tekis', velocity: 'Velocity (tez→sekin→tez)', slowfast: 'Ramp (sekin→tez→sekin)' };
   const CURVE_AVG = { none: 1, velocity: 1.6, slowfast: 1.6 };
   const TSTYLES = { bold: 'Qalin + kontur', neon: 'Neon', box: 'Fonli quti', outline: 'Faqat kontur', gradient: 'Gradient', plain: 'Oddiy (soya)' };
   const ANIMS = { pop: 'Pop', fade: 'Fade', slide: 'Pastdan', type: 'Yozuv mashinkasi', words: "So'zma-so'z", glitch: 'Glitch', none: "Yo'q" };
+  const PROPS = { scale: ['Masshtab', 100, '%', 1, 600, 1], posX: ['Joy X', 0, '%', -150, 150, 0.5], posY: ['Joy Y', 0, '%', -150, 150, 0.5], rot: ['Burilish', 0, '°', -360, 360, 1], opacity: ['Shaffoflik', 100, '%', 0, 100, 1] };
 
-  let media = [], rt = {}, proj = null, index = [], hist = [], fut = [], editSnap = null, sel = null;
-  let T = 0, playing = false, lastTs = 0, dirty = true, exporting = false, pps = 90, hitBoxes = {}, aiRef = null;
+  let media = [], urls = {}, pool = {}, proj = null, index = [], hist = [], fut = [], editSnap = null, sel = new Set(), clipboard = null;
+  let T = 0, playing = false, lastTs = 0, dirty = true, exporting = false, pps = 90, hitBoxes = {}, tool = 'select', snapOn = true, linkOn = true, playRate = 1;
 
   /* ---------- yordamchilar ---------- */
   const mediaById = id => media.find(m => m.id === id);
-  const rtOf = m => {
-    if (!rt[m.id]) {
-      const url = URL.createObjectURL(m.blob); let el;
-      if (m.kind === 'video') { el = makeVideo(url); el.muted = false; el.addEventListener('seeked', () => dirty = true); el.addEventListener('loadeddata', () => dirty = true); }
-      else if (m.kind === 'image') { el = new Image(); el.onload = () => dirty = true; el.src = url; }
-      else { el = new Audio(url); el.preload = 'auto'; }
-      rt[m.id] = { url, el };
-    }
-    return rt[m.id];
-  };
-  const maxDur = m => !m ? 1e9 : m.kind === 'image' ? 60 : m.dur;
-  const cdur = c => Math.max(0.05, (c.out - c.in) / (c.speed * (CURVE_AVG[c.curve] || 1)));
-  const layout = () => { let t = 0; return proj.clips.map(c => { const s = t; t += cdur(c); return s; }); };
-  function total() {
-    if (!proj) return 0; const L = layout(); const n = proj.clips.length;
-    const v = n ? L[n - 1] + cdur(proj.clips[n - 1]) : 0;
-    return Math.max(v, ...proj.texts.map(x => x.start + x.dur), 0);
-  }
+  const clipById = id => proj.clips.find(c => c.id === id);
+  const trackById = id => proj.tracks.find(t => t.id === id);
+  const kindOfTrack = id => (trackById(id) || {}).kind;
+  const maxDur = m => !m ? 1e9 : m.kind === 'image' ? 3600 : m.dur;
+  const rate = c => c.speed * (CURVE_AVG[c.curve] || 1);
+  const cdur = c => c.type === 't' ? c.dur : Math.max(F1, (c.out - c.in) / rate(c));
+  const cend = c => c.start + cdur(c);
+  const total = () => proj ? Math.max(0, ...proj.clips.map(cend)) : 0;
+  const onTrack = id => proj.clips.filter(c => c.track === id).sort((a, b) => a.start - b.start);
+  const vTracks = () => proj.tracks.filter(t => t.kind === 'v'), aTracks = () => proj.tracks.filter(t => t.kind === 'a');
+  const displayTracks = () => [...vTracks().slice().reverse(), ...aTracks()];
+  const soloOn = () => aTracks().some(t => t.solo);
+  const audible = t => t && !t.mute && (!soloOn() || t.solo);
+  const tc = t => { const f = Math.round(Math.max(0, t) * FPS), p = n => String(n).padStart(2, '0'); return `${p(Math.floor(f / (3600 * FPS)))}:${p(Math.floor(f / (60 * FPS)) % 60)}:${p(Math.floor(f / FPS) % 60)}:${p(f % FPS)}`; };
+  const snapF = t => Math.round(t * FPS) / FPS;
   function srcAt(c, lt) {
     const D = cdur(c), u = clamp(lt / D, 0, 1), k = c.speed;
     if (!c.curve || c.curve === 'none') return c.in + clamp(lt, 0, D) * k;
     const s2 = Math.sin(2 * Math.PI * u) / (4 * Math.PI);
-    const f = c.curve === 'velocity' ? 0.4 * u + 2.4 * (u / 2 + s2) : 0.4 * u + 2.4 * (u / 2 - s2);
-    return c.in + k * D * f;
+    return c.in + k * D * (c.curve === 'velocity' ? 0.4 * u + 2.4 * (u / 2 + s2) : 0.4 * u + 2.4 * (u / 2 - s2));
   }
   function rateAt(c, lt) {
     if (!c.curve || c.curve === 'none') return c.speed;
     const u = clamp(lt / cdur(c), 0, 1), cs = Math.cos(Math.PI * u) ** 2;
     return c.speed * (0.4 + 2.4 * (c.curve === 'velocity' ? cs : 1 - cs));
   }
-  function clipAt(t) {
-    if (!proj || !proj.clips.length) return null;
-    const L = layout();
-    for (let i = 0; i < L.length; i++) { const D = cdur(proj.clips[i]); if (t >= L[i] && t < L[i] + D) return { c: proj.clips[i], i, start: L[i] }; }
-    const i = L.length - 1; if (t >= L[i]) return t <= L[i] + cdur(proj.clips[i]) + 0.001 ? { c: proj.clips[i], i, start: L[i] } : null;
-    return null;
+  // keyframe xususiyatlari
+  function pv(c, n, lt) {
+    const p = c.props && c.props[n]; if (!p) return PROPS[n][1];
+    if (p.k && p.k.length) {
+      const k = p.k; if (lt <= k[0].t) return k[0].v; if (lt >= k[k.length - 1].t) return k[k.length - 1].v;
+      for (let i = 0; i < k.length - 1; i++) if (lt >= k[i].t && lt <= k[i + 1].t) { const f = (lt - k[i].t) / (k[i + 1].t - k[i].t || 1); return k[i].v + (k[i + 1].v - k[i].v) * f; }
+    }
+    return p.v ?? PROPS[n][1];
   }
-  function projBeats() {
-    if (!proj || !proj.music) return [];
-    const m = mediaById(proj.music.m); if (!m || !m.beats) return [];
-    return m.beats.map(b => b - proj.music.offset).filter(b => b >= 0);
+  const kfAt = (c, n, lt) => { const p = c.props && c.props[n]; return p && p.k ? p.k.find(k => Math.abs(k.t - lt) < F1 / 2) : null; };
+  function setPv(c, n, v, lt) {
+    c.props = c.props || {}; const p = c.props[n] = c.props[n] || { v: PROPS[n][1] };
+    if (p.k && p.k.length) { const k = kfAt(c, n, lt); if (k) k.v = v; else { p.k.push({ t: lt, v }); p.k.sort((a, b) => a.t - b.t); } }
+    else p.v = v;
   }
-  const fmtT = t => `${Math.floor(t / 60)}:${(t % 60).toFixed(1).padStart(4, '0')}`;
+  function toggleKf(c, n, lt) {
+    c.props = c.props || {}; const p = c.props[n] = c.props[n] || { v: PROPS[n][1] }, cur = pv(c, n, lt);
+    if (!p.k || !p.k.length) { p.k = [{ t: lt, v: cur }]; return; }
+    const k = kfAt(c, n, lt);
+    if (k) { p.k = p.k.filter(x => x !== k); if (!p.k.length) { delete p.k; p.v = cur; } }
+    else { p.k.push({ t: lt, v: cur }); p.k.sort((a, b) => a.t - b.t); }
+  }
+  const shiftKf = (c, d) => { if (!c.props) return; for (const n in c.props) if (c.props[n].k) c.props[n].k.forEach(k => k.t += d); };
+  const kfTimes = c => c.props ? [...new Set(Object.values(c.props).flatMap(p => (p.k || []).map(k => +k.t.toFixed(3))))] : [];
+  function timelineBeats() {
+    if (!proj) return [];
+    const out = [];
+    proj.clips.forEach(c => { const m = c.type === 'm' && mediaById(c.m); if (!m || m.kind !== 'audio' || !m.beats || kindOfTrack(c.track) !== 'a') return;
+      m.beats.forEach(b => { if (b >= c.in && b <= c.out) out.push(c.start + (b - c.in) / c.speed); }); });
+    return out.sort((a, b) => a - b);
+  }
 
-  /* ---------- tarix (undo/redo) va saqlash ---------- */
+  /* ---------- tarix va saqlash ---------- */
   function beginEdit() { if (!editSnap) editSnap = JSON.stringify(proj); }
   function endEdit() {
     if (!editSnap) return; const now = JSON.stringify(proj);
-    if (now !== editSnap) { hist.push(editSnap); if (hist.length > 120) hist.shift(); fut = []; saveProj(); }
+    if (now !== editSnap) { hist.push(editSnap); if (hist.length > 150) hist.shift(); fut = []; saveProj(); }
     editSnap = null; updUndo();
   }
   function mutate(fn) { beginEdit(); fn(); endEdit(); renderAll(); }
-  function undo() { if (!hist.length) return; fut.push(JSON.stringify(proj)); proj = JSON.parse(hist.pop()); saveProj(); sel = null; renderAll(); updUndo(); }
-  function redo() { if (!fut.length) return; hist.push(JSON.stringify(proj)); proj = JSON.parse(fut.pop()); saveProj(); sel = null; renderAll(); updUndo(); }
+  function undo() { if (!hist.length) return; fut.push(JSON.stringify(proj)); proj = JSON.parse(hist.pop()); saveProj(); cleanSel(); renderAll(); updUndo(); }
+  function redo() { if (!fut.length) return; hist.push(JSON.stringify(proj)); proj = JSON.parse(fut.pop()); saveProj(); cleanSel(); renderAll(); updUndo(); }
+  const cleanSel = () => { sel = new Set([...sel].filter(id => clipById(id))); };
   function updUndo() { $('undoBtn').disabled = !hist.length; $('redoBtn').disabled = !fut.length; }
   function saveProj() {
     if (!proj) return; proj.updated = Date.now(); KV.set('proj-' + proj.id, proj);
-    const e = index.find(x => x.id === proj.id); const meta = { id: proj.id, name: proj.name, updated: proj.updated, dur: +total().toFixed(1), clips: proj.clips.length };
+    const e = index.find(x => x.id === proj.id), meta = { id: proj.id, name: proj.name, updated: proj.updated, dur: +total().toFixed(1), clips: proj.clips.length };
     if (e) Object.assign(e, meta); else index.push(meta);
     KV.set('projIndex', index); KV.set('lastProj', proj.id); renderProjSel(); renderContinue();
   }
-  const newProject = name => ({ id: uid(), name: name || ('Loyiha ' + (index.length + 1)), created: Date.now(), updated: Date.now(), workSec: 0, filter: 'none', letterbox: false, clips: [], texts: [], music: null, notes: '' });
+  const newProject = name => ({ id: uid(), name: name || ('Loyiha ' + (index.length + 1)), created: Date.now(), updated: Date.now(), workSec: 0, letterbox: false,
+    tracks: [{ id: 'V1', kind: 'v' }, { id: 'V2', kind: 'v' }, { id: 'V3', kind: 'v' }, { id: 'A1', kind: 'a' }, { id: 'A2', kind: 'a' }], clips: [], markers: [], notes: '' });
+  function migrate(p) {
+    if (p.tracks) return p;
+    const n = Object.assign(newProject(p.name), { id: p.id, created: p.created, workSec: p.workSec || 0, notes: p.notes || '', letterbox: !!p.letterbox });
+    let t = 0;
+    (p.clips || []).forEach(c => { const nc = { id: c.id, type: 'm', track: 'V1', start: t, m: c.m, in: c.in, out: c.out, speed: c.speed || 1, curve: c.curve || 'none', tr: c.tr || 'cut', fx: c.zoom || 'none', look: p.filter || 'none', vol: 1, props: {} }; n.clips.push(nc); t += cdur(nc); });
+    (p.texts || []).forEach(x => n.clips.push({ ...x, type: 't', track: 'V2' }));
+    if (p.music) { const m = mediaById(p.music.m); n.clips.push({ id: uid(), type: 'm', track: 'A2', start: 0, m: p.music.m, in: p.music.offset, out: Math.min(m ? m.dur : 1e9, p.music.offset + Math.max(t, 1)), speed: 1, curve: 'none', vol: p.music.vol ?? 0.9, fadeIn: 0, fadeOut: 1 }); }
+    return n;
+  }
   async function loadProj(id) {
     pause(); const p = await KV.get('proj-' + id, null);
     if (!p) { toast('Loyiha topilmadi'); return; }
-    proj = Object.assign(newProject(), p); hist = []; fut = []; sel = null; T = 0; KV.set('lastProj', id);
-    proj.texts.forEach(x => loadFont(x.font)); renderAll(); updUndo(); renderProjSel();
+    proj = migrate(Object.assign({}, p)); proj.markers = proj.markers || []; hist = []; fut = []; sel = new Set(); T = 0; KV.set('lastProj', id);
+    proj.clips.forEach(c => c.type === 't' && loadFont(c.font)); renderAll(); updUndo(); renderProjSel();
   }
   function renderProjSel() {
-    const s = $('projSel'); const list = index.slice().sort((a, b) => b.updated - a.updated);
-    s.innerHTML = list.map(p => `<option value="${p.id}"${proj && p.id === proj.id ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
+    $('projSel').innerHTML = index.slice().sort((a, b) => b.updated - a.updated).map(p => `<option value="${p.id}"${proj && p.id === proj.id ? ' selected' : ''}>${esc(p.name)}</option>`).join('');
   }
   function renderContinue() {
     const last = index.slice().sort((a, b) => b.updated - a.updated)[0];
@@ -1206,7 +1279,7 @@ const Editor = (() => {
   }
   $('contBtn').onclick = async () => { const last = index.slice().sort((a, b) => b.updated - a.updated)[0]; if (last && (!proj || proj.id !== last.id)) await loadProj(last.id); show('editor'); };
   $('projSel').onchange = e => loadProj(e.target.value);
-  $('projNew').onclick = () => { pause(); proj = newProject(); hist = []; fut = []; sel = null; T = 0; saveProj(); renderAll(); updUndo(); toast('Yangi loyiha'); };
+  $('projNew').onclick = () => { pause(); proj = newProject(); hist = []; fut = []; sel = new Set(); T = 0; saveProj(); renderAll(); updUndo(); toast('Yangi loyiha'); };
   $('projRename').onclick = async () => { const n = await dlg('Loyiha nomi:', { input: proj.name, ok: 'Saqlash' }); if (n && n.trim()) { proj.name = n.trim(); saveProj(); } };
   $('projDel').onclick = async () => {
     if (!(await dlg(`«${proj.name}» loyihasini o'chirasizmi?`, { ok: "O'chirish" }))) return;
@@ -1216,151 +1289,318 @@ const Editor = (() => {
   $('undoBtn').onclick = undo; $('redoBtn').onclick = redo;
 
   /* ---------- media ---------- */
+  const urlOf = m => urls[m.id] || (urls[m.id] = URL.createObjectURL(m.blob));
+  function dropMedia(id) { for (const k in pool) if (pool[k].m === id) { try { pool[k].el.pause && pool[k].el.pause(); } catch (e) {} delete pool[k]; } if (urls[id]) { URL.revokeObjectURL(urls[id]); delete urls[id]; } }
   function kindOf(f) {
     if (f.type.startsWith('video')) return 'video'; if (f.type.startsWith('image')) return 'image'; if (f.type.startsWith('audio')) return 'audio';
     const e = (f.name.split('.').pop() || '').toLowerCase();
     return ['mp4', 'mov', 'webm', 'mkv', 'm4v'].includes(e) ? 'video' : ['jpg', 'jpeg', 'png', 'webp', 'gif'].includes(e) ? 'image' : ['mp3', 'wav', 'm4a', 'aac', 'ogg', 'flac'].includes(e) ? 'audio' : null;
   }
-  function thumbOf(el, w, h) {
-    const c = document.createElement('canvas'); c.width = 90; c.height = 160; const x = c.getContext('2d');
-    const k = Math.max(90 / w, 160 / h); x.drawImage(el, (90 - w * k) / 2, (160 - h * k) / 2, w * k, h * k); return c.toDataURL('image/jpeg', 0.7);
-  }
-  async function addFiles(files, { toTimeline = false, idOverride = null } = {}) {
+  function frameOf(el, w, h, W, H, q = 0.7) { const c = document.createElement('canvas'); c.width = W; c.height = H; const k = Math.max(W / w, H / h); c.getContext('2d').drawImage(el, (W - w * k) / 2, (H - h * k) / 2, w * k, h * k); return c.toDataURL('image/jpeg', q); }
+  async function addFiles(files, { idOverride = null } = {}) {
     const added = [];
     for (const f of files) {
-      const kind = kindOf(f); if (!kind) { toast('Qo\'llab-quvvatlanmaydi: ' + f.name); continue; }
+      const kind = kindOf(f); if (!kind) { toast("Qo'llab-quvvatlanmaydi: " + f.name); continue; }
       toast('Yuklanmoqda: ' + f.name, 8000);
-      const rec = { id: idOverride || uid(), name: f.name, kind, blob: f, added: Date.now() };
-      const url = URL.createObjectURL(f);
+      const rec = { id: idOverride || uid(), name: f.name, kind, blob: f, added: Date.now() }, url = URL.createObjectURL(f);
       try {
         if (kind === 'video') {
           const v = makeVideo(url); if (!(await waitMeta(v))) throw new Error("videoni o'qib bo'lmadi");
           rec.dur = v.duration; rec.w = v.videoWidth; rec.h = v.videoHeight;
-          await seekEl(v, Math.min(1, rec.dur * 0.1)); rec.thumb = thumbOf(v, rec.w, rec.h);
+          const fw = Math.max(16, Math.round(50 * rec.w / rec.h)); rec.film = [];
+          for (let i = 0; i < 10; i++) { await seekEl(v, rec.dur * (i + 0.5) / 10); rec.film.push(frameOf(v, rec.w, rec.h, fw, 50, 0.6)); }
+          await seekEl(v, Math.min(1, rec.dur * 0.1)); rec.thumb = frameOf(v, rec.w, rec.h, 90, 160);
           const sc = await scanVideoEl(v, { frames: 0, maxSteps: 120 }); rec.motion = sc.motion; rec.cuts = sc.cuts;
+          const buf = await decodeAudio(f); rec.hasAudio = !!buf; if (buf) rec.peaks = peaksOf(buf);
         } else if (kind === 'image') {
-          const img = new Image(); img.src = url; await img.decode(); rec.w = img.naturalWidth; rec.h = img.naturalHeight; rec.dur = 0; rec.thumb = thumbOf(img, rec.w, rec.h);
+          const img = new Image(); img.src = url; await img.decode(); rec.w = img.naturalWidth; rec.h = img.naturalHeight; rec.dur = 0;
+          rec.thumb = frameOf(img, rec.w, rec.h, 90, 160); rec.film = [frameOf(img, rec.w, rec.h, Math.max(16, Math.round(50 * rec.w / rec.h)), 50, 0.6)];
         } else {
           const buf = await decodeAudio(f); if (!buf) throw new Error("audioni o'qib bo'lmadi");
-          rec.dur = buf.duration; rec.peaks = peaksOf(buf); const b = detectBeats(buf); rec.bpm = b.bpm; rec.beats = b.beats;
+          rec.dur = buf.duration; rec.peaks = peaksOf(buf); rec.hasAudio = true; const b = detectBeats(buf); rec.bpm = b.bpm; rec.beats = b.beats;
         }
       } catch (e) { toast('Xato: ' + f.name + ' — ' + (e.message || e)); URL.revokeObjectURL(url); continue; }
-      URL.revokeObjectURL(url);
-      if (rt[rec.id]) { URL.revokeObjectURL(rt[rec.id].url); delete rt[rec.id]; }
+      URL.revokeObjectURL(url); dropMedia(rec.id);
       media = media.filter(m => m.id !== rec.id); media.push(rec); IDB.put(rec); added.push(rec);
-      if (toTimeline) addToTimeline(rec, false);
     }
     renderMedia(); renderAll(); if (added.length) toast(`✓ ${added.length} ta fayl qo'shildi`);
     return added;
   }
   function renderMedia() {
-    $('mediaList').innerHTML = media.length ? media.slice().sort((a, b) => a.added - b.added).map(m => `<div class="mi" draggable="true" data-mid="${m.id}" title="Bosing — timelinega qo'shish">
+    $('mediaCount').textContent = media.length ? media.length + ' ta' : '';
+    $('mediaList').innerHTML = media.length ? media.slice().sort((a, b) => a.added - b.added).map(m => `<div class="mi" draggable="true" data-mid="${m.id}" title="Timelinega sudrang yoki bosing">
       ${m.thumb ? `<img src="${m.thumb}" alt="">` : `<div class="ph">${m.kind === 'audio' ? '🎵' : '📄'}</div>`}
-      <div class="t"><b>${esc(m.name)}</b><span>${m.kind === 'video' ? '🎬 ' + m.dur.toFixed(1) + ' s' : m.kind === 'image' ? '🖼 rasm' : '🎵 ' + m.dur.toFixed(0) + ' s' + (m.bpm ? ' · ' + m.bpm + ' BPM' : '')}</span></div>
+      <div class="t"><b>${esc(m.name)}</b><span>${m.kind === 'video' ? '🎬 ' + tc(m.dur).slice(3) + (m.hasAudio ? ' · 🔊' : '') : m.kind === 'image' ? '🖼 rasm' : '🎵 ' + tc(m.dur).slice(3) + (m.bpm ? ' · ' + m.bpm + ' BPM' : '')}</span></div>
       <button class="x" data-mdel="${m.id}" title="O'chirish">×</button></div>`).join('') : '<div class="muted" style="padding:6px">Hali media yo\'q.</div>';
-    $('stageEmpty').hidden = !!(proj && (proj.clips.length || proj.texts.length));
+    $('stageEmpty').hidden = !!(proj && proj.clips.length);
   }
-  function addToTimeline(m, withMutate = true, at = null) {
-    const fn = () => {
-      if (m.kind === 'audio') { proj.music = { m: m.id, offset: 0, vol: 0.9 }; return; }
-      const c = { id: uid(), m: m.id, in: 0, out: m.kind === 'video' ? Math.min(m.dur, 6) : 2.5, speed: 1, curve: 'none', tr: 'cut', zoom: m.kind === 'image' ? 'zoomIn' : 'none', vol: 1, panX: 0.5, panY: 0.5 };
-      if (at == null) proj.clips.push(c); else proj.clips.splice(at, 0, c);
-      sel = { k: 'v', id: c.id };
-    };
-    if (withMutate) mutate(fn); else { beginEdit(); fn(); endEdit(); }
+  const pairTrack = (vid) => { const vi = vTracks().findIndex(t => t.id === vid), a = aTracks(); return (a[vi] || a[0] || {}).id; };
+  function placeMedia(m, trackId, start) {
+    const made = [], link = uid();
+    if (m.kind === 'audio') {
+      const tk = kindOfTrack(trackId) === 'a' ? trackId : (aTracks().find(t => !onTrack(t.id).some(c => c.start < start + 1 && cend(c) > start)) || aTracks()[aTracks().length - 1]).id;
+      made.push({ id: uid(), type: 'm', track: tk, start, m: m.id, in: 0, out: m.dur, speed: 1, curve: 'none', vol: 1, fadeIn: 0, fadeOut: 0 });
+    } else {
+      const tk = kindOfTrack(trackId) === 'v' ? trackId : 'V1';
+      const v = { id: uid(), type: 'm', track: tk, start, m: m.id, in: 0, out: m.kind === 'video' ? Math.min(m.dur, 600) : 3, speed: 1, curve: 'none', tr: 'cut', fx: m.kind === 'image' ? 'zoomIn' : 'none', look: 'none', props: {} };
+      made.push(v);
+      if (m.kind === 'video' && m.hasAudio && pairTrack(tk)) { v.link = link; made.push({ id: uid(), type: 'm', track: pairTrack(tk), start, m: m.id, in: v.in, out: v.out, speed: 1, curve: 'none', vol: 1, fadeIn: 0, fadeOut: 0, link }); }
+    }
+    proj.clips.push(...made); overwrite(made); return made;
+  }
+  function addToTimeline(m) {
+    mutate(() => {
+      const made = m.kind === 'audio' ? placeMedia(m, 'A2', snapF(T)) : placeMedia(m, 'V1', Math.max(0, ...onTrack('V1').map(cend)));
+      sel = new Set(made.map(c => c.id));
+    });
+    toast("Timelinega qo'shildi");
   }
   $('drop').onclick = () => $('mediaFile').click();
   $('mediaFile').onchange = e => { addFiles([...e.target.files]); e.target.value = ''; };
-  const ed = $('tab-editor');
-  ed.addEventListener('dragover', e => { if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); $('drop').classList.add('over'); } });
-  ed.addEventListener('dragleave', e => { if (e.target === $('drop')) $('drop').classList.remove('over'); });
-  ed.addEventListener('drop', e => {
+  const edTab = $('tab-editor');
+  edTab.addEventListener('dragover', e => { if (e.dataTransfer.types.includes('Files')) { e.preventDefault(); $('drop').classList.add('over'); } });
+  edTab.addEventListener('dragleave', e => { if (e.target === $('drop')) $('drop').classList.remove('over'); });
+  edTab.addEventListener('drop', async e => {
     $('drop').classList.remove('over');
-    if (e.dataTransfer.files.length) { e.preventDefault(); addFiles([...e.dataTransfer.files], { toTimeline: !!e.target.closest('.timeline') }); }
+    if (!e.dataTransfer.files.length) return; e.preventDefault();
+    const inTl = e.target.closest('#tlInner'), x = e.clientX, y = e.clientY;
+    const added = await addFiles([...e.dataTransfer.files]);
+    if (inTl && added.length) { const { t, track } = posAt(x, y); mutate(() => { let s = t; added.forEach(m => { const mk = placeMedia(m, track, s); s = Math.max(...mk.map(cend)); }); }); }
   });
   $('mediaList').addEventListener('click', async e => {
     const d = e.target.closest('[data-mdel]');
     if (d) {
-      e.stopPropagation(); const id = d.dataset.mdel;
-      const used = proj && (proj.clips.some(c => c.m === id) || (proj.music && proj.music.m === id));
+      e.stopPropagation(); const id = d.dataset.mdel, used = proj && proj.clips.some(c => c.m === id);
       if (!(await dlg(used ? "Bu fayl timelineda ishlatilgan. Baribir o'chirasizmi?" : "Faylni o'chirasizmi?", { ok: "O'chirish" }))) return;
-      media = media.filter(m => m.id !== id); IDB.del(id); if (rt[id]) { URL.revokeObjectURL(rt[id].url); delete rt[id]; } renderMedia(); renderAll(); return;
+      media = media.filter(m => m.id !== id); IDB.del(id); dropMedia(id); renderMedia(); renderAll(); return;
     }
-    const it = e.target.closest('[data-mid]'); if (it) { addToTimeline(mediaById(it.dataset.mid)); toast("Timelinega qo'shildi"); }
+    const it = e.target.closest('[data-mid]'); if (it) addToTimeline(mediaById(it.dataset.mid));
   });
   $('mediaList').addEventListener('dragstart', e => { const it = e.target.closest('[data-mid]'); if (it) e.dataTransfer.setData('text/mid', it.dataset.mid); });
   $('tlScroll').addEventListener('dragover', e => { if (e.dataTransfer.types.includes('text/mid')) e.preventDefault(); });
   $('tlScroll').addEventListener('drop', e => {
-    const id = e.dataTransfer.getData('text/mid'); if (!id) return; e.preventDefault();
-    const x = e.clientX - $('tlInner').getBoundingClientRect().left, t = x / pps, L = layout();
-    let at = proj.clips.length; for (let i = 0; i < L.length; i++) if (t < L[i] + cdur(proj.clips[i]) / 2) { at = i; break; }
-    addToTimeline(mediaById(id), true, at);
+    const id = e.dataTransfer.getData('text/mid'); if (!id) return; e.preventDefault(); e.stopPropagation();
+    const { t, track } = posAt(e.clientX, e.clientY), m = mediaById(id);
+    mutate(() => { sel = new Set(placeMedia(m, track, snapF(t)).map(c => c.id)); });
   });
-
   async function importWithCuts(file, cuts) {
-    show('editor');
-    pause(); proj = newProject(file.name.replace(/\.[^.]+$/, '') + ' (qayta montaj)'); hist = []; fut = []; T = 0; saveProj();
+    show('editor'); pause(); proj = newProject(file.name.replace(/\.[^.]+$/, '') + ' (qayta montaj)'); hist = []; fut = []; T = 0; saveProj();
     const [m] = await addFiles([file]); if (!m) return;
     mutate(() => {
       const pts = [0, ...cuts.filter(c => c > 0.2 && c < m.dur - 0.2), m.dur];
-      for (let i = 0; i < pts.length - 1; i++) proj.clips.push({ id: uid(), m: m.id, in: pts[i], out: pts[i + 1], speed: 1, curve: 'none', tr: 'cut', zoom: 'none', vol: 1, panX: .5, panY: .5 });
+      for (let i = 0; i < pts.length - 1; i++) {
+        const link = m.hasAudio ? uid() : null;
+        proj.clips.push({ id: uid(), type: 'm', track: 'V1', start: pts[i], m: m.id, in: pts[i], out: pts[i + 1], speed: 1, curve: 'none', tr: 'cut', fx: 'none', look: 'none', props: {}, link });
+        if (link) proj.clips.push({ id: uid(), type: 'm', track: 'A1', start: pts[i], m: m.id, in: pts[i], out: pts[i + 1], speed: 1, curve: 'none', vol: 1, fadeIn: 0, fadeOut: 0, link });
+      }
     });
-    toast(`${proj.clips.length} ta kadrga bo'lindi — endi tahrirlang`);
+    toast(`${pts_count()} ta kadrga bo'lindi — endi tahrirlang`);
+  }
+  const pts_count = () => onTrack('V1').length;
+
+  /* ---------- tahrir amallari ---------- */
+  function setStart(o, ns) { const d = ns - o.start; if (o.type === 't') o.dur -= d; else { o.in += d * rate(o); shiftKf(o, -d); } o.start = ns; }
+  function setEnd(o, ne) { if (o.type === 't') o.dur = ne - o.start; else o.out = o.in + (ne - o.start) * rate(o); }
+  function overwrite(moved) {
+    const ids = new Set(moved.map(c => c.id)), add = [];
+    moved.forEach(mc => {
+      const s = mc.start, e = cend(mc), eps = 1e-4;
+      proj.clips.filter(o => o.track === mc.track && !ids.has(o.id)).forEach(o => {
+        const os = o.start, oe = cend(o); if (oe <= s + eps || os >= e - eps) return;
+        if (os >= s - eps && oe <= e + eps) o._del = true;
+        else if (os < s && oe > e) { const r = JSON.parse(JSON.stringify(o)); r.id = uid(); setStart(r, e); if (r.link) r.link = r.link + '~' + Math.round(e * 1000); setEnd(o, s); add.push(r); }
+        else if (os < s) setEnd(o, s); else setStart(o, e);
+      });
+    });
+    proj.clips = proj.clips.filter(c => !c._del).concat(add);
+  }
+  const linkedOf = c => c.link ? proj.clips.filter(x => x.link === c.link) : [c];
+  const expand = list => { const out = new Set(); list.forEach(c => (linkOn ? linkedOf(c) : [c]).forEach(x => out.add(x))); return [...out]; };
+  function splitClip(c, t, linkMap) {
+    if (t <= c.start + F1 / 2 || t >= cend(c) - F1 / 2) return null;
+    const r = JSON.parse(JSON.stringify(c)); r.id = uid(); const lt = t - c.start;
+    if (c.type === 't') { r.dur = cend(c) - t; c.dur = lt; }
+    else { const mid = srcAt(c, lt); r.in = mid; c.out = mid; r.tr = 'cut'; shiftKf(r, -lt); if (c.fadeOut) c.fadeOut = 0; if (r.fadeIn) r.fadeIn = 0; }
+    r.start = t;
+    if (c.link) { linkMap[c.link] = linkMap[c.link] || uid(); r.link = linkMap[c.link]; }
+    proj.clips.push(r); return r;
+  }
+  function splitAt(clips, t) { const lm = {}; let n = 0; clips.forEach(c => { if (splitClip(c, t, lm)) n++; }); return n; }
+  const unlocked = c => !(trackById(c.track) || {}).lock;
+  const underT = (t = T) => proj.clips.filter(c => unlocked(c) && c.start < t - 1e-4 && cend(c) > t + 1e-4);
+  function cmdSplit() {
+    const s = [...sel].map(clipById).filter(Boolean), base = s.length ? expand(s) : underT();
+    beginEdit(); const n = splitAt(base.filter(c => c.start < T && cend(c) > T), snapF(T)); endEdit(); renderAll();
+    if (!n) toast("Playhead ostida kesiladigan klip yo'q");
+  }
+  function rippleRemove(ranges) { // ranges: [{track, s, e}]
+    ranges.sort((a, b) => b.s - a.s).forEach(r => { proj.clips.filter(c => c.track === r.track && c.start >= r.e - 1e-4).forEach(c => c.start -= (r.e - r.s)); });
+  }
+  function delSel(ripple) {
+    const s = [...sel].map(clipById).filter(Boolean).filter(unlocked); if (!s.length) return;
+    const all = expand(s).filter(unlocked);
+    mutate(() => { const ids = new Set(all.map(c => c.id)); proj.clips = proj.clips.filter(c => !ids.has(c.id)); if (ripple) rippleRemove(all.map(c => ({ track: c.track, s: c.start, e: cend(c) }))); sel = new Set(); });
+  }
+  function trimToPlayhead(side) { // Q / W
+    const list = underT(); if (!list.length) return toast("Playhead ostida klip yo'q");
+    mutate(() => {
+      const t = snapF(T), ranges = [];
+      list.forEach(c => { if (side === 'q') { const d = t - c.start; ranges.push({ track: c.track, s: c.start, e: t }); setStart(c, t); c.start -= 0; c._shift = d; } else { ranges.push({ track: c.track, s: t, e: cend(c) }); setEnd(c, t); } });
+      if (side === 'q') { list.forEach(c => { c.start = c.start; }); ranges.sort((a, b) => b.s - a.s).forEach(r => { proj.clips.filter(c => c.track === r.track && c.start >= r.e - 1e-4).forEach(c => c.start -= (r.e - r.s)); }); list.forEach(c => delete c._shift); }
+      else rippleRemove(ranges);
+    });
+    if (side === 'q') setT(list[0].start);
+  }
+  function copySel() { const s = expand([...sel].map(clipById).filter(Boolean)); if (!s.length) return; const t0 = Math.min(...s.map(c => c.start)); clipboard = s.map(c => ({ ...JSON.parse(JSON.stringify(c)), start: c.start - t0 })); toast(`${s.length} ta klip nusxalandi`); }
+  function paste() {
+    if (!clipboard) return; const lm = {};
+    mutate(() => { const made = clipboard.map(c => { const n = JSON.parse(JSON.stringify(c)); n.id = uid(); n.start += snapF(T); if (n.link) n.link = lm[n.link] || (lm[n.link] = uid()); if (!trackById(n.track)) n.track = n.type === 't' || mediaById(n.m)?.kind !== 'audio' ? 'V1' : 'A1'; return n; }); proj.clips.push(...made); overwrite(made); sel = new Set(made.map(c => c.id)); });
+  }
+  function addTrack(kind) { mutate(() => { const n = proj.tracks.filter(t => t.kind === kind).length + 1; let id = (kind === 'v' ? 'V' : 'A') + n; while (trackById(id)) id += '′'; proj.tracks.push({ id, kind }); }); }
+  function editPoints() { return [...new Set([0, ...proj.clips.flatMap(c => [c.start, cend(c)])].map(t => +t.toFixed(4)))].sort((a, b) => a - b); }
+  let lastFont = 'Bebas Neue';
+  function addText(o = {}) {
+    const x = { id: uid(), type: 't', track: 'V2', text: 'Matningiz', start: snapF(T), dur: 2.5, font: lastFont, size: 0.11, color: '#ffffff', style: 'bold', anim: 'pop', x: 0.5, y: 0.35, bold: true, ...o };
+    loadFont(x.font); mutate(() => { proj.clips.push(x); overwrite([x]); sel = new Set([x.id]); });
+    setTimeout(() => { const ta = $('insp').querySelector('textarea'); if (ta) { ta.focus(); ta.select(); } }, 50);
+  }
+  function useFont(name) {
+    show('editor'); lastFont = name; loadFont(name);
+    const x = [...sel].map(clipById).find(c => c && c.type === 't');
+    if (x) { mutate(() => { x.font = name; }); toast("Shrift qo'yildi: " + name); }
+    else { addText({ font: name, text: $('fontSample').value || 'Matningiz' }); toast("Matn qo'shildi: " + name); }
+  }
+  function usePair(a, b) {
+    show('editor'); loadFont(a); loadFont(b); const t0 = snapF(T);
+    mutate(() => {
+      const x1 = { id: uid(), type: 't', track: 'V2', text: $('fontSample').value || 'Sarlavha', start: t0, dur: 3, font: a, size: 0.12, color: '#ffffff', style: 'bold', anim: 'pop', x: .5, y: .42, bold: true };
+      const x2 = { id: uid(), type: 't', track: 'V3', text: 'Ikkinchi qator', start: t0 + 0.3, dur: 2.7, font: b, size: 0.05, color: '#ffffff', style: 'plain', anim: 'fade', x: .5, y: .5, bold: false };
+      proj.clips.push(x1, x2); overwrite([x1, x2]);
+    });
+    toast("Juftlik qo'shildi (V2 va V3)");
+  }
+  function snapToBeats() {
+    const bs = timelineBeats(); if (bs.length < 2) return false;
+    const v1 = onTrack('V1').filter(c => c.type === 'm'); if (!v1.length) return false;
+    let acc = v1[0].start;
+    v1.forEach(c => {
+      const D = cdur(c), end = acc + D; let best = null;
+      for (const b of bs) if (b > acc + 0.25 && (best == null || Math.abs(b - end) < Math.abs(best - end))) best = b;
+      const partners = linkedOf(c).filter(x => x !== c);
+      c.start = acc;
+      if (best != null && Math.abs(best - end) < Math.max(0.3, D * 0.5)) c.out = clamp(c.in + (best - acc) * rate(c), c.in + 0.1, maxDur(mediaById(c.m)));
+      partners.forEach(p => { p.start = c.start; p.in = c.in; p.out = c.out; p.speed = c.speed; p.curve = c.curve; });
+      acc = cend(c);
+    });
+    return true;
+  }
+
+  /* ---------- elementlar puli va ovoz grafi ---------- */
+  let actx = null, master = null, anL = null, anR = null;
+  function ensureCtx() {
+    if (actx) { if (actx.state === 'suspended') actx.resume(); return; }
+    try {
+      actx = new (window.AudioContext || window.webkitAudioContext)(); master = actx.createGain();
+      const sp = actx.createChannelSplitter(2); anL = actx.createAnalyser(); anR = actx.createAnalyser(); anL.fftSize = anR.fftSize = 512;
+      master.connect(actx.destination); master.connect(sp); sp.connect(anL, 0); sp.connect(anR, 1);
+    } catch (e) { actx = null; }
+  }
+  function poolEl(kind, m, lane) {
+    const key = kind + ':' + m.id + ':' + lane;
+    if (!pool[key]) {
+      const url = urlOf(m); let el;
+      if (kind === 'v') { el = makeVideo(url); el.addEventListener('seeked', () => dirty = true); el.addEventListener('loadeddata', () => dirty = true); }
+      else if (kind === 'i') { el = new Image(); el.onload = () => dirty = true; el.src = url; }
+      else { el = new Audio(url); el.preload = 'auto'; }
+      pool[key] = { el, kind, m: m.id };
+    }
+    return pool[key];
+  }
+  function setVol(en, v) {
+    if (actx && !en.g && !en.nog) { try { const s = actx.createMediaElementSource(en.el); en.g = actx.createGain(); s.connect(en.g).connect(master); } catch (e) { en.nog = true; } }
+    if (en.g) { en.el.volume = 1; en.g.gain.value = v; } else en.el.volume = clamp(v, 0, 1);
+  }
+  const fadeK = (c, lt) => { const D = cdur(c); let f = 1; if (c.fadeIn > 0 && lt < c.fadeIn) f = lt / c.fadeIn; if (c.fadeOut > 0 && lt > D - c.fadeOut) f = Math.min(f, (D - lt) / c.fadeOut); return clamp(f, 0, 1); };
+  function activeAt(t) { // {v:[{c,en}], a:[{c,en}]}
+    const lanes = {}, out = { v: [], a: [] };
+    for (const tr of proj.tracks) {
+      if (tr.kind === 'v' && tr.hide) continue; if (tr.kind === 'a' && !audible(tr)) continue;
+      for (const c of proj.clips) {
+        if (c.track !== tr.id || c.type !== 'm' || t < c.start || t >= cend(c)) continue;
+        const m = mediaById(c.m); if (!m) { if (tr.kind === 'v') out.v.push({ c, en: null }); continue; }
+        if (tr.kind === 'v') { if (m.kind === 'image') out.v.push({ c, en: poolEl('i', m, 0) }); else if (m.kind === 'video') { const k = 'v' + m.id; lanes[k] = (lanes[k] ?? -1) + 1; out.v.push({ c, en: poolEl('v', m, lanes[k]) }); } }
+        else { const k = 'a' + m.id; lanes[k] = (lanes[k] ?? -1) + 1; out.a.push({ c, en: poolEl('a', m, lanes[k]) }); }
+      }
+    }
+    return out;
+  }
+  function syncMedia() {
+    const act = activeAt(T), used = new Set();
+    act.v.forEach(({ c, en }) => {
+      if (!en || en.kind !== 'v') return; used.add(en); const el = en.el, lt = T - c.start, want = srcAt(c, lt), r = clamp(rateAt(c, lt) * playRate, 0.07, 16);
+      if (playing) { if (Math.abs(el.playbackRate - r) > 0.02) el.playbackRate = r; if (el.paused) { el.currentTime = want; el.play().catch(() => {}); } else if (Math.abs(el.currentTime - want) > 0.3) el.currentTime = want; }
+      else if (!el.seeking && Math.abs(el.currentTime - want) > 0.03) el.currentTime = want;
+    });
+    act.a.forEach(({ c, en }) => {
+      used.add(en); const el = en.el, lt = T - c.start, want = srcAt(c, lt);
+      if (playing) { setVol(en, (c.vol ?? 1) * fadeK(c, lt)); const r = clamp(rateAt(c, lt) * playRate, 0.07, 16); if (Math.abs(el.playbackRate - r) > 0.02) el.playbackRate = r;
+        if (el.paused) { el.currentTime = want; el.play().catch(() => {}); } else if (Math.abs(el.currentTime - want) > 0.25) el.currentTime = want; }
+    });
+    for (const k in pool) { const en = pool[k]; if (!used.has(en) && en.el.pause && !en.el.paused) en.el.pause(); if (!playing && en.kind === 'a' && !en.el.paused) en.el.pause(); }
+    return act;
   }
 
   /* ---------- chizish ---------- */
   const easeOut = p => 1 - Math.pow(1 - p, 3);
   const easeBack = p => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(p - 1, 3) + c1 * Math.pow(p - 1, 2); };
   const lum = hex => { const n = parseInt((hex || '#fff').slice(1), 16); return ((n >> 16) * .3 + (n >> 8 & 255) * .59 + (n & 255) * .11) / 255; };
-  function draw(t) {
+  function draw(t, act) {
     const W = cv.width, H = cv.height;
-    ctx.save(); ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
-    const a = clipAt(t);
-    if (a) {
-      const { c, start } = a, lt = t - start, D = cdur(c), m = mediaById(c.m);
-      let s = 1, tx = 0, ty = 0, blur = 0, alpha = 1, flash = 0, glitch = 0;
-      if (c.zoom === 'zoomIn') s *= 1 + 0.15 * (lt / D);
-      if (c.zoom === 'zoomOut') s *= 1.15 - 0.15 * (lt / D);
-      if (c.zoom === 'shake' && lt < 0.45) { const k = 1 - lt / 0.45; tx += Math.sin(lt * 90) * W * 0.025 * k; ty += Math.cos(lt * 70) * W * 0.02 * k; s *= 1 + 0.05 * k; }
-      if (c.zoom === 'pulse') { const bs = projBeats(); let b = -1; for (const x of bs) { if (x <= t) b = x; else break; } const dt = t - b; if (b >= 0 && dt < 0.18) s *= 1 + 0.07 * (1 - dt / 0.18); }
-      const p = lt / 0.35;
-      if (p < 1 && (a.i > 0 || c.tr === 'fade')) {
-        const e = easeOut(p);
-        if (c.tr === 'flash') flash = 1 - p;
-        if (c.tr === 'zoom') { s *= 1 + 0.5 * (1 - e); blur = 8 * (1 - e); }
-        if (c.tr === 'whip') { tx += (1 - e) * W * 0.9; blur = 18 * (1 - e); }
-        if (c.tr === 'fade') alpha = e;
-        if (c.tr === 'glitch') glitch = 1 - p;
-        if (c.tr === 'slide') ty += (1 - e) * H;
-      }
-      let f = FILTERS[proj.filter] || 'none'; if (blur > 0.5) f = (f === 'none' ? '' : f + ' ') + `blur(${blur.toFixed(1)}px)`;
-      ctx.globalAlpha = alpha; ctx.filter = f;
-      if (m) {
-        const el = rtOf(m).el, sw = m.kind === 'video' ? el.videoWidth : el.naturalWidth, sh = m.kind === 'video' ? el.videoHeight : el.naturalHeight;
-        if (sw && (m.kind !== 'video' || el.readyState >= 2)) {
-          const k = Math.max(W / sw, H / sh) * s, dw = sw * k, dh = sh * k;
-          ctx.drawImage(el, (W - dw) * (c.panX ?? .5) + tx, (H - dh) * (c.panY ?? .5) + ty, dw, dh);
-        }
-      } else { ctx.filter = 'none'; ctx.fillStyle = '#1a1030'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#fff'; ctx.font = `600 ${W * 0.04}px Manrope`; ctx.textAlign = 'center'; ctx.fillText('⚠ Media topilmadi — qayta ulang', W / 2, H / 2); }
-      ctx.filter = 'none'; ctx.globalAlpha = 1;
-      if (glitch > 0) {
-        for (let i = 0; i < 7; i++) { const y = Math.random() * H, h = 10 + Math.random() * H * 0.06, off = (Math.random() - .5) * W * 0.25 * glitch; ctx.drawImage(cv, 0, y, W, h, off, y, W, h); }
-        ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = `rgba(255,0,160,${0.18 * glitch})`; ctx.fillRect(0, 0, W, H); ctx.globalCompositeOperation = 'source-over';
-      }
-      if (flash > 0) { ctx.fillStyle = `rgba(255,255,255,${flash})`; ctx.fillRect(0, 0, W, H); }
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.filter = 'none'; ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H);
+    act = act || activeAt(t); hitBoxes = {};
+    const byTrack = {}; act.v.forEach(x => byTrack[x.c.track] = x);
+    for (const tr of vTracks()) {
+      if (tr.hide) continue;
+      const x = byTrack[tr.id]; if (x) drawMedia(x.c, x.en, t);
+      for (const c of proj.clips) if (c.type === 't' && c.track === tr.id && t >= c.start && t < cend(c)) drawText(c, t - c.start);
     }
-    if (proj && proj.letterbox) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H * 0.1); ctx.fillRect(0, H * 0.9, W, H * 0.1); }
-    hitBoxes = {};
-    if (proj) for (const x of proj.texts) if (t >= x.start && t <= x.start + x.dur) drawText(x, t - x.start);
+    if (proj.letterbox) { ctx.fillStyle = '#000'; ctx.fillRect(0, 0, W, H * 0.1); ctx.fillRect(0, H * 0.9, W, H * 0.1); }
     ctx.restore();
+  }
+  function drawMedia(c, en, t) {
+    const W = cv.width, H = cv.height, lt = t - c.start, D = cdur(c), m = mediaById(c.m);
+    let s = pv(c, 'scale', lt) / 100, tx = pv(c, 'posX', lt) / 100 * W, ty = pv(c, 'posY', lt) / 100 * H, rot = pv(c, 'rot', lt), alpha = pv(c, 'opacity', lt) / 100, blur = 0, flash = 0, glitch = 0;
+    if (c.fx === 'zoomIn') s *= 1 + 0.15 * (lt / D);
+    if (c.fx === 'zoomOut') s *= 1.15 - 0.15 * (lt / D);
+    if (c.fx === 'shake' && lt < 0.45) { const k = 1 - lt / 0.45; tx += Math.sin(lt * 90) * W * 0.025 * k; ty += Math.cos(lt * 70) * W * 0.02 * k; s *= 1 + 0.05 * k; }
+    if (c.fx === 'pulse') { let b = -1; for (const x of timelineBeats()) { if (x <= t) b = x; else break; } const dt = t - b; if (b >= 0 && dt < 0.18) s *= 1 + 0.07 * (1 - dt / 0.18); }
+    const p = lt / 0.35;
+    if (p < 1 && c.tr && c.tr !== 'cut') {
+      const e = easeOut(p);
+      if (c.tr === 'flash') flash = 1 - p; if (c.tr === 'zoom') { s *= 1 + 0.5 * (1 - e); blur = 8 * (1 - e); }
+      if (c.tr === 'whip') { tx += (1 - e) * W * 0.9; blur = 18 * (1 - e); } if (c.tr === 'fade') alpha *= e;
+      if (c.tr === 'glitch') glitch = 1 - p; if (c.tr === 'slide') ty += (1 - e) * H;
+    }
+    ctx.save();
+    let f = FILTERS[c.look] || 'none'; if (blur > 0.5) f = (f === 'none' ? '' : f + ' ') + `blur(${(blur * W / 720).toFixed(1)}px)`;
+    ctx.globalAlpha = clamp(alpha, 0, 1); ctx.filter = f;
+    if (m && en) {
+      const el = en.el, sw = en.kind === 'v' ? el.videoWidth : el.naturalWidth, sh = en.kind === 'v' ? el.videoHeight : el.naturalHeight;
+      if (sw && (en.kind !== 'v' || el.readyState >= 2)) {
+        const k = Math.max(W / sw, H / sh) * s, dw = sw * k, dh = sh * k;
+        ctx.translate(W / 2 + tx, H / 2 + ty); if (rot) ctx.rotate(rot * Math.PI / 180); ctx.drawImage(el, -dw / 2, -dh / 2, dw, dh);
+      }
+    } else { ctx.filter = 'none'; ctx.fillStyle = '#1a1030'; ctx.fillRect(0, 0, W, H); ctx.fillStyle = '#fff'; ctx.font = `600 ${W * 0.04}px Manrope`; ctx.textAlign = 'center'; ctx.fillText('⚠ Media topilmadi — qayta ulang', W / 2, H / 2); }
+    ctx.restore();
+    if (glitch > 0) {
+      for (let i = 0; i < 7; i++) { const y = Math.random() * H, h = 10 + Math.random() * H * 0.06, off = (Math.random() - .5) * W * 0.25 * glitch; ctx.drawImage(cv, 0, y, W, h, off, y, W, h); }
+      ctx.globalCompositeOperation = 'screen'; ctx.fillStyle = `rgba(255,0,160,${0.18 * glitch})`; ctx.fillRect(0, 0, W, H); ctx.globalCompositeOperation = 'source-over';
+    }
+    if (flash > 0) { ctx.fillStyle = `rgba(255,255,255,${flash})`; ctx.fillRect(0, 0, W, H); }
   }
   function wrapLines(str, maxW) {
     const out = [];
-    for (const para of String(str).split('\n')) {
-      const words = para.split(' '); let line = '';
-      for (const w of words) { const test = line ? line + ' ' + w : w; if (ctx.measureText(test).width > maxW && line) { out.push(line); line = w; } else line = test; }
-      out.push(line);
-    }
+    for (const para of String(str).split('\n')) { let line = ''; for (const w of para.split(' ')) { const tst = line ? line + ' ' + w : w; if (ctx.measureText(tst).width > maxW && line) { out.push(line); line = w; } else line = tst; } out.push(line); }
     return out;
   }
   function drawText(x, lt) {
@@ -1399,286 +1639,373 @@ const Editor = (() => {
   document.fonts && document.fonts.addEventListener && document.fonts.addEventListener('loadingdone', () => { dirty = true; });
 
   /* ---------- ijro ---------- */
-  function pauseAll() { Object.values(rt).forEach(r => { if (r.el.pause && !r.el.paused) r.el.pause(); }); }
   function play() {
-    if (!proj || (!proj.clips.length && !proj.texts.length)) return;
+    if (!proj || !proj.clips.length) return; ensureCtx();
     if (T >= total() - 0.02) T = 0;
     playing = true; lastTs = performance.now(); $('playBtn').textContent = '❚❚'; syncMedia();
   }
-  function pause() { playing = false; $('playBtn').textContent = '▶'; pauseAll(); dirty = true; }
-  function syncMedia() {
-    const a = clipAt(T), m = a && mediaById(a.c.m);
-    const activeEl = m && m.kind === 'video' ? rtOf(m).el : null;
-    Object.values(rt).forEach(r => { if (r.el !== activeEl && r.el.tagName === 'VIDEO' && !r.el.paused) r.el.pause(); });
-    if (proj.music) {
-      const mm = mediaById(proj.music.m);
-      if (mm) {
-        const el = rtOf(mm).el, want = T + proj.music.offset;
-        if (playing && want < mm.dur) { el.volume = clamp(proj.music.vol, 0, 1); if (el.paused) { el.currentTime = want; el.play().catch(() => {}); } else if (Math.abs(el.currentTime - want) > 0.25) el.currentTime = want; }
-        else if (!el.paused) el.pause();
-      }
-    }
-    if (activeEl) {
-      const want = srcAt(a.c, T - a.start), rate = clamp(rateAt(a.c, T - a.start), 0.07, 16);
-      if (playing) {
-        activeEl.muted = !(a.c.vol > 0); activeEl.volume = clamp(a.c.vol ?? 1, 0, 1);
-        if (Math.abs(activeEl.playbackRate - rate) > 0.02) activeEl.playbackRate = rate;
-        if (activeEl.paused) { activeEl.currentTime = want; activeEl.play().catch(() => {}); }
-        else if (Math.abs(activeEl.currentTime - want) > 0.3) activeEl.currentTime = want;
-      } else if (!activeEl.seeking && Math.abs(activeEl.currentTime - want) > 0.03) activeEl.currentTime = want;
-    }
+  function pause() { playing = false; playRate = 1; $('playBtn').textContent = '▶'; for (const k in pool) { const e = pool[k].el; if (e.pause && !e.paused) e.pause(); } dirty = true; }
+  function setT(t) { T = clamp(t, 0, Math.max(total(), 0)); if (playing) lastTs = performance.now(); syncMedia(); dirty = true; updatePlayhead(); kfInspRefresh(); }
+  function updatePlayhead() {
+    $('playhead').style.left = (T * pps) + 'px';
+    $('tcBig').textContent = $('tcNow').textContent = tc(T); $('tcDur').textContent = tc(total());
   }
-  function setT(t) { T = clamp(t, 0, total()); if (playing) { lastTs = performance.now(); } syncMedia(); dirty = true; updatePlayhead(); }
-  function updatePlayhead() { $('playhead').style.left = (T * pps) + 'px'; $('timeLbl').textContent = `${fmtT(T)} / ${fmtT(total())}`; }
+  let kfT = 0; function kfInspRefresh() { if (sel.size !== 1) return; const c = clipById([...sel][0]); if (!c || !kfTimes(c).length || $('insp').contains(document.activeElement)) return; clearTimeout(kfT); kfT = setTimeout(renderInsp, 60); }
+  const mc = $('meter'), mctx = mc.getContext('2d'), mbuf = new Float32Array(512), pk = [0, 0];
+  function drawMeter() {
+    const H = mc.height, W = mc.width; mctx.clearRect(0, 0, W, H);
+    [anL, anR].forEach((an, i) => {
+      let p = 0; if (an && playing) { an.getFloatTimeDomainData(mbuf); for (let j = 0; j < mbuf.length; j++) p = Math.max(p, Math.abs(mbuf[j])); }
+      pk[i] = Math.max(p, pk[i] * 0.9); const h = clamp((20 * Math.log10(pk[i] || 1e-5) + 60) / 60, 0, 1) * H;
+      const g = mctx.createLinearGradient(0, H, 0, 0); g.addColorStop(0, '#36c27a'); g.addColorStop(.75, '#ffcf4a'); g.addColorStop(1, '#ff5c7a');
+      mctx.fillStyle = 'rgba(255,255,255,.07)'; mctx.fillRect(i * 11, 0, 9, H); mctx.fillStyle = g; mctx.fillRect(i * 11, H - h, 9, h);
+    });
+  }
   function loop(ts) {
     if (!exporting && proj) {
-      if (playing) { T += (ts - lastTs) / 1000; lastTs = ts; const tot = total(); if (T >= tot) { T = tot; pause(); } syncMedia(); draw(T); updatePlayhead(); followPlayhead(); }
-      else if (dirty) { dirty = false; draw(T); updatePlayhead(); }
+      if (playing) { T += (ts - lastTs) / 1000 * playRate; lastTs = ts; const tot = total(); if (T >= tot) { T = tot; pause(); } const act = syncMedia(); draw(T, act); updatePlayhead(); followPlayhead(); drawMeter(); }
+      else if (dirty) { dirty = false; draw(T); updatePlayhead(); if (pk[0] + pk[1] > 0.001) drawMeter(); }
+      else if (pk[0] + pk[1] > 0.001) drawMeter();
     }
     requestAnimationFrame(loop);
   }
-  function followPlayhead() { const s = $('tlScroll'), x = T * pps; if (x > s.scrollLeft + s.clientWidth - 60 || x < s.scrollLeft) s.scrollLeft = x - 60; }
+  function followPlayhead() { const s = $('tlScroll'), x = T * pps; if (x > s.scrollLeft + s.clientWidth - 40 || x < s.scrollLeft) s.scrollLeft = x - 40; }
   $('playBtn').onclick = () => playing ? pause() : play();
-  $('toStart').onclick = () => setT(0); $('toEnd').onclick = () => setT(total());
+  $('frBack').onclick = () => { pause(); setT(snapF(T) - F1); }; $('frFwd').onclick = () => { pause(); setT(snapF(T) + F1); };
+  $('prevEdit').onclick = () => { const p = editPoints().filter(x => x < T - 1e-3); setT(p.length ? p[p.length - 1] : 0); };
+  $('nextEdit').onclick = () => { const p = editPoints().find(x => x > T + 1e-3); setT(p ?? total()); };
+  $('mkBtn').onclick = () => mutate(() => { if (!proj.markers.some(m => Math.abs(m - T) < F1)) proj.markers.push(snapF(T)); });
+  $('safeBtn').onclick = () => { const s = $('safeBox'); s.hidden = !s.hidden; $('safeBtn').classList.toggle('on', !s.hidden); };
+  $('monQ').onchange = e => { const q = num(e.target.value); cv.width = 720 * q; cv.height = 1280 * q; dirty = true; };
 
-  /* ---------- timeline ---------- */
+  /* ---------- timeline chizish ---------- */
+  function renderHeads() {
+    $('heads').innerHTML = `<div class="rsp"><button class="btn sm" data-add="v" title="Video trek qo'shish" style="padding:3px 8px">+V</button><button class="btn sm" data-add="a" title="Audio trek qo'shish" style="padding:3px 8px">+A</button></div>` +
+      displayTracks().map(t => t.kind === 'v'
+        ? `<div class="hd v"><b>${esc(t.id)}</b><button data-h="hide" data-tid="${t.id}" class="${t.hide ? 'off' : ''}" title="Ko'rinish">👁</button><button data-h="lock" data-tid="${t.id}" class="opt ${t.lock ? 'on' : ''}" title="Qulflash">🔒</button></div>`
+        : `<div class="hd a"><b>${esc(t.id)}</b><button data-h="mute" data-tid="${t.id}" class="${t.mute ? 'on' : ''}" title="Ovozsiz (Mute)">M</button><button data-h="solo" data-tid="${t.id}" class="${t.solo ? 'on' : ''}" title="Faqat shu trek (Solo)">S</button><button data-h="lock" data-tid="${t.id}" class="opt ${t.lock ? 'on' : ''}" title="Qulflash">🔒</button></div>`).join('');
+  }
+  $('heads').addEventListener('click', e => {
+    const a = e.target.closest('[data-add]'); if (a) return addTrack(a.dataset.add);
+    const h = e.target.closest('[data-h]'); if (!h) return;
+    mutate(() => { const t = trackById(h.dataset.tid); t[h.dataset.h] = !t[h.dataset.h]; }); syncMedia();
+  });
   function renderTL() {
     if (!proj) return;
-    const tot = total(), inner = $('tlInner'), width = Math.max($('tlScroll').clientWidth - 12, (tot + 4) * pps);
+    renderHeads();
+    const tot = total(), inner = $('tlInner'), width = Math.max($('tlScroll').clientWidth, (tot + 6) * pps);
     inner.style.width = width + 'px';
-    const step = [0.5, 1, 2, 5, 10, 15, 30, 60].find(s => s * pps >= 64) || 60, endT = width / pps;
+    const step = [F1 * 5, F1 * 10, F1 * 15, 1, 2, 5, 10, 15, 30, 60, 120].find(s => s * pps >= 80) || 120, sub = step >= 1 ? step / (step >= 10 ? 5 : 4) : F1 * 5 > step / 2 ? step / 5 : step / 5, endT = width / pps;
     let r = '';
-    for (let t = 0; t <= endT; t += step / 2) { const major = Math.abs(t / step - Math.round(t / step)) < 1e-6; r += `<i style="left:${t * pps}px;height:${major ? 8 : 4}px"></i>` + (major ? `<span style="left:${t * pps}px">${t < 60 ? t + 's' : fmtT(t).replace('.0', '')}</span>` : ''); }
-    const bs = projBeats(); if (bs.length > 1 && (bs[1] - bs[0]) * pps > 5) r += bs.filter(b => b <= endT).map(b => `<i class="beat" style="left:${b * pps}px"></i>`).join('');
+    for (let i = 0, t = 0; t <= endT; i++, t = i * sub) { const major = Math.abs(t / step - Math.round(t / step)) < 1e-6; r += `<i style="left:${t * pps}px;height:${major ? 10 : 4}px"></i>` + (major ? `<span style="left:${t * pps}px">${tc(t).slice(3)}</span>` : ''); }
+    const bs = timelineBeats(); if (bs.length > 1 && (bs[1] - bs[0]) * pps > 6) r += bs.filter(b => b <= endT).map(b => `<i class="beat" style="left:${b * pps}px"></i>`).join('');
+    r += proj.markers.map(m => `<span class="mk" data-mk="${m}" title="Marker ${tc(m)} (Alt+bosish — o'chirish)" style="left:${m * pps}px;top:auto"></span>`).join('');
     $('ruler').innerHTML = r;
-    const L = layout();
-    $('trV').innerHTML = proj.clips.map((c, i) => {
-      const m = mediaById(c.m), bd = [];
-      if (c.speed !== 1) bd.push('×' + c.speed); if (c.curve !== 'none') bd.push('〰'); if (TR_IC[c.tr] && i > 0) bd.push(TR_IC[c.tr]); if (c.zoom !== 'none') bd.push('✦');
-      return `<div class="clip${sel && sel.id === c.id ? ' sel' : ''}" data-k="v" data-id="${c.id}" style="left:${L[i] * pps}px;width:${Math.max(6, cdur(c) * pps - 2)}px;${m && m.thumb ? `background-image:url(${m.thumb})` : ''}">
-        <div class="h l"></div><div class="h r"></div><div class="bd">${bd.map(b => `<span>${b}</span>`).join('')}</div><div class="lb">${m ? esc(m.name) : "⚠ media yo'q"} · ${cdur(c).toFixed(1)}s</div></div>`;
-    }).join('');
-    $('trT').innerHTML = proj.texts.map(x => `<div class="clip txt${sel && sel.id === x.id ? ' sel' : ''}" data-k="t" data-id="${x.id}" style="left:${x.start * pps}px;width:${Math.max(6, x.dur * pps - 2)}px">
-        <div class="h l"></div><div class="h r"></div><div class="lb" style="font-family:'${esc(x.font)}'">${esc(x.text)}</div></div>`).join('');
-    const mm = proj.music && mediaById(proj.music.m);
-    $('trA').innerHTML = proj.music ? `<div class="clip mus${sel && sel.k === 'a' ? ' sel' : ''}" data-k="a" data-id="music" style="left:0;width:${Math.max(40, (tot || 10) * pps)}px" title="Sudrab musiqaning qaysi qismi ijro etilishini tanlang"><canvas></canvas><div class="lb">🎵 ${mm ? esc(mm.name) + (mm.bpm ? ' · ' + mm.bpm + ' BPM' : '') + ' · ' + proj.music.offset.toFixed(1) + 's dan' : "⚠ musiqa yo'q"}</div></div>` : '';
-    const wc = $('trA').querySelector('canvas');
-    if (wc && mm && mm.peaks) {
-      const r2 = wc.getBoundingClientRect(); wc.width = Math.min(4000, r2.width); wc.height = 30; const x = wc.getContext('2d'); x.fillStyle = '#00e5ff';
-      for (let i = 0; i < wc.width; i++) { const t = proj.music.offset + (i / wc.width) * (tot || 10); const pk = mm.peaks[Math.floor(t / mm.dur * mm.peaks.length)] || 0; const h = pk * 28; x.fillRect(i, 15 - h / 2, 1, h || 1); }
-    }
+    $('tracks').innerHTML = displayTracks().map(tr => `<div class="trk ${tr.kind}${tr.lock ? ' locked' : ''}" data-track="${tr.id}">${onTrack(tr.id).map(c => clipHTML(c, tr)).join('')}</div>`).join('');
+    $('tracks').querySelectorAll('canvas[data-wf]').forEach(drawWave);
+    $('nle').classList.toggle('razor', tool === 'razor');
+    mc.height = Math.max(60, mc.clientHeight || 200);
     updatePlayhead();
   }
-  $('zoom').oninput = e => { pps = +e.target.value; renderTL(); };
+  function clipHTML(c, tr) {
+    const m = c.type === 'm' ? mediaById(c.m) : null, D = cdur(c), w = Math.max(3, D * pps - 1), s = sel.has(c.id) ? ' sel' : '';
+    const cls = c.type === 't' ? 't' : tr.kind;
+    const flags = (c.type === 'm' && c.speed !== 1 ? `<em>[${Math.round(c.speed * 100)}%]</em>` : '') + (c.curve && c.curve !== 'none' ? '<em>〰</em>' : '') +
+      ((c.fx && c.fx !== 'none') || (c.look && c.look !== 'none') || (c.props && Object.keys(c.props).length) ? '<em>fx</em>' : '') + (c.link && linkOn ? '' : '');
+    let inner = `<div class="lb">${c.type === 't' ? 'T · ' + esc(c.font) : m ? esc(m.name) : "⚠ media yo'q"}${flags}</div>`;
+    if (c.type === 't') inner += `<div class="tx" style="font-family:'${esc(c.font)}',sans-serif">${esc(c.text)}</div>`;
+    else if (tr.kind === 'v' && m && m.film && m.film.length) {
+      const tw = Math.max(16, Math.round(50 * (m.w || 9) / (m.h || 16))), n = Math.min(240, Math.ceil(w / tw)); let fl = '';
+      for (let i = 0; i < n; i++) { const st = m.kind === 'image' ? 0 : srcAt(c, ((i + 0.5) * tw) / pps); fl += `<img src="${m.film[clamp(Math.floor(st / (m.dur || 1) * m.film.length), 0, m.film.length - 1)]}" style="width:${tw}px" alt="">`; }
+      inner += `<div class="film">${fl}</div>`;
+    } else if (tr.kind === 'a' && m && m.peaks) inner += `<canvas data-wf="${c.id}"></canvas>`;
+    if (c.tr && c.tr !== 'cut') inner += `<div class="trn" style="width:${Math.min(w, 0.35 * pps)}px" title="O'tish: ${esc(TRS[c.tr])}"></div>`;
+    if (sel.has(c.id)) inner += kfTimes(c).map(k => `<i class="kfd" style="left:${k * pps}px"></i>`).join('');
+    if (c.type === 'm' && tr.kind === 'a' && (c.fadeIn > 0 || c.fadeOut > 0)) inner += `<svg style="position:absolute;inset:16px 0 0 0;width:100%;height:calc(100% - 16px);pointer-events:none" viewBox="0 0 ${w} 40" preserveAspectRatio="none"><polyline points="0,40 ${(c.fadeIn || 0) * pps},2 ${w - (c.fadeOut || 0) * pps},2 ${w},40" fill="none" stroke="#ffcf4a" stroke-width="1.5" vector-effect="non-scaling-stroke"/></svg>`;
+    return `<div class="clip ${cls}${s}" data-id="${c.id}" style="left:${c.start * pps}px;width:${w}px" title="${esc(m ? m.name : c.text || '')} · ${tc(D).slice(3)}">${inner}<div class="h l"></div><div class="h r"></div></div>`;
+  }
+  function drawWave(cn) {
+    const c = clipById(cn.dataset.wf), m = c && mediaById(c.m); if (!m || !m.peaks) return;
+    const r = cn.getBoundingClientRect(), W = Math.min(4000, Math.max(1, Math.round(r.width))), H = 40; cn.width = W; cn.height = H;
+    const x = cn.getContext('2d'); x.fillStyle = 'rgba(160,255,200,.85)'; const v = c.vol ?? 1;
+    for (let i = 0; i < W; i++) { const st = srcAt(c, i / pps); const p = m.peaks[Math.floor(st / m.dur * m.peaks.length)] || 0; const h = Math.min(H, p * H * Math.min(2, v) * fadeK(c, i / pps)); x.fillRect(i, (H - h) / 2, 1, h || 1); }
+  }
+  $('zoom').oninput = e => setZoom(+e.target.value);
+  function setZoom(z, anchorT) { const s = $('tlScroll'), at = anchorT ?? T, px = at * pps - s.scrollLeft; pps = clamp(z, 10, 400); $('zoom').value = pps; renderTL(); s.scrollLeft = at * pps - px; }
+  $('fitBtn').onclick = () => setZoom(($('tlScroll').clientWidth - 30) / Math.max(1, total()), 0);
+  $('tlScroll').addEventListener('wheel', e => { if (!(e.altKey || e.ctrlKey)) return; e.preventDefault(); const r = $('tlInner').getBoundingClientRect(); setZoom(pps * (e.deltaY < 0 ? 1.15 : 1 / 1.15), (e.clientX - r.left) / pps); }, { passive: false });
+  $('snapBtn').onclick = () => { snapOn = !snapOn; $('snapBtn').classList.toggle('on', snapOn); toast('Yopishish: ' + (snapOn ? 'yoqildi' : "o'chdi")); };
+  $('linkBtn').onclick = () => { linkOn = !linkOn; $('linkBtn').classList.toggle('on', linkOn); toast("Bog'langan tanlash: " + (linkOn ? 'yoqildi' : "o'chdi")); };
+  function setTool(t) { tool = t; document.querySelectorAll('[data-tool]').forEach(b => b.classList.toggle('on', b.dataset.tool === t)); $('nle').classList.toggle('razor', t === 'razor'); $('razorline').hidden = true; }
+  document.querySelectorAll('[data-tool]').forEach(b => b.onclick = () => setTool(b.dataset.tool));
+
+  /* ---------- timeline sichqoncha ---------- */
+  function posAt(cx, cy) {
+    const r = $('tlInner').getBoundingClientRect(), t = Math.max(0, (cx - r.left) / pps);
+    const rows = [...$('tracks').children], row = rows.find(el => { const b = el.getBoundingClientRect(); return cy >= b.top && cy < b.bottom; });
+    return { t, track: row ? row.dataset.track : 'V1' };
+  }
+  function snapTargets(exclude) {
+    const s = [0, T, ...proj.markers, ...timelineBeats()];
+    proj.clips.forEach(c => { if (!exclude.has(c.id)) s.push(c.start, cend(c)); });
+    return s;
+  }
+  function snapDelta(edges, exclude) {
+    if (!snapOn) return { d: 0, at: null };
+    const tg = snapTargets(exclude), th = 8 / pps; let best = null;
+    edges.forEach(e => tg.forEach(t => { const d = t - e; if (Math.abs(d) <= th && (!best || Math.abs(d) < Math.abs(best.d))) best = { d, at: t }; }));
+    return best || { d: 0, at: null };
+  }
+  const showSnap = at => { const s = $('snapline'); s.hidden = at == null; if (at != null) s.style.left = at * pps + 'px'; };
   let drag = null;
-  $('tlInner').addEventListener('pointerdown', e => {
-    if (!proj || e.button > 0) return;
-    const inner = $('tlInner'), x0 = e.clientX - inner.getBoundingClientRect().left;
+  const tlIn = $('tlInner');
+  tlIn.addEventListener('pointerdown', e => {
+    if (!proj || e.button > 0) return; hideCtx();
+    const r = tlIn.getBoundingClientRect(), x0 = e.clientX - r.left, t0 = x0 / pps;
+    if (e.target.closest('.ruler')) {
+      const mk = e.target.closest('.mk'); if (mk) { if (e.altKey) mutate(() => { proj.markers = proj.markers.filter(m => m !== +mk.dataset.mk); }); else setT(+mk.dataset.mk); return; }
+      tlIn.setPointerCapture(e.pointerId); drag = { mode: 'scrub' }; setT(t0); return;
+    }
     const ce = e.target.closest('.clip');
-    inner.setPointerCapture(e.pointerId);
-    if (!ce) { drag = { mode: 'seek' }; setT(x0 / pps); if (!e.target.closest('.ruler')) { sel = null; renderTL(); renderInsp(); } return; }
-    const k = ce.dataset.k, id = ce.dataset.id, h = e.target.classList.contains('h') ? (e.target.classList.contains('l') ? 'l' : 'r') : null;
-    sel = { k, id }; beginEdit();
-    const obj = k === 'v' ? proj.clips.find(c => c.id === id) : k === 't' ? proj.texts.find(c => c.id === id) : proj.music;
-    drag = { mode: 'obj', k, h, obj, orig: JSON.parse(JSON.stringify(obj)), x0, moved: false };
+    if (!ce) { sel = new Set(); renderTL(); renderInsp(); return; }
+    const c = clipById(ce.dataset.id); if (!c || !unlocked(c)) return;
+    if (tool === 'razor') {
+      let t = t0; const sd = snapDelta([t], new Set()); if (sd.at != null) t = sd.at;
+      mutate(() => splitAt(e.shiftKey ? proj.clips.filter(x => unlocked(x) && x.start < t && cend(x) > t) : (e.altKey ? [c] : expand([c])), snapF(t)));
+      return;
+    }
+    const grp = e.altKey ? [c] : expand([c]);
+    if (e.shiftKey || e.ctrlKey || e.metaKey) { const has = sel.has(c.id); grp.forEach(x => has ? sel.delete(x.id) : sel.add(x.id)); renderTL(); renderInsp(); return; }
+    if (!sel.has(c.id)) sel = new Set(grp.map(x => x.id)); else if (!e.altKey) grp.forEach(x => sel.add(x.id));
+    const h = e.target.classList.contains('h') ? (e.target.classList.contains('l') ? 'l' : 'r') : null;
+    const set = h ? grp : [...sel].map(clipById).filter(x => x && unlocked(x));
+    beginEdit(); tlIn.setPointerCapture(e.pointerId);
+    drag = { mode: h ? 'trim' : 'move', h, c, x0, set, orig: new Map(set.map(x => [x.id, JSON.parse(JSON.stringify(x))])), moved: false, rowTrack: c.track };
     renderTL(); renderInsp();
   });
-  $('tlInner').addEventListener('pointermove', e => {
+  tlIn.addEventListener('pointermove', e => {
+    const r = tlIn.getBoundingClientRect(), x = e.clientX - r.left;
+    if (tool === 'razor' && !drag) { const rl = $('razorline'); const onClip = e.target.closest('.clip'); rl.hidden = !onClip; rl.style.left = x + 'px'; }
     if (!drag) return;
-    const x = e.clientX - $('tlInner').getBoundingClientRect().left;
-    if (drag.mode === 'seek') { setT(x / pps); return; }
-    const dt = (x - drag.x0) / pps, o = drag.orig, c = drag.obj; if (Math.abs(x - drag.x0) > 3) drag.moved = true; if (!drag.moved) return;
-    if (drag.k === 'v') {
-      const m = mediaById(c.m), r = c.speed * (CURVE_AVG[c.curve] || 1);
-      if (drag.h === 'l') c.in = clamp(o.in + dt * r, 0, c.out - 0.1);
-      else if (drag.h === 'r') c.out = clamp(o.out + dt * r, c.in + 0.1, maxDur(m));
-      else { const el = $('trV').querySelector(`[data-id="${c.id}"]`); if (el) { el.style.transform = `translateX(${x - drag.x0}px)`; el.classList.add('ghost'); } drag.tp = x / pps; return; }
-    } else if (drag.k === 't') {
-      if (drag.h === 'r') c.dur = Math.max(0.2, o.dur + dt);
-      else if (drag.h === 'l') { const ns = clamp(o.start + dt, 0, o.start + o.dur - 0.2); c.dur = o.dur - (ns - o.start); c.start = ns; }
-      else c.start = Math.max(0, o.start + dt);
-    } else if (drag.k === 'a') { const mm = mediaById(c.m); c.offset = clamp(o.offset - dt, 0, mm ? Math.max(0, mm.dur - 1) : 0); }
-    dirty = true; renderTL();
+    if (drag.mode === 'scrub') { let t = x / pps; const sd = snapDelta([t], new Set()); if (sd.at != null && e.shiftKey) t = sd.at; setT(t); return; }
+    if (Math.abs(x - drag.x0) > 3) drag.moved = true; if (!drag.moved) return;
+    let dt = (x - drag.x0) / pps; const ex = new Set(drag.set.map(c => c.id));
+    if (drag.mode === 'move') {
+      const os = [...drag.orig.values()]; dt = Math.max(dt, -Math.min(...os.map(o => o.start)));
+      const sd = snapDelta(os.flatMap(o => [o.start + dt, o.start + dt + cdur(o)]), ex); dt += sd.d; showSnap(sd.at);
+      // trekni almashtirish (bir xil turdagi treklar ichida)
+      const { track } = posAt(e.clientX, e.clientY), k0 = kindOfTrack(drag.orig.get(drag.c.id).track), list = proj.tracks.filter(t => t.kind === k0).map(t => t.id);
+      let off = 0; if (kindOfTrack(track) === k0) off = list.indexOf(track) - list.indexOf(drag.orig.get(drag.c.id).track);
+      const okOff = drag.set.every(c => { const o = drag.orig.get(c.id), l = proj.tracks.filter(t => t.kind === kindOfTrack(o.track)).map(t => t.id); if (kindOfTrack(o.track) !== k0) return true; const ni = l.indexOf(o.track) + off; return ni >= 0 && ni < l.length && !trackById(l[ni]).lock; });
+      drag.set.forEach(c => { const o = drag.orig.get(c.id); c.start = Math.max(0, o.start + dt); if (okOff && kindOfTrack(o.track) === k0) { const l = proj.tracks.filter(t => t.kind === k0).map(t => t.id); c.track = l[l.indexOf(o.track) + off]; } });
+    } else {
+      const left = drag.h === 'l'; let lo = -1e9, hi = 1e9;
+      drag.set.forEach(c => {
+        const o = drag.orig.get(c.id), oe = o.start + cdur(o), others = proj.clips.filter(x => x.track === o.track && !ex.has(x.id));
+        if (left) { const prevEnd = Math.max(0, ...others.filter(x => cend(x) <= o.start + 1e-4).map(cend)); lo = Math.max(lo, prevEnd - o.start); if (o.type === 'm') lo = Math.max(lo, -o.in / rate(o)); hi = Math.min(hi, cdur(o) - F1); }
+        else { const nextStart = Math.min(1e9, ...others.filter(x => x.start >= oe - 1e-4).map(x => x.start)); hi = Math.min(hi, nextStart - oe); if (o.type === 'm') hi = Math.min(hi, (maxDur(mediaById(o.m)) - o.out) / rate(o)); lo = Math.max(lo, F1 - cdur(o)); }
+      });
+      const o0 = drag.orig.get(drag.c.id), edge = left ? o0.start + dt : o0.start + cdur(o0) + dt;
+      const sd = snapDelta([edge], ex); dt = clamp(dt + sd.d, lo, hi); showSnap(sd.at != null && Math.abs(dt - ((x - drag.x0) / pps + sd.d)) < 1e-6 ? sd.at : null);
+      drag.set.forEach(c => { const o = drag.orig.get(c.id); Object.assign(c, JSON.parse(JSON.stringify(o))); if (left) setStart(c, o.start + dt); else setEnd(c, o.start + cdur(o) + dt); });
+    }
+    dirty = true; renderTL(); renderInsp();
   });
   const endDrag = () => {
-    if (!drag) return;
-    if (drag.mode === 'obj') {
-      if (drag.k === 'v' && !drag.h && drag.moved && drag.tp != null) {
-        const i = proj.clips.indexOf(drag.obj); proj.clips.splice(i, 1); const L = layout();
-        let at = proj.clips.length; for (let j = 0; j < L.length; j++) if (drag.tp < L[j] + cdur(proj.clips[j]) / 2) { at = j; break; }
-        proj.clips.splice(at, 0, drag.obj);
-      }
-      endEdit(); renderAll();
-    }
+    if (!drag) return; showSnap(null);
+    if (drag.mode !== 'scrub') { if (drag.mode === 'move' && drag.moved) overwrite(drag.set); endEdit(); renderAll(); }
     drag = null;
   };
-  $('tlInner').addEventListener('pointerup', endDrag); $('tlInner').addEventListener('pointercancel', endDrag);
+  tlIn.addEventListener('pointerup', endDrag); tlIn.addEventListener('pointercancel', endDrag);
+  tlIn.addEventListener('pointerleave', () => { $('razorline').hidden = true; });
 
-  /* ---------- matnni ekranda sudrash ---------- */
-  let tdrag = null;
-  const cvPt = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * cv.width, (e.clientY - r.top) / r.height * cv.height]; };
+  /* ---------- kontekst menyu ---------- */
+  const ctxEl = $('ctx');
+  function hideCtx() { ctxEl.hidden = true; }
+  document.addEventListener('pointerdown', e => { if (!ctxEl.contains(e.target)) hideCtx(); });
+  tlIn.addEventListener('contextmenu', e => {
+    e.preventDefault(); if (!proj) return;
+    const ce = e.target.closest('.clip'), { t, track } = posAt(e.clientX, e.clientY); const items = [];
+    if (ce) {
+      const c = clipById(ce.dataset.id); if (!sel.has(c.id)) { sel = new Set(expand([c]).map(x => x.id)); renderTL(); renderInsp(); }
+      items.push(['✂ Shu joyda kesish', 'C', () => mutate(() => splitAt(expand([c]), snapF(t)))], ['🗑 O\'chirish', 'Del', () => delSel(false)], ['⇤ Ripple o\'chirish', 'Shift+Del', () => delSel(true)],
+        ['⧉ Nusxalash', 'Ctrl+C', copySel], ['📋 Joylash (playhead)', 'Ctrl+V', paste]);
+      if (c.link) items.push(["🔗 Bog'lanishni uzish", '', () => mutate(() => linkedOf(c).forEach(x => delete x.link))]);
+      else if (sel.size === 2) { const [a, b] = [...sel].map(clipById); if (a && b && kindOfTrack(a.track) !== kindOfTrack(b.track)) items.push(["🔗 Bog'lash", '', () => mutate(() => { const l = uid(); a.link = b.link = l; })]); }
+      if (c.type === 'm' && kindOfTrack(c.track) === 'v') items.push(['◐ Fade o\'tish qo\'shish', 'Ctrl+D', () => mutate(() => { c.tr = 'fade'; })], ['⟲ Effektlarni tozalash', '', () => mutate(() => { c.props = {}; c.fx = 'none'; c.look = 'none'; c.tr = 'cut'; c.speed = 1; c.curve = 'none'; })]);
+    } else {
+      const on = onTrack(track), prev = on.filter(c => cend(c) <= t + 1e-4).map(cend), next = on.filter(c => c.start >= t - 1e-4).map(c => c.start);
+      const gs = prev.length ? Math.max(...prev) : 0, ge = next.length ? Math.min(...next) : null;
+      if (ge != null && ge - gs > F1) items.push(["⇤ Bo'shliqni yopish (ripple)", '', () => mutate(() => rippleRemove([{ track, s: gs, e: ge }]))]);
+      items.push(['📋 Joylash (playhead)', 'Ctrl+V', paste], ['⬥ Marker qo\'shish', 'M', () => $('mkBtn').click()], ['T Matn qo\'shish', 'T', () => addText()]);
+    }
+    ctxEl.innerHTML = items.map((it, i) => `<button data-i="${i}">${it[0]}<small>${it[1]}</small></button>`).join('');
+    ctxEl.hidden = false; ctxEl.style.left = Math.min(e.clientX, innerWidth - 220) + 'px'; ctxEl.style.top = Math.min(e.clientY, innerHeight - items.length * 34 - 10) + 'px';
+    ctxEl.onclick = ev => { const b = ev.target.closest('[data-i]'); if (b) { hideCtx(); items[+b.dataset.i][2](); } };
+  });
+
+  /* ---------- monitorda sudrash ---------- */
+  let mdrag = null;
+  const cvPt = e => { const r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / r.width, (e.clientY - r.top) / r.height]; };
   cv.addEventListener('pointerdown', e => {
-    if (!proj) return; const [px, py] = cvPt(e);
+    if (!proj) return; const [fx, fy] = cvPt(e), px = fx * cv.width, py = fy * cv.height;
     const hit = Object.entries(hitBoxes).reverse().find(([, b]) => px >= b.x && px <= b.x + b.w && py >= b.y && py <= b.y + b.h);
-    if (!hit) { if (!playing) play(); else pause(); return; }
-    const x = proj.texts.find(t => t.id === hit[0]); if (!x) return;
-    sel = { k: 't', id: x.id }; beginEdit(); tdrag = { x, px, py, ox: x.x, oy: x.y }; cv.setPointerCapture(e.pointerId); renderTL(); renderInsp();
+    let c = hit ? clipById(hit[0]) : null, mode = 'text';
+    if (!c) { const s = [...sel].map(clipById).find(x => x && x.type === 'm' && kindOfTrack(x.track) === 'v' && T >= x.start && T < cend(x)); if (s) { c = s; mode = 'pos'; } }
+    if (!c || !unlocked(c)) return;
+    if (mode === 'text') sel = new Set([c.id]);
+    beginEdit(); mdrag = { c, mode, fx, fy, ox: mode === 'text' ? c.x : pv(c, 'posX', T - c.start), oy: mode === 'text' ? c.y : pv(c, 'posY', T - c.start) };
+    cv.setPointerCapture(e.pointerId); renderTL(); renderInsp();
   });
-  cv.addEventListener('pointermove', e => { if (!tdrag) return; const [px, py] = cvPt(e); tdrag.x.x = clamp(tdrag.ox + (px - tdrag.px) / cv.width, 0.05, 0.95); tdrag.x.y = clamp(tdrag.oy + (py - tdrag.py) / cv.height, 0.04, 0.96); dirty = true; });
-  cv.addEventListener('pointerup', () => { if (tdrag) { tdrag = null; endEdit(); renderInsp(); } });
+  cv.addEventListener('pointermove', e => {
+    if (!mdrag) return; const [fx, fy] = cvPt(e), c = mdrag.c;
+    if (mdrag.mode === 'text') { c.x = clamp(mdrag.ox + fx - mdrag.fx, 0.05, 0.95); c.y = clamp(mdrag.oy + fy - mdrag.fy, 0.04, 0.96); }
+    else { const lt = T - c.start; setPv(c, 'posX', +(mdrag.ox + (fx - mdrag.fx) * 100).toFixed(1), lt); setPv(c, 'posY', +(mdrag.oy + (fy - mdrag.fy) * 100).toFixed(1), lt); }
+    dirty = true;
+  });
+  cv.addEventListener('pointerup', () => { if (mdrag) { mdrag = null; endEdit(); renderInsp(); } });
 
-  /* ---------- amallar ---------- */
-  function split() {
-    const a = clipAt(T); if (!a) return toast("Playhead ostida klip yo'q");
-    const lt = T - a.start, D = cdur(a.c); if (lt < 0.05 || lt > D - 0.05) return toast("Klip chetiga juda yaqin");
-    mutate(() => { const mid = srcAt(a.c, lt); const c2 = { ...a.c, id: uid(), in: mid, tr: 'cut' }; a.c.out = mid; proj.clips.splice(a.i + 1, 0, c2); sel = { k: 'v', id: c2.id }; });
-  }
-  function delSel() {
-    if (!sel) return;
-    mutate(() => { if (sel.k === 'v') proj.clips = proj.clips.filter(c => c.id !== sel.id); else if (sel.k === 't') proj.texts = proj.texts.filter(c => c.id !== sel.id); else proj.music = null; sel = null; });
-  }
-  function dupSel() {
-    if (!sel || sel.k === 'a') return;
-    mutate(() => {
-      if (sel.k === 'v') { const i = proj.clips.findIndex(c => c.id === sel.id); const c = { ...proj.clips[i], id: uid() }; proj.clips.splice(i + 1, 0, c); sel.id = c.id; }
-      else { const x = proj.texts.find(c => c.id === sel.id); const n = { ...x, id: uid(), start: x.start + x.dur }; proj.texts.push(n); sel.id = n.id; }
-    });
-  }
-  let lastFont = 'Bebas Neue';
-  function addText(o = {}) {
-    const x = { id: uid(), text: 'Matningiz', start: +T.toFixed(2), dur: 2.5, font: lastFont, size: 0.11, color: '#ffffff', style: 'bold', anim: 'pop', x: 0.5, y: 0.35, bold: true, ...o };
-    loadFont(x.font); mutate(() => { proj.texts.push(x); sel = { k: 't', id: x.id }; });
-    setTimeout(() => { const ta = $('insp').querySelector('textarea'); if (ta) { ta.focus(); ta.select(); } }, 50);
-  }
-  function useFont(name) {
-    show('editor'); lastFont = name; loadFont(name);
-    const x = sel && sel.k === 't' && proj.texts.find(t => t.id === sel.id);
-    if (x) { mutate(() => { x.font = name; }); toast('Shrift qo\'yildi: ' + name); }
-    else { addText({ font: name, text: $('fontSample').value || 'Matningiz' }); toast('Matn qo\'shildi: ' + name); }
-  }
-  function usePair(a, b) {
-    show('editor'); loadFont(a); loadFont(b);
-    mutate(() => {
-      const t0 = +T.toFixed(2);
-      proj.texts.push({ id: uid(), text: $('fontSample').value || 'Sarlavha', start: t0, dur: 3, font: a, size: 0.12, color: '#ffffff', style: 'bold', anim: 'pop', x: .5, y: .42, bold: true });
-      proj.texts.push({ id: uid(), text: 'Ikkinchi qator', start: t0 + 0.3, dur: 2.7, font: b, size: 0.05, color: '#ffffff', style: 'plain', anim: 'fade', x: .5, y: .5, bold: false });
-    });
-    toast('Juftlik qo\'shildi');
-  }
-  function snapToBeats() {
-    const bs = projBeats(); if (bs.length < 2) return false;
-    let acc = 0;
-    proj.clips.forEach(c => {
-      const D = cdur(c), end = acc + D;
-      let best = null; for (const b of bs) if (b > acc + 0.25 && (best == null || Math.abs(b - end) < Math.abs(best - end))) best = b;
-      if (best != null && Math.abs(best - end) < Math.max(0.3, D * 0.5)) {
-        const nd = best - acc, r = c.speed * (CURVE_AVG[c.curve] || 1), m = mediaById(c.m);
-        c.out = clamp(c.in + nd * r, c.in + 0.1, maxDur(m));
-      }
-      acc += cdur(c);
-    });
-    return true;
-  }
-  $('splitBtn').onclick = split; $('delBtn').onclick = delSel; $('dupBtn').onclick = dupSel; $('addTextBtn').onclick = () => addText();
-  $('beatBtn').onclick = () => { if (!projBeats().length) return toast("Avval musiqa qo'shing (Media → 🎵 fayl)"); mutate(snapToBeats); toast('⚡ Kesimlar beatga moslandi'); };
+  /* ---------- klaviatura ---------- */
   document.addEventListener('keydown', e => {
-    if (curTab !== 'editor' || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+    if (curTab !== 'editor' || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName) || document.querySelector('.sheet.open')) return;
     const k = e.key.toLowerCase(), mod = e.ctrlKey || e.metaKey;
-    if (k === ' ') { e.preventDefault(); playing ? pause() : play(); }
-    else if (k === 's' && !mod) split();
-    else if (k === 'delete' || k === 'backspace') { e.preventDefault(); delSel(); }
-    else if (mod && k === 'z') { e.preventDefault(); e.shiftKey ? redo() : undo(); }
-    else if (mod && k === 'y') { e.preventDefault(); redo(); }
-    else if (mod && k === 'd') { e.preventDefault(); dupSel(); }
-    else if (k === 'arrowleft') setT(T - (e.shiftKey ? 1 : 1 / 30));
-    else if (k === 'arrowright') setT(T + (e.shiftKey ? 1 : 1 / 30));
+    const go = fn => { e.preventDefault(); fn(); };
+    if (k === ' ') go(() => playing ? pause() : play());
+    else if (mod && k === 'k') go(cmdSplit);
+    else if (mod && k === 'z') go(() => e.shiftKey ? redo() : undo());
+    else if (mod && k === 'y') go(redo);
+    else if (mod && k === 'c') go(copySel);
+    else if (mod && k === 'v') go(paste);
+    else if (mod && k === 'd') go(() => mutate(() => [...sel].map(clipById).forEach(c => { if (c && c.type === 'm' && kindOfTrack(c.track) === 'v') c.tr = 'fade'; })));
+    else if (mod && k === 'a') go(() => { sel = new Set(proj.clips.map(c => c.id)); renderTL(); renderInsp(); });
+    else if (mod) return;
+    else if (k === 'delete' || k === 'backspace') go(() => delSel(e.shiftKey));
+    else if (k === 'v') setTool('select');
+    else if (k === 'c') setTool('razor');
+    else if (k === 's') $('snapBtn').click();
+    else if (k === 'm') $('mkBtn').click();
     else if (k === 't') addText();
+    else if (k === 'q') trimToPlayhead('q');
+    else if (k === 'w') trimToPlayhead('w');
+    else if (k === 'k') pause();
+    else if (k === 'l') { if (!playing) play(); else { playRate = Math.min(4, playRate * 2); lastTs = performance.now(); } }
+    else if (k === 'j') { pause(); setT(T - 1); }
+    else if (k === 'arrowleft') go(() => { pause(); setT(snapF(T) - F1 * (e.shiftKey ? 5 : 1)); });
+    else if (k === 'arrowright') go(() => { pause(); setT(snapF(T) + F1 * (e.shiftKey ? 5 : 1)); });
+    else if (k === 'arrowup') go(() => $('prevEdit').click());
+    else if (k === 'arrowdown') go(() => $('nextEdit').click());
+    else if (k === 'home') go(() => setT(0));
+    else if (k === 'end') go(() => setT(total()));
+    else if (k === '=' || k === '+') setZoom(pps * 1.25);
+    else if (k === '-') setZoom(pps / 1.25);
+    else if (k === '\\') $('fitBtn').click();
+    else if (k === 'escape') { sel = new Set(); renderTL(); renderInsp(); }
   });
+  $('splitBtn').onclick = cmdSplit; $('addTextBtn').onclick = () => addText();
+  $('beatBtn').onclick = () => { if (timelineBeats().length < 2) return toast("Avval audio trekka musiqa qo'shing"); mutate(snapToBeats); toast('⚡ V1 kesimlari beatga moslandi'); };
 
-  /* ---------- inspektor ---------- */
+  /* ---------- Effekt sozlamalari (inspektor) ---------- */
   const opts = (o, v) => Object.entries(o).map(([k, n]) => `<option value="${k}"${k === v ? ' selected' : ''}>${esc(n)}</option>`).join('');
   const fontOpts = v => Object.entries(FONT_CATS).map(([c, n]) => `<optgroup label="${n}">${FONTS.filter(f => f[1] === c).map(f => `<option${f[0] === v ? ' selected' : ''}>${esc(f[0])}</option>`).join('')}</optgroup>`).join('');
+  const propRow = (c, n, lt) => { const [lab, , u, mn, mx, st] = PROPS[n], v = pv(c, n, lt), anim = !!(c.props && c.props[n] && c.props[n].k);
+    return `<div class="prop" data-p="${n}"><span>${lab}</span><input type="range" min="${mn}" max="${mx}" step="${st}" value="${v}"><input type="number" step="${st}" value="${+v.toFixed(1)}" title="${u}">
+      <button class="kf" data-kn="-1" title="Oldingi keyframe">◀</button><button class="kf${kfAt(c, n, lt) ? ' on' : anim ? '' : ''}" data-kt title="${anim ? 'Keyframe qo\'shish/olib tashlash' : 'Animatsiyani yoqish (keyframe)'}" style="${anim ? 'color:#ffcf4a99' : ''}${kfAt(c, n, lt) ? ';color:#ffcf4a' : ''}">◆</button><button class="kf" data-kn="1" title="Keyingi keyframe">▶</button></div>`; };
   function renderInsp() {
     const el = $('insp'); if (!proj) { el.innerHTML = ''; return; }
-    if (sel && sel.k === 'v') {
-      const c = proj.clips.find(x => x.id === sel.id); if (!c) { sel = null; return renderInsp(); }
-      const m = mediaById(c.m), i = proj.clips.indexOf(c);
-      el.innerHTML = `<h3>🎬 Klip ${i + 1}<span class="r">${cdur(c).toFixed(2)} s</span></h3>
-        <div class="muted" style="word-break:break-all">${m ? esc(m.name) : "⚠ Media topilmadi"}</div>
+    const list = [...sel].map(clipById).filter(Boolean), c = list.length === 1 ? list[0] : (list.length === 2 && list[0].link && list[0].link === list[1].link ? list.find(x => kindOfTrack(x.track) === 'v') : null);
+    $('inspName').textContent = c ? (c.type === 't' ? 'Matn' : (mediaById(c.m) || {}).name || '') : '';
+    if (c && c.type === 'm') {
+      const m = mediaById(c.m), lt = clamp(T - c.start, 0, cdur(c)), isV = kindOfTrack(c.track) === 'v';
+      const partner = c.link && linkedOf(c).find(x => x !== c);
+      el.innerHTML = `<div class="muted" style="word-break:break-all">${m ? esc(m.name) : '⚠ Media topilmadi'} · ${esc(c.track)} · ${tc(cdur(c)).slice(3)}</div>
         ${m ? '' : `<button class="btn sm" data-act="relink" style="margin-top:8px">Faylni qayta ulash</button>`}
-        <div class="g2"><div><label>Boshi (s)</label><input type="number" step="0.05" min="0" data-f="in" value="${c.in.toFixed(2)}"></div><div><label>Oxiri (s)</label><input type="number" step="0.05" data-f="out" value="${c.out.toFixed(2)}"></div></div>
-        <div class="g2"><div><label>Tezlik</label><select data-f="speed" data-n>${[0.25, 0.5, 0.75, 1, 1.25, 1.5, 2, 3, 4].map(s => `<option value="${s}"${s === c.speed ? ' selected' : ''}>×${s}</option>`).join('')}</select></div>
-          <div><label>Tezlik egri chizig'i</label><select data-f="curve">${opts(CURVES, c.curve)}</select></div></div>
-        <label>O'tish (kirishda)</label><select data-f="tr">${opts(TRS, c.tr)}</select>
-        <label>Kamera effekti</label><select data-f="zoom">${opts(ZOOMS, c.zoom)}</select>
-        <label class="rv">Ovoz <span>${Math.round((c.vol ?? 1) * 100)}%</span></label><input type="range" min="0" max="1" step="0.05" data-f="vol" data-n value="${c.vol ?? 1}">
-        <label class="rv">Kadr joyi (gorizontal) <span>${Math.round((c.panX ?? .5) * 100)}%</span></label><input type="range" min="0" max="1" step="0.01" data-f="panX" data-n value="${c.panX ?? .5}">
-        <label class="rv">Kadr joyi (vertikal) <span>${Math.round((c.panY ?? .5) * 100)}%</span></label><input type="range" min="0" max="1" step="0.01" data-f="panY" data-n value="${c.panY ?? .5}">
-        <div class="row"><button class="btn sm" data-act="split">✂ Bo'lish</button><button class="btn sm" data-act="dup">⧉ Nusxa</button><button class="btn sm" data-act="del">🗑 O'chirish</button></div>`;
-    } else if (sel && sel.k === 't') {
-      const x = proj.texts.find(t => t.id === sel.id); if (!x) { sel = null; return renderInsp(); }
-      el.innerHTML = `<h3>🔤 Matn</h3>
-        <textarea data-f="text" rows="2">${esc(x.text)}</textarea>
-        <label>Shrift</label><select data-f="font">${fontOpts(x.font)}</select>
-        <div class="g2"><div><label>Uslub</label><select data-f="style">${opts(TSTYLES, x.style)}</select></div><div><label>Animatsiya</label><select data-f="anim">${opts(ANIMS, x.anim)}</select></div></div>
-        <div class="g2"><div><label>Rang</label><input type="color" data-f="color" value="${x.color}"></div><div><label>&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0 0"><input type="checkbox" data-f="bold"${x.bold ? ' checked' : ''}> Qalin</label></div></div>
-        <label class="rv">Hajm <span>${Math.round(x.size * 100)}</span></label><input type="range" min="0.03" max="0.22" step="0.005" data-f="size" data-n value="${x.size}">
-        <label class="rv">Balandlik <span>${Math.round(x.y * 100)}%</span></label><input type="range" min="0.04" max="0.96" step="0.01" data-f="y" data-n value="${x.y}">
-        <div class="g2"><div><label>Boshlanish (s)</label><input type="number" step="0.1" min="0" data-f="start" data-n value="${x.start.toFixed(2)}"></div><div><label>Davomiylik (s)</label><input type="number" step="0.1" min="0.2" data-f="dur" data-n value="${x.dur.toFixed(2)}"></div></div>
-        <div class="muted" style="margin-top:8px">💡 Matnni ko'rish oynasida sichqoncha bilan sudrab joylashtiring.</div>
-        <div class="row"><button class="btn sm" data-act="dup">⧉ Nusxa</button><button class="btn sm" data-act="del">🗑 O'chirish</button></div>`;
+        ${isV ? `<h4>🎥 Harakat (Motion)</h4>${['scale', 'posX', 'posY', 'rot'].map(n => propRow(c, n, lt)).join('')}
+        <div class="row" style="margin-top:4px"><button class="btn sm" data-act="resetMotion">⟲ Kadrga moslash</button></div>
+        <h4>◐ Shaffoflik</h4>${propRow(c, 'opacity', lt)}
+        <h4>🎨 Rang (Look)</h4><select data-f="look">${opts(FILTER_N, c.look || 'none')}</select>
+        <h4>✨ Effektlar</h4><label>O'tish (kirishda)</label><select data-f="tr">${opts(TRS, c.tr || 'cut')}</select>
+        <label>Kamera effekti</label><select data-f="fx">${opts(ZOOMS, c.fx || 'none')}</select>`
+        : `<h4>🔊 Ovoz</h4><label class="rv">Daraja <span>${Math.round((c.vol ?? 1) * 100)}%</span></label><input type="range" min="0" max="2" step="0.05" data-f="vol" data-n value="${c.vol ?? 1}">
+        <div class="g2"><div><label>Fade in (s)</label><input type="number" min="0" step="0.1" data-f="fadeIn" data-n value="${c.fadeIn || 0}"></div><div><label>Fade out (s)</label><input type="number" min="0" step="0.1" data-f="fadeOut" data-n value="${c.fadeOut || 0}"></div></div>`}
+        ${m && m.kind !== 'image' ? `<h4>⏱ Tezlik / davomiylik</h4><div class="g2"><div><label>Tezlik %</label><input type="number" min="10" max="1000" step="5" data-f="speedPct" data-n value="${Math.round(c.speed * 100)}"></div><div><label>Egri chiziq</label><select data-f="curve">${opts(CURVES, c.curve || 'none')}</select></div></div>
+        <div class="g2"><div><label>Manba boshi (s)</label><input type="number" step="0.04" min="0" data-f="in" value="${c.in.toFixed(2)}"></div><div><label>Manba oxiri (s)</label><input type="number" step="0.04" data-f="out" value="${c.out.toFixed(2)}"></div></div>` :
+        m ? `<h4>⏱ Davomiylik</h4><input type="number" min="0.1" step="0.1" data-f="imgDur" data-n value="${cdur(c).toFixed(2)}">` : ''}
+        ${partner ? `<div class="muted" style="margin-top:10px">🔗 Bog'langan: ${esc(partner.track)}${isV ? ` · ovoz ${Math.round((partner.vol ?? 1) * 100)}%` : ''}</div>` : ''}
+        <div class="row"><button class="btn sm" data-act="split">✂ Kesish</button><button class="btn sm" data-act="del">🗑</button>${c.link ? `<button class="btn sm" data-act="unlink">🔗 Uzish</button>` : ''}</div>`;
+    } else if (c && c.type === 't') {
+      el.innerHTML = `<textarea data-f="text" rows="2">${esc(c.text)}</textarea>
+        <label>Shrift</label><select data-f="font">${fontOpts(c.font)}</select>
+        <div class="g2"><div><label>Uslub</label><select data-f="style">${opts(TSTYLES, c.style)}</select></div><div><label>Animatsiya</label><select data-f="anim">${opts(ANIMS, c.anim)}</select></div></div>
+        <div class="g2"><div><label>Rang</label><input type="color" data-f="color" value="${c.color}"></div><div><label>&nbsp;</label><label style="display:flex;gap:8px;align-items:center;margin:8px 0 0"><input type="checkbox" data-f="bold"${c.bold ? ' checked' : ''}> Qalin</label></div></div>
+        <label class="rv">Hajm <span>${Math.round(c.size * 100)}</span></label><input type="range" min="0.03" max="0.22" step="0.005" data-f="size" data-n value="${c.size}">
+        <label class="rv">Balandlik <span>${Math.round(c.y * 100)}%</span></label><input type="range" min="0.04" max="0.96" step="0.01" data-f="y" data-n value="${c.y}">
+        <div class="g2"><div><label>Boshlanish (s)</label><input type="number" step="0.04" min="0" data-f="start" data-n value="${c.start.toFixed(2)}"></div><div><label>Davomiylik (s)</label><input type="number" step="0.04" min="0.1" data-f="dur" data-n value="${c.dur.toFixed(2)}"></div></div>
+        <div class="muted" style="margin-top:8px">💡 Matnni monitorda sudrab joylashtiring.</div>
+        <div class="row"><button class="btn sm" data-act="split">✂ Kesish</button><button class="btn sm" data-act="del">🗑</button></div>`;
+    } else if (list.length > 1) {
+      el.innerHTML = `<div class="muted">${list.length} ta klip tanlandi.</div>
+        <h4>Hammasiga</h4><label>Rang (Look)</label><select data-all="look"><option value="">—</option>${opts(FILTER_N, '')}</select>
+        <label>O'tish</label><select data-all="tr"><option value="">—</option>${opts(TRS, '')}</select>
+        <label>Kamera effekti</label><select data-all="fx"><option value="">—</option>${opts(ZOOMS, '')}</select>
+        <div class="row"><button class="btn sm" data-act="del">🗑 O'chirish</button><button class="btn sm" data-act="rdel">⇤ Ripple o'chirish</button></div>`;
     } else {
-      const auds = media.filter(m => m.kind === 'audio'), mu = proj.music, mm = mu && mediaById(mu.m);
       const tot = total();
-      el.innerHTML = `<h3>⚙ Loyiha<span class="r">${fmtT(tot)}</span></h3>
-        <div class="muted">${proj.clips.length} klip · ${proj.texts.length} matn · ish vaqti ${Math.round((proj.workSec || 0) / 60)} daq</div>
-        <label>Rang filtri (butun video)</label><select data-pf="filter">${opts(FILTER_N, proj.filter)}</select>
+      el.innerHTML = `<div class="muted">Ketma-ketlik: 1080×1920 · ${FPS} kadr/s · ${tc(tot)}</div>
+        <div class="muted">${proj.clips.length} klip · ${proj.tracks.length} trek · ish vaqti ${Math.round((proj.workSec || 0) / 60)} daq</div>
         <label style="display:flex;gap:8px;align-items:center"><input type="checkbox" data-pf="letterbox"${proj.letterbox ? ' checked' : ''}> Kino chiziqlari (letterbox)</label>
-        <h4>Musiqa</h4>
-        <select data-pf="music"><option value="">— Musiqasiz —</option>${auds.map(a => `<option value="${a.id}"${mu && mu.m === a.id ? ' selected' : ''}>${esc(a.name)}</option>`).join('')}</select>
-        ${mu ? `<label class="rv">Musiqa ovozi <span>${Math.round(mu.vol * 100)}%</span></label><input type="range" min="0" max="1" step="0.05" data-pf="mvol" value="${mu.vol}">
-        <label class="rv">Boshlanish nuqtasi <span>${mu.offset.toFixed(1)} s</span></label><input type="range" min="0" max="${mm ? Math.max(0, mm.dur - 1).toFixed(1) : 0}" step="0.1" data-pf="moff" value="${mu.offset}">
-        <div class="muted" style="margin-top:6px">${mm && mm.bpm ? `🎵 ${mm.bpm} BPM · ${projBeats().length} ta beat (timeline ustida pushti chiziqlar)` : ''}</div>` : `<div class="muted" style="margin-top:6px">Media ro'yxatiga mp3/wav qo'shing — beatlar avtomatik aniqlanadi.</div>`}
+        ${proj.markers.length ? `<h4>⬥ Markerlar</h4>${proj.markers.slice().sort((a, b) => a - b).map(m => `<button class="btn sm" data-goto="${m}" style="margin:2px">${tc(m).slice(3)}</button>`).join('')}` : ''}
         ${proj.notes ? `<h4>🤖 AI izohi</h4><div class="ai muted">${esc(proj.notes)}</div>` : ''}
-        <h4>Maslahat</h4><div class="muted">Klip yoki matnni tanlasangiz, shu yerda uning sozlamalari chiqadi.</div>`;
+        <h4>Qanday ishlatiladi</h4><div class="muted">Klipni tanlang — shu yerda Harakat, Shaffoflik, Rang, Tezlik va keyframe'lar chiqadi. ◆ — playhead joyida keyframe. Klipni monitorda sudrab joyini o'zgartiring.</div>`;
     }
   }
   const insp = $('insp');
   insp.addEventListener('focusin', beginEdit); insp.addEventListener('pointerdown', beginEdit);
   insp.addEventListener('input', e => applyInsp(e.target, false));
-  insp.addEventListener('change', e => { applyInsp(e.target, true); endEdit(); renderAll(); });
+  insp.addEventListener('change', e => { applyInsp(e.target, true); endEdit(); renderTL(); renderInsp(); });
   insp.addEventListener('focusout', () => setTimeout(() => { if (!insp.contains(document.activeElement)) endEdit(); }, 0));
+  function curClip() { const list = [...sel].map(clipById).filter(Boolean); return list.length === 1 ? list[0] : (list.length === 2 && list[0].link === list[1].link ? list.find(x => kindOfTrack(x.track) === 'v') : null); }
   function applyInsp(t, final) {
-    const f = t.dataset.f, pf = t.dataset.pf; if (!f && !pf) return; beginEdit();
-    const val = t.type === 'checkbox' ? t.checked : (t.dataset.n !== undefined || t.type === 'number' || t.type === 'range') ? num(t.value) : t.value;
-    if (f) {
-      const o = sel.k === 'v' ? proj.clips.find(c => c.id === sel.id) : proj.texts.find(c => c.id === sel.id); if (!o) return;
-      if (f === 'in') o.in = clamp(val, 0, o.out - 0.1);
-      else if (f === 'out') o.out = clamp(val, o.in + 0.1, maxDur(mediaById(o.m)));
-      else o[f] = val;
-      if (f === 'font') { loadFont(val); lastFont = val; }
-      const lbl = t.previousElementSibling && t.previousElementSibling.querySelector && t.previousElementSibling.querySelector('span');
-      if (lbl && t.type === 'range') lbl.textContent = f === 'size' ? Math.round(val * 100) : Math.round(val * 100) + '%';
-    } else {
-      if (pf === 'filter') proj.filter = val; if (pf === 'letterbox') proj.letterbox = val;
-      if (pf === 'music') proj.music = val ? { m: val, offset: 0, vol: 0.9 } : null;
-      if (pf === 'mvol' && proj.music) proj.music.vol = val;
-      if (pf === 'moff' && proj.music) proj.music.offset = val;
-      const lbl = t.previousElementSibling && t.previousElementSibling.querySelector && t.previousElementSibling.querySelector('span');
-      if (lbl && pf === 'mvol') lbl.textContent = Math.round(val * 100) + '%'; if (lbl && pf === 'moff') lbl.textContent = val.toFixed(1) + ' s';
-      if (final && pf === 'music') renderInsp();
+    beginEdit();
+    const pr = t.closest('.prop');
+    if (pr) {
+      const c = curClip(); if (!c) return; const n = pr.dataset.p, v = num(t.value), lt = clamp(T - c.start, 0, cdur(c));
+      setPv(c, n, v, lt); pr.querySelectorAll('input').forEach(i => { if (i !== t) i.value = i.type === 'number' ? +v.toFixed(1) : v; });
+      dirty = true; return;
     }
+    if (t.dataset.all) { const v = t.value; if (!v) return; [...sel].map(clipById).forEach(c => { if (c && c.type === 'm' && kindOfTrack(c.track) === 'v') c[t.dataset.all] = v; }); dirty = true; return; }
+    if (t.dataset.pf === 'letterbox') { proj.letterbox = t.checked; dirty = true; return; }
+    const f = t.dataset.f; if (!f) return; const c = curClip(); if (!c) return;
+    const val = t.type === 'checkbox' ? t.checked : (t.dataset.n !== undefined || t.type === 'number' || t.type === 'range') ? num(t.value) : t.value;
+    const grp = linkOn ? linkedOf(c) : [c];
+    if (f === 'speedPct') { if (!final) return; const sp = clamp(val / 100, 0.1, 10); grp.forEach(x => { x.speed = sp; }); grp.forEach(x => x.link && overwrite([x])); }
+    else if (f === 'curve') grp.forEach(x => { x.curve = val; });
+    else if (f === 'in') { if (!final) return; grp.forEach(x => { x.in = clamp(val, 0, x.out - 0.05); }); }
+    else if (f === 'out') { if (!final) return; grp.forEach(x => { x.out = clamp(val, x.in + 0.05, maxDur(mediaById(x.m))); }); grp.forEach(x => overwrite([x])); }
+    else if (f === 'imgDur') { if (!final) return; c.out = c.in + Math.max(0.1, val); overwrite([c]); }
+    else { c[f] = val; if (f === 'font') { loadFont(val); lastFont = val; } if (f === 'start' || f === 'dur') { if (f === 'dur') c.dur = Math.max(0.1, val); if (final) overwrite([c]); } }
+    const lbl = t.previousElementSibling && t.previousElementSibling.querySelector && t.previousElementSibling.querySelector('span');
+    if (lbl && t.type === 'range') lbl.textContent = f === 'size' ? Math.round(val * 100) : Math.round(val * 100) + '%';
     dirty = true; if (!final) renderTL();
   }
   insp.addEventListener('click', e => {
+    const g = e.target.closest('[data-goto]'); if (g) return setT(+g.dataset.goto);
+    const pr = e.target.closest('.prop'), c = curClip();
+    if (pr && c && e.target.closest('[data-kt]')) { mutate(() => toggleKf(c, pr.dataset.p, clamp(T - c.start, 0, cdur(c)))); return; }
+    if (pr && c && e.target.closest('[data-kn]')) {
+      const dir = +e.target.closest('[data-kn]').dataset.kn, ks = ((c.props && c.props[pr.dataset.p] && c.props[pr.dataset.p].k) || []).map(k => k.t), lt = T - c.start;
+      const tgt = dir > 0 ? ks.find(k => k > lt + 1e-3) : ks.filter(k => k < lt - 1e-3).pop(); if (tgt != null) setT(c.start + tgt); return;
+    }
     const a = e.target.closest('[data-act]'); if (!a) return;
-    if (a.dataset.act === 'split') { const c = proj.clips.find(x => x.id === sel.id); const L = layout(), i = proj.clips.indexOf(c); if (T < L[i] || T > L[i] + cdur(c)) setT(L[i] + cdur(c) / 2); split(); }
-    if (a.dataset.act === 'dup') dupSel(); if (a.dataset.act === 'del') delSel();
-    if (a.dataset.act === 'relink') { const c = proj.clips.find(x => x.id === sel.id); const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'video/*,image/*'; inp.onchange = () => inp.files[0] && addFiles([inp.files[0]], { idOverride: c.m }); inp.click(); }
+    const act = a.dataset.act;
+    if (act === 'split') { if (!c) return; if (T <= c.start || T >= cend(c)) setT(c.start + cdur(c) / 2); mutate(() => splitAt(expand([c]), snapF(T))); }
+    if (act === 'del') delSel(false); if (act === 'rdel') delSel(true);
+    if (act === 'unlink' && c) mutate(() => linkedOf(c).forEach(x => delete x.link));
+    if (act === 'resetMotion' && c) mutate(() => { ['scale', 'posX', 'posY', 'rot'].forEach(n => { if (c.props) delete c.props[n]; }); });
+    if (act === 'relink' && c) { const inp = document.createElement('input'); inp.type = 'file'; inp.accept = 'video/*,image/*,audio/*'; inp.onchange = () => inp.files[0] && addFiles([inp.files[0]], { idOverride: c.m }); inp.click(); }
   });
   function renderAll() { renderTL(); renderInsp(); renderMedia(); dirty = true; }
 
-  /* ---------- ish vaqtini hisoblash ---------- */
+  /* ---------- ish vaqti ---------- */
   let lastAct = Date.now();
   ['pointerdown', 'keydown'].forEach(ev => document.addEventListener(ev, () => lastAct = Date.now()));
   setInterval(() => { if (curTab === 'editor' && proj && Date.now() - lastAct < 60000 && document.visibilityState === 'visible') { proj.workSec = (proj.workSec || 0) + 10; KV.set('proj-' + proj.id, proj); } }, 10000);
@@ -1689,14 +2016,15 @@ const Editor = (() => {
  "clips":[{"m":"M1","in":0.0,"out":2.0,"speed":1,"curve":"${Object.keys(CURVES).join('|')}","tr":"${Object.keys(TRS).join('|')}","zoom":"${Object.keys(ZOOMS).join('|')}"}],
  "texts":[{"text":"","start":0,"dur":2,"font":"Bebas Neue","size":0.1,"color":"#ffffff","style":"${Object.keys(TSTYLES).join('|')}","anim":"${Object.keys(ANIMS).join('|')}","x":0.5,"y":0.3,"bold":true}],
  "musicOffset":0,"notes":"o'zbekcha qisqa izoh: nima qilding va nega"}`;
-  const planRules = `Qoidalar: klip timeline davomiyligi = (out-in)/speed (curve velocity/slowfast bo'lsa yana 1.6 ga bo'linadi). in/out media davomiyligidan oshmasin. Birinchi 1-2 soniya kuchli hook bo'lsin. Eng qiziqarli (harakati yuqori) joylarni tanla, bir joyni takrorlama. Matnlar qisqa (1-5 so'z), yuz va asosiy obyektni to'smasin (y 0.15-0.3 yoki 0.7-0.85 yaxshi). size 0.04-0.16 oralig'ida. Shrift faqat ro'yxatdagilardan. Rang hex formatda.`;
+  const planRules = `Qoidalar: clips V1 trekda ketma-ket turadi; klip timeline davomiyligi = (out-in)/speed (curve velocity/slowfast bo'lsa yana 1.6 ga bo'linadi). in/out media davomiyligidan oshmasin. Birinchi 1-2 soniya kuchli hook bo'lsin. Eng qiziqarli (harakati yuqori) joylarni tanla, bir joyni takrorlama. Matnlar qisqa (1-5 so'z), yuz va asosiy obyektni to'smasin (y 0.15-0.3 yoki 0.7-0.85). size 0.04-0.16. Shrift faqat ro'yxatdagilardan. Rang hex.`;
   function openAI(o = {}) {
     if (!proj) return;
     const vis = media.filter(m => m.kind !== 'audio');
     $('aiMediaPick').innerHTML = vis.length ? vis.map(m => `<label class="mi" style="margin:0"><input type="checkbox" value="${m.id}" checked>${m.thumb ? `<img src="${m.thumb}" alt="">` : ''}<div class="t"><b>${esc(m.name)}</b><span>${m.kind === 'video' ? m.dur.toFixed(1) + ' s' : 'rasm'}</span></div></label>`).join('')
-      : '<div class="muted">Avval Media bo\'limiga video yoki rasmlar qo\'shing.</div>';
+      : '<div class="muted">Avval Media paneliga video yoki rasmlar qo\'shing.</div>';
     const auds = media.filter(m => m.kind === 'audio');
-    $('aiMusic').innerHTML = `<option value="">— Musiqasiz —</option>` + auds.map(a => `<option value="${a.id}"${proj.music && proj.music.m === a.id ? ' selected' : ''}>${esc(a.name)}${a.bpm ? ' · ' + a.bpm + ' BPM' : ''}</option>`).join('');
+    $('aiMusic').innerHTML = `<option value="">— Musiqasiz —</option>` + auds.map(a => `<option value="${a.id}">${esc(a.name)}${a.bpm ? ' · ' + a.bpm + ' BPM' : ''}</option>`).join('');
+    if (auds.length) $('aiMusic').value = auds[auds.length - 1].id;
     if (o.style) { const s = $('aiStyle'); if (![...s.options].some(x => x.text === o.style)) s.add(new Option(o.style)); s.value = o.style; }
     $('aiRef').checked = !!(o.ref && lastAnalysis); $('aiRef').disabled = !lastAnalysis; $('aiRefName').textContent = lastAnalysis ? '(' + lastAnalysis.name + ')' : "(avval 🎬 Tahlil'da video tahlil qiling)";
     $('aiStatus').textContent = ''; $('aiSheet').classList.add('open');
@@ -1706,55 +2034,56 @@ const Editor = (() => {
     const ids = [...$('aiMediaPick').querySelectorAll('input:checked')].map(i => i.value);
     return { sel: media.filter(m => ids.includes(m.id)), mus: mediaById($('aiMusic').value) || null, dur: num($('aiDur').value), style: $('aiStyle').value, idea: $('aiIdea').value.trim(), snap: $('aiSnap').checked };
   }
-  function applyPlan(plan, labels, mus, opts) {
-    const p = opts.into || newProject(String(plan.title || 'AI montaj').slice(0, 60));
-    const pick = (v, o, d) => (v in o ? v : d);
-    p.filter = pick(plan.filter, FILTERS, 'none'); p.letterbox = !!plan.letterbox; p.notes = String(plan.notes || '').slice(0, 1500);
-    p.clips = (Array.isArray(plan.clips) ? plan.clips : []).map(c => {
-      const m = labels[c.m]; if (!m) return null; const md = maxDur(m);
-      const i0 = clamp(num(c.in), 0, Math.max(0, md - 0.15)), o0 = clamp(num(c.out) || i0 + 1.5, i0 + 0.15, md);
-      return { id: uid(), m: m.id, in: +i0.toFixed(3), out: +o0.toFixed(3), speed: clamp(num(c.speed) || 1, 0.25, 4), curve: pick(c.curve, CURVES, 'none'), tr: pick(c.tr, TRS, 'cut'), zoom: pick(c.zoom, ZOOMS, 'none'), vol: mus ? 0 : 1, panX: .5, panY: .5 };
-    }).filter(Boolean);
-    p.texts = (Array.isArray(plan.texts) ? plan.texts : []).filter(x => x && x.text).map(x => ({ id: uid(), text: String(x.text).slice(0, 120), start: Math.max(0, num(x.start)), dur: clamp(num(x.dur) || 2, 0.3, 30),
+  function planToClips(plan, labels, mus) {
+    const pick = (v, o, d) => (v in o ? v : d), clips = [];
+    let t = 0;
+    (Array.isArray(plan.clips) ? plan.clips : []).forEach(pc => {
+      const m = labels[pc.m]; if (!m) return; const md = maxDur(m);
+      const i0 = clamp(num(pc.in), 0, Math.max(0, (m.kind === 'image' ? 30 : md) - 0.15)), o0 = clamp(num(pc.out) || i0 + 1.5, i0 + 0.15, m.kind === 'image' ? i0 + 30 : md);
+      const v = { id: uid(), type: 'm', track: 'V1', start: t, m: m.id, in: +i0.toFixed(3), out: +o0.toFixed(3), speed: clamp(num(pc.speed) || 1, 0.25, 4), curve: pick(pc.curve, CURVES, 'none'), tr: pick(pc.tr, TRS, 'cut'), fx: pick(pc.zoom, ZOOMS, 'none'), look: pick(plan.filter, FILTERS, 'none'), props: {} };
+      clips.push(v);
+      if (m.kind === 'video' && m.hasAudio) { v.link = uid(); clips.push({ id: uid(), type: 'm', track: 'A1', start: t, m: m.id, in: v.in, out: v.out, speed: v.speed, curve: v.curve, vol: mus ? 0 : 1, fadeIn: 0, fadeOut: 0, link: v.link }); }
+      t += cdur(v);
+    });
+    (Array.isArray(plan.texts) ? plan.texts : []).filter(x => x && x.text).forEach(x => clips.push({ id: uid(), type: 't', track: 'V2', text: String(x.text).slice(0, 120), start: Math.max(0, num(x.start)), dur: clamp(num(x.dur) || 2, 0.3, 30),
       font: FONT_BY[x.font] ? x.font : 'Montserrat', size: clamp(num(x.size) || 0.08, 0.03, 0.2), color: /^#[0-9a-f]{6}$/i.test(x.color) ? x.color : '#ffffff',
       style: pick(x.style, TSTYLES, 'bold'), anim: pick(x.anim, ANIMS, 'pop'), x: clamp(num(x.x) || 0.5, 0.05, 0.95), y: clamp(num(x.y) || 0.3, 0.04, 0.96), bold: x.bold !== false }));
-    p.music = mus ? { m: mus.id, offset: clamp(num(plan.musicOffset), 0, Math.max(0, mus.dur - 1)), vol: 0.9 } : (opts.into ? p.music : null);
-    return p;
+    if (mus) { const off = clamp(num(plan.musicOffset), 0, Math.max(0, mus.dur - 1)); clips.push({ id: uid(), type: 'm', track: 'A2', start: 0, m: mus.id, in: off, out: Math.min(mus.dur, off + Math.max(t, 1) + 0.5), speed: 1, curve: 'none', vol: 0.9, fadeIn: 0, fadeOut: 1 }); }
+    return clips;
   }
-  function loadPlanProject(p, snap) {
-    pause(); proj = p; hist = []; fut = []; sel = null; T = 0;
-    if (snap) snapToBeats();
-    proj.texts.forEach(x => loadFont(x.font)); saveProj(); renderAll(); updUndo();
+  function fitMusic() { const tot = Math.max(0, ...proj.clips.filter(c => kindOfTrack(c.track) === 'v').map(cend)); proj.clips.filter(c => c.type === 'm' && mediaById(c.m)?.kind === 'audio' && c.start === 0).forEach(c => { c.out = Math.min(mediaById(c.m).dur, c.in + tot); }); }
+  function loadPlan(plan, labels, mus, snap) {
+    pause(); proj = newProject(String(plan.title || 'AI montaj').slice(0, 60));
+    proj.letterbox = !!plan.letterbox; proj.notes = String(plan.notes || '').slice(0, 1500); proj.clips = planToClips(plan, labels, mus);
+    hist = []; fut = []; sel = new Set(); T = 0; if (snap) snapToBeats(); fitMusic();
+    proj.clips.forEach(c => c.type === 't' && loadFont(c.font)); saveProj(); renderAll(); updUndo();
   }
   $('aiGo').onclick = async () => {
     const { sel: list, mus, dur, style, idea, snap } = aiInputs();
     if (!list.length) return toast('Kamida bitta video yoki rasm tanlang');
     const btn = $('aiGo'); btn.disabled = true; const st = $('aiStatus');
     try {
-      const labels = labelsOf(list), images = [], desc = [];
-      const per = clamp(Math.floor(20 / list.length), 1, 4);
+      const labels = labelsOf(list), images = [], desc = [], per = clamp(Math.floor(12 / list.length), 1, 3);
       for (const [lab, m] of Object.entries(labels)) {
         st.innerHTML = `<span class="spin"></span>${esc(m.name)} ko'rib chiqilmoqda…`;
         if (m.kind === 'video') {
-          const v = makeVideo(rtOf(m).url); await waitMeta(v);
-          const sc = await scanVideoEl(v, { frames: per, thumbW: 240, maxSteps: 150 });
+          const v = makeVideo(urlOf(m)); await waitMeta(v);
+          const sc = await scanVideoEl(v, { frames: per, thumbW: 200, maxSteps: 120 });
           sc.frames.forEach(f => { images.push(f.data); desc.push(`Rasm #${images.length} = ${lab} kadri ${f.t.toFixed(1)} s`); });
           desc.push(`${lab}: video "${m.name}", ${m.dur.toFixed(2)} s; harakat har soniya (0-9): ${sc.motion.join(',')}; ichki kesimlar: ${sc.cuts.join(', ') || "yo'q"}`);
         } else { images.push(m.thumb); desc.push(`Rasm #${images.length} = ${lab} (foto "${m.name}")`); desc.push(`${lab}: rasm, xohlagan davomiylik (in=0, out=1..4)`); }
       }
       st.innerHTML = '<span class="spin"></span>AI montaj qilyapti (30-90 soniya)…';
-      const bt = mus && mus.beats ? mus.beats.filter(b => b < dur + 30).slice(0, 160) : [];
-      const prompt = `Sen professional reels montajchisisan. Berilgan materiallardan ${dur} soniyalik vertikal (9:16) montaj rejasini tuz.\n` +
-        `Uslub: ${style}.\n${idea ? 'Matn/g\'oya: ' + idea + '\n' : ''}` +
+      const bt = mus && mus.beats ? mus.beats.filter(b => b < dur + 30).slice(0, 120) : [];
+      const prompt = `Sen professional reels montajchisisan. Berilgan materiallardan ${dur} soniyalik vertikal (9:16) montaj rejasini tuz.\nUslub: ${style}.\n${idea ? "Matn/g'oya: " + idea + '\n' : ''}` +
         `Materiallar:\n${desc.join('\n')}\n` +
         (mus ? `Musiqa: "${mus.name}", ${mus.dur.toFixed(1)} s, ${mus.bpm} BPM, beatlar (s): ${bt.join(', ')}. musicOffset bilan musiqaning eng kuchli qismidan boshla; kesimlarni beatlarga to'g'rila (timeline vaqti = beat - musicOffset).\n` : "Musiqa yo'q — klip ovozlari qoladi.\n") +
         ($('aiTrends').checked && trends ? `Hozirgi trendlar: stillar — ${(trends.data.styles || []).map(s => s.name).join(', ')}; effektlar — ${(trends.data.effects || []).map(s => s.name).join(', ')}; shriftlar — ${(trends.data.fonts || []).map(s => s.name).join(', ')}.\n` : '') +
-        ($('aiRef').checked && lastAnalysis ? `Namuna video uslubiga o'xshat: o'rtacha kadr ${lastAnalysis.avgShot} s, ${lastAnalysis.cuts} kesim / ${lastAnalysis.dur} s, ${lastAnalysis.bpm || '?'} BPM, ranglar ${lastAnalysis.palette.join(', ')}. ${lastAnalysis.aiText ? 'Namuna tahlili: ' + lastAnalysis.aiText.slice(0, 700) : ''}\n` : '') +
+        ($('aiRef').checked && lastAnalysis ? `Namuna video uslubiga o'xshat: o'rtacha kadr ${lastAnalysis.avgShot} s, ${lastAnalysis.cuts} kesim / ${lastAnalysis.dur} s, ${lastAnalysis.bpm || '?'} BPM, ranglar ${lastAnalysis.palette.join(', ')}. ${lastAnalysis.aiText ? 'Namuna tahlili: ' + lastAnalysis.aiText.slice(0, 500) : ''}\n` : '') +
         `Ruxsat etilgan shriftlar: ${FONTS.map(f => f[0]).join(', ')}.\n${planRules}\nFaqat shu JSON:\n${planSchema}`;
       const r = await ai({ json: true, images, prompt, effort: 'high' });
-      const p = applyPlan(r.data || {}, labels, mus, {});
-      if (!p.clips.length) throw { code: 'invalid_json' };
-      loadPlanProject(p, snap && !!mus);
+      if (!planToClips(r.data || {}, labels, null).some(c => c.track === 'V1')) throw { code: 'invalid_json' };
+      loadPlan(r.data || {}, labels, mus, snap && !!mus);
       $('aiSheet').classList.remove('open'); toast('✨ AI montaj tayyor — endi xohlagancha tahrirlang');
     } catch (e) { st.textContent = errText(e); }
     btn.disabled = false;
@@ -1762,76 +2091,68 @@ const Editor = (() => {
   $('aiLocal').onclick = () => {
     const { sel: list, mus, dur, style, idea } = aiInputs();
     if (!list.length) return toast('Kamida bitta video yoki rasm tanlang');
-    const period = mus && mus.bpm ? 60 / mus.bpm : 0.5, calm = /kinemat|to'y|minimal|vlog/i.test(style);
-    const segLen = period * (calm ? 4 : 2);
+    const period = mus && mus.bpm ? 60 / mus.bpm : 0.5, calm = /kinemat|to'y|minimal|vlog/i.test(style), segLen = period * (calm ? 4 : 2);
     const cands = [];
     list.forEach(m => {
       if (m.kind === 'image') { cands.push({ m, in: 0, score: 4 }); return; }
-      for (let s = 0; s + segLen <= m.dur; s += segLen / 2) { const mo = (m.motion || []).slice(Math.floor(s), Math.ceil(s + segLen)); const sc = mo.length ? mo.reduce((a, b) => a + b, 0) / mo.length : 3; cands.push({ m, in: s, score: sc + Math.random() * 0.5 }); }
+      for (let s = 0; s + segLen <= m.dur; s += segLen / 2) { const mo = (m.motion || []).slice(Math.floor(s), Math.ceil(s + segLen)); cands.push({ m, in: s, score: (mo.length ? mo.reduce((a, b) => a + b, 0) / mo.length : 3) + Math.random() * 0.5 }); }
     });
     cands.sort((a, b) => b.score - a.score);
-    const used = [], picked = []; let acc = 0;
-    for (const c of cands) { if (acc >= dur) break; if (used.some(u => u.m === c.m && Math.abs(u.in - c.in) < segLen)) continue; used.push(c); picked.push(c); acc += segLen; }
+    const picked = []; let acc = 0;
+    for (const c of cands) { if (acc >= dur) break; if (picked.some(u => u.m === c.m && Math.abs(u.in - c.in) < segLen)) continue; picked.push(c); acc += segLen; }
     picked.sort((a, b) => list.indexOf(a.m) - list.indexOf(b.m) || a.in - b.in);
     const trs = calm ? ['fade', 'cut', 'zoom'] : ['flash', 'zoom', 'whip', 'glitch', 'cut'];
     const font = /to'y/i.test(style) ? 'Great Vibes' : calm ? 'Playfair Display' : (trends && trends.data.fonts && FONT_BY[trends.data.fonts[0]?.name] ? trends.data.fonts[0].name : 'Bebas Neue');
     const plan = { title: idea || 'Avto montaj', filter: calm ? (/to'y/i.test(style) ? 'soft' : 'cinematic') : 'vivid', letterbox: /kinemat/i.test(style),
-      clips: picked.map((c, i) => ({ m: 'X' + list.indexOf(c.m), in: c.in, out: c.in + segLen, speed: 1, curve: !calm && i % 4 === 2 ? 'velocity' : 'none', tr: i ? trs[i % trs.length] : 'fade', zoom: mus && !calm ? 'pulse' : 'zoomIn' })),
+      clips: picked.map((c, i) => { const vel = !calm && i % 4 === 2; return { m: 'X' + list.indexOf(c.m), in: c.in, out: Math.min(maxDur(c.m), c.in + segLen * (vel ? 1.6 : 1)), speed: 1, curve: vel ? 'velocity' : 'none', tr: i ? trs[i % trs.length] : 'cut', zoom: mus && !calm ? 'pulse' : 'zoomIn' }; }),
       texts: idea ? [{ text: idea, start: 0.2, dur: Math.min(3, dur * 0.3), font, size: /to'y/i.test(style) ? 0.1 : 0.12, color: '#ffffff', style: calm ? 'plain' : 'bold', anim: calm ? 'fade' : 'pop', x: .5, y: .3, bold: !calm }] : [],
       musicOffset: 0, notes: 'Tezkor algoritm: eng harakatli joylar tanlandi va beatga moslandi. AI montaj uchun «✨ Montaj qil» ni bosing.' };
-    // velocity klipda kadr uzunligi saqlanishi uchun out ni kengaytiramiz
-    plan.clips.forEach(c => { if (c.curve === 'velocity') { const m = list[+c.m.slice(1)]; c.out = Math.min(maxDur(m), c.in + segLen * 1.6); } });
-    const p = applyPlan(plan, Object.fromEntries(list.map((m, i) => ['X' + i, m])), mus, {});
-    loadPlanProject(p, !!mus); $('aiSheet').classList.remove('open'); toast('⚡ Avto montaj tayyor');
+    loadPlan(plan, Object.fromEntries(list.map((m, i) => ['X' + i, m])), mus, !!mus); $('aiSheet').classList.remove('open'); toast('⚡ Avto montaj tayyor');
   };
   function projAsPlan() {
     const labs = media.filter(m => m.kind !== 'audio'), lab = id => 'M' + (labs.findIndex(m => m.id === id) + 1);
-    return { labels: labelsOf(labs), plan: { title: proj.name, filter: proj.filter, letterbox: proj.letterbox,
-      clips: proj.clips.map(c => ({ m: lab(c.m), in: +c.in.toFixed(2), out: +c.out.toFixed(2), speed: c.speed, curve: c.curve, tr: c.tr, zoom: c.zoom })),
-      texts: proj.texts.map(x => ({ text: x.text, start: +x.start.toFixed(2), dur: +x.dur.toFixed(2), font: x.font, size: x.size, color: x.color, style: x.style, anim: x.anim, x: x.x, y: x.y, bold: x.bold })),
-      musicOffset: proj.music ? proj.music.offset : 0 } };
+    const v1 = onTrack('V1').filter(c => c.type === 'm'), mus = proj.clips.find(c => c.type === 'm' && mediaById(c.m)?.kind === 'audio');
+    return { labels: labelsOf(labs), mus: mus && mediaById(mus.m), plan: { title: proj.name, filter: (v1[0] || {}).look || 'none', letterbox: proj.letterbox,
+      clips: v1.map(c => ({ m: lab(c.m), in: +c.in.toFixed(2), out: +c.out.toFixed(2), speed: c.speed, curve: c.curve, tr: c.tr, zoom: c.fx })),
+      texts: proj.clips.filter(c => c.type === 't').map(x => ({ text: x.text, start: +x.start.toFixed(2), dur: +x.dur.toFixed(2), font: x.font, size: x.size, color: x.color, style: x.style, anim: x.anim, x: x.x, y: x.y, bold: x.bold })),
+      musicOffset: mus ? mus.in : 0 } };
   }
   $('aiCmd').addEventListener('keydown', e => { if (e.key === 'Enter') $('aiCmdBtn').click(); });
   $('aiCmdBtn').onclick = async () => {
-    const q = $('aiCmd').value.trim(); if (!q) return; if (!proj.clips.length && !proj.texts.length) return toast("Timeline bo'sh — avval «🤖 AI montaj» qiling");
+    const q = $('aiCmd').value.trim(); if (!q) return; if (!proj.clips.length) return toast("Timeline bo'sh — avval «🤖 AI montaj» qiling");
     const btn = $('aiCmdBtn'); btn.disabled = true; btn.innerHTML = '<span class="spin"></span>';
     try {
-      const { labels, plan } = projAsPlan(), mus = proj.music && mediaById(proj.music.m);
+      const { labels, plan, mus } = projAsPlan();
       const prompt = `Hozirgi montaj rejasi (JSON):\n${JSON.stringify(plan)}\n\nMateriallar:\n${Object.entries(labels).map(([l, m]) => `${l}: ${m.kind} "${m.name}"${m.kind === 'video' ? ', ' + m.dur.toFixed(2) + ' s, harakat: ' + (m.motion || []).join(',') : ''}`).join('\n')}\n` +
-        (mus ? `Musiqa: ${mus.bpm} BPM, beatlar: ${(mus.beats || []).slice(0, 120).join(', ')}\n` : '') +
+        (mus ? `Musiqa: ${mus.bpm} BPM, beatlar: ${(mus.beats || []).slice(0, 100).join(', ')}\n` : '') +
         `Foydalanuvchi buyrug'i: «${q}»\nBuyruqni bajarib, YANGILANGAN TO'LIQ rejani qaytar (o'zgarmagan qismlarni saqla). notes ga nima o'zgartirganingni yoz.\nRuxsat etilgan shriftlar: ${FONTS.map(f => f[0]).join(', ')}.\n${planRules}\nFaqat shu JSON:\n${planSchema}`;
       const r = await ai({ json: true, prompt, effort: 'medium' });
-      beginEdit(); const keep = { id: proj.id, name: proj.name, created: proj.created, workSec: proj.workSec };
-      const p = applyPlan(r.data || {}, labels, mus, { into: JSON.parse(JSON.stringify(proj)) });
-      if (!p.clips.length && proj.clips.length) throw { code: 'invalid_json' };
-      proj = Object.assign(p, keep); if (mus) proj.music.m = mus.id;
-      proj.texts.forEach(x => loadFont(x.font)); endEdit(); sel = null; renderAll();
-      $('aiCmd').value = ''; toast('✓ Bajarildi (orqaga qaytarish: Ctrl+Z)');
+      const nc = planToClips(r.data || {}, labels, mus); if (!nc.some(c => c.track === 'V1')) throw { code: 'invalid_json' };
+      beginEdit();
+      const keepOther = proj.clips.filter(c => !(c.track === 'V1' || c.type === 't' || (c.link && proj.clips.some(v => v.link === c.link && v.track === 'V1')) || (c.type === 'm' && mediaById(c.m)?.kind === 'audio')));
+      proj.clips = [...keepOther, ...nc]; proj.letterbox = !!r.data.letterbox; proj.notes = String(r.data.notes || '').slice(0, 1500); fitMusic();
+      proj.clips.forEach(c => c.type === 't' && loadFont(c.font)); endEdit(); sel = new Set(); renderAll();
+      $('aiCmd').value = ''; toast('✓ Bajarildi (orqaga: Ctrl+Z)');
     } catch (e) { toast(errText(e), 5000); }
     btn.disabled = false; btn.textContent = 'Bajar';
   };
 
   /* ---------- MP4 eksport ---------- */
-  $('mp4Btn').onclick = () => { if (!proj.clips.length) return toast("Timeline bo'sh"); pause(); $('expBar').style.width = '0'; $('expStatus').textContent = `Davomiyligi ${fmtT(total())}. Eksport kadrma-kadr bo'ladi — sahifani yopmang.`; $('expGo').disabled = false; $('expSheet').classList.add('open'); };
+  $('mp4Btn').onclick = () => { if (!proj.clips.length) return toast("Timeline bo'sh"); pause(); $('expBar').style.width = '0'; $('expStatus').textContent = `Davomiyligi ${tc(total())}. Eksport kadrma-kadr bo'ladi — sahifani yopmang.`; $('expGo').disabled = false; $('expSheet').classList.add('open'); };
   let cancelExp = false;
   $('expClose').onclick = () => { if (exporting) { cancelExp = true; return; } $('expSheet').classList.remove('open'); };
   async function renderAudio(tot) {
     const sr = 48000, AC = window.OfflineAudioContext || window.webkitOfflineAudioContext; if (!AC) return null;
     const oc = new AC(2, Math.max(1, Math.ceil(tot * sr)), sr); let any = false; const bufs = {};
     const getBuf = async m => (m.id in bufs ? bufs[m.id] : (bufs[m.id] = await decodeAudio(m.blob)));
-    const L = layout();
-    for (let i = 0; i < proj.clips.length; i++) {
-      const c = proj.clips[i], m = mediaById(c.m); if (!m || m.kind !== 'video' || !(c.vol > 0)) continue;
-      const buf = await getBuf(m); if (!buf) continue;
-      const src = oc.createBufferSource(); src.buffer = buf; const g = oc.createGain(); g.gain.value = c.vol; src.connect(g).connect(oc.destination);
-      const D = cdur(c);
-      if (c.curve && c.curve !== 'none') { const arr = new Float32Array(32).map((_, k) => rateAt(c, D * k / 31)); src.playbackRate.setValueCurveAtTime(arr, L[i], D); }
-      else src.playbackRate.value = c.speed;
-      src.start(L[i], c.in, c.out - c.in); any = true;
-    }
-    if (proj.music) {
-      const m = mediaById(proj.music.m), buf = m && await getBuf(m);
-      if (buf) { const src = oc.createBufferSource(); src.buffer = buf; const g = oc.createGain(); g.gain.setValueAtTime(proj.music.vol, 0); g.gain.setValueAtTime(proj.music.vol, Math.max(0, tot - 1)); g.gain.linearRampToValueAtTime(0, tot); src.connect(g).connect(oc.destination); src.start(0, proj.music.offset); any = true; }
+    for (const c of proj.clips) {
+      const tr = trackById(c.track); if (c.type !== 'm' || !tr || tr.kind !== 'a' || !audible(tr) || !((c.vol ?? 1) > 0)) continue;
+      const m = mediaById(c.m), buf = m && await getBuf(m); if (!buf) continue;
+      const src = oc.createBufferSource(); src.buffer = buf; const g = oc.createGain(), D = cdur(c), v = c.vol ?? 1; src.connect(g).connect(oc.destination);
+      g.gain.setValueAtTime(c.fadeIn > 0 ? 0 : v, c.start); if (c.fadeIn > 0) g.gain.linearRampToValueAtTime(v, c.start + Math.min(c.fadeIn, D));
+      if (c.fadeOut > 0) { g.gain.setValueAtTime(v, Math.max(c.start, c.start + D - c.fadeOut)); g.gain.linearRampToValueAtTime(0, c.start + D); }
+      if (c.curve && c.curve !== 'none') src.playbackRate.setValueCurveAtTime(new Float32Array(32).map((_, k) => rateAt(c, D * k / 31)), c.start, D); else src.playbackRate.value = c.speed;
+      src.start(c.start, c.in, c.out - c.in); any = true;
     }
     return any ? await oc.startRendering() : null;
   }
@@ -1839,27 +2160,26 @@ const Editor = (() => {
     if (!('VideoEncoder' in window) || !window.Mp4Muxer) { $('expStatus').textContent = "Bu brauzer video eksportni qo'llamaydi. Kompyuterda Chrome yoki Edge'ning yangi versiyasidan foydalaning."; return; }
     const res = num($('expRes').value), fps = num($('expFps').value), W = res, H = Math.round(res * 16 / 9), tot = total(), N = Math.ceil(tot * fps);
     const st = $('expStatus'), bar = $('expBar'); $('expGo').disabled = true; exporting = true; cancelExp = false; $('expClose').textContent = "To'xtatish";
-    let err = null;
+    let err = null; const pw = cv.width, ph = cv.height;
     try {
       st.innerHTML = '<span class="spin"></span>Shriftlar va ovoz tayyorlanmoqda…';
-      await Promise.all(proj.texts.map(x => loadFont(x.font)));
+      await Promise.all(proj.clips.filter(c => c.type === 't').map(x => loadFont(x.font)));
       const audio = await renderAudio(tot);
       let vcodec = null, mux = 'avc';
-      for (const c of ['avc1.640033', 'avc1.64002a', 'avc1.640028', 'avc1.4d0028', 'avc1.42002a']) { try { const s = await VideoEncoder.isConfigSupported({ codec: c, width: W, height: H, bitrate: W > 800 ? 10e6 : 5e6, framerate: fps }); if (s.supported) { vcodec = c; break; } } catch (e) {} }
-      if (!vcodec) { for (const c of ['vp09.00.40.08', 'vp09.00.31.08']) { try { const s = await VideoEncoder.isConfigSupported({ codec: c, width: W, height: H, bitrate: 8e6, framerate: fps }); if (s.supported) { vcodec = c; mux = 'vp9'; break; } } catch (e) {} } }
-      if (!vcodec) throw new Error("video kodek topilmadi");
+      for (const c of ['avc1.640033', 'avc1.64002a', 'avc1.640028', 'avc1.4d0028', 'avc1.42002a']) { try { if ((await VideoEncoder.isConfigSupported({ codec: c, width: W, height: H, bitrate: W > 800 ? 10e6 : 5e6, framerate: fps })).supported) { vcodec = c; break; } } catch (e) {} }
+      if (!vcodec) for (const c of ['vp09.00.40.08', 'vp09.00.31.08']) { try { if ((await VideoEncoder.isConfigSupported({ codec: c, width: W, height: H, bitrate: 8e6, framerate: fps })).supported) { vcodec = c; mux = 'vp9'; break; } } catch (e) {} }
+      if (!vcodec) throw new Error('video kodek topilmadi');
       let acodec = null;
-      if (audio && 'AudioEncoder' in window) for (const [c, n] of [['mp4a.40.2', 'aac'], ['opus', 'opus']]) { try { const s = await AudioEncoder.isConfigSupported({ codec: c, sampleRate: 48000, numberOfChannels: 2, bitrate: 160000 }); if (s.supported) { acodec = [c, n]; break; } } catch (e) {} }
-      const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: mux, width: W, height: H, frameRate: fps },
-        audio: acodec ? { codec: acodec[1], numberOfChannels: 2, sampleRate: 48000 } : undefined, fastStart: 'in-memory', firstTimestampBehavior: 'offset' });
+      if (audio && 'AudioEncoder' in window) for (const [c, n] of [['mp4a.40.2', 'aac'], ['opus', 'opus']]) { try { if ((await AudioEncoder.isConfigSupported({ codec: c, sampleRate: 48000, numberOfChannels: 2, bitrate: 160000 })).supported) { acodec = [c, n]; break; } } catch (e) {} }
+      const muxer = new Mp4Muxer.Muxer({ target: new Mp4Muxer.ArrayBufferTarget(), video: { codec: mux, width: W, height: H, frameRate: fps }, audio: acodec ? { codec: acodec[1], numberOfChannels: 2, sampleRate: 48000 } : undefined, fastStart: 'in-memory', firstTimestampBehavior: 'offset' });
       const venc = new VideoEncoder({ output: (ch, meta) => muxer.addVideoChunk(ch, meta), error: e => { err = e; } });
       venc.configure({ codec: vcodec, width: W, height: H, bitrate: W > 800 ? 10e6 : 5e6, framerate: fps });
-      cv.width = W; cv.height = H; pauseAll();
+      cv.width = W; cv.height = H; pause();
       for (let f = 0; f < N; f++) {
         if (cancelExp) throw new Error("to'xtatildi"); if (err) throw err;
-        const t = f / fps, a = clipAt(t), m = a && mediaById(a.c.m);
-        if (m && m.kind === 'video') { const el = rtOf(m).el; if (el.readyState < 2) await new Promise(r => { el.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 3000); }); await seekEl(el, Math.min(m.dur - 0.01, srcAt(a.c, t - a.start))); }
-        draw(t);
+        const t = f / fps, act = activeAt(t);
+        await Promise.all(act.v.filter(x => x.en && x.en.kind === 'v').map(async ({ c, en }) => { const el = en.el, m = mediaById(c.m); if (el.readyState < 2) await new Promise(r => { el.addEventListener('loadeddata', r, { once: true }); setTimeout(r, 3000); }); await seekEl(el, Math.min(m.dur - 0.01, srcAt(c, t - c.start))); }));
+        draw(t, act);
         const vf = new VideoFrame(cv, { timestamp: Math.round(f * 1e6 / fps), duration: Math.round(1e6 / fps) });
         venc.encode(vf, { keyFrame: f % (fps * 2) === 0 }); vf.close();
         while (venc.encodeQueueSize > 6) await sleep(4);
@@ -1881,52 +2201,46 @@ const Editor = (() => {
       muxer.finalize(); bar.style.width = '100%';
       const blob = new Blob([muxer.target.buffer], { type: 'video/mp4' });
       st.textContent = `✓ Tayyor: ${(blob.size / 1048576).toFixed(1)} MB${acodec ? '' : ' (ovozsiz)'}`;
-      cv.width = 720; cv.height = 1280; exporting = false; dirty = true;
+      cv.width = pw; cv.height = ph; exporting = false; dirty = true;
       await saveFile((proj.name || 'montaj').replace(/[\\/:*?"<>|]/g, '_') + '.mp4', blob);
-      if (await dlg('Montaj tayyor! «Montajlarim» ro\'yxatiga qo\'shaymi?', { ok: "Qo'shish" })) {
-        addEdit({ name: proj.name, date: today(), type: 'Reels', style: $('aiStyle').value.split(' —')[0].split(' (')[0], fonts: [...new Set(proj.texts.map(x => x.font))].join(', '),
-          effects: [...new Set(proj.clips.map(c => TRS[c.tr]).concat(proj.clips.filter(c => c.zoom !== 'none').map(c => ZOOMS[c.zoom])))].join(', '),
-          music: proj.music && mediaById(proj.music.m) ? mediaById(proj.music.m).name : '', app: 'Montaj Studiya', duration: Math.round(tot), hours: Math.max(0.25, Math.round((proj.workSec || 0) / 900) / 4) });
-        toast('Montajlarim ro\'yxatiga qo\'shildi');
+      if (await dlg("Montaj tayyor! «Montajlarim» ro'yxatiga qo'shaymi?", { ok: "Qo'shish" })) {
+        const vc = proj.clips.filter(c => c.type === 'm' && kindOfTrack(c.track) === 'v'), mus = proj.clips.find(c => c.type === 'm' && mediaById(c.m)?.kind === 'audio');
+        addEdit({ name: proj.name, date: today(), type: 'Reels', style: $('aiStyle').value.split(' —')[0].split(' (')[0], fonts: [...new Set(proj.clips.filter(c => c.type === 't').map(x => x.font))].join(', '),
+          effects: [...new Set(vc.filter(c => c.tr && c.tr !== 'cut').map(c => TRS[c.tr]).concat(vc.filter(c => c.fx && c.fx !== 'none').map(c => ZOOMS[c.fx])))].join(', '),
+          music: mus ? mediaById(mus.m).name : '', app: 'Montaj Studiya', duration: Math.round(tot), hours: Math.max(0.25, Math.round((proj.workSec || 0) / 900) / 4) });
+        toast("Montajlarim ro'yxatiga qo'shildi");
       }
     } catch (e) { st.textContent = 'Xato: ' + (e.message || e); }
-    cv.width = 720; cv.height = 1280; exporting = false; dirty = true; $('expGo').disabled = false; $('expClose').textContent = 'Yopish';
+    cv.width = pw; cv.height = ph; exporting = false; dirty = true; $('expGo').disabled = false; $('expClose').textContent = 'Yopish';
   };
 
   /* ---------- After Effects skripti ---------- */
   $('aeBtn').onclick = async () => {
     if (!proj.clips.length) return toast("Timeline bo'sh");
-    const L = layout(), tot = total(), J = JSON.stringify, n = v => (+v).toFixed(3);
-    let s = `// Montaj Studiya → After Effects\n// Ishlatish: After Effects → File → Scripts → Run Script File… → shu faylni tanlang.\n// So'ng manba fayllar (video, rasm, musiqa) turgan papkani tanlang.\n// Eslatma: rang filtri va o'tishlar ko'chirilmaydi — ularni AE'da qo'shing.\n(function(){\napp.beginUndoGroup("Montaj Studiya");\nvar folder = Folder.selectDialog("Manba fayllar turgan papkani tanlang");\nif(!folder){return;}\nvar comp = app.project.items.addComp(${J(proj.name)}, 1080, 1920, 1, ${n(Math.max(1, tot))}, 30);\nvar cache = {};\nfunction imp(nm){ if(cache[nm]) return cache[nm]; var f = new File(folder.fsName + "/" + nm); if(!f.exists){ alert("Topilmadi: " + nm); return null; } cache[nm] = app.project.importFile(new ImportOptions(f)); return cache[nm]; }\nfunction fit(Ly, it){ var k = Math.max(1080/it.width, 1920/it.height)*100; Ly.property("Scale").setValue([k,k]); }\nvar it, Ly, T, sp, td;\n`;
-    if (proj.music && mediaById(proj.music.m)) s += `it = imp(${J(mediaById(proj.music.m).name)}); if(it){ Ly = comp.layers.add(it); Ly.startTime = ${n(-proj.music.offset)}; Ly.inPoint = 0; Ly.outPoint = ${n(tot)}; }\n`;
-    proj.clips.forEach((c, i) => {
-      const m = mediaById(c.m); if (!m) return;
-      s += m.kind === 'video' ? `it = imp(${J(m.name)}); if(it){ Ly = comp.layers.add(it); Ly.stretch = ${n(100 / c.speed)}; Ly.startTime = ${n(L[i] - c.in / c.speed)}; Ly.inPoint = ${n(L[i])}; Ly.outPoint = ${n(L[i] + cdur(c))}; fit(Ly, it); }\n`
-        : `it = imp(${J(m.name)}); if(it){ Ly = comp.layers.add(it); Ly.startTime = ${n(L[i])}; Ly.outPoint = ${n(L[i] + cdur(c))}; fit(Ly, it); }\n`;
-    });
-    proj.texts.forEach(x => {
-      const rgb = [1, 3, 5].map(k => (parseInt(x.color.slice(k, k + 2), 16) / 255).toFixed(3));
-      s += `T = comp.layers.addText(${J(x.text)}); sp = T.property("Source Text"); td = sp.value; try{ td.font = ${J(x.font.replace(/\s+/g, '') + (x.bold && FONT_BY[x.font] && FONT_BY[x.font][2] ? '-Bold' : '-Regular'))}; }catch(e){} td.fontSize = ${Math.round(x.size * 1080)}; td.fillColor = [${rgb}]; td.justification = ParagraphJustification.CENTER_JUSTIFY; sp.setValue(td); T.property("Position").setValue([${Math.round(x.x * 1080)}, ${Math.round(x.y * 1920)}]); T.inPoint = ${n(x.start)}; T.outPoint = ${n(x.start + x.dur)};\n`;
-    });
+    const tot = total(), J = JSON.stringify, n = v => (+v).toFixed(3);
+    let s = `// Montaj Studiya → After Effects\n// After Effects → File → Scripts → Run Script File… → shu fayl. So'ng manba fayllar papkasini tanlang.\n// Eslatma: o'tishlar, rang va keyframe'lar ko'chirilmaydi (boshlang'ich qiymatlar qo'yiladi).\n(function(){\napp.beginUndoGroup("Montaj Studiya");\nvar folder = Folder.selectDialog("Manba fayllar turgan papkani tanlang");\nif(!folder){return;}\nvar comp = app.project.items.addComp(${J(proj.name)}, 1080, 1920, 1, ${n(Math.max(1, tot))}, ${FPS});\nvar cache = {};\nfunction imp(nm){ if(cache[nm]) return cache[nm]; var f = new File(folder.fsName + "/" + nm); if(!f.exists){ alert("Topilmadi: " + nm); return null; } cache[nm] = app.project.importFile(new ImportOptions(f)); return cache[nm]; }\nvar it, Ly, T, sp, td, k;\n`;
+    aTracks().forEach(tr => onTrack(tr.id).forEach(c => { const m = mediaById(c.m); if (!m || c.type !== 'm') return;
+      s += `it = imp(${J(m.name)}); if(it){ Ly = comp.layers.add(it); Ly.enabled = false; Ly.audioEnabled = ${!!audible(tr)}; Ly.stretch = ${n(100 / c.speed)}; Ly.startTime = ${n(c.start - c.in / c.speed)}; Ly.inPoint = ${n(c.start)}; Ly.outPoint = ${n(cend(c))}; try{ Ly.property("Audio Levels").setValue([${n(20 * Math.log10(Math.max(0.001, c.vol ?? 1)))}, ${n(20 * Math.log10(Math.max(0.001, c.vol ?? 1)))}]); }catch(e){} }\n`; }));
+    vTracks().forEach(tr => onTrack(tr.id).forEach(c => {
+      if (c.type === 't') { const rgb = [1, 3, 5].map(k => (parseInt(c.color.slice(k, k + 2), 16) / 255).toFixed(3));
+        s += `T = comp.layers.addText(${J(c.text)}); sp = T.property("Source Text"); td = sp.value; try{ td.font = ${J(c.font.replace(/\s+/g, '') + (c.bold && FONT_BY[c.font] && FONT_BY[c.font][2] ? '-Bold' : '-Regular'))}; }catch(e){} td.fontSize = ${Math.round(c.size * 1080)}; td.fillColor = [${rgb}]; td.justification = ParagraphJustification.CENTER_JUSTIFY; sp.setValue(td); T.property("Position").setValue([${Math.round(c.x * 1080)}, ${Math.round(c.y * 1920)}]); T.inPoint = ${n(c.start)}; T.outPoint = ${n(cend(c))};${tr.hide ? ' T.enabled = false;' : ''}\n`; return; }
+      const m = mediaById(c.m); if (!m) return; const sc = pv(c, 'scale', 0), px = pv(c, 'posX', 0), py = pv(c, 'posY', 0);
+      s += `it = imp(${J(m.name)}); if(it){ Ly = comp.layers.add(it); ${m.kind === 'video' ? `Ly.audioEnabled = false; Ly.stretch = ${n(100 / c.speed)}; Ly.startTime = ${n(c.start - c.in / c.speed)}; Ly.inPoint = ${n(c.start)};` : `Ly.startTime = ${n(c.start)};`} Ly.outPoint = ${n(cend(c))}; k = Math.max(1080/it.width, 1920/it.height)*${n(sc)}; Ly.property("Scale").setValue([k,k]); Ly.property("Position").setValue([${n(540 + px / 100 * 1080)}, ${n(960 + py / 100 * 1920)}]); Ly.property("Rotation").setValue(${n(pv(c, 'rot', 0))}); Ly.property("Opacity").setValue(${n(pv(c, 'opacity', 0))});${tr.hide ? ' Ly.enabled = false;' : ''} }\n`;
+    }));
     s += `comp.openInViewer();\napp.endUndoGroup();\nalert("Tayyor! Shriftlar kompyuterda o'rnatilgan bo'lishi kerak.");\n})();\n`;
     const name = (proj.name || 'montaj').replace(/[\\/:*?"<>|]/g, '_');
     await P.ready;
-    if (P.dl) { await saveFile(name + '.jsx.txt', s); toast("Saqlandi: oxiridagi .txt ni o'chirib .jsx qiling", 6000); }
-    else saveFile(name + '.jsx', s);
+    if (P.dl) { await saveFile(name + '.jsx.txt', s); toast("Saqlandi: oxiridagi .txt ni o'chirib .jsx qiling", 6000); } else saveFile(name + '.jsx', s);
   };
 
   /* ---------- tashqi API ---------- */
   function describe() {
     if (!proj) return "yo'q";
-    const L = layout();
-    return `«${proj.name}», ${total().toFixed(1)} s, filtr ${proj.filter}${proj.music && mediaById(proj.music.m) ? ', musiqa ' + mediaById(proj.music.m).name + ' (' + mediaById(proj.music.m).bpm + ' BPM)' : ''}.\nKliplar: ` +
-      proj.clips.map((c, i) => `${i + 1}) ${(mediaById(c.m) || {}).name || '?'} ${c.in.toFixed(1)}-${c.out.toFixed(1)}s, ${L[i].toFixed(1)}s da, ×${c.speed}${c.curve !== 'none' ? ' ' + c.curve : ''}, o'tish ${c.tr}, effekt ${c.zoom}`).join('; ') +
-      `\nMatnlar: ` + (proj.texts.map(x => `«${x.text}» ${x.font} ${x.start.toFixed(1)}s ${x.style}/${x.anim}`).join('; ') || "yo'q");
+    return `«${proj.name}», ${total().toFixed(1)} s, treklar: ${proj.tracks.map(t => t.id).join(', ')}.\n` + displayTracks().map(tr => `${tr.id}: ` + (onTrack(tr.id).map(c => c.type === 't' ? `matn «${c.text}» ${c.font} ${c.start.toFixed(1)}-${cend(c).toFixed(1)}s` : `${(mediaById(c.m) || {}).name || '?'} ${c.start.toFixed(1)}-${cend(c).toFixed(1)}s (manba ${c.in.toFixed(1)}-${c.out.toFixed(1)}, ×${c.speed}${c.tr && c.tr !== 'cut' ? ', ' + c.tr : ''}${c.fx && c.fx !== 'none' ? ', ' + c.fx : ''})`).join('; ') || "bo'sh")).join('\n');
   }
   function onShow() { requestAnimationFrame(() => { renderTL(); dirty = true; }); }
   async function init() {
-    media = (await IDB.all()) || []; index = await KV.get('projIndex', []) || [];
-    index = index.filter(Boolean);
+    media = (await IDB.all()) || []; index = ((await KV.get('projIndex', [])) || []).filter(Boolean);
     const last = await KV.get('lastProj', null);
     if (last && index.some(p => p.id === last)) await loadProj(last);
     else if (index.length) await loadProj(index[0].id);

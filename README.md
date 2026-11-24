@@ -23,7 +23,7 @@ Kalitsiz ham 3D miya, chizib o'rgatish va rasm tanish ishlaydi. 3D shar uchun in
 Reels montajchi uchun studiya: `app/src/main/assets/montaj.html` (bitta fayl). Bosh sahifadagi 🎥 tugmasi orqali ochiladi.
 
 - **📊 Hisob** — montajlar soni, soatlar, ko'rishlar grafigi, haftalik maqsad, ketma-ket kunlar, «Davom ettirish» va AI hisobot.
-- **🎞 Timeline** — video, rasm va musiqani qo'shing; kliplarni sudrab joyini almashtiring, chetini tortib qirqing, bo'ling (S), nusxalang, tezlik (velocity egri chizig'i bilan), o'tishlar (flash, zoom, whip, glitch…), kamera effektlari (beat pulsi, silkinish), rang filtrlari, matnlar (130+ shrift, 6 uslub, 7 animatsiya). Musiqa BPM va beatlari avtomatik aniqlanadi, «⚡ Beatga moslash» kesimlarni beatga tushiradi. Ctrl+Z / Ctrl+Shift+Z. Hammasi avtomatik saqlanadi — keyin o'sha joyidan davom ettirasiz.
+- **🎞 Timeline** — professional NLE uslubida: ko'p trekli (V1–V3, A1–A2, +V/+A), bog'langan video+audio, kadrlar lentasi va to'lqin shakli, Tanlash (V) va Ustara (C) asboblari, yopishish (S), overwrite, ripple o'chirish, markerlar (M), timecode, keyframe'lar (masshtab, joy, burilish, shaffoflik), fade in/out, ovoz indikatori, Ctrl+K / Q / W / J-K-L klavishlari, o'ng tugma menyusi. Hammasi avtomatik saqlanadi.
 - **🤖 AI montaj** — AI kadrlaringizni ko'rib, musiqa beatlariga mos montaj qiladi va timelinega joylaydi. «✨ AI'ga buyruq» bilan tayyor montajni o'zgartirtirasiz. API'siz «⚡ Tezkor avto» ham bor.
 - **⬇ MP4** — kadrma-kadr H.264 + ovoz, 720p yoki 1080p. **AE .jsx** — timeline'ni After Effects'ga ko'chiruvchi skript.
 - **🎬 Tahlil** — kesimlar, harakat grafigi, BPM, beatga moslik %, hook bahosi, rang palitrasi; «Kesimlar bo'yicha timelinega» va «Shu uslubda AI montaj».
