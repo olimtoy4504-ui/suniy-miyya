@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Montaj Studiya</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{--bg:#07040f;--card:rgba(24,16,46,.7);--edge:rgba(255,255,255,.09);--txt:#f4f1ff;--mute:rgba(244,241,255,.55);
+        --acc:#b14cff;--acc2:#00e5ff;--ok:#3ddc97;--bad:#ff5c7a;
+        --grad:linear-gradient(120deg,#00e5ff,#b14cff 45%,#ff3fa4 75%,#ffd23f)}
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;background:radial-gradient(ellipse at 50% 0%,#1a0d3a 0%,#07040f 60%);background-color:var(--bg);color:var(--txt);
+    font-family:Manrope,system-ui,sans-serif;min-height:100%}
+  body{padding:0 0 84px}
+  header{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:10px;padding:14px 16px;background:rgba(7,4,15,.85);backdrop-filter:blur(14px);border-bottom:1px solid var(--edge)}
+  header h1{font-size:18px;margin:0;flex:1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .ib{width:38px;height:38px;border-radius:50%;border:1px solid var(--edge);background:var(--card);color:var(--txt);display:grid;place-items:center;cursor:pointer;text-decoration:none;font-size:16px}
+  main{max-width:720px;margin:0 auto;padding:14px 16px}
+  .tab{display:none}.tab.on{display:block}
+  nav{position:fixed;bottom:0;left:0;right:0;z-index:5;display:flex;background:rgba(7,4,15,.92);backdrop-filter:blur(14px);border-top:1px solid var(--edge);padding:6px 4px calc(6px + env(safe-area-inset-bottom))}
+  nav button{flex:1;background:none;border:0;color:var(--mute);font:inherit;font-size:11px;padding:6px 2px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+  nav button .e{font-size:20px}
+  nav button.on{color:var(--txt)}
+  nav button.on .e{filter:drop-shadow(0 0 8px var(--acc))}
+  .card{background:var(--card);border:1px solid var(--edge);border-radius:18px;padding:14px;margin-bottom:12px}
+  .card h3{margin:0 0 10px;font-size:15px}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+  .stat{background:var(--card);border:1px solid var(--edge);border-radius:16px;padding:12px}
+  .stat b{display:block;font-size:24px}
+  .stat span{font-size:12px;color:var(--mute)}
+  label{display:block;font-size:12px;color:var(--mute);margin:10px 0 4px}
+  input,select,textarea{width:100%;padding:10px 12px;border-radius:12px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);font:inherit;font-size:15px;outline:none}
+  input:focus,select:focus,textarea:focus{border-color:var(--acc)}
+  select option{background:#140c2a}
+  textarea{resize:vertical;min-height:70px}
+  .g2{display:grid;grid-template-columns:1fr 1fr;gap:0 10px}
+  .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 8px}
+  .btn{padding:11px 16px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.05);color:var(--txt);font:inherit;font-weight:600;cursor:pointer}
+  .btn.main{background:var(--grad);border:0;color:#fff}
+  .btn:disabled{opacity:.45;cursor:default}
+  .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+  .item{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--edge)}
+  .item:first-child{border-top:0}
+  .item .t{flex:1;min-width:0}
+  .item .t b{display:block;font-size:14px}
+  .item .t small{color:var(--mute);font-size:12px}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--edge);margin:4px 4px 0 0;color:var(--mute)}
+  .x{background:none;border:0;color:var(--mute);cursor:pointer;font-size:18px;padding:0 4px}
+  .bars{display:flex;align-items:flex-end;gap:6px;height:110px;padding-top:8px}
+  .bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+  .bars i{display:block;width:100%;border-radius:6px 6px 2px 2px;background:var(--grad);min-height:2px}
+  .bars small{font-size:10px;color:var(--mute)}
+  .rank div{display:flex;justify-content:space-between;font-size:14px;padding:5px 0}
+  .rank span{color:var(--mute)}
+  .ai{white-space:pre-wrap;line-height:1.55;font-size:14px}
+  .ai h4{margin:12px 0 4px}
+  .muted{color:var(--mute);font-size:13px}
+  .frames{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+  .frames img{width:100%;border-radius:8px;aspect-ratio:9/16;object-fit:cover;background:#000}
+  video{width:100%;max-height:320px;border-radius:12px;background:#000;margin-top:10px}
+  .font-card{border:1px solid var(--edge);border-radius:14px;padding:12px;margin-top:8px}
+  .font-card .s{font-size:30px;line-height:1.1;margin:6px 0;word-break:break-word}
+  .trend{border-top:1px solid var(--edge);padding:10px 0}
+  .trend:first-child{border-top:0}
+  .trend b{font-size:14px}
+  .trend p{margin:4px 0 0;font-size:13px;color:var(--mute);line-height:1.5}
+  .src a{color:var(--acc2);font-size:12px;word-break:break-all}
+  .msgs{display:flex;flex-direction:column;gap:10px;min-height:40vh}
+  .m{max-width:88%;line-height:1.5;font-size:14px;white-space:pre-wrap;padding:10px 13px;border-radius:16px}
+  .m.u{align-self:flex-end;background:rgba(177,76,255,.25);border-radius:16px 16px 4px 16px}
+  .m.b{align-self:flex-start;background:var(--card);border:1px solid var(--edge);border-radius:16px 16px 16px 4px}
+  .chatbar{position:fixed;left:0;right:0;bottom:62px;z-index:4;padding:8px 16px;background:linear-gradient(transparent,rgba(7,4,15,.95) 30%)}
+  .chatbar form{max-width:720px;margin:0 auto;display:flex;gap:8px}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+  .chip{font-size:12px;padding:6px 10px;border-radius:999px;border:1px solid var(--edge);background:rgba(255,255,255,.04);color:var(--txt);cursor:pointer;font-family:inherit}
+  .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--mute);border-top-color:var(--acc2);border-radius:50%;animation:r 0.8s linear infinite;vertical-align:-2px;margin-right:6px}
+  @keyframes r{to{transform:rotate(360deg)}}
+  .sheet{position:fixed;inset:0;z-index:9;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:16px}
+  .sheet.open{display:flex}
+  .sheet .card{width:min(440px,100%)}
+  #tab-chat{padding-bottom:70px}
+</style>
+</head>
+<body>
+<header>
+  <a class="ib" href="index.html" title="Orqaga">←</a>
+  <h1>Montaj Studiya</h1>
+  <button class="ib" id="keyBtn" title="API kalit">🔑</button>
+</header>
+
+<main>
+  <!-- 1. HISOB -->
+  <section class="tab on" id="tab-stats">
+    <div class="stats">
+      <div class="stat"><b id="sCount">0</b><span>Jami montaj</span></div>
+      <div class="stat"><b id="sHours">0</b><span>Sarflangan soat</span></div>
+      <div class="stat"><b id="sViews">0</b><span>O'rtacha ko'rish</span></div>
+      <div class="stat"><b id="sMonth">0</b><span>Shu oy</span></div>
+    </div>
+    <div class="card"><h3>Haftalik montajlar (8 hafta)</h3><div class="bars" id="weekBars"></div></div>
+    <div class="card"><h3>Qaysi stil ko'proq ko'rilgan</h3><div class="rank" id="styleRank"><span class="muted">Ma'lumot yo'q</span></div></div>
+    <div class="card">
+      <h3>Montajlarim</h3>
+      <div id="list"><span class="muted">Hali montaj qo'shilmagan. «➕ Qo'shish» bo'limidan boshlang.</span></div>
+      <div class="row">
+        <button class="btn" id="exportBtn">Zaxira (JSON)</button>
+        <button class="btn" id="importBtn">Tiklash</button>
+        <input type="file" id="importFile" accept="application/json" hidden>
+      </div>
+    </div>
+    <div class="card">
+      <h3>🤖 AI hisobot</h3>
+      <div class="muted">AI montajlaringiz statistikasini ko'rib, nima yaxshi ishlayotganini va nimani o'zgartirish kerakligini aytadi.</div>
+      <div class="row"><button class="btn main" id="reportBtn">Tahlil qilish</button></div>
+      <div class="ai" id="reportOut"></div>
+    </div>
+  </section>
+
+  <!-- 2. QO'SHISH -->
+  <section class="tab" id="tab-add">
+    <div class="card">
+      <h3 id="formTitle">Yangi montaj</h3>
+      <form id="addForm">
+        <label>Nomi</label><input name="name" required placeholder="Masalan: To'y reels — Aziz">
+        <div class="g2">
+          <div><label>Sana</label><input name="date" type="date" required></div>
+          <div><label>Turi</label><select name="type"><option>Reels</option><option>TikTok</option><option>Shorts</option><option>To'y / marosim</option><option>Reklama</option><option>Klip</option><option>Boshqa</option></select></div>
+        </div>
+        <div class="g2">
+          <div><label>Stil</label><input name="style" list="styles" placeholder="Velocity, cinematic…"></div>
+          <div><label>Shrift(lar)</label><input name="fonts" placeholder="Bebas Neue, Montserrat"></div>
+        </div>
+        <datalist id="styles"><option>Velocity edit</option><option>Cinematic</option><option>Beat sync</option><option>Glitch</option><option>Minimal</option><option>Vlog</option><option>Kinetic typography</option><option>Before / After</option><option>Slow motion</option><option>Transition edit</option></datalist>
+        <label>Effektlar / o'tishlar</label><input name="effects" placeholder="Zoom, shake, whip pan, masking…">
+        <div class="g2">
+          <div><label>Musiqa</label><input name="music" placeholder="Trek nomi"></div>
+          <div><label>Dastur</label><input name="app" list="apps" placeholder="CapCut, AE…"></div>
+        </div>
+        <datalist id="apps"><option>CapCut</option><option>After Effects</option><option>Premiere Pro</option><option>DaVinci Resolve</option><option>VN</option><option>Alight Motion</option></datalist>
+        <div class="g3">
+          <div><label>Davomiylik (s)</label><input name="duration" type="number" min="0" step="1"></div>
+          <div><label>Vaqt (soat)</label><input name="hours" type="number" min="0" step="0.25"></div>
+          <div><label>Narx (so'm)</label><input name="price" type="number" min="0" step="1000"></div>
+        </div>
+        <div class="g3">
+          <div><label>Ko'rishlar</label><input name="views" type="number" min="0"></div>
+          <div><label>Layklar</label><input name="likes" type="number" min="0"></div>
+          <div><label>Saqlashlar</label><input name="saves" type="number" min="0"></div>
+        </div>
+        <label>Izoh</label><textarea name="notes" placeholder="Nima yaxshi chiqdi, nima qiyin bo'ldi…"></textarea>
+        <div class="row"><button class="btn main" type="submit">Saqlash</button><button class="btn" type="button" id="cancelEdit" hidden>Bekor qilish</button></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- 3. VIDEO TAHLIL -->
+  <section class="tab" id="tab-video">
+    <div class="card">
+      <h3>🎬 Videoni tahlil qilish</h3>
+      <div class="muted">Montajingizni yoki ilhom olgan reelsni tanlang. Dastur kesimlar sonini, tempni o'lchaydi, keyin AI kadrlarni ko'rib stil, shrift, rang va yaxshilash g'oyalarini beradi.</div>
+      <label>Video</label><input type="file" id="vidFile" accept="video/*">
+      <label>Qo'shimcha savol (ixtiyoriy)</label><input id="vidQ" placeholder="Masalan: bu to'y reels uchun qaysi shrift mos?">
+      <video id="vid" controls playsinline muted hidden></video>
+      <div class="muted" id="vidInfo" style="margin-top:8px"></div>
+      <div class="frames" id="frames"></div>
+      <div class="row"><button class="btn main" id="analyzeBtn" disabled>AI bilan tahlil</button><button class="btn" id="saveVidBtn" disabled>Montajlarimga qo'shish</button></div>
+      <div class="ai" id="vidOut"></div>
+    </div>
+  </section>
+
+  <!-- 4. TRENDLAR -->
+  <section class="tab" id="tab-trends">
+    <div class="card">
+      <h3>🔥 Yangiliklar va trendlar</h3>
+      <div class="muted">AI internetdan eng so'nggi reels montaj stillari, shriftlar, o'tishlar va audio trendlarni qidiradi.</div>
+      <label>Yo'nalish</label>
+      <select id="trendNiche"><option>Umumiy Reels / TikTok</option><option>To'y va marosim videolari</option><option>Avto / moto edit</option><option>Sport / futbol edit</option><option>Biznes reklama</option><option>Vlog / lifestyle</option><option>Musiqiy klip</option><option>Anime / gaming edit</option></select>
+      <div class="row"><button class="btn main" id="trendBtn">Trendlarni yangilash</button></div>
+      <div class="muted" id="trendDate" style="margin-top:8px"></div>
+    </div>
+    <div id="trendOut"></div>
+  </section>
+
+  <!-- 5. AI HAMKOR -->
+  <section class="tab" id="tab-chat">
+    <div class="chips" id="chips">
+      <button class="chip">Bugun qanday montaj qilay?</button>
+      <button class="chip">Hook uchun 5 ta g'oya ber</button>
+      <button class="chip">To'y reels uchun shrift juftligi</button>
+      <button class="chip">CapCut'da velocity qanday qilinadi?</button>
+    </div>
+    <div class="msgs" id="msgs"></div>
+  </section>
+</main>
+
+<div class="chatbar" id="chatbar" hidden>
+  <form id="chatForm" autocomplete="off"><input id="chatInp" placeholder="AI hamkorga yozing…" maxlength="2000"><button class="btn main" id="chatSend">➤</button></form>
+</div>
+
+<nav id="nav">
+  <button data-t="stats" class="on"><span class="e">📊</span>Hisob</button>
+  <button data-t="add"><span class="e">➕</span>Qo'shish</button>
+  <button data-t="video"><span class="e">🎬</span>Tahlil</button>
+  <button data-t="trends"><span class="e">🔥</span>Trendlar</button>
+  <button data-t="chat"><span class="e">🤖</span>Hamkor</button>
+</nav>
+
+<div class="sheet" id="keySheet">
+  <div class="card">
+    <h3>Anthropic API kaliti</h3>
+    <input id="keyInp" type="password" placeholder="sk-ant-...">
+    <div class="row"><button class="btn main" id="keySave">Saqlash</button><button class="btn" id="keyClose">Yopish</button></div>
+    <div class="muted" style="margin-top:10px">Kalit faqat shu telefonda saqlanadi (bosh sahifa bilan umumiy). Uni console.anthropic.com saytidan olasiz.</div>
+  </div>
+</div>
+
+<script>
+(() => {
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const num = v => { const n = parseFloat(v); return isNaN(n) ? 0 : n; };
+const fmt = n => n >= 1e6 ? (n/1e6).toFixed(1)+'M' : n >= 1e3 ? (n/1e3).toFixed(1)+'K' : String(Math.round(n));
+const load = (k, d) => { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+const save = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+
+/* ---------- Claude API ---------- */
+const MODEL = 'claude-opus-5-5';
+const getKey = () => { try { return localStorage.getItem('miya-key') || ''; } catch (e) { return ''; } };
+const ERR = { no_key: "Avval 🔑 tugmasi orqali API kalitni kiriting.", bad_key: "API kalit noto'g'ri.", rate_limited: "Juda ko'p so'rov — biroz kutib qayta urinib ko'ring.", offline: "Internet yo'q.", http: "Server xatosi, qayta urinib ko'ring.", refusal: "AI bu so'rovga javob bermadi." };
+const errText = e => ERR[e && e.code] || ('Xato: ' + (e && (e.msg || e.message) || e));
+
+async function claude({ system, messages, web = false, effort = 'medium', maxTokens = 16000 }) {
+  const key = getKey(); if (!key) throw { code: 'no_key' };
+  const msgs = messages.slice();
+  const tools = web ? [{ type: 'web_search_20260209', name: 'web_search', max_uses: 6 }] : undefined;
+  const sources = new Map();
+  for (let round = 0; round < 6; round++) {
+    let res;
+    try {
+      res = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-api-key': key, 'anthropic-version': '2023-06-01',
+                   'anthropic-beta': 'server-side-fallback-2026-07-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+        body: JSON.stringify({ model: MODEL, max_tokens: maxTokens, system, messages: msgs, tools,
+                               output_config: { effort }, fallbacks: 'default' }) });
+    } catch (e) { throw { code: 'offline' }; }
+    if (!res.ok) {
+      let msg = ''; try { msg = (await res.json()).error.message; } catch (e) {}
+      throw { code: res.status === 401 ? 'bad_key' : res.status === 429 ? 'rate_limited' : 'http', msg };
+    }
+    const j = await res.json();
+    if (j.stop_reason === 'refusal') throw { code: 'refusal' };
+    for (const c of j.content) {
+      if (c.type === 'web_search_tool_result' && Array.isArray(c.content))
+        c.content.forEach(r => r.url && sources.set(r.url, r.title || r.url));
+    }
+    if (j.stop_reason === 'pause_turn') { msgs.push({ role: 'assistant', content: j.content }); continue; }
+    const text = j.content.filter(c => c.type === 'text').map(c => c.text).join('').trim();
+    return { text, sources: [...sources].map(([url, title]) => ({ url, title })) };
+  }
+  throw { code: 'http', msg: 'juda uzoq davom etdi' };
+}
+
+const SYS_BASE = `Sen tajribali video montajchi va kreativ direktorsan. Foydalanuvchi Instagram Reels, TikTok va Shorts uchun montaj qiladi (CapCut, After Effects, Premiere va h.k.).
+Har doim o'zbek tilida (lotin yozuvida) javob ber. Aniq, amaliy bo'l: qaysi dasturda, qaysi effekt, nechanchi soniyada, qanday shrift — konkret yoz.
+Javobni qisqa sarlavhalar va ro'yxatlar bilan tuz. Markdown jadval ishlatma.`;
+
+/* ---------- Montajlar ma'lumoti ---------- */
+let edits = load('montaj-edits', []);
+let editingId = null;
+const persist = () => save('montaj-edits', edits);
+
+function summary() {
+  const n = edits.length;
+  const hours = edits.reduce((s, e) => s + num(e.hours), 0);
+  const withViews = edits.filter(e => num(e.views) > 0);
+  const avgViews = withViews.length ? withViews.reduce((s, e) => s + num(e.views), 0) / withViews.length : 0;
+  const now = new Date(), ym = now.toISOString().slice(0, 7);
+  const month = edits.filter(e => (e.date || '').startsWith(ym)).length;
+  const byStyle = {};
+  edits.forEach(e => { const k = (e.style || 'Belgilanmagan').trim(); (byStyle[k] ||= { n: 0, views: 0, saves: 0 }); byStyle[k].n++; byStyle[k].views += num(e.views); byStyle[k].saves += num(e.saves); });
+  const income = edits.reduce((s, e) => s + num(e.price), 0);
+  return { n, hours, avgViews, month, byStyle, income };
+}
+
+function renderStats() {
+  const s = summary();
+  $('sCount').textContent = s.n; $('sHours').textContent = +s.hours.toFixed(1);
+  $('sViews').textContent = fmt(s.avgViews); $('sMonth').textContent = s.month;
+  // haftalik
+  const weeks = []; const start = new Date(); start.setHours(0,0,0,0); start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+  for (let i = 7; i >= 0; i--) { const a = new Date(start); a.setDate(a.getDate() - i * 7); const b = new Date(a); b.setDate(b.getDate() + 7); weeks.push({ a, b, n: 0 }); }
+  edits.forEach(e => { const d = new Date(e.date); weeks.forEach(w => { if (d >= w.a && d < w.b) w.n++; }); });
+  const max = Math.max(1, ...weeks.map(w => w.n));
+  $('weekBars').innerHTML = weeks.map(w => `<div><small>${w.n || ''}</small><i style="height:${w.n / max * 80}%"></i><small>${w.a.getDate()}.${w.a.getMonth() + 1}</small></div>`).join('');
+  // stillar
+  const st = Object.entries(s.byStyle).sort((a, b) => (b[1].views / b[1].n) - (a[1].views / a[1].n));
+  $('styleRank').innerHTML = st.length ? st.slice(0, 6).map(([k, v]) => `<div><b>${esc(k)}</b><span>${v.n} ta · o'rtacha ${fmt(v.views / v.n)} ko'rish</span></div>`).join('') : '<span class="muted">Ma\'lumot yo\'q</span>';
+  // ro'yxat
+  const sorted = edits.slice().sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+  $('list').innerHTML = sorted.length ? sorted.map(e => `<div class="item"><div class="t"><b>${esc(e.name)}</b>
+      <small>${esc(e.date)} · ${esc(e.type)}${e.app ? ' · ' + esc(e.app) : ''}${num(e.views) ? ' · 👁 ' + fmt(num(e.views)) : ''}${num(e.likes) ? ' · ❤ ' + fmt(num(e.likes)) : ''}${num(e.saves) ? ' · 🔖 ' + fmt(num(e.saves)) : ''}</small><br>
+      ${[e.style, e.fonts, e.effects].filter(Boolean).map(p => `<span class="pill">${esc(p)}</span>`).join('')}</div>
+      <button class="x" data-edit="${e.id}" title="Tahrirlash">✎</button><button class="x" data-del="${e.id}" title="O'chirish">×</button></div>`).join('')
+    : '<span class="muted">Hali montaj qo\'shilmagan. «➕ Qo\'shish» bo\'limidan boshlang.</span>';
+}
+
+$('list').onclick = ev => {
+  const del = ev.target.dataset.del, ed = ev.target.dataset.edit;
+  if (del && confirm("Bu montajni o'chirasizmi?")) { edits = edits.filter(e => e.id !== del); persist(); renderStats(); }
+  if (ed) startEdit(ed);
+};
+
+const form = $('addForm');
+function resetForm() { form.reset(); form.date.value = new Date().toISOString().slice(0, 10); editingId = null; $('formTitle').textContent = 'Yangi montaj'; $('cancelEdit').hidden = true; }
+function startEdit(id) {
+  const e = edits.find(x => x.id === id); if (!e) return;
+  resetForm(); editingId = id; $('formTitle').textContent = 'Tahrirlash';  $('cancelEdit').hidden = false;
+  for (const [k, v] of Object.entries(e)) if (form.elements[k]) form.elements[k].value = v;
+  show('add');
+}
+$('cancelEdit').onclick = () => { resetForm(); show('stats'); };
+form.onsubmit = ev => {
+  ev.preventDefault();
+  const data = Object.fromEntries(new FormData(form));
+  if (editingId) { const i = edits.findIndex(e => e.id === editingId); edits[i] = { ...edits[i], ...data }; }
+  else edits.push({ id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6), ...data });
+  persist(); resetForm(); renderStats(); show('stats');
+};
+
+$('exportBtn').onclick = () => {
+  const blob = new Blob([JSON.stringify(edits, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'montajlar-' + new Date().toISOString().slice(0, 10) + '.json'; a.click();
+};
+$('importBtn').onclick = () => $('importFile').click();
+$('importFile').onchange = async ev => {
+  const f = ev.target.files[0]; if (!f) return;
+  try { const arr = JSON.parse(await f.text()); if (!Array.isArray(arr)) throw 0;
+    const ids = new Set(edits.map(e => e.id)); arr.forEach(e => { if (e && e.id && !ids.has(e.id)) edits.push(e); });
+    persist(); renderStats(); alert(arr.length + ' ta yozuv tiklandi');
+  } catch (e) { alert("Fayl noto'g'ri"); }
+  ev.target.value = '';
+};
+
+function editsForAI(limit = 40) {
+  return edits.slice().sort((a, b) => (b.date || '').localeCompare(a.date || '')).slice(0, limit)
+    .map(e => `- ${e.date} | ${e.name} | ${e.type} | stil: ${e.style || '-'} | shrift: ${e.fonts || '-'} | effekt: ${e.effects || '-'} | dastur: ${e.app || '-'} | ${e.duration || '?'}s | ${e.hours || '?'} soat | 👁${e.views || 0} ❤${e.likes || 0} 🔖${e.saves || 0}${e.notes ? ' | izoh: ' + e.notes : ''}`).join('\n');
+}
+
+$('reportBtn').onclick = async () => {
+  if (!edits.length) { $('reportOut').textContent = 'Avval bir nechta montaj qo\'shing.'; return; }
+  const btn = $('reportBtn'); btn.disabled = true; $('reportOut').innerHTML = '<span class="spin"></span>Tahlil qilinyapti…';
+  const s = summary();
+  try {
+    const r = await claude({ system: SYS_BASE, effort: 'medium', messages: [{ role: 'user', content:
+      `Mening montajlarim statistikasi: jami ${s.n} ta, ${s.hours.toFixed(1)} soat, o'rtacha ${Math.round(s.avgViews)} ko'rish, daromad ${s.income} so'm.\n\nMontajlar:\n${editsForAI()}\n\n` +
+      `Tahlil qil: 1) qaysi stil/shrift/effekt eng yaxshi natija bergan (ko'rish va saqlash bo'yicha), 2) zaif tomonlarim, 3) tezlik/samaradorlik (soat sarfi), 4) keyingi hafta uchun aniq 5 ta vazifa.` }] });
+    $('reportOut').textContent = r.text;
+  } catch (e) { $('reportOut').textContent = errText(e); }
+  btn.disabled = false;
+};
+
+/* ---------- Video tahlil ---------- */
+let vidMeta = null, vidFrames = [];
+const vid = $('vid');
+$('vidFile').onchange = async ev => {
+  const f = ev.target.files[0]; if (!f) return;
+  $('vidOut').textContent = ''; $('frames').innerHTML = ''; $('analyzeBtn').disabled = true; $('saveVidBtn').disabled = true;
+  vid.src = URL.createObjectURL(f); vid.hidden = false;
+  await new Promise((ok, no) => { vid.onloadedmetadata = ok; vid.onerror = no; }).catch(() => null);
+  if (!vid.duration || !isFinite(vid.duration)) { $('vidInfo').textContent = "Videoni o'qib bo'lmadi."; return; }
+  $('vidInfo').innerHTML = '<span class="spin"></span>Kesimlar sanalyapti…';
+  try {
+    vidMeta = await scanVideo(f.name);
+    vidFrames = vidMeta.frames;
+    $('frames').innerHTML = vidFrames.map(fr => `<img src="data:image/jpeg;base64,${fr.data}" alt="${fr.t.toFixed(1)}s">`).join('');
+    $('vidInfo').innerHTML = `⏱ ${vidMeta.duration.toFixed(1)} s · 📐 ${vidMeta.w}×${vidMeta.h} (${vidMeta.ratio}) · ✂️ ~${vidMeta.cuts.length} ta kesim · ⚡ har ${vidMeta.avgShot.toFixed(2)} s da kesim · 🌗 o'rtacha yorug'lik ${vidMeta.brightness}%`;
+    $('analyzeBtn').disabled = false; $('saveVidBtn').disabled = false;
+  } catch (e) { $('vidInfo').textContent = 'Xato: ' + (e.message || e); }
+};
+
+const seek = t => new Promise(ok => { const h = () => { vid.removeEventListener('seeked', h); ok(); }; vid.addEventListener('seeked', h); vid.currentTime = t; });
+
+async function scanVideo(name) {
+  const dur = vid.duration, w = vid.videoWidth, h = vid.videoHeight;
+  const small = document.createElement('canvas'); small.width = 48; small.height = Math.round(48 * h / w) || 85;
+  const sctx = small.getContext('2d', { willReadFrequently: true });
+  const step = Math.max(0.1, Math.min(0.25, dur / 400));
+  let prev = null; const diffs = []; let brightSum = 0, bn = 0;
+  for (let t = 0; t < dur; t += step) {
+    await seek(t); sctx.drawImage(vid, 0, 0, small.width, small.height);
+    const px = sctx.getImageData(0, 0, small.width, small.height).data;
+    const g = new Float32Array(px.length / 4);
+    for (let i = 0; i < g.length; i++) { g[i] = (px[i*4] * .3 + px[i*4+1] * .59 + px[i*4+2] * .11); brightSum += g[i]; bn++; }
+    if (prev) { let d = 0; for (let i = 0; i < g.length; i++) d += Math.abs(g[i] - prev[i]); diffs.push({ t, d: d / g.length }); }
+    prev = g;
+  }
+  // moslashuvchan chegara: median * 3, kamida 18
+  const sorted = diffs.map(x => x.d).sort((a, b) => a - b); const med = sorted[Math.floor(sorted.length / 2)] || 0;
+  const thr = Math.max(18, med * 3);
+  const cuts = []; diffs.forEach(x => { if (x.d > thr && (!cuts.length || x.t - cuts[cuts.length - 1] > 0.3)) cuts.push(x.t); });
+  // AI uchun 8 ta kadr
+  const big = document.createElement('canvas'); const bw = 360; big.width = bw; big.height = Math.round(bw * h / w);
+  const bctx = big.getContext('2d'); const frames = []; const N = 8;
+  for (let i = 0; i < N; i++) { const t = dur * (i + 0.5) / N; await seek(t); bctx.drawImage(vid, 0, 0, big.width, big.height);
+    frames.push({ t, data: big.toDataURL('image/jpeg', 0.7).split(',')[1] }); }
+  await seek(0);
+  const g = (a, b) => b ? g(b, a % b) : a; const k = g(w, h);
+  return { name, duration: dur, w, h, ratio: `${w / k}:${h / k}`, cuts, avgShot: dur / (cuts.length + 1), brightness: Math.round(brightSum / bn / 2.55), frames };
+}
+
+$('analyzeBtn').onclick = async () => {
+  if (!vidMeta) return;
+  const btn = $('analyzeBtn'); btn.disabled = true; $('vidOut').innerHTML = '<span class="spin"></span>AI kadrlarni ko\'ryapti…';
+  const trends = load('montaj-trends', null);
+  const content = [];
+  vidFrames.forEach(fr => { content.push({ type: 'text', text: `Kadr ${fr.t.toFixed(1)} s:` }); content.push({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: fr.data } }); });
+  content.push({ type: 'text', text:
+    `Video: ${vidMeta.duration.toFixed(1)} s, ${vidMeta.w}x${vidMeta.h}, ~${vidMeta.cuts.length} kesim (o'rtacha kadr ${vidMeta.avgShot.toFixed(2)} s), kesim vaqtlari: ${vidMeta.cuts.slice(0, 40).map(c => c.toFixed(1)).join(', ')}.\n` +
+    (trends ? `Oxirgi topilgan trendlar (${trends.date}): ${trends.data.styles?.map(s => s.name).join(', ')}; shriftlar: ${trends.data.fonts?.map(f => f.name).join(', ')}.\n` : '') +
+    ($('vidQ').value.trim() ? `Savolim: ${$('vidQ').value.trim()}\n` : '') +
+    `Shu montajni tahlil qil:\n1) Stil va janr\n2) Hook (birinchi 1-3 soniya) — kuchli/zaifmi\n3) Temp va kesimlar ritmi\n4) Matn va shriftlar (kadrlarda ko'ringan bo'lsa nomini taxmin qil) va o'rniga nimani tavsiya qilasan\n5) Rang / grading\n6) Shu videoga qo'shsa bo'ladigan 5 ta zamonaviy yangilik (effekt, o'tish, shrift, sound design) — aniq qaysi soniyaga\n7) 10 balldan baho` });
+  try {
+    const r = await claude({ system: SYS_BASE, effort: 'high', messages: [{ role: 'user', content }] });
+    $('vidOut').textContent = r.text;
+  } catch (e) { $('vidOut').textContent = errText(e); }
+  btn.disabled = false;
+};
+
+$('saveVidBtn').onclick = () => {
+  if (!vidMeta) return; resetForm();
+  form.name.value = vidMeta.name.replace(/\.[^.]+$/, ''); form.duration.value = Math.round(vidMeta.duration);
+  form.notes.value = `${vidMeta.cuts.length} kesim, har ${vidMeta.avgShot.toFixed(2)} s`;
+  show('add');
+};
+
+/* ---------- Trendlar ---------- */
+function loadFont(name) {
+  const id = 'gf-' + name.replace(/\W/g, '');
+  if (document.getElementById(id)) return;
+  const l = document.createElement('link'); l.id = id; l.rel = 'stylesheet';
+  l.href = 'https://fonts.googleapis.com/css2?family=' + encodeURIComponent(name).replace(/%20/g, '+') + '&display=swap';
+  document.head.appendChild(l);
+}
+function parseJSON(text) {
+  const m = text.match(/```(?:json)?\s*([\s\S]*?)```/); const raw = m ? m[1] : text.slice(text.indexOf('{'), text.lastIndexOf('}') + 1);
+  return JSON.parse(raw);
+}
+function renderTrends() {
+  const t = load('montaj-trends', null);
+  if (!t) { $('trendOut').innerHTML = '<div class="card muted">Hali trendlar yuklanmagan. «Trendlarni yangilash» ni bosing.</div>'; return; }
+  $('trendDate').textContent = `Oxirgi yangilanish: ${new Date(t.at).toLocaleString()} · ${t.niche}`;
+  const d = t.data, sec = (title, arr, f) => arr && arr.length ? `<div class="card"><h3>${title}</h3>${arr.map(f).join('')}</div>` : '';
+  const item = x => `<div class="trend"><b>${esc(x.name)}</b>${x.how ? `<p>${esc(x.how)}</p>` : ''}${x.why ? `<p>💡 ${esc(x.why)}</p>` : ''}</div>`;
+  (d.fonts || []).forEach(f => f.google && loadFont(f.name));
+  $('trendOut').innerHTML =
+    sec('🎨 Montaj stillari', d.styles, item) +
+    sec('🔤 Shriftlar', d.fonts, f => `<div class="font-card"><small class="muted">${esc(f.name)}${f.google ? ' · Google Fonts' : ''}${f.use ? ' · ' + esc(f.use) : ''}</small>
+        <div class="s" style="font-family:'${esc(f.name)}',sans-serif">${esc(f.sample || 'Reels 2026')}</div>${f.why ? `<p class="muted" style="margin:0">${esc(f.why)}</p>` : ''}</div>`) +
+    sec('🔀 O\'tishlar va effektlar', d.effects, item) +
+    sec('🎵 Audio va format', d.audio, item) +
+    sec('✅ Shu hafta sinab ko\'ring', d.ideas, item) +
+    (t.sources && t.sources.length ? `<div class="card src"><h3>Manbalar</h3>${t.sources.slice(0, 12).map(s => `<div><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a></div>`).join('')}</div>` : '');
+}
+$('trendBtn').onclick = async () => {
+  const btn = $('trendBtn'); btn.disabled = true;
+  const niche = $('trendNiche').value; const today = new Date().toISOString().slice(0, 10);
+  $('trendDate').innerHTML = '<span class="spin"></span>Internetdan qidirilyapti (1–2 daqiqa)…';
+  try {
+    const r = await claude({ system: SYS_BASE, web: true, effort: 'medium', messages: [{ role: 'user', content:
+      `Bugun ${today}. Web search orqali "${niche}" yo'nalishida OXIRGI 1-2 OYDAGI Instagram Reels / TikTok video montaj trendlarini top: yangi montaj stillari, mashhur shriftlar (iloji bo'lsa Google Fonts'dagilar), o'tishlar/effektlar, audio va format trendlari. Eski (bir yildan oldingi) narsalarni yozma.\n` +
+      `Javobni FAQAT shu JSON ko'rinishda, \`\`\`json blokida, matnlar o'zbek tilida ber:\n` +
+      `{"styles":[{"name":"","how":"qanday qilinadi (CapCut/AE)","why":"nega ishlaydi"}],"fonts":[{"name":"aniq shrift nomi","google":true,"use":"sarlavha/subtitr","sample":"namuna matn","why":""}],"effects":[{"name":"","how":"","why":""}],"audio":[{"name":"","how":"","why":""}],"ideas":[{"name":"","how":""}]}\n` +
+      `Har bo'limda 4-6 ta element.` }] });
+    const data = parseJSON(r.text);
+    save('montaj-trends', { at: Date.now(), date: today, niche, data, sources: r.sources });
+    renderTrends();
+  } catch (e) { $('trendDate').textContent = e instanceof SyntaxError ? "AI javobini o'qib bo'lmadi, qayta urinib ko'ring." : errText(e); }
+  btn.disabled = false;
+};
+
+/* ---------- AI hamkor chat ---------- */
+let chat = load('montaj-chat', []);
+function bubble(role, text) { const d = document.createElement('div'); d.className = 'm ' + role; d.textContent = text; $('msgs').appendChild(d); window.scrollTo(0, document.body.scrollHeight); return d; }
+chat.slice(-20).forEach(m => bubble(m.role === 'user' ? 'u' : 'b', m.content));
+async function ask(q) {
+  q = q.trim(); if (!q) return;
+  bubble('u', q); chat.push({ role: 'user', content: q });
+  const b = bubble('b', ''); b.innerHTML = '<span class="spin"></span>O\'ylayapman…'; $('chatSend').disabled = true;
+  const t = load('montaj-trends', null), s = summary();
+  const ctx = `${SYS_BASE}\nSen foydalanuvchining doimiy montaj hamkorisan. Kerak bo'lsa web_search bilan eng yangi ma'lumotni top.\n\nFoydalanuvchi montajlari (jami ${s.n}):\n${editsForAI(25) || 'hali yo\'q'}\n` +
+    (t ? `\nOxirgi saqlangan trendlar (${t.date}, ${t.niche}): ${JSON.stringify(t.data).slice(0, 3000)}` : '');
+  try {
+    const r = await claude({ system: ctx, web: true, effort: 'low', maxTokens: 8000, messages: chat.slice(-16).map(m => ({ role: m.role, content: m.content })) });
+    b.textContent = r.text || '…'; chat.push({ role: 'assistant', content: r.text || '…' });
+  } catch (e) { b.textContent = errText(e); chat.pop(); }
+  chat = chat.slice(-40); save('montaj-chat', chat); $('chatSend').disabled = false;
+}
+$('chatForm').onsubmit = ev => { ev.preventDefault(); const v = $('chatInp').value; $('chatInp').value = ''; ask(v); };
+$('chips').onclick = ev => { if (ev.target.classList.contains('chip')) ask(ev.target.textContent); };
+
+/* ---------- Navigatsiya va kalit ---------- */
+function show(t) {
+  document.querySelectorAll('.tab').forEach(s => s.classList.toggle('on', s.id === 'tab-' + t));
+  document.querySelectorAll('#nav button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+  $('chatbar').hidden = t !== 'chat'; window.scrollTo(0, t === 'chat' ? document.body.scrollHeight : 0);
+}
+$('nav').onclick = ev => { const b = ev.target.closest('button'); if (b) show(b.dataset.t); };
+$('keyBtn').onclick = () => { $('keyInp').value = getKey(); $('keySheet').classList.add('open'); };
+$('keyClose').onclick = () => $('keySheet').classList.remove('open');
+$('keySave').onclick = () => { try { localStorage.setItem('miya-key', $('keyInp').value.trim()); } catch (e) {} $('keySheet').classList.remove('open'); };
+
+resetForm(); renderStats(); renderTrends();
+})();
+</script>
+</body>
+</html>

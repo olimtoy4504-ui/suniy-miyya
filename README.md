@@ -17,3 +17,15 @@ Papkani **File → Open** orqali oching, keyin **Build → Build APK(s)** ni bos
 
 Ilova ichida yuqoridagi 🔑 tugmasini bosing va Anthropic API kalitini kiriting. Kalitni console.anthropic.com saytidan olasiz; bu xizmat alohida pullik. Kalit faqat telefoningizda saqlanadi.
 Kalitsiz ham 3D miya, chizib o'rgatish va rasm tanish ishlaydi. 3D shar uchun internet kerak.
+
+## 🎬 Montaj Studiya
+
+Bosh sahifada yuqoridagi 🎥 tugmasini bosing. Ichida 5 bo'lim bor:
+
+- **📊 Hisob** — montajlaringiz soni, sarflangan soat, o'rtacha ko'rishlar, haftalik grafik, qaysi stil ko'proq ko'rilgani. «Tahlil qilish» tugmasi AI'dan hisobot va keyingi haftaga vazifalar oladi. Zaxira (JSON) bilan ma'lumotni saqlab qo'yish mumkin.
+- **➕ Qo'shish** — har bir montajni yozib boring: stil, shrift, effektlar, musiqa, dastur, vaqt, narx, ko'rish/layk/saqlash.
+- **🎬 Tahlil** — videoni tanlang: dastur kesimlar sonini, tempni, o'lchamni o'zi hisoblaydi, keyin AI 8 ta kadrni ko'rib hook, shrift, rang, temp bo'yicha baho va shu videoga qo'shsa bo'ladigan yangiliklarni aytadi.
+- **🔥 Trendlar** — AI internetdan eng so'nggi reels stillari, shriftlar (namunasi bilan), o'tishlar va audio trendlarni qidirib beradi. Yo'nalishni tanlash mumkin (to'y, avto, sport…).
+- **🤖 Hamkor** — montajlaringiz va trendlarni biladigan AI bilan suhbat; kerak bo'lsa internetdan qidiradi.
+
+AI qismlari uchun 🔑 API kalit kerak (bosh sahifadagi kalit bilan bir xil). Video kadrlari va trend qidiruvi ko'proq token ishlatadi.
